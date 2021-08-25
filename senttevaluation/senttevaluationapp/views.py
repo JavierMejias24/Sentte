@@ -13,3 +13,6 @@ def graficos(request):
 
 def ayuda(request):
     return render(request, "senttevaluationapp/ayuda.html")
+
+def ayuda(request):
+    return render(request, "senttevaluationapp/login.html")
