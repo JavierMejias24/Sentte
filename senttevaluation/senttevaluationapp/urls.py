@@ -3,9 +3,9 @@ from django.urls import path
 from senttevaluationapp import views
 
 urlpatterns = [
-    path('', views.ayuda, name="Login"),
+    path('', views.login, name="Login"),
     path('home', views.home, name="Home"),
     path('grupos', views.grupos, name="Grupos"),
     path('graficos', views.graficos, name="Graficos"),
-    path('ayuda', views.ayuda, name="Ayuda"),    
+    path('ayuda', views.ayuda, name="Ayuda"),
 ]
