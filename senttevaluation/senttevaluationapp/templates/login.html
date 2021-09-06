@@ -21,39 +21,14 @@
         <script src="static/javascripts/login.js"></script>
     </head>
     <body>
-        <div class="container" id="container">
-            <div class="form-container sign-up-container">
-                <form action="#">
-                    <h1>Registrarse</h1>
-                    <input type="text" placeholder="Nombre" />
-                    <input type="email" placeholder="Correo" />
-                    <input type="password" placeholder="Contraseña" />
-                    <button >Registrate</button>
-                </form>
-            </div>
-            <div class="form-container sign-in-container">
-                <form action="#">
-                    <h1>Sentte</h1>
-                    <input type="email" placeholder="Correo" />
-                    <input type="password" placeholder="Contraseña" />
-                    <a href="">¿Olvidó su contraseña?</a>
-                    <button>Iniciar sesión</button>
-                </form>
-            </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-left">
-                        <h1>¡Bienvenido de nuevo!</h1>
-                        <p>Si ya tiene una cuenta</p>
-                        <button class="ghost" id="signIn">Inicie sesión aquí</button>
-                    </div>
-                    <div class="overlay-panel overlay-right">
-                        <h1>¿Eres nuevo?</h1>
-                        <p>Para crearse una cuenta</p>
-                        <button class="ghost" id="signUp">Pulse aquí</button>
-                    </div>
-                </div>
-            </div>
+        <div class="container" id="container">        
+            <form action="#">
+                <img id="imglogo" src="static/img/logo.png" alt="profileImg">
+                <a href="">Ingrese sus credenciales</a>
+                <input type="email" placeholder="Correo"/>
+                <input type="password" placeholder="Contraseña"/>
+                <button>Iniciar sesión</button>
+            </form>    
         </div>
     </body>
     <footer>
