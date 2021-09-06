@@ -1,85 +1,88 @@
+{% load static %}
 {% include 'base.html' %}
 {% include 'menulateral.html' %}
-<body>
-    <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Inicio</span>
-        </div>
-        <br>
-        <!-- Se genera un contenedor para el cuerpo principal, donde va a ir la info -->
-        <div class="container-fluid">
-            <a>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam quaerat aliquam deserunt 
-            veritatis quisquam illo odit quos, dolores tempore aut adipisci in veniam dicta assumenda 
-            facere illum velit fuga eius.</a>
-            <br><br>
-            <!-- Se crea una tarjeta que actua como contenedor -->
-            <div class="card shadow mb-4">
-                <!-- Se crea el titulo del "contenedor"-->
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold">Evaluaciones</h6>
+
+<section class="home-section">
+    <div class="home-content">
+        <i class='bx bx-menu' ></i>
+        <span class="text">Inicio</span>
+    </div>
+    <br>
+    <!-- Se genera un contenedor para el cuerpo principal, donde va a ir la info -->
+    <div class="container-fluid">
+        <a>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam quaerat aliquam deserunt 
+        veritatis quisquam illo odit quos, dolores tempore aut adipisci in veniam dicta assumenda 
+        facere illum velit fuga eius.</a>
+        <br><br>
+        <!-- Se crea una tarjeta que actua como contenedor -->
+        <div class="card shadow mb-4">
+            <!-- Se crea el titulo del "contenedor"-->
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold">Evaluaciones</h6>
+            </div>
+            <!-- En el cuerpo de la tarjeta se diven en varias columnas para poner la informacion -->
+            <div class="card-body">
+                <!-- Primera columna -->
+                <div class="container p-3 my-3 border">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <i><img class="img-fluid" src="{% static 'img/foto perfil.jpg' %}" width="300" height="250"></i>
+                        </div>
+                        <div class="col-sm-6">
+                            <h3>Jose Luis Rodriguez</h3> 
+                            <h8>Encargdo del area de comercio</h8>
+                            <br>
+                            <h8>Tiempo de antigüedad: 4 años</h8>
+                            <br>
+                            <h8>Aclamado por su equipo</h8>
+                        </div>
+                        <div class="col-sm-2" >
+                            <button type="button" class="btn btn-outline-primary">Evaluar</button>
+                        </div>
+                    </div>
                 </div>
-                <!-- En el cuerpo de la tarjeta se diven en varias columnas para poner la informacion -->
-                <div class="card-body">
-                    <!-- Primera columna -->
-                    <div class="container p-3 my-3 border">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <i><img class="img-fluid" src="static/img/foto perfil.jpg" width="300" height="250"></i>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>Jose Luis Rodriguez</h3> 
-                                <h8>Encargdo del area de comercio</h8>
-                                <br>
-                                <h8>Tiempo de antigüedad: 4 años</h8>
-                                <br>
-                                <h8>Aclamado por su equipo</h8>
-                            </div>
-                            <div class="col-sm-2" >
-                                <button type="button" class="btn btn-outline-primary">Evaluar</button>
-                            </div>
+                <!-- Segunda columna -->
+                <div class="container p-3 my-3 border">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <i><img class="img-fluid" src="{% static 'img/foto perfil.jpg' %}" width="300" height="250"></i>
+                        </div>
+                        <div class="col-sm-6">
+                            <h3>Jose Luis Rodriguez</h3> 
+                            <h8>Encargdo del area de comercio</h8>
+                            <br>
+                            <h8>Tiempo de antigüedad: 4 años</h8>
+                            <br>
+                            <h8>Aclamado por su equipo</h8>
+                        </div>
+                        <div class="col-sm-2" >
+                            <button type="button" class="btn btn-outline-primary">Evaluar</button>
                         </div>
                     </div>
-                    <!-- Segunda columna -->
-                    <div class="container p-3 my-3 border">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <i><img class="img-fluid" src="static/img/foto perfil.jpg" width="300" height="250"></i>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>Jose Luis Rodriguez</h3> 
-                                <h8>Encargdo del area de comercio</h8>
-                                <br>
-                                <h8>Tiempo de antigüedad: 4 años</h8>
-                                <br>
-                                <h8>Aclamado por su equipo</h8>
-                            </div>
-                            <div class="col-sm-2" >
-                                <button type="button" class="btn btn-outline-primary">Evaluar</button>
-                            </div>
+                </div>
+                <!-- Tercera columna -->
+                <div class="container p-3 my-3 border">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <i><img class="img-fluid" src="{% static 'img/foto perfil.jpg' %}" width="300" height="250"></i>
                         </div>
-                    </div>
-                    <!-- Tercera columna -->
-                    <div class="container p-3 my-3 border">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <i><img class="img-fluid" src="static/img/foto perfil.jpg" width="300" height="250"></i>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>Jose Luis Rodriguez</h3> 
-                                <h8>Encargdo del area de comercio</h8>
-                                <br>
-                                <h8>Tiempo de antigüedad: 4 años</h8>
-                                <br>
-                                <h8>Aclamado por su equipo</h8>
-                            </div>
-                            <div class="col-sm-2" >
-                                <button type="button" class="btn btn-outline-primary">Evaluar</button>
-                            </div>
+                        <div class="col-sm-6">
+                            <h3>Jose Luis Rodriguez</h3> 
+                            <h8>Encargdo del area de comercio</h8>
+                            <br>
+                            <h8>Tiempo de antigüedad: 4 años</h8>
+                            <br>
+                            <h8>Aclamado por su equipo</h8>
+                        </div>
+                        <div class="col-sm-2" >
+                            <button type="button" class="btn btn-outline-primary">Evaluar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-</body>
+    </div>
+    <div id="footer" class="container-fluid">
+        {% include 'footer.html' %}
+    </div>
+</section>
