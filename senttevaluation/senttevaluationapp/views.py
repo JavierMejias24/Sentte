@@ -2,17 +2,17 @@ from django.shortcuts import render, HttpResponse
 
 # Create your views here.
 # ----------------------------------  Evaluador ---------------------------------.
-def home(request):
-    return render(request, "home.html")
+def evaluadorInicio(request):
+    return render(request, "evaluadorInicio.html")
 
-def grupos(request):
-    return render(request, "grupos.html")
+def evaluadorEvaluacion(request):
+    return render(request, "evaluadorEvaluacion.html")
 
-def graficos(request):
-    return render(request, "graficos.html")
+def evaluadorAutovaluacion(request):
+    return render(request, "evaluadorAutovaluacion.html")
 
-def ayuda(request):
-    return render(request, "ayuda.html")
+def evaluadorAyuda(request):
+    return render(request, "evaluadorAyuda.html")
 
 def login(request):
     return render(request, "login.html")
@@ -44,3 +44,25 @@ def adminEvaluaciones(request):
 
 def adminAyuda(request):
     return render(request, "adminAyuda.html")
+
+# ----------------------------------  Colaborador ---------------------------------.
+
+def colaboradorInicio(request):
+    return render(request, "colaboradorInicio.html")
+
+def colaboradorAyuda(request):
+    return render(request, "colaboradorAyuda.html")
+
+def colaboradorAutovaluacion(request):
+    return render(request, "colaboradorAutovaluacion.html")
+
+# ----------------------------------  Colaborador ---------------------------------.
+
+def calibradorInicio(request):
+    return render(request, "calibradorInicio.html")
+    
+def calibradorAyuda(request):
+    return render(request, "calibradorAyuda.html")
+
+def calibradorEvaluaciones(request):
+    return render(request, "calibradorEvaluaciones.html")

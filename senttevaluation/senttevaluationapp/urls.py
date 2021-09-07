@@ -4,10 +4,10 @@ from senttevaluationapp import views
 
 urlpatterns = [
     path('', views.login, name="Login"),
-    path('home', views.home, name="Home"),
-    path('grupos', views.grupos, name="Grupos"),
-    path('graficos', views.graficos, name="Graficos"),
-    path('ayuda', views.ayuda, name="Ayuda"),
+    path('evaluadorInicio', views.evaluadorInicio, name="evaluadorInicio"),
+    path('evaluadorEvaluacion', views.evaluadorEvaluacion, name="evaluadorEvaluacion"),
+    path('evaluadorAutovaluacion', views.evaluadorAutovaluacion, name="evaluadorAutovaluacion"),
+    path('evaluadorAyuda', views.evaluadorAyuda, name="evaluadorAyuda"),
     path('adminInicio', views.adminInicio, name="adminInicio"),
     path('adminAcciones', views.adminAcciones, name="adminAcciones"),
     path('adminCargos', views.adminCargos, name="adminCargos"),
@@ -17,4 +17,10 @@ urlpatterns = [
     path('adminUsuarios', views.adminUsuarios, name="adminUsuarios"),
     path('adminEvaluaciones', views.adminEvaluaciones, name="adminEvaluaciones"),
     path('adminAyuda', views.adminAyuda, name="adminAyuda"),
+    path('colaboradorInicio', views.colaboradorInicio, name="colaboradorInicio"),
+    path('colaboradorAyuda', views.colaboradorAyuda, name="colaboradorAyuda"),
+    path('colaboradorAutovaluacion', views.colaboradorAutovaluacion, name="colaboradorAutovaluacion"),
+    path('calibradorInicio', views.calibradorInicio, name="calibradorInicio"),
+    path('calibradorAyuda', views.calibradorAyuda, name="calibradorAyuda"),
+    path('calibradorEvaluaciones', views.calibradorEvaluaciones, name="calibradorEvaluaciones"),
 ]
