@@ -1,5 +1,6 @@
 {% include 'base.html' %}
 {% include 'sidebars/adminSidebar.html' %}
+{% load static %}
 <body>
     <section class="home-section">
         <div class="home-content">
@@ -17,7 +18,7 @@
                 <!-- El cuerpo de la tarjeta -->
                 <div class="card-body">
                     <div class="text-center">
-                        <img class="img-fluid" src="static/img/ayuda_foto.PNG" width="40%" height="40%">
+                        <img class="img-fluid" src="{% static 'img/ayuda_foto.PNG' %}" width="40%" height="40%">
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quia exercitationem illo, 
                             doloremque dignissimos tempora id natus distinctio incidunt 
