@@ -1,68 +1,69 @@
 from django.shortcuts import render, HttpResponse
 
 # Create your views here.
-# ----------------------------------  Evaluador ---------------------------------.
-def evaluadorInicio(request):
-    return render(request, "evaluadorInicio.html")
-
-def evaluadorEvaluacion(request):
-    return render(request, "evaluadorEvaluacion.html")
-
-def evaluadorAutovaluacion(request):
-    return render(request, "evaluadorAutovaluacion.html")
-
-def evaluadorAyuda(request):
-    return render(request, "evaluadorAyuda.html")
-
+# ----------------------------------  Login ---------------------------------.
 def login(request):
     return render(request, "login.html")
 
 # ----------------------------------  Administrador ---------------------------------.
 def adminInicio(request):
-    return render(request, "adminInicio.html")
+    return render(request, "admin/adminInicio.html")
 
 def adminAcciones(request):
-    return render(request, "adminAcciones.html")
+    return render(request, "admin/adminAcciones.html")
 
 def adminCargos(request):
-    return render(request, "adminCargos.html")
+    return render(request, "admin/adminCargos.html")
 
 def adminCompetencias(request):
-    return render(request, "adminCompetencias.html")
+    return render(request, "admin/adminCompetencias.html")
 
 def adminGerencias(request):
-    return render(request, "adminGerencias.html")
+    return render(request, "admin/adminGerencias.html")
 
 def adminSubgerencias(request):
-    return render(request, "adminSubgerencias.html")
+    return render(request, "admin/adminSubgerencias.html")
 
 def adminUsuarios(request):
-    return render(request, "adminUsuarios.html")
+    return render(request, "admin/adminUsuarios.html")
 
 def adminEvaluaciones(request):
-    return render(request, "adminEvaluaciones.html")
+    return render(request, "admin/adminEvaluaciones.html")
 
 def adminAyuda(request):
-    return render(request, "adminAyuda.html")
+    return render(request, "admin/adminAyuda.html")
+
+# ----------------------------------  Evaluador ---------------------------------.
+def evaluadorInicio(request):
+    return render(request, "evaluador/evaluadorInicio.html")
+
+def evaluadorEvaluacion(request):
+    return render(request, "evaluador/evaluadorEvaluacion.html")
+
+def evaluadorAutovaluacion(request):
+    return render(request, "evaluador/evaluadorAutovaluacion.html")
+
+def evaluadorAyuda(request):
+    return render(request, "evaluador/evaluadorAyuda.html")
 
 # ----------------------------------  Colaborador ---------------------------------.
 
 def colaboradorInicio(request):
-    return render(request, "colaboradorInicio.html")
+    return render(request, "colaborador/colaboradorInicio.html")
 
 def colaboradorAyuda(request):
-    return render(request, "colaboradorAyuda.html")
+    return render(request, "colaborador/colaboradorAyuda.html")
 
 def colaboradorAutovaluacion(request):
-    return render(request, "colaboradorAutovaluacion.html")
+    return render(request, "colaborador/colaboradorAutovaluacion.html")
 
-# ----------------------------------  Colaborador ---------------------------------.
+# ----------------------------------  Calibrador ---------------------------------.
 
 def calibradorInicio(request):
-    return render(request, "calibradorInicio.html")
+    return render(request, "calibrador/calibradorInicio.html")
     
 def calibradorAyuda(request):
-    return render(request, "calibradorAyuda.html")
+    return render(request, "calibrador/calibradorAyuda.html")
 
 def calibradorEvaluaciones(request):
-    return render(request, "calibradorEvaluaciones.html")
+    return render(request, "calibrador/calibradorEvaluaciones.html")
