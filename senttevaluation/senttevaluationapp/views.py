@@ -27,9 +27,6 @@ def adminSubgerencias(request):
 def adminUsuarios(request):
     return render(request, "admin/adminUsuarios.html")
 
-def adminEvaluaciones(request):
-    return render(request, "admin/adminEvaluaciones.html")
-
 def adminAyuda(request):
     return render(request, "admin/adminAyuda.html")
 

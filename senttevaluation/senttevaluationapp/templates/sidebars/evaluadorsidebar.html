@@ -1,8 +1,9 @@
+{% load static%}
  <!-- Se crea la divicion para el menu lateral -->
 <div class="sidebar close">
   <!-- Se configura el logo con el nombre -->
   <div class="logo-details">
-    <i><img src="static/img/logo.png" width="50" height="50"></i>
+    <i><img src="{% static 'img/logo.png' %}" width="50" height="50"></i>
     <span class="logo_name">Sentte</span>
   </div>
   <!-- Se realizan las opciones del menu lateral -->
@@ -35,7 +36,7 @@
     <li>
         <div class="profile-details">
           <div class="profile-content">
-            <img src="static/img/foto perfil.jpg" alt="profileImg">
+            <img src="{% static 'img/foto_perfil.jpg' %}" alt="profileImg">
           </div>
           <div class="name-job">
             <div class="profile_name">Julio Profe</div>
