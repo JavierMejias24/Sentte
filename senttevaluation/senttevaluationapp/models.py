@@ -1,85 +1,110 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 
 # Create your models here.
 
 class AREA(models.Model):
-    NOMBRE = models.CharField(max_length=50)
+    NombreArea = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.NOMBRE
-
-class CARGOS(models.Model):
-    NOMBRE = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.NOMBRE
-
-class PERFIL_COMPETENCIAS(models.Model):
-    NOMBRE = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.NOMBRE
-
-class SUB_GERENCIA(models.Model):
-    NOMBRE = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.NOMBRE
+        return self.NombreArea
 
 class GERENCIA(models.Model):
-    NOMBRE = models.CharField(max_length=50)
+    NombreGerencia = models.CharField(max_length=50)
+    IdArea = models.ForeignKey(AREA, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.NOMBRE
+        return self.NombreGerencia
+
+class SUBGERENCIA(models.Model):
+    NombreSubgerencia = models.CharField(max_length=50)
+    IdGerencia = models.ForeignKey(GERENCIA, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.NombreSubgerencia
+
+class EVALUADOR(models.Model):
+    NombreEvaluador = models.CharField(max_length=60)
+    IdSubGerencia = models.ForeignKey(SUBGERENCIA, on_delete=PROTECT)
+
+    def __str__(self):
+        return self.NombreEvaluador
+
+class CALIBRADOR(models.Model):
+    NombreCalibrador = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.NombreCalibrador
+
+class PLANACCION(models.Model):
+    Accion = models.CharField(max_length=200)
+    Medicion = models.CharField(max_length=200)
+
+class CARGO(models.Model):
+    NombreCargo = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.NombreCargo
 
 class PERFIL(models.Model):
-    NOMBRE = models.CharField(max_length=50)
-    CORREO = models.CharField(max_length=50)
-    FECHA_INGRESO = models.DateField()
-    FECHA_ANTIGUEDAD = models.CharField(max_length=50)
-    ID_SUB_GERENCIA = models.ForeignKey(SUB_GERENCIA, on_delete=models.PROTECT)
-    ID_GERENCIA = models.ForeignKey(GERENCIA, on_delete=models.PROTECT)
-    ID_AREA = models.ForeignKey(AREA, on_delete=models.PROTECT)
-    ID_PERFIL_COMPETENCIAS = models.ForeignKey(PERFIL_COMPETENCIAS, on_delete=models.PROTECT)
-    ID_CARGO = models.ForeignKey(CARGOS, on_delete=models.PROTECT)
+    NombrePerfil = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.NOMBRE
+        return self.NombrePerfil
 
-class CUENTAS(models.Model):
-    RUT = models.CharField(max_length=13)
-    CONTRASEÑA = models.CharField(max_length=80)
-    ID_PERFILES = models.ForeignKey(PERFIL, on_delete=models.PROTECT)
+class PERFILCARGO(models.Model):
+    IdCargo = models.ForeignKey(CARGO, on_delete=PROTECT)
+    IdPerfil = models.ForeignKey(PERFIL, on_delete=PROTECT)
 
-class EVALUACIONES(models.Model):
-    ESTADO = models.CharField(max_length=1)
-    COMPETENCIAS = models.CharField(max_length=40)
-    CALIFICACION = models.IntegerField()
-    COMENTARIOS = models.CharField(max_length=100)
-    TIPO_COMPETENCIA = models.CharField(max_length=30)
-    ACCION = models.CharField(max_length=30)
-    MEDICION = models.CharField(max_length=30)
-
-class CUENTA_EVALUACION(models.Model):
-    ROL = models.CharField(max_length=30)
-    ID_CUENTA = models.ForeignKey(CUENTAS, on_delete=models.PROTECT)
-    ID_EVALUACIONES = models.ForeignKey(EVALUACIONES, on_delete=models.PROTECT)
-
-class COMPETENCIA_ASOCIADA(models.Model):
-    NOMBRE = models.CharField(max_length=50)
-    DEFINICION = models.CharField(max_length=100)
-    ID_EVALUACIONES = models.ForeignKey(EVALUACIONES, on_delete=models.PROTECT)
+class EMPLEADO(models.Model):
+    Rut = models.CharField(max_length=13)
+    Nombre = models.CharField(max_length=60)
+    Usuario = models.CharField(max_length=50)
+    Contraseña = models.CharField(max_length=50)
+    Rol = models.CharField(max_length=50)
+    Correo = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.NOMBRE
-    
-class PLANES_DE_ACCION(models.Model):
-    ACCION = models.CharField(max_length=200)
-    MEDICION = models.CharField(max_length=200)
-    ID_EVALUACIONES = models.ForeignKey(EVALUACIONES, on_delete=models.PROTECT)
-    ID_COMPETENCIA_ASOCIADA = models.ForeignKey(COMPETENCIA_ASOCIADA, on_delete=models.PROTECT)
+        return self.Nombre
 
-class ACCIONES_CLAVE(models.Model):
-    DESCRIPCIÓN = models.CharField(max_length=100)
-    PUNTUACIÓN = models.IntegerField()
-    ID_COMPETENCIA_ASOCIADA = models.ForeignKey(COMPETENCIA_ASOCIADA, on_delete=models.PROTECT)
+class EVALUADO(models.Model):
+    FechaIngreso = models.DateField()
+    IdEmpleado = models.ForeignKey(EMPLEADO, on_delete=PROTECT)
+    IdSubGerencia = models.ForeignKey(SUBGERENCIA, on_delete=PROTECT)
+
+class EVALUACION(models.Model):
+    Estado = models.CharField(max_length=50)
+    Fase = models.CharField(max_length=50)
+    IdPerfil = models.ForeignKey(PERFIL, on_delete=PROTECT)
+    IdEvaluado = models.ForeignKey(EVALUADO, on_delete=PROTECT)
+
+class ENCARGADO(models.Model):
+    IdEvaluador = models.ForeignKey(EVALUADOR, on_delete=PROTECT)
+    IdEvaluacion = models.ForeignKey(EVALUACION, on_delete=PROTECT)
+    IdCalibrador = models.ForeignKey(CALIBRADOR, on_delete=PROTECT)
+    Fecha = models.DateField()
+    RelacionEvaluado = models.CharField(max_length=50)
+    Comentario = models.CharField(max_length=200)
+
+class ACCIONCLAVE(models.Model):
+    Descripcion = models.CharField(max_length=1000)
+
+class COMPETENCIA(models.Model):
+    NombreCompetencia = models.CharField(max_length=50)
+    Definicion = models.CharField(max_length=1000)
+
+class COMPACC(models.Model):
+    IdCompetencia = models.ForeignKey(COMPETENCIA, on_delete=PROTECT)
+    IdAccionClave = models.ForeignKey(ACCIONCLAVE, on_delete=PROTECT)
+
+class PERFCOMP(models.Model):
+    IdPerfil = models.ForeignKey(PERFIL, on_delete=PROTECT)
+    IdCompetencia = models.ForeignKey(COMPETENCIA, on_delete=PROTECT)
+
+class DETALLEEV(models.Model):
+    FechaEvaluacion = models.DateField()
+    ComentarioEvaluador = models.CharField(max_length=100)
+    Calificacion = models.IntegerField()
+    AutoEvaluacion = models.IntegerField()
+    IdEvaluacion = models.ForeignKey(EVALUACION, on_delete=PROTECT)
+    IdPlanaccion = models.ForeignKey(PLANACCION, on_delete=PROTECT)
