@@ -43,6 +43,9 @@ def evaluadorAutovaluacion(request):
 def evaluadorAyuda(request):
     return render(request, "evaluador/evaluadorAyuda.html")
 
+def evaluadorFormulario(request):
+    return render(request, "evaluador/evaluadorFormulario.html")
+
 # ----------------------------------  Colaborador ---------------------------------.
 
 def colaboradorInicio(request):
