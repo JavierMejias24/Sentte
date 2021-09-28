@@ -3,18 +3,9 @@ from django.urls import path
 from senttevaluationapp import views
 
 urlpatterns = [
-<<<<<<< HEAD
 # ----------------------------------  Login ---------------------------------.
     path('', views.login, name="Login"),    
 # ----------------------------------  Administrador ---------------------------------------------.
-=======
-    path('', views.login, name="Login"),
-    path('evaluadorInicio', views.evaluadorInicio, name="evaluadorInicio"),
-    path('evaluadorEvaluacion', views.evaluadorEvaluacion, name="evaluadorEvaluacion"),
-    path('evaluadorAutovaluacion', views.evaluadorAutovaluacion, name="evaluadorAutovaluacion"),
-    path('evaluadorFormulario', views.evaluadorFormulario, name="evaluadorFormulario"),
-    path('evaluadorAyuda', views.evaluadorAyuda, name="evaluadorAyuda"),
->>>>>>> hans
     path('adminInicio', views.adminInicio, name="adminInicio"),
     path('adminAcciones', views.adminAcciones, name="adminAcciones"),
     path('adminCargos', views.adminCargos, name="adminCargos"),
@@ -27,6 +18,7 @@ urlpatterns = [
     path('evaluadorInicio', views.evaluadorInicio, name="evaluadorInicio"),
     path('evaluadorEvaluacion', views.evaluadorEvaluacion, name="evaluadorEvaluacion"),
     path('evaluadorAutovaluacion', views.evaluadorAutovaluacion, name="evaluadorAutovaluacion"),
+    path('evaluadorFormulario', views.evaluadorAutovaluacion, name="evaluadorAutovaluacion"),
     path('evaluadorAyuda', views.evaluadorAyuda, name="evaluadorAyuda"),
 # ----------------------------------  Colaborador ----------------------------------------------------.
     path('colaboradorInicio', views.colaboradorInicio, name="colaboradorInicio"),
