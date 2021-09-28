@@ -18,7 +18,7 @@ urlpatterns = [
     path('evaluadorInicio', views.evaluadorInicio, name="evaluadorInicio"),
     path('evaluadorEvaluacion', views.evaluadorEvaluacion, name="evaluadorEvaluacion"),
     path('evaluadorAutovaluacion', views.evaluadorAutovaluacion, name="evaluadorAutovaluacion"),
-    path('evaluadorFormulario', views.evaluadorAutovaluacion, name="evaluadorAutovaluacion"),
+    path('evaluadorFormulario', views.evaluadorFormulario, name="evaluadorAutovaluacion"),
     path('evaluadorAyuda', views.evaluadorAyuda, name="evaluadorAyuda"),
 # ----------------------------------  Colaborador ----------------------------------------------------.
     path('colaboradorInicio', views.colaboradorInicio, name="colaboradorInicio"),
