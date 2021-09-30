@@ -69,14 +69,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {%for empleado in empleados %}
                                         <tr>
-                                            <td>ALEJANDRA FABIOLA VALENZUELA SOTO</td>
-                                            <td>10676050-0</td>
-                                            <td>avalenzuela@scollege.cl</td>
-                                            <td>Gerente</td>
-                                            <td>DIRECCION</td>
-                                            <td>Gerencia General</td>
-                                            <td>EXECUTIVE</td>
+                                            <td>{{empleado.Rut}}</td>
+                                            <td>{{empleado.Nombre}}</td>
+                                            <td>{{empleado.Correo}}</td>
+                                            <td>No se</td>
+                                            <td>No se</td>
+                                            <td>No se</td>
+                                            <td>No se</td>
+                                            <td></td>
                                             <td>
                                                 <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                                     <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
@@ -86,57 +88,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>ALEJANDRA FABIOLA VALENZUELA SOTO</td>
-                                            <td>10676050-0</td>
-                                            <td>avalenzuela@scollege.cl</td>
-                                            <td>Gerente</td>
-                                            <td>DIRECCION</td>
-                                            <td>Gerencia General</td>
-                                            <td>EXECUTIVE</td>
-                                            <td>
-                                                <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                                <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>ALEJANDRA FABIOLA VALENZUELA SOTO</td>
-                                            <td>10676050-0</td>
-                                            <td>avalenzuela@scollege.cl</td>
-                                            <td>Gerente</td>
-                                            <td>DIRECCION</td>
-                                            <td>Gerencia General</td>
-                                            <td>EXECUTIVE</td>
-                                            <td>
-                                                <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                                <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>ALEJANDRA FABIOLA VALENZUELA SOTO</td>
-                                            <td>10676050-0</td>
-                                            <td>avalenzuela@scollege.cl</td>
-                                            <td>Gerente</td>
-                                            <td>DIRECCION</td>
-                                            <td>Gerencia General</td>
-                                            <td>EXECUTIVE</td>
-                                            <td>
-                                                <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                                <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        {%endfor%}
                                     </tbody>
                                 </table>
                             </div>
