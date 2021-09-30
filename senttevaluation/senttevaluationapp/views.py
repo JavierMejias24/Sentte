@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .models import CARGO, ACCIONCLAVE, COMPETENCIA, GERENCIA, EMPLEADO
+from .models import CARGO, ACCIONCLAVE, COMPETENCIA, GERENCIA, EMPLEADO, SUBGERENCIA
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -33,7 +33,8 @@ def adminGerencias(request):
     return render(request, "admin/adminGerencias.html", {'gerencias':gerencias})
 
 def adminSubgerencias(request):
-    return render(request, "admin/adminSubgerencias.html")
+    subgerencias = SUBGERENCIA.objects.all()
+    return render(request, "admin/adminSubgerencias.html", {'subgerencias':subgerencias})
 
 def adminUsuarios(request):
     empleados = EMPLEADO.objects.all()
