@@ -8,7 +8,52 @@
         </div>
         <br>
         <div class="container-fluid">
-            <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis ea sapiente, nihil blanditiis iure fugiat amet deserunt libero sint quibusdam debitis quia ipsa necessitatibus optio, beatae architecto eveniet! Recusandae, tempora!</h3>
+            <div class="card">
+                <div class="card-body">  
+                    <div class="content-header row">
+                        <div class="content-header-left col-md-6 col-12 mb-2">
+                            <h3 class="content-header-title"> Mantenedor de competencias </h3>
+                        </div>
+                        <div class="content-header-right col-md-6 col-12">
+                            <div class="media-body media-right text-right">
+                                <button onclick="modalAgregar()" type="button" class="bx bx-list-check">
+                                    <i class="la la-list-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid" style="overflow: hidden; position: realtive; border: 0px; width: 100%;">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr> 
+                                    <th>Nombre</th>
+                                    <th>Definicion</th>
+                                    <br>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for competencia in competencias%}
+                                <tr>
+                                    <td>{{competencia.NombreCompetencia}}</td>
+                                    <td>{{competencia.Definicion}}</td>
+                                    
+                                    <td>
+                                        <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
+                                            <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                        </button>
+                                        <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
+                                            <a href="#" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </body>
