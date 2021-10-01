@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import View
-from .models import Cargo, AccionClave, Competencia, Gerencia, Empleado, SubGerencia
+from .models import Cargo, AccionClave, Competencia, Gerencia, Empleado, SubGerencia, Perfil
 from .forms import EmpleadoForm
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -14,8 +14,8 @@ def adminInicio(request):
 
 # --1) Forma de llamar a todos los datos--.
 def adminAcciones(request):
-    accionclaves = AccionClave.objects.all()
-    return render(request, "admin/adminAcciones.html", {'accionclaves':accionclaves})
+    accioneclaves = AccionClave.objects.all()
+    return render(request, "admin/adminAcciones.html",{'accionclaves':accioneclaves})
 
 # --2) Forma de llamar a todos los datos--.
 def adminCargos(request):

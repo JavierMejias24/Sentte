@@ -28,6 +28,7 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Definicion</th>
+                                        <th>Competencia</th>
                                         <br>
                                         <th>Opciones</th>
                                     </tr>
@@ -36,6 +37,7 @@
                                     {%for accionclave in accionclaves%}
                                     <tr>
                                         <td>{{accionclave.Descripcion}}</td>
+                                        <td>{{accionclave.idcompetencia}}</td>
                                         <td>
                                             <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                                 <a href=" " class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
