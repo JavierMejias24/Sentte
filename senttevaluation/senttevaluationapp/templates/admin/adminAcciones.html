@@ -24,23 +24,31 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div id="tablaPreguntas_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                <div class="row">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe totam amet explicabo. 
-                                        Reprehenderit asperiores incidunt error, quidem magnam ipsam pariatur repudiandae aspernatur 
-                                        necessitatibus excepturi aliquam voluptatem architecto, commodi nostrum voluptas.</p>
-                                </div>
-                                <div class="row">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe totam amet explicabo. 
-                                        Reprehenderit asperiores incidunt error, quidem magnam ipsam pariatur repudiandae aspernatur 
-                                        necessitatibus excepturi aliquam voluptatem architecto, commodi nostrum voluptas.</p>
-                                </div>
-                                <div class="row">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe totam amet explicabo. 
-                                        Reprehenderit asperiores incidunt error, quidem magnam ipsam pariatur repudiandae aspernatur 
-                                        necessitatibus excepturi aliquam voluptatem architecto, commodi nostrum voluptas.</p>
-                                </div>
-                            </div>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Definicion</th>
+                                        <br>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for accionclave in accionclaves%}
+                                    <tr>
+                                        <td>{{accionclave.Descripcion}}</td>
+                                        <td>
+                                            <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
+                                                <a href=" " class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                            </button>
+                                            <br>
+                                            <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
+                                                <a href=" " class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

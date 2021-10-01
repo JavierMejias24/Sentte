@@ -1,31 +1,45 @@
 from django.shortcuts import render, HttpResponse
-
+from django.views.generic import View
+from .models import Cargo, AccionClave, Competencia, Gerencia, Empleado, SubGerencia
+from .forms import EmpleadoForm
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
 def login(request):
-    return render(request, "login.html")
+    return render(request, "registration/login.html")
 
 # ----------------------------------  Administrador ---------------------------------.
+
 def adminInicio(request):
     return render(request, "admin/adminInicio.html")
 
+# --1) Forma de llamar a todos los datos--.
 def adminAcciones(request):
-    return render(request, "admin/adminAcciones.html")
+    accionclaves = AccionClave.objects.all()
+    return render(request, "admin/adminAcciones.html", {'accionclaves':accionclaves})
 
+# --2) Forma de llamar a todos los datos--.
 def adminCargos(request):
-    return render(request, "admin/adminCargos.html")
+    cargos = Cargo.objects.all()
+    contexto = {
+        'cargos':cargos
+    }
+    return render(request, "admin/adminCargos.html",contexto)
 
 def adminCompetencias(request):
-    return render(request, "admin/adminCompetencias.html")
+    competencias = Competencia.objects.all()
+    return render(request, "admin/adminCompetencias.html", {'competencias':competencias})
 
 def adminGerencias(request):
-    return render(request, "admin/adminGerencias.html")
+    gerencias = Gerencia.objects.all()
+    return render(request, "admin/adminGerencias.html", {'gerencias':gerencias})
 
 def adminSubgerencias(request):
-    return render(request, "admin/adminSubgerencias.html")
+    subgerencias = SubGerencia.objects.all()
+    return render(request, "admin/adminSubgerencias.html", {'subgerencias':subgerencias})
 
 def adminUsuarios(request):
-    return render(request, "admin/adminUsuarios.html")
+    empleados = Empleado.objects.all()
+    return render(request, "admin/adminUsuarios.html", {'empleados':empleados})
 
 def adminAyuda(request):
     return render(request, "admin/adminAyuda.html")
