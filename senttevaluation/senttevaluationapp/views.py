@@ -1,10 +1,24 @@
 from django.shortcuts import render, HttpResponse
 from .models import CARGO, ACCIONCLAVE, COMPETENCIA, GERENCIA, EMPLEADO, SUBGERENCIA
-
+from .forms import EmpleadoForm
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
 def login(request):
-    return render(request, "login.html")
+    return render(request, "registration/login.html")
+
+def log(request):
+    data = {
+        'form': EmpleadoForm
+    }
+
+    if request.method == 'POST':
+        formulario = EmpleadoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+        else:
+            data["form"] = formulario
+    
+    return render(request, 'admin/adminInicio', data)
 
 # ----------------------------------  Administrador ---------------------------------.
 

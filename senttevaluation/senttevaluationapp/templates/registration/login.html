@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Sentte</title>
+        <link rel="icon" type="image/png" href="static/img/logo.png"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <form action="adminInicio"method="POST">
+            <div class="container" id="container">
+                <form action="#">
+                    <img id="imglogo" src="static/img/logo.png" alt="profileImg">
+                    <br>
+                    <h4>Ingrese sus credenciales</h4>
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Iniciar Sesión">                
+                </form>
+            </div>
+        </form>
+    </body>
+</html>

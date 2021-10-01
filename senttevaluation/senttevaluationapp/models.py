@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import PROTECT
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -57,12 +58,12 @@ class PERFILCARGO(models.Model):
     IdPerfil = models.ForeignKey(PERFIL, on_delete=PROTECT)
 
 class EMPLEADO(models.Model):
-    Rut = models.CharField(max_length=13)
+    Rut = models.CharField(max_length=12, unique=True)
     Nombre = models.CharField(max_length=60)
     Usuario = models.CharField(max_length=50)
     Contraseña = models.CharField(max_length=50)
     Rol = models.CharField(max_length=50)
-    Correo = models.CharField(max_length=50)
+    Correo = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.Nombre
