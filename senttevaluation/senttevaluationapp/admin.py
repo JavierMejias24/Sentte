@@ -21,4 +21,3 @@ admin.site.register(COMPETENCIA)
 admin.site.register(COMPACC)
 admin.site.register(PERFCOMP)
 admin.site.register(DETALLEEV)
-

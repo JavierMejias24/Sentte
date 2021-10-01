@@ -6,6 +6,8 @@ from .models import CARGO, ACCIONCLAVE, COMPETENCIA, GERENCIA, EMPLEADO, SUBGERE
 def login(request):
     return render(request, "login.html")
 
+
+
 # ----------------------------------  Administrador ---------------------------------.
 
 def adminInicio(request):

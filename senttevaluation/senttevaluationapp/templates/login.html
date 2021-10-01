@@ -20,15 +20,17 @@
         <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/login.css' %}">
     </head>
     <body>
-        <div class="container" id="container">
-            <form action="#">
-                <img id="imglogo" src="static/img/logo.png" alt="profileImg">
-                <br>
-                <h5>Ingrese sus credenciales</h5>
-                <input class="" type="email" placeholder="Correo"/>
-                <input class="" type="password" placeholder="Contraseña"/>
-                <button>Iniciar sesión</button>
-            </form>
-        </div>
+        <form method="post">
+            <div class="container" id="container">
+                <form action="#">
+                    <img id="imglogo" src="static/img/logo.png" alt="profileImg">
+                    <br>
+                    <h5>Ingrese sus credenciales</h5>
+                    <input class="" type="email" placeholder="Correo"/>
+                    <input class="" type="password" placeholder="Contraseña"/>
+                    <button>Iniciar sesión</button>
+                </form>
+            </div>
+        </form>
     </body>
 </html>

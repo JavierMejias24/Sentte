@@ -1,10 +1,9 @@
 from django.urls import path
-
 from senttevaluationapp import views
 
 urlpatterns = [
 # ----------------------------------  Login ---------------------------------.
-    path('', views.login, name="Login"),    
+    path('', views.login, name="Login"),
 # ----------------------------------  Administrador ---------------------------------------------.
     path('adminInicio', views.adminInicio, name="adminInicio"),
     path('adminAcciones', views.adminAcciones, name="adminAcciones"),
