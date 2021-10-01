@@ -1,9 +1,9 @@
 
 from django import forms
-from .models import EMPLEADO
+from .models import Empleado
 
 class EmpleadoForm(forms.ModelForm):
 
     class Meta:
-        model = EMPLEADO()
+        model = Empleado()
         fields = '__all__'

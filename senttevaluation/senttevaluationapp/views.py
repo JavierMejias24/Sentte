@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import View
-from .models import CARGO, ACCIONCLAVE, COMPETENCIA, GERENCIA, EMPLEADO, SUBGERENCIA
+from .models import Cargo, AccionClave, Competencia, Gerencia, Empleado, SubGerencia
 from .forms import EmpleadoForm
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -14,31 +14,31 @@ def adminInicio(request):
 
 # --1) Forma de llamar a todos los datos--.
 def adminAcciones(request):
-    accionclaves = ACCIONCLAVE.objects.all()
+    accionclaves = AccionClave.objects.all()
     return render(request, "admin/adminAcciones.html", {'accionclaves':accionclaves})
 
 # --2) Forma de llamar a todos los datos--.
 def adminCargos(request):
-    cargos = CARGO.objects.all()
+    cargos = Cargo.objects.all()
     contexto = {
         'cargos':cargos
     }
     return render(request, "admin/adminCargos.html",contexto)
 
 def adminCompetencias(request):
-    competencias = COMPETENCIA.objects.all()
+    competencias = Competencia.objects.all()
     return render(request, "admin/adminCompetencias.html", {'competencias':competencias})
 
 def adminGerencias(request):
-    gerencias = GERENCIA.objects.all()
+    gerencias = Gerencia.objects.all()
     return render(request, "admin/adminGerencias.html", {'gerencias':gerencias})
 
 def adminSubgerencias(request):
-    subgerencias = SUBGERENCIA.objects.all()
+    subgerencias = SubGerencia.objects.all()
     return render(request, "admin/adminSubgerencias.html", {'subgerencias':subgerencias})
 
 def adminUsuarios(request):
-    empleados = EMPLEADO.objects.all()
+    empleados = Empleado.objects.all()
     return render(request, "admin/adminUsuarios.html", {'empleados':empleados})
 
 def adminAyuda(request):
