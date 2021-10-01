@@ -69,7 +69,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {%for empleado in empleados %}
+                                        {% for empleado in empleados %}
                                         <tr>
                                             <td>{{empleado.Rut}}</td>
                                             <td>{{empleado.Nombre}}</td>
@@ -87,13 +87,12 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        {%endfor%}
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
                             <!-- Tercera parte: paso de pagina -->
                             <div class="row">
-
                             </div>
                         </div>
                     </div>  

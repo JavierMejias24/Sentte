@@ -33,11 +33,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {%for competencia in competencias%}
+                                {% for competencia in competencias %}
                                 <tr>
-                                    <td>{{competencia.NombreCompetencia}}</td>
-                                    <td>{{competencia.Definicion}}</td>
-                                    
+                                    <td>{{ competencia.NombreCompetencia }}</td>
+                                    <td>{{ competencia.Definicion }}</td>
                                     <td>
                                         <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                             <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
@@ -47,8 +46,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                {%endfor%}
-    
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
