@@ -22,7 +22,6 @@ urlpatterns = [
     path('adminSubgerenciasModificar/<id>/', views.editarSubgerencia, name="adminSubgerenciasModificar"),
     path('adminSubgerenciasEliminar/<id>/', views.eliminarSubgerencia, name="adminSubgerenciasEliminar"),
     path('adminUsuarios', views.adminUsuarios, name="adminUsuarios"),
-    path('adminUsuariosAgregar', views.agregarUsuario, name="adminUsuariosAgregar"),
     path('adminUsuariosModificar/<id>/', views.editarUsuario, name="adminUsuariosModificar"),
     path('adminUsuariosEliminar/<id>/', views.eliminarUsuario, name="adminUsuariosEliminar"),
     path('adminAyuda', views.adminAyuda, name="adminAyuda"),

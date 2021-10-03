@@ -204,19 +204,18 @@ def eliminarSubgerencia(request, id):
 # -- ------------ Empleado ----------------.
 def adminUsuarios(request):
     empleados = Empleado.objects.all()
-    if request.method == 'POST':
-        form = EmpleadoForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return HttpResponseRedirect("adminUsuarios")
-        
-    return render(request, "admin/adminUsuarios.html", {'empleados':empleados})
-
-def agregarUsuario(request):
-    data = {
+    contexto = {
+        'empleados': empleados,
         'form': EmpleadoForm()
     }
-    return render(request, 'admin/adminUsuarioAgregar.html')
+    if request.method == 'POST':
+        formulario = EmpleadoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect("adminUsuarios")
+        else:
+            return render("admin/adminUsuarios.html")
+    return render(request, "admin/adminUsuarios.html",contexto)
 
 def editarUsuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)

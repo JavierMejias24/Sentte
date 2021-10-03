@@ -8,7 +8,7 @@ from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, SubGere
 class EmpleadoForm(forms.ModelForm):
 
     class Meta:
-        model = Empleado()
+        model = Empleado
         fields = '__all__'
       
 class CargoForm(forms.ModelForm):
