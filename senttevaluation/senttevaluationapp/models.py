@@ -33,7 +33,7 @@ class Empleado(models.Model):
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=PROTECT)
 
     def __str__(self):
-        return self.Nombre
+        return self.Nombre 
 
 class PerfilRol(models.Model):
     Rol = models.CharField(max_length=200)
@@ -44,6 +44,9 @@ class PerfilRol(models.Model):
 
 class Cargo(models.Model):
     NombreCargo = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.NombreCargo
 
 class Perfil(models.Model):
     NombrePerfil = models.CharField(max_length=50)
@@ -76,6 +79,12 @@ class Competencia(models.Model):
     Definicion = models.CharField(max_length=1000)
     IdPerfil = models.ForeignKey(Perfil, on_delete=PROTECT)
 
+    def __str__(self):
+        return self.NombreCompetencia
+
 class AccionClave(models.Model):
     Descripcion = models.CharField(max_length=1000)
-    IdCompetencia = models.ForeignKey(Competencia, on_delete=PROTECT)
+    idcompetencia = models.ForeignKey(Competencia, on_delete=PROTECT)
+
+    def __str__(self):
+        return self.Descripcion
