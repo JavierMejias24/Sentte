@@ -9,17 +9,54 @@
         <br>
         </div>
         <div class="container-fluid">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body">
                         <div class="content-header row">
                             <div class="content-header-left col-md-6 col-12 mb-2">
                                 <h3 class="content-header-title"> Mantenedor de Cargos </h3>
+                                <br>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="tablaUsuarios_filter" class="dataTables_filter"> 
+                                        <label>
+                                            Buscar:
+                                            <input class="form-control" id="buscar" type="text" placeholder="Search..">
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="content-header-right col-md-6 col-12">
                                 <div class="media-body media-right text-right">
-                                    <button onclick="modalAgregar()" type="button" class="bx bx-list-check">
-                                        <i class="la la-list-alt"></i>
+                                    <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalAgregar" style="opacity: 0.5;">
+                                        <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                     </button>
+                                    <!-- Modal Agregar -->
+                                    <div class="modal fade" id='modalAgregar'>
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Crear cargos</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                  </div>
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                   
+                                                    <form action='' method="POST">
+                                                        {% csrf_token %}
+                                                        
+                                                        {{ form }}
+                                                        <br><br>
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                            &nbsp;
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                        
+                                                    </form>
+                                                </div>                                               
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -32,62 +69,29 @@
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="tabla">
                                     {%for cargo in cargos%}
                                     <tr>
                                         <td>{{cargo.NombreCargo}}</td>
                                         <td>
-                                            <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                            <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
+                                                <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                             </button>
+                                            
                                             <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a href="#" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                <a href="{% url 'adminCargosEliminar' cargo.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                             </button>
                                         </td>
                                     </tr>
                                     {%endfor%}
         
                                 </tbody>
-                            </table>
+                            </table>                
                         </div>
                     </div>
-                </div>
-                    <!--Boton para mostrar ventana de formuladrio -->
-                    <a href="#miModal" class="btn btn-info" role="button">Abrir Modal</a>
-                <div id="miModal" class="modalDialog">
-                    <div class="modal-contenido">
-                        <div class="container p-3 my-3 bg-dark text-white">
-                            <div class="card-header">
-                                    Agregar un usuario
-                                    <a href="#close" title="Close" class="close">X</a>
-                                </div>                            
-                        </div>
-                      <div class="container">
-                          <div class="row">
-                            <div class="col-md-6 mb-1">
-                                <label for="a_nombre">Nombre de Usuario</label>
-                                <input type="text" class="form-control" id="a_nombre">
-                            </div>
-                          </div>
-                        <p>Nombre de usuario <input type="text" name="nombre" size="40" placeholder="Escriba su nombre" minlength="1" required></p>
-                        
-                        <p>Usuario<input type="text" name="usuario" size="40" placeholder="Escriba el usuario" required></p>
-                        
-                        <p>Rut Usuario<input type="text" name="rut" size="40" placeholder="11.111.111-1" required></p>
-                        
-                        <p>Fecha de ingreso<input type="date" size="40" name="fecha"></p>
-
-                        <p>Correo<input type="email" size="40" name="correo"></p>
-                        
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                            Deserunt eos quis velit! Quod tempora aperiam eligendi incidunt 
-                            laudantium molestiae at earum? Accusantium distinctio animi 
-                            commodi. Accusamus, reprehenderit? Expedita, voluptate molestias.
-                        </p>
-                      </div>  
-                    </div>     
-                </div>  
+                </div> 
             </div>
         </div>
+        <br><br><br>
     </section>
 </body>
