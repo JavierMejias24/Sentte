@@ -42,7 +42,9 @@
                                                 <div class="modal-body">
                                                     <form action='' method="POST">
                                                         {% csrf_token %}
-                                                        {{ form }}
+                                                        <div class="media-body text-left">
+                                                            {{ form.as_p }}
+                                                        </div>
                                                         <br><br>
                                                         <div class="d-flex justify-content-end">
                                                             <button type="submit" class="btn btn-primary">Guardar</button>

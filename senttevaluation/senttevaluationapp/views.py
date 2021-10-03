@@ -30,7 +30,7 @@ def admin_acciones(request):
             formulario.save()
             return HttpResponseRedirect("adminAcciones")
         else:
-            return render("admin/adminAcciones.html")
+            return HttpResponseRedirect("adminAcciones")
     return render(request, "admin/adminAcciones.html", contexto)
 
 def editar_acciones(request, id):
@@ -67,8 +67,7 @@ def admin_cargos(request):
             print("Agregado con exito")
             return HttpResponseRedirect("adminCargos")
         else:
-            return render("admin/adminCargos.html")
-
+            return HttpResponseRedirect("adminCargos")
     return render(request,"admin/adminCargos.html", contexto)
 
 def editar_cargos(request, id):
@@ -105,7 +104,7 @@ def admin_competencias(request):
             formulario.save()
             return HttpResponseRedirect("adminCompetencias")
         else:
-            return render("admin/adminCompetencias.html")
+            return HttpResponseRedirect("adminCompetencias")
     return render(request, "admin/adminCompetencias.html", contexto1)
 
 def editar_competencias(request, id):
@@ -142,7 +141,7 @@ def admin_gerencias(request):
             formulario.save()
             return HttpResponseRedirect("adminGerencias")
         else:
-            return render("admin/adminGerencias.html")
+            return HttpResponseRedirect("adminGerencias")
     return render(request, "admin/adminGerencias.html", contexto)
 
 def editar_gerencias(request, id):
@@ -178,7 +177,7 @@ def admin_subgerencias(request):
             formulario.save()
             return HttpResponseRedirect("adminSubgerencias")
         else:
-            return render("admin/adminSubgerencias.html")
+            return HttpResponseRedirect("adminSubgerencias")
     return render(request, "admin/adminSubgerencias.html", contexto)
 
 def editar_subgerencia(request, id):
@@ -214,7 +213,7 @@ def admin_usuarios(request):
             formulario.save()
             return HttpResponseRedirect("adminUsuarios")
         else:
-            return render("admin/adminUsuarios.html")
+            return HttpResponseRedirect("adminUsuarios")
     return render(request, "admin/adminUsuarios.html",contexto)
 
 def editar_usuario(request, id):

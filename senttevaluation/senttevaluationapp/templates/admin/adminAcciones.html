@@ -38,10 +38,12 @@
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                               </div>
                                             <!-- Modal body -->
-                                            <div class="modal-body">
+                                            <div class="modal-body ">
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
-                                                    {{ form.as_p }}
+                                                    <div class="media-body text-left">
+                                                        {{ form.as_p }}
+                                                    </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">
                                                         <button type="submit" class="btn btn-primary">Guardar</button>
