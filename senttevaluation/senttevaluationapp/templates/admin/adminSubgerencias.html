@@ -8,17 +8,54 @@
         </div>
         <br>
         <div class="container-fluid">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
                     <div class="content-header row">
                         <div class="content-header-left col-md-6 col-12 mb-2">
                             <h3 class="content-header-title"> Mantenedor de Subgerencias </h3>
+                            <br>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="tablaUsuarios_filter" class="dataTables_filter"> 
+                                        <label>
+                                            Buscar:
+                                            <input class="form-control" id="buscar" type="text" placeholder="Search..">
+                                        </label>
+                                    </div>
+                                </div>
                         </div>
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
-                                <button onclick="modalAgregar()" type="button" class="btn btn-secondary">
-                                    <i class="bx bx-list-check"></i>
+                                <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalAgregar" style="opacity: 0.5;">
+                                    <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                 </button>
+                                <!-- Modal Agregar -->
+                                <div class="modal fade" id='modalAgregar'>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Crear cargos</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                               
+                                                <form action='' method="POST">
+                                                    {% csrf_token %}
+                                                    
+                                                    {{ form }}
+                                                    <br><br>
+                                                    <div class="d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                                        &nbsp;
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                    
+                                                </form>
+                                            </div>                                               
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -27,12 +64,12 @@
                             <thead class="thead-dark">
                                 <tr> 
                                     <th>Nombre</th>
-                                    <th></th>
+                                    <th>Gerencia</th>
                                     <br>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tabla">
                                 {% for subgerencia in subgerencias %}
                                 <tr>
                                     <td>{{subgerencia.NombreSubgerencia}}</td>
@@ -48,10 +85,11 @@
                                 </tr>
                                 {% endfor %}
                             </tbody>
-                        </table>
+                        </table>            
                     </div>
                 </div>
             </div>
         </div>
+        <br><br><br>
     </section>
 </body>

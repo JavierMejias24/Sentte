@@ -33,7 +33,7 @@ class Empleado(models.Model):
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=PROTECT)
 
     def __str__(self):
-        return self.Nombre
+        return self.Nombre 
 
 class PerfilRol(models.Model):
     Rol = models.CharField(max_length=200)

@@ -13,6 +13,8 @@ urlpatterns = [
     path('adminSubgerencias', views.adminSubgerencias, name="adminSubgerencias"),
     path('adminUsuarios', views.adminUsuarios, name="adminUsuarios"),
     path('adminAyuda', views.adminAyuda, name="adminAyuda"),
+    path('adminAccionesModificar/<int:accionclave_id>/', views.editarAcciones, name="adminAccionesModificar"),
+
 # ----------------------------------  Evaluador ------------------------------------------------------.
     path('evaluadorInicio', views.evaluadorInicio, name="evaluadorInicio"),
     path('evaluadorEvaluacion', views.evaluadorEvaluacion, name="evaluadorEvaluacion"),

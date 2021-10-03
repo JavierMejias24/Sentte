@@ -1,7 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.core.files.base import ContentFile
+from django.http.request import HttpRequest
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import redirect, render, HttpResponse
 from django.views.generic import View
 from .models import Cargo, AccionClave, Competencia, Gerencia, Empleado, SubGerencia, Perfil
-from .forms import EmpleadoForm
+from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, GerenciaForm, SubgerenciaForm
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
 def login(request):
@@ -15,27 +18,87 @@ def adminInicio(request):
 # --1) Forma de llamar a todos los datos--.
 def adminAcciones(request):
     accioneclaves = AccionClave.objects.all()
-    return render(request, "admin/adminAcciones.html",{'accionclaves':accioneclaves})
+    contexto = {
+        'accionclaves':accioneclaves,
+        'form': AccionesForm()
+    }
+    if request.method == 'POST':
+        formulario = AccionesForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect("adminAcciones")
+        else:
+            return render("admin/adminAcciones.html")
+    return render(request, "admin/adminAcciones.html", contexto)
+
+def editarAcciones(request, idAccionClave):
+    acciones = AccionClave.objects.filter(id=idAccionClave).first()
+    form = AccionesForm(instance=acciones)
+    return render(request, "admin/adminAccionesModificar.html", {'form':form, 'acciones':acciones})
 
 # --2) Forma de llamar a todos los datos--.
 def adminCargos(request):
     cargos = Cargo.objects.all()
     contexto = {
-        'cargos':cargos
+        'cargos':cargos,
+        'form': CargoForm()
     }
-    return render(request, "admin/adminCargos.html",contexto)
+    if request.method == 'POST':
+        formulario = CargoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            print("Agregado con exito")
+            return HttpResponseRedirect("adminCargos")
+        else:
+            return render("admin/adminCargos.html")
+
+    return render(request,"admin/adminCargos.html", contexto)
+
 
 def adminCompetencias(request):
     competencias = Competencia.objects.all()
-    return render(request, "admin/adminCompetencias.html", {'competencias':competencias})
+    contexto1 = {
+        'competencias': competencias,
+        'form': CompetenciaForm()
+    }
+    if request.method == 'POST':
+        formulario = CompetenciaForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect("adminCompetencias")
+        else:
+            return render("admin/adminCompetencias.html")
+    return render(request, "admin/adminCompetencias.html", contexto1)
 
 def adminGerencias(request):
     gerencias = Gerencia.objects.all()
-    return render(request, "admin/adminGerencias.html", {'gerencias':gerencias})
+    contexto = {
+        'gerencias': gerencias,
+        'form': GerenciaForm()
+    }
+    if request.method == 'POST':
+        formulario = GerenciaForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect("adminGerencias")
+        else:
+            return render("admin/adminGerencias.html")
+    return render(request, "admin/adminGerencias.html", contexto)
 
 def adminSubgerencias(request):
     subgerencias = SubGerencia.objects.all()
-    return render(request, "admin/adminSubgerencias.html", {'subgerencias':subgerencias})
+    contexto = {
+        'subgerencias': subgerencias,
+        'form': SubgerenciaForm()
+    }
+    if request.method == 'POST':
+        formulario = SubgerenciaForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect("adminSubgerencias")
+        else:
+            return render("admin/adminSubgerencias.html")
+    return render(request, "admin/adminSubgerencias.html", contexto)
 
 def adminUsuarios(request):
     empleados = Empleado.objects.all()
