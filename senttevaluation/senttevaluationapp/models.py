@@ -25,11 +25,11 @@ class SubGerencia(models.Model):
         return self.NombreSubgerencia
 
 class Empleado(models.Model):
-    Rut = models.CharField(max_length=12, unique=True)
+    Rut = models.CharField(max_length=12)
     Nombre = models.CharField(max_length=50)
     Contraseña = models.CharField(max_length=50)
     Rol = models.CharField(max_length=50)
-    Correo = models.CharField(max_length=50, unique=True)
+    Correo = models.CharField(max_length=50)
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=PROTECT)
 
     def __str__(self):

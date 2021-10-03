@@ -75,37 +75,11 @@
                                         <td>{{cargo.NombreCargo}}</td>
                                         <td>
                                             <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
-                                                <a href=" " class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                                <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                             </button>
-                                            <!-- The Modal -->
-                                            <div class="modal fade" id='modalModificar'>
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <!-- Modal Header -->
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Crear cargos</h4>
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                          </div>
-                                                        <!-- Modal body -->
-                                                        <div class="modal-body">
-                                                            <form method="post">
-                                                                <div class="form-group">
-                                                                    <label for="cargo">Cargos:</label>
-                                                                    {{form}
-                                                                    <div class="d-flex justify-content-end">
-                                                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                                                         &nbsp;
-                                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                                    </div>
-                                                                    </input>
-                                                                </div>
-                                                          </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a href=" " class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                <a href="{% url 'adminCargosEliminar' cargo.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                             </button>
                                         </td>
                                     </tr>

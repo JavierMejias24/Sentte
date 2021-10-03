@@ -1,10 +1,12 @@
 from django.core.files.base import ContentFile
+from django.db.models.query import InstanceCheckMeta
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import redirect, render, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.views.generic import View
 from .models import Cargo, AccionClave, Competencia, Gerencia, Empleado, SubGerencia, Perfil
 from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, GerenciaForm, SubgerenciaForm
+
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
 def login(request):
@@ -15,9 +17,9 @@ def login(request):
 def adminInicio(request):
     return render(request, "admin/adminInicio.html")
 
-# --1) Forma de llamar a todos los datos--.
+# -- ------------Acciones Claves----------------.
 def adminAcciones(request):
-    accioneclaves = AccionClave.objects.all()
+    accioneclaves = AccionClave.objects.all() 
     contexto = {
         'accionclaves':accioneclaves,
         'form': AccionesForm()
@@ -31,12 +33,27 @@ def adminAcciones(request):
             return render("admin/adminAcciones.html")
     return render(request, "admin/adminAcciones.html", contexto)
 
-def editarAcciones(request, idAccionClave):
-    acciones = AccionClave.objects.filter(id=idAccionClave).first()
-    form = AccionesForm(instance=acciones)
-    return render(request, "admin/adminAccionesModificar.html", {'form':form, 'acciones':acciones})
+def editarAcciones(request, id):
+    acciones = get_object_or_404(AccionClave, id=id)
+    data = {
+        'form':  AccionesForm(instance=acciones)
+    }
+    if request.method == 'POST':
+        formulario = AccionesForm(data=request.POST, instance=acciones)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="adminAcciones")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminAccionesModificar.html", data)
 
-# --2) Forma de llamar a todos los datos--.
+def eliminarAcciones(request, id):
+    acciones = get_object_or_404(AccionClave, id=id)
+    acciones.delete()
+    return redirect(to='adminAcciones')
+# -----------------------------------------------------------------------------------------------.
+
+# -- ------------ Cargos ----------------.
 def adminCargos(request):
     cargos = Cargo.objects.all()
     contexto = {
@@ -54,7 +71,28 @@ def adminCargos(request):
 
     return render(request,"admin/adminCargos.html", contexto)
 
+def editarCargos(request, id):
+    cargos = get_object_or_404(Cargo, id=id)
+    data = {
+        'form':  CargoForm(instance=cargos)
+    }
+    if request.method == 'POST':
+        formulario = CargoForm(data=request.POST, instance=cargos)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="adminCargos")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminCargosModificar.html", data)
 
+def eliminarCargos(request, id):
+    cargos = get_object_or_404(Cargo, id=id)
+    cargos.delete()
+    return redirect(to="adminCargos")
+
+# -----------------------------------------------------------------------------------------------.
+
+# -- ------------ Competencias ----------------.
 def adminCompetencias(request):
     competencias = Competencia.objects.all()
     contexto1 = {
@@ -70,6 +108,28 @@ def adminCompetencias(request):
             return render("admin/adminCompetencias.html")
     return render(request, "admin/adminCompetencias.html", contexto1)
 
+def editarCompetencias(request, id):
+    competencias = get_object_or_404(Competencia, id=id)
+    data = {
+        'form':  CompetenciaForm(instance=competencias)
+    }
+    if request.method == 'POST':
+        formulario = CompetenciaForm(data=request.POST, instance=competencias)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="adminCompetencias")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminCompetenciasModificar.html", data)
+
+def eliminarCompetencias(request, id):
+    competencias = get_object_or_404(Competencia, id=id)
+    competencias.delete()
+    return redirect(to="adminCompetencias")
+
+# -----------------------------------------------------------------------------------------------.
+
+# -- ------------ Gerencias ----------------.
 def adminGerencias(request):
     gerencias = Gerencia.objects.all()
     contexto = {
@@ -85,6 +145,27 @@ def adminGerencias(request):
             return render("admin/adminGerencias.html")
     return render(request, "admin/adminGerencias.html", contexto)
 
+def editarGerencias(request, id):
+    gerencias = get_object_or_404(Gerencia, id=id)
+    data = {
+        'form':  GerenciaForm(instance=gerencias)
+    }
+    if request.method == 'POST':
+        formulario = GerenciaForm(data=request.POST, instance=gerencias)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="adminGerencias")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminGerenciasModificar.html", data)
+
+def eliminarGerencias(request, id):
+    gerencias = get_object_or_404(Gerencia, id=id)
+    gerencias.delete()
+    return redirect(to="adminGerencias")
+# -----------------------------------------------------------------------------------------------.
+
+# -- ------------ Sub-gerencias ----------------.
 def adminSubgerencias(request):
     subgerencias = SubGerencia.objects.all()
     contexto = {
@@ -100,12 +181,62 @@ def adminSubgerencias(request):
             return render("admin/adminSubgerencias.html")
     return render(request, "admin/adminSubgerencias.html", contexto)
 
+def editarSubgerencia(request, id):
+    subgerencias = get_object_or_404(SubGerencia, id=id)
+    data = {
+        'form':  SubgerenciaForm(instance=subgerencias)
+    }
+    if request.method == 'POST':
+        formulario = SubgerenciaForm(data=request.POST, instance=subgerencias)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="adminSubgerencias")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminSubgerenciasModificar.html", data)
+
+def eliminarSubgerencia(request, id):
+    subgerencias = get_object_or_404(SubGerencia, id=id)
+    subgerencias.delete()
+    return redirect(to="adminSubgerencias")
+# -----------------------------------------------------------------------------------------------.
+
+# -- ------------ Empleado ----------------.
 def adminUsuarios(request):
     empleados = Empleado.objects.all()
+    if request.method == 'POST':
+        form = EmpleadoForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect("adminUsuarios")
+        
     return render(request, "admin/adminUsuarios.html", {'empleados':empleados})
+
+def editarUsuario(request, id):
+    empleados = get_object_or_404(Empleado, id=id)
+    data = {
+        'form':  EmpleadoForm(instance=empleados)
+    }
+    if request.method == 'POST':
+        formulario = EmpleadoForm(data=request.POST, instance=empleados)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="adminUsuarios")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminUsuariosModificar.html", data)
+
+def eliminarUsuario(request, id):
+    empleados = get_object_or_404(Empleado, id=id)
+    empleados.delete()
+    return redirect(to="adminUsuarios")
+
+# -----------------------------------------------------------------------------------------------.
 
 def adminAyuda(request):
     return render(request, "admin/adminAyuda.html")
+
+# -----------------------------------------------------------------------------------------------.
 
 # ----------------------------------  Evaluador ---------------------------------.
 def evaluadorInicio(request):

@@ -93,10 +93,10 @@
                                             <td>{{empleado.IdSubGerencia}}</td>
                                             <td>
                                                 <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                                    <a href="{% url 'adminUsuariosModificar' empleado.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                                 </button>
                                                 <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="#" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                    <a href="{% url 'adminUsuariosEliminar' empleado.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                                 </button>
                                             </td>
                                         </tr>

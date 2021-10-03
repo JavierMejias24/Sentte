@@ -70,7 +70,6 @@
                                 <tbody id="tabla">
                                     {%for accionclave in accionclaves%}
                                     <tr>
-                                        
                                         <td>{{accionclave.Descripcion}}</td>
                                         <td>{{accionclave.idcompetencia}}</td>
                                         <td>
@@ -79,7 +78,7 @@
                                             </button>
                                             <br>
                                             <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a href=" " class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                <a href="{% url 'adminAccionesEliminar' accionclave.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                             </button>
                                         </td>
                                     </tr>

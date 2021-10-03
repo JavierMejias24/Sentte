@@ -76,10 +76,10 @@
                                     <td>{{ competencia.IdPerfil}}</td>
                                     <td>
                                         <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                            <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                            <a href="{% url 'adminCompetenciasModificar' competencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                         </button>
                                         <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                            <a href="#" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                            <a href="{% url 'adminCompetenciasEliminar' competencia.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                         </button>
                                     </td>
                                 </tr>
