@@ -14,7 +14,7 @@ def login(request):
 
 # ----------------------------------  Administrador ---------------------------------.
 
-def adminInicio(request):
+def adminIndex(request):
     return render(request, "admin/adminInicio.html")
 
 # -- ------------Acciones Claves----------------.

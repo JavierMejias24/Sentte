@@ -5,7 +5,7 @@ urlpatterns = [
 # ----------------------------------  Login ---------------------------------.
     path('', views.login, name="Login"),
 # ----------------------------------  Administrador ---------------------------------------------.
-    path('adminInicio', views.adminInicio, name="adminInicio"),
+    path('adminInicio', views.adminIndex, name="adminInicio"),
     path('adminAcciones', views.adminAcciones, name="adminAcciones"),
     path('adminAccionesModificar/<id>/', views.editarAcciones, name="adminAccionesModificar"),
     path('adminAccionesEliminar/<id>/', views.eliminarAcciones, name="adminAccionesEliminar"),
@@ -25,7 +25,6 @@ urlpatterns = [
     path('adminUsuariosModificar/<id>/', views.editarUsuario, name="adminUsuariosModificar"),
     path('adminUsuariosEliminar/<id>/', views.eliminarUsuario, name="adminUsuariosEliminar"),
     path('adminAyuda', views.adminAyuda, name="adminAyuda"),
-
 # ----------------------------------  Evaluador ------------------------------------------------------.
     path('evaluadorInicio', views.evaluadorInicio, name="evaluadorInicio"),
     path('evaluadorEvaluacion', views.evaluadorEvaluacion, name="evaluadorEvaluacion"),
