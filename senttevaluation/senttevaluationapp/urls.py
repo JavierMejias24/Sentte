@@ -5,7 +5,7 @@ urlpatterns = [
 # ----------------------------------  Login ---------------------------------.
     path('', views.login, name="Login"),
 # ----------------------------------  Administrador ---------------------------------------------.
-    path('adminInicio', views.adminIndex, name="adminInicio"),
+    path('adminInicio', views.admin_inicio, name="adminInicio"),
     path('adminAcciones', views.adminAcciones, name="adminAcciones"),
     path('adminAccionesModificar/<id>/', views.editarAcciones, name="adminAccionesModificar"),
     path('adminAccionesEliminar/<id>/', views.eliminarAcciones, name="adminAccionesEliminar"),
