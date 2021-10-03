@@ -14,14 +14,14 @@
                         <div class="content-header-left col-md-6 col-12 mb-2">
                             <h3 class="content-header-title"> Mantenedor Acciones </h3>
                             <br>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="tablaUsuarios_filter" class="dataTables_filter"> 
-                                        <label>
-                                            Buscar:
-                                            <input class="form-control" id="buscar" type="text" placeholder="Search..">
-                                        </label>
-                                    </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="tablaUsuarios_filter" class="dataTables_filter"> 
+                                    <label>
+                                        Buscar:
+                                        <input class="form-control" id="buscar" type="text" placeholder="Search..">
+                                    </label>
                                 </div>
+                            </div>
                         </div>
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
@@ -69,19 +69,19 @@
                                 </thead>
                                 <tbody id="tabla">
                                     {%for accionclave in accionclaves%}
-                                    <tr>
-                                        <td>{{accionclave.Descripcion}}</td>
-                                        <td>{{accionclave.idcompetencia}}</td>
-                                        <td>
-                                            <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                <a href="{% url 'adminAccionesModificar' accionclave.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                            <br>
-                                            <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a href="{% url 'adminAccionesEliminar' accionclave.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{accionclave.Descripcion}}</td>
+                                            <td>{{accionclave.idcompetencia}}</td>
+                                            <td>
+                                                <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
+                                                    <a href="{% url 'adminAccionesModificar' accionclave.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                                </button>
+                                                <br>
+                                                <button type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
+                                                    <a href="{% url 'adminAccionesEliminar' accionclave.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                </button>
+                                            </td>
+                                        </tr>
                                     {%endfor%}
                                 </tbody>
                             </table>

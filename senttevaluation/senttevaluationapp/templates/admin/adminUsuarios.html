@@ -43,10 +43,8 @@
                                               </div>
                                             <!-- Modal body -->
                                             <div class="modal-body">
-                                               
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
-                                                    
                                                     {{ form.as_p }}
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">
@@ -54,7 +52,6 @@
                                                         &nbsp;
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                     </div>
-                                                    
                                                 </form>
                                             </div>                                               
                                         </div>
@@ -83,23 +80,23 @@
                                     </thead>
                                     <tbody id="tabla">
                                         {% for empleado in empleados %}
-                                        <tr>
-                                            <td>{{empleado.Rut}}</td>
-                                            <td>{{empleado.Nombre}}</td>
-                                            <td>{{empleado.Correo}}</td>
-                                            <td>No se</td>
-                                            <td>{{empleado.IdSubGerencia.IdGerencia.IdArea}}</td>
-                                            <td>{{empleado.IdSubGerencia.IdGerencia}}</td>
-                                            <td>{{empleado.IdSubGerencia}}</td>
-                                            <td>
-                                                <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                    <a href="{% url 'adminUsuariosModificar' empleado.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                                <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="{% url 'adminUsuariosEliminar' empleado.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{empleado.Rut}}</td>
+                                                <td>{{empleado.Nombre}}</td>
+                                                <td>{{empleado.Correo}}</td>
+                                                <td>No se</td>
+                                                <td>{{empleado.IdSubGerencia.IdGerencia.IdArea}}</td>
+                                                <td>{{empleado.IdSubGerencia.IdGerencia}}</td>
+                                                <td>{{empleado.IdSubGerencia}}</td>
+                                                <td>
+                                                    <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
+                                                        <a href="{% url 'adminUsuariosModificar' empleado.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                                    </button>
+                                                    <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
+                                                        <a href="{% url 'adminUsuariosEliminar' empleado.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                    </button>
+                                                </td>
+                                            </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>
