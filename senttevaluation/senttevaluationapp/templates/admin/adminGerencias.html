@@ -14,14 +14,14 @@
                         <div class="content-header-left col-md-6 col-12 mb-2">
                             <h3 class="content-header-title"> Mantenedor de gerencia</h3>
                             <br>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="tablaUsuarios_filter" class="dataTables_filter"> 
-                                        <label>
-                                            Buscar:
-                                            <input class="form-control" id="buscar" type="text" placeholder="Search..">
-                                        </label>
-                                    </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="tablaUsuarios_filter" class="dataTables_filter"> 
+                                    <label>
+                                        Buscar:
+                                        <input class="form-control" id="buscar" type="text" placeholder="Search..">
+                                    </label>
                                 </div>
+                            </div>
                         </div>
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
@@ -68,18 +68,18 @@
                             </thead>
                             <tbody id="tabla">
                                 {% for gerencia in gerencias %}
-                                <tr>
-                                    <td>{{ gerencia.NombreGerencia }}</td>
-                                    <td>{{ gerencia.IdArea}}</td>
-                                    <td>
-                                        <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                            <a href="{% url 'adminGerenciasModificar' gerencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                        </button>
-                                        <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                            <a href="{% url 'adminGerenciasEliminar' gerencia.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                        </button>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ gerencia.NombreGerencia }}</td>
+                                        <td>{{ gerencia.IdArea}}</td>
+                                        <td>
+                                            <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
+                                                <a href="{% url 'adminGerenciasModificar' gerencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                            </button>
+                                            <button type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
+                                                <a href="{% url 'adminGerenciasEliminar' gerencia.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 {% endfor %}
                             </tbody>
                         </table>

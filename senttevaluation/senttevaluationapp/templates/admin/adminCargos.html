@@ -40,10 +40,8 @@
                                                   </div>
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
-                                                   
                                                     <form action='' method="POST">
                                                         {% csrf_token %}
-                                                        
                                                         {{ form }}
                                                         <br><br>
                                                         <div class="d-flex justify-content-end">
@@ -51,9 +49,8 @@
                                                             &nbsp;
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                         </div>
-                                                        
                                                     </form>
-                                                </div>                                               
+                                                </div>    
                                             </div>
                                         </div>
                                     </div>
@@ -71,20 +68,18 @@
                                 </thead>
                                 <tbody id="tabla">
                                     {%for cargo in cargos%}
-                                    <tr>
-                                        <td>{{cargo.NombreCargo}}</td>
-                                        <td>
-                                            <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
-                                                <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                            
-                                            <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a href="{% url 'adminCargosEliminar' cargo.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{cargo.NombreCargo}}</td>
+                                            <td>
+                                                <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
+                                                    <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                                </button>
+                                                <button type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
+                                                    <a href="{% url 'adminCargosEliminar' cargo.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                </button>
+                                            </td>
+                                        </tr>
                                     {%endfor%}
-        
                                 </tbody>
                             </table>                
                         </div>
