@@ -20,9 +20,10 @@
                         <form action="" method="POST"> 
                             {% csrf_token %}
                             {{ form.as_p }}
-                            <div class="d-flex justify-content-end">
-                                <input type="reset" value="Cancelar" class="btn btn-secundary">
+                            <div class="d-flex justify-content-end"> 
                                 <input type="submit" value="Guardar" class="btn btn-primary">
+                                &nbsp;
+                                <a href="http://localhost:8000/adminUsuarios" value="Cancelar" class="btn btn-dange" role="button">Cancelar</a>
                             </div>
                         </form>
                     </div>
