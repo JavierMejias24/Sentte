@@ -18,7 +18,7 @@ def admin_inicio(request):
     return render(request, "admin/adminInicio.html")
 
 # -- ------------Acciones Claves----------------.
-def adminAcciones(request):
+def admin_acciones(request):
     accioneclaves = AccionClave.objects.all() 
     contexto = {
         'accionclaves':accioneclaves,
@@ -33,7 +33,7 @@ def adminAcciones(request):
             return render("admin/adminAcciones.html")
     return render(request, "admin/adminAcciones.html", contexto)
 
-def editarAcciones(request, id):
+def editar_acciones(request, id):
     acciones = get_object_or_404(AccionClave, id=id)
     data = {
         'form':  AccionesForm(instance=acciones)
@@ -47,14 +47,14 @@ def editarAcciones(request, id):
             data["form"] = formulario
     return render(request, "admin/adminAccionesModificar.html", data)
 
-def eliminarAcciones(request, id):
+def eliminar_acciones(request, id):
     acciones = get_object_or_404(AccionClave, id=id)
     acciones.delete()
     return redirect(to='adminAcciones')
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Cargos ----------------.
-def adminCargos(request):
+def admin_cargos(request):
     cargos = Cargo.objects.all()
     contexto = {
         'cargos':cargos,
@@ -71,7 +71,7 @@ def adminCargos(request):
 
     return render(request,"admin/adminCargos.html", contexto)
 
-def editarCargos(request, id):
+def editar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
     data = {
         'form':  CargoForm(instance=cargos)
@@ -85,7 +85,7 @@ def editarCargos(request, id):
             data["form"] = formulario
     return render(request, "admin/adminCargosModificar.html", data)
 
-def eliminarCargos(request, id):
+def eliminar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
     cargos.delete()
     return redirect(to="adminCargos")
@@ -93,7 +93,7 @@ def eliminarCargos(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Competencias ----------------.
-def adminCompetencias(request):
+def admin_competencias(request):
     competencias = Competencia.objects.all()
     contexto1 = {
         'competencias': competencias,
@@ -108,7 +108,7 @@ def adminCompetencias(request):
             return render("admin/adminCompetencias.html")
     return render(request, "admin/adminCompetencias.html", contexto1)
 
-def editarCompetencias(request, id):
+def editar_competencias(request, id):
     competencias = get_object_or_404(Competencia, id=id)
     data = {
         'form':  CompetenciaForm(instance=competencias)
@@ -122,7 +122,7 @@ def editarCompetencias(request, id):
             data["form"] = formulario
     return render(request, "admin/adminCompetenciasModificar.html", data)
 
-def eliminarCompetencias(request, id):
+def eliminar_competencias(request, id):
     competencias = get_object_or_404(Competencia, id=id)
     competencias.delete()
     return redirect(to="adminCompetencias")
@@ -130,7 +130,7 @@ def eliminarCompetencias(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Gerencias ----------------.
-def adminGerencias(request):
+def admin_gerencias(request):
     gerencias = Gerencia.objects.all()
     contexto = {
         'gerencias': gerencias,
@@ -145,7 +145,7 @@ def adminGerencias(request):
             return render("admin/adminGerencias.html")
     return render(request, "admin/adminGerencias.html", contexto)
 
-def editarGerencias(request, id):
+def editar_gerencias(request, id):
     gerencias = get_object_or_404(Gerencia, id=id)
     data = {
         'form':  GerenciaForm(instance=gerencias)
@@ -159,14 +159,14 @@ def editarGerencias(request, id):
             data["form"] = formulario
     return render(request, "admin/adminGerenciasModificar.html", data)
 
-def eliminarGerencias(request, id):
+def eliminar_gerencias(request, id):
     gerencias = get_object_or_404(Gerencia, id=id)
     gerencias.delete()
     return redirect(to="adminGerencias")
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Sub-gerencias ----------------.
-def adminSubgerencias(request):
+def admin_subgerencias(request):
     subgerencias = SubGerencia.objects.all()
     contexto = {
         'subgerencias': subgerencias,
@@ -181,7 +181,7 @@ def adminSubgerencias(request):
             return render("admin/adminSubgerencias.html")
     return render(request, "admin/adminSubgerencias.html", contexto)
 
-def editarSubgerencia(request, id):
+def editar_subgerencia(request, id):
     subgerencias = get_object_or_404(SubGerencia, id=id)
     data = {
         'form':  SubgerenciaForm(instance=subgerencias)
@@ -195,14 +195,14 @@ def editarSubgerencia(request, id):
             data["form"] = formulario
     return render(request, "admin/adminSubgerenciasModificar.html", data)
 
-def eliminarSubgerencia(request, id):
+def eliminar_subgerencia(request, id):
     subgerencias = get_object_or_404(SubGerencia, id=id)
     subgerencias.delete()
     return redirect(to="adminSubgerencias")
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Empleado ----------------.
-def adminUsuarios(request):
+def admin_usuarios(request):
     empleados = Empleado.objects.all()
     contexto = {
         'empleados': empleados,
@@ -217,7 +217,7 @@ def adminUsuarios(request):
             return render("admin/adminUsuarios.html")
     return render(request, "admin/adminUsuarios.html",contexto)
 
-def editarUsuario(request, id):
+def editar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     data = {
         'form':  EmpleadoForm(instance=empleados)
@@ -231,52 +231,52 @@ def editarUsuario(request, id):
             data["form"] = formulario
     return render(request, "admin/adminUsuariosModificar.html", data)
 
-def eliminarUsuario(request, id):
+def eliminar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     empleados.delete()
     return redirect(to="adminUsuarios")
 
 # -----------------------------------------------------------------------------------------------.
 
-def adminAyuda(request):
+def admin_ayuda(request):
     return render(request, "admin/adminAyuda.html")
 
 # -----------------------------------------------------------------------------------------------.
 
 # ----------------------------------  Evaluador ---------------------------------.
-def evaluadorInicio(request):
+def evaluador_inicio(request):
     return render(request, "evaluador/evaluadorInicio.html")
 
-def evaluadorEvaluacion(request):
+def evaluador_evaluacion(request):
     return render(request, "evaluador/evaluadorEvaluacion.html")
 
-def evaluadorAutovaluacion(request):
+def evaluador_autovaluacion(request):
     return render(request, "evaluador/evaluadorAutovaluacion.html")
 
-def evaluadorAyuda(request):
+def evaluador_ayuda(request):
     return render(request, "evaluador/evaluadorAyuda.html")
 
-def evaluadorFormulario(request):
+def evaluador_formulario(request):
     return render(request, "evaluador/evaluadorFormulario.html")
 
 # ----------------------------------  Colaborador ---------------------------------.
 
-def colaboradorInicio(request):
+def colaborador_inicio(request):
     return render(request, "colaborador/colaboradorInicio.html")
 
-def colaboradorAyuda(request):
+def colaborador_ayuda(request):
     return render(request, "colaborador/colaboradorAyuda.html")
 
-def colaboradorAutovaluacion(request):
+def colaborador_autovaluacion(request):
     return render(request, "colaborador/colaboradorAutovaluacion.html")
 
 # ----------------------------------  Calibrador ---------------------------------.
 
-def calibradorInicio(request):
+def calibrador_inicio(request):
     return render(request, "calibrador/calibradorInicio.html")
     
-def calibradorAyuda(request):
+def calibrador_ayuda(request):
     return render(request, "calibrador/calibradorAyuda.html")
 
-def calibradorEvaluaciones(request):
+def calibrador_evaluaciones(request):
     return render(request, "calibrador/calibradorEvaluaciones.html")
