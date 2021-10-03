@@ -212,6 +212,12 @@ def adminUsuarios(request):
         
     return render(request, "admin/adminUsuarios.html", {'empleados':empleados})
 
+def agregarUsuario(request):
+    data = {
+        'form': EmpleadoForm()
+    }
+    return render(request, 'admin/adminUsuarioAgregar.html')
+
 def editarUsuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     data = {

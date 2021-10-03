@@ -30,7 +30,7 @@
                             <div class="media-body media-right text-right">
                                 <!-- Llama a la funcion modalAgregar -->
                                 <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalAgregar" style="opacity: 0.5;">
-                                    <a href="#" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                    <a href="{% url 'adminUsuariosAgregar' %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                 </button>
                                 <!-- Modal Agregar -->
                                 <div class="modal fade" id='modalAgregar'>
@@ -88,8 +88,8 @@
                                             <td>{{empleado.Nombre}}</td>
                                             <td>{{empleado.Correo}}</td>
                                             <td>No se</td>
-                                            <td>No se</td>
-                                            <td>no se</td>
+                                            <td>{{empleado.IdSubGerencia.IdGerencia.IdArea}}</td>
+                                            <td>{{empleado.IdSubGerencia.IdGerencia}}</td>
                                             <td>{{empleado.IdSubGerencia}}</td>
                                             <td>
                                                 <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
