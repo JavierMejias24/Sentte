@@ -3,7 +3,7 @@ from django import forms
 from django.db.models.base import ModelBase
 from django.forms import fields
 from django.forms.models import model_to_dict
-from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, SubGerencia
+from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, PerfilRol, SubGerencia
 
 class EmpleadoForm(forms.ModelForm):
 
@@ -11,6 +11,11 @@ class EmpleadoForm(forms.ModelForm):
         model = Empleado
         fields = '__all__'
       
+class PerfilRolForm(forms.ModelForm):
+    class Meta:
+        model = PerfilRol
+        fields = '__all__'
+
 class CargoForm(forms.ModelForm):
     class Meta:
         model = Cargo

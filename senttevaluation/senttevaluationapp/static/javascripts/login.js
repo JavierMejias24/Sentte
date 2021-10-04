@@ -1,14 +1,20 @@
-function validar(){
-    var usuario=document.getElementById("#usuario").value;
-    var contraseña=document.getElementById("#contrasea").value;
-
-    if(usuario="admin"&&contraseña=="admin")
+$(document).ready(function validar(){
+    var usuario=document.getElementById("usuario").value;
+    var contraseña=document.getElementById("contraseña").value;
+    if(usuario =="admin")
     {
-        alert("Bien");
-        setTimeout("location.href='http://localhost:8000/adminInicio'", 0);
+        if (contraseña == "admin")
+        {
+            alert("Malo")
+           
+        }
+        else {
+            alert("Mal contra");
+        }
+        alert("Mal usa");
     }
     else
     {
-        alert("Mal");
+        setTimeout("location.href='http://localhost:8000/adminInicio'", 1000);
     }
-}
+});

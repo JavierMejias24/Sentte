@@ -11,14 +11,14 @@ class Area(models.Model):
 
 class Gerencia(models.Model):
     NombreGerencia = models.CharField(max_length=50)
-    IdArea = models.ForeignKey(Area, on_delete=models.CASCADE)
+    IdArea = models.ForeignKey(Area, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.NombreGerencia
 
 class SubGerencia(models.Model):
     NombreSubgerencia = models.CharField(max_length=50)
-    IdGerencia = models.ForeignKey(Gerencia, on_delete=models.CASCADE)
+    IdGerencia = models.ForeignKey(Gerencia, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.NombreSubgerencia
@@ -29,7 +29,7 @@ class Empleado(models.Model):
     Contraseña = models.CharField(max_length=50)
     Rol = models.CharField(max_length=50)
     Correo = models.CharField(max_length=50, unique=True)
-    IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE)
+    IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
 
     def __str__(self):
         return self.Nombre 
@@ -39,7 +39,10 @@ class PerfilRol(models.Model):
     RelacionEvaluado = models.CharField(max_length=50)
     NombreEvaluador = models.CharField(max_length=50)
     NombreCalibrador = models.CharField(max_length=50)
-    IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE)
+    IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
+
+    def __str__(self):
+        return self.Rol
 
 class Cargo(models.Model):
     NombreCargo = models.CharField(max_length=50)
@@ -49,7 +52,7 @@ class Cargo(models.Model):
 
 class Perfil(models.Model):
     NombrePerfil = models.CharField(max_length=50)
-    IdCargo = models.ForeignKey(Cargo, on_delete=CASCADE)
+    IdCargo = models.ForeignKey(Cargo, on_delete=CASCADE, default=1)
 
     def __str__(self):
         return self.NombrePerfil
@@ -58,8 +61,8 @@ class Evaluacion(models.Model):
     Estado = models.CharField(max_length=50)
     Fase = models.CharField(max_length=50)
     ComentarioCalibrador = models.CharField(max_length=50)
-    IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE)
-    IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE)
+    IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE, default=1)
+    IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 
 class PlanAccion(models.Model):
     Accion = models.CharField(max_length=50)
@@ -70,20 +73,20 @@ class DetalleEv(models.Model):
     ComentarioEvaluador = models.CharField(max_length=100)
     Calificacion = models.IntegerField()
     AutoEvaluacion = models.IntegerField()
-    IdEvaluacion = models.ForeignKey(Evaluacion, on_delete=CASCADE)
-    IdPlanAccion = models.ForeignKey(PlanAccion, on_delete=CASCADE)
+    IdEvaluacion = models.ForeignKey(Evaluacion, on_delete=CASCADE, default=1)
+    IdPlanAccion = models.ForeignKey(PlanAccion, on_delete=CASCADE, default=1)
 
 class Competencia(models.Model):
     NombreCompetencia = models.CharField(max_length=50)
     Definicion = models.CharField(max_length=1000)
-    IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE)
+    IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE, default=1)
 
     def __str__(self):
         return self.NombreCompetencia
 
 class AccionClave(models.Model):
     Descripcion = models.CharField(max_length=1000)
-    IdCompetencia = models.ForeignKey(Competencia, on_delete=CASCADE)
+    IdCompetencia = models.ForeignKey(Competencia, on_delete=CASCADE, default=1)
 
     def __str__(self):
         return self.Descripcion
