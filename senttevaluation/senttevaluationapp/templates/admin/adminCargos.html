@@ -67,19 +67,19 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabla">
-                                    {%for cargo in cargos%}
+                                    {% for cargo in cargos %}
                                         <tr>
-                                            <td>{{cargo.NombreCargo}}</td>
+                                            <td>{{ cargo.NombreCargo }}</td>
                                             <td>
                                                 <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
                                                     <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                                 </button>
-                                                <button type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
+                                                <button data-name="{{ cargo.NombreCargo }}" type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
                                                     <a href="{% url 'adminCargosEliminar' cargo.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                                 </button>
                                             </td>
                                         </tr>
-                                    {%endfor%}
+                                    {% endfor %}
                                 </tbody>
                             </table>                
                         </div>
