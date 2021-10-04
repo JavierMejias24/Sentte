@@ -1,5 +1,6 @@
 {% include 'base.html' %}
 {% include 'sidebars/adminSidebar.html' %}
+{% load crispy_forms_tags %}
 <body>
      <!-- Icono del menu -->
      <section class="home-section">
@@ -19,7 +20,7 @@
                     <div class="col-sm-12">  
                         <form action="" method="POST"> 
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            {{ form | crispy }}
                             <div class="d-flex justify-content-end"> 
                                 <input type="submit" value="Guardar" class="btn btn-primary">
                                 &nbsp;
