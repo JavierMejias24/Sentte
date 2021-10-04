@@ -1,11 +1,12 @@
 $(document).ready(function(){
-    const btnEliminar = document.querySelectorAll("#btnEliminar");
+    var btnEliminar = document.querySelectorAll("#btnEliminar");
     btnEliminar.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const confirmacion = confirm('¿Está seguro?');
+            var name = btn.dataset.name;
+            var confirmacion = confirm('¿Está seguro que desea eliminar: ' + name + '?' );
             if(!confirmacion) {
                 e.preventDefault();
             }
         });
     });
-})();
+});
