@@ -69,13 +69,13 @@
                             <tbody id="tabla">
                                 {% for subgerencia in subgerencias %}
                                     <tr>
-                                        <td>{{subgerencia.NombreSubgerencia}}</td>
-                                        <td>{{subgerencia.IdGerencia}}</td>
+                                        <td>{{ subgerencia.NombreSubgerencia }}</td>
+                                        <td>{{ subgerencia.IdGerencia }}</td>
                                         <td>
                                             <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                                 <a href="{% url 'adminSubgerenciasModificar' subgerencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                             </button>
-                                            <button type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
+                                            <button data-name="{{ subgerencia.NombreSubgerencia }}" type="button" id="btn" class="btn btn-danger" style="opacity: 0.5;">
                                                 <a href="{% url 'adminSubgerenciasEliminar' subgerencia.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                             </button>
                                         </td>
