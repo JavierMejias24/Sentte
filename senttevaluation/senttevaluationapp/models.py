@@ -22,20 +22,20 @@ class SubGerencia(models.Model):
 
     def __str__(self):
         return self.NombreSubgerencia
-
-ROL =[
-    (1, "Evaluador"),
-    (2, "Evaluado"),
-    (3, "Calibrador"),
-]
+    
 class PerfilRol(models.Model):
-    Rol = models.CharField(max_length=200, choices=ROL, default=1)
+    ROL = [
+        (1, "Evaluador"),
+        (2, "Evaluado"),
+        (3, "Calibrador"),
+    ]
+    Rol = models.IntegerField(choices=ROL, default=1)
     RelacionEvaluado = models.CharField(max_length=50)
     NombreEvaluador = models.CharField(max_length=50, blank=True, default='')
-    NombreCalibrador = models.CharField(max_length=50, blank=True, default='')    
+    NombreCalibrador = models.CharField(max_length=50, blank=True, default='')
 
     def __str__(self):
-        return self.Rol
+        return self.get_Rol_display()
 
 class Empleado(models.Model):
     Rut = models.CharField(max_length=12, unique=True)
