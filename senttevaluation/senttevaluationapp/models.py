@@ -34,11 +34,17 @@ class Empleado(models.Model):
     def __str__(self):
         return self.Nombre 
 
+
+ROL =[
+    (1, "Evaluador"),
+    (2, "Evaluado"),
+    (3, "Calibrador"),
+]
 class PerfilRol(models.Model):
-    Rol = models.CharField(max_length=200)
+    Rol = models.CharField(max_length=200, choices=ROL, default=1)
     RelacionEvaluado = models.CharField(max_length=50)
-    NombreEvaluador = models.CharField(max_length=50)
-    NombreCalibrador = models.CharField(max_length=50)
+    NombreEvaluador = models.CharField(max_length=50, blank=True, default='')
+    NombreCalibrador = models.CharField(max_length=50, blank=True, default='')
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 
     def __str__(self):

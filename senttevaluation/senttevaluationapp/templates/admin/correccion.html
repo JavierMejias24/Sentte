@@ -3,8 +3,8 @@
 <body>
     <section class="home-section">
         <div class="home-content">
-            <i class='bx bx-menu'></i>
-            <span class="text">Gerencias</span>
+            <i class='bx bx-menu' ></i>
+            <span class="text">Usuarios</span>
         </div>
         <br>
         <div class="container-fluid">
@@ -12,10 +12,10 @@
                 <div class="card-body">
                     <div class="content-header row">
                         <div class="content-header-left col-md-6 col-12 mb-2">
-                            <h3 class="content-header-title"> Mantenedor de gerencia</h3>
+                            <h3 class="content-header-title"> Mantenedor Usuarios </h3>
                             <br>
                             <div class="col-sm-12 col-md-6">
-                                <div id="tablaUsuarios_filter" class="dataTables_filter">
+                                <div id="tablaUsuarios_filter" class="dataTables_filter"> 
                                     <label>
                                         Buscar:
                                         <input class="form-control" id="buscar" type="text" placeholder="Search..">
@@ -32,12 +32,10 @@
                                 <div class="modal fade" id='modalAgregar'>
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <!-- Modal Header -->
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Crear cargos</h4>
+                                                <h4 class="modal-title">Crear Usuario</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                              </div>
-                                            <!-- Modal body -->
+                                            </div>
                                             <div class="modal-body">
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
@@ -51,7 +49,7 @@
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </form>
-                                            </div>                                               
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -62,26 +60,35 @@
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr> 
+                                    <th>Rut</th>
                                     <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Perfil Evaluacion</th>
                                     <th>Area</th>
-                                    <br>
+                                    <th>Gerencia</th>
+                                    <th>SubGerencia</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                {% for gerencia in gerencias %}
-                                    <tr>
-                                        <td data-label="Gerencia">{{ gerencia.NombreGerencia }}</td>
-                                        <td data-label="Area">{{ gerencia.IdArea}}</td>
-                                        <td>
-                                            <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                <a href="{% url 'adminGerenciasModificar' gerencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                            <button data-name="{{ gerencia.NombreGerencia }}" type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a href="{% url 'adminGerenciasEliminar' gerencia.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                {% for empleado in empleados %}
+                                <tr>
+                                    <td data-label="Rut">{{ empleado.Rut }}</td>
+                                    <td data-label="Nombre">{{ empleado.Nombre }}</td>
+                                    <td data-label="Correo">{{ empleado.Correo }}</td>
+                                    <td data-label="P.Evaluacion">No se</td>
+                                    <td data-label="Area">{{ empleado.IdSubGerencia.IdGerencia.IdArea }}</td>
+                                    <td data-label="Gerencia">{{ empleado.IdSubGerencia.IdGerencia }}</td>
+                                    <td data-label="Subgerencia">{{ empleado.IdSubGerencia }}</td>
+                                    <td>
+                                        <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
+                                            <a href="{% url 'adminUsuariosModificar' empleado.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
+                                        </button>
+                                        <button data-name="{{ empleado.Nombre }}" type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
+                                            <a href="{% url 'adminUsuariosEliminar' empleado.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                        </button>
+                                    </td>
+                                </tr>
                                 {% endfor %}
                             </tbody>
                         </table>

@@ -11,7 +11,7 @@
   left: 0;
   height: 100%;
   width: 260px;
-  background: #11101d;
+  background: #100e1f;
   z-index: 100;
   transition: all 0.5s ease;
 }
@@ -180,42 +180,28 @@
   font-weight: 600;
 }
 
-.modalDialog .modal-contenido{
-  width: 500px;
-  height: 15000px;
-  margin: auto;
-  background: #fff;
-  box-shadow: 1px 7px 25px, rgb(0, 0, 0, 0.6);
-  transition: all 500ms ease;
-}
-.modalDialog .modal-contenido .header{
-  padding: 10px;
-  background: #db8046;
-  color: rgb(161, 26, 26);
-}
+@media (max-width: 768px){
+  
+  .sidebar.close{
+    width: 70px;
+  }
+  .sidebar{
+    position: fixed;
+    background: #100e1f;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: all 500ms ease;
+  }
 
-.modalDialog{
-  background-color: rgba(0,0,0, 0.8);
-  position: fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  opacity:0;
-  pointer-events:none;
-  transition: all 1s;
-  justify-content: center;
-  align-items: center;
-}
-#miModal:target{
-  opacity:1;
-  pointer-events:auto;
-}
+  .home-section{
+    position:static;
+    margin-left: 65px;
+  }
 
-#btn-modal{
-  display: none;
-}
-
-.modalDialog .close {
-  color: #fff;
+  .sidebar .profile-details{
+    width: 100%;
+  }
+  
 }

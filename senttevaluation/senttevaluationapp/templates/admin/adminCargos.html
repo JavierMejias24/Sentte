@@ -72,7 +72,7 @@
                                 <tbody id="tabla">
                                     {% for cargo in cargos %}
                                         <tr>
-                                            <td>{{ cargo.NombreCargo }}</td>
+                                            <td data-label="N.Cargo">{{ cargo.NombreCargo }}</td>
                                             <td>
                                                 <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
                                                     <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>

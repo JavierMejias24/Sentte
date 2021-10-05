@@ -1,11 +1,12 @@
 {% include 'base.html' %}
 {% include 'sidebars/adminSidebar.html' %}
+{% load crispy_forms_tags %}
 <body>
      <!-- Icono del menu -->
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu' ></i>
-            <span class="text">Mantenedor Usuarios</span>
+            <span class="text">Usuarios</span>
         </div>
         <br>
         <!-- Cuerpo principal -->
@@ -39,15 +40,16 @@
                                         <div class="modal-content">
                                             <!-- Modal Header -->
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Crear cargos</h4>
+                                                <h4 class="modal-title">Crear Usuario</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                               </div>
+
                                             <!-- Modal body -->
                                             <div class="modal-body">
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
-                                                        {{ form.as_p }}
+                                                        {{ form | crispy}}
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">
@@ -75,22 +77,18 @@
                                             <th>Nombre</th>
                                             <th>Correo</th>
                                             <th>Perfil Evaluacion</th>
-                                            <th>Area</th>
-                                            <th>Gerencia</th>
-                                            <th>SubGerencia</th>
-                                            <th>Opciones</th>
+                                            <th>opciones</th>
+                                          
                                         </tr>
                                     </thead>
                                     <tbody id="tabla">
                                         {% for empleado in empleados %}
                                             <tr>
-                                                <td>{{ empleado.Rut }}</td>
-                                                <td>{{ empleado.Nombre }}</td>
-                                                <td>{{ empleado.Correo }}</td>
-                                                <td>No se</td>
-                                                <td>{{ empleado.IdSubGerencia.IdGerencia.IdArea }}</td>
-                                                <td>{{ empleado.IdSubGerencia.IdGerencia }}</td>
-                                                <td>{{ empleado.IdSubGerencia }}</td>
+                                                <td data-label="Rut">{{ empleado.Rut }}</td>
+                                                <td data-label="Nombre">{{ empleado.Nombre }}</td>
+                                                <td data-label="Correo">{{ empleado.Correo }}</td>
+                                                <td data-label="P.Evaluacion">No se</td>
+                                               
                                                 <td>
                                                     <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                                         <a href="{% url 'adminUsuariosModificar' empleado.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
