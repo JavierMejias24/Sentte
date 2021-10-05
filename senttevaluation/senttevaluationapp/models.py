@@ -24,12 +24,12 @@ class SubGerencia(models.Model):
         return self.NombreSubgerencia
     
 class PerfilRol(models.Model):
-    ROL = [
+    Roles = [
         (1, "Evaluador"),
         (2, "Evaluado"),
         (3, "Calibrador"),
     ]
-    Rol = models.IntegerField(choices=ROL, default=1)
+    Rol = models.IntegerField(choices=Roles, default=1)
     RelacionEvaluado = models.CharField(max_length=50)
     NombreEvaluador = models.CharField(max_length=50, blank=True, default='')
     NombreCalibrador = models.CharField(max_length=50, blank=True, default='')
