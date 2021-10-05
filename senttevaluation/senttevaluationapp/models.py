@@ -23,18 +23,6 @@ class SubGerencia(models.Model):
     def __str__(self):
         return self.NombreSubgerencia
 
-class Empleado(models.Model):
-    Rut = models.CharField(max_length=12, unique=True)
-    Nombre = models.CharField(max_length=50)
-    Contraseña = models.CharField(max_length=50)
-    Rol = models.CharField(max_length=50)
-    Correo = models.CharField(max_length=50, unique=True)
-    IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
-
-    def __str__(self):
-        return self.Nombre 
-
-
 ROL =[
     (1, "Evaluador"),
     (2, "Evaluado"),
@@ -44,11 +32,21 @@ class PerfilRol(models.Model):
     Rol = models.CharField(max_length=200, choices=ROL, default=1)
     RelacionEvaluado = models.CharField(max_length=50)
     NombreEvaluador = models.CharField(max_length=50, blank=True, default='')
-    NombreCalibrador = models.CharField(max_length=50, blank=True, default='')
-    IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
+    NombreCalibrador = models.CharField(max_length=50, blank=True, default='')    
 
     def __str__(self):
         return self.Rol
+
+class Empleado(models.Model):
+    Rut = models.CharField(max_length=12, unique=True)
+    Nombre = models.CharField(max_length=50)
+    Contraseña = models.CharField(max_length=50)
+    Correo = models.CharField(max_length=50, unique=True)
+    IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
+    IdRol = models.ForeignKey(PerfilRol, on_delete=CASCADE, default=1)
+
+    def __str__(self):
+        return self.Nombre 
 
 class Cargo(models.Model):
     NombreCargo = models.CharField(max_length=50)
