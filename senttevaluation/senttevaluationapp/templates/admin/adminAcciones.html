@@ -1,5 +1,6 @@
 {% include 'base.html' %}
 {% include 'sidebars/adminSidebar.html' %}
+{% load crispy_forms_tags %}
 <body>
     <section class="home-section">
         <div class="home-content">
@@ -35,7 +36,7 @@
                                         <div class="modal-content">
                                             <!-- Modal Header -->
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Crear cargos</h4>
+                                                <h4 class="modal-title">Crear acciones</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                               </div>
                                             <!-- Modal body -->
@@ -43,7 +44,7 @@
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
-                                                        {{ form.as_p }}
+                                                        {{ form | crispy }}
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">

@@ -9,7 +9,6 @@
             <span class="text">Usuarios</span>
         </div>
         <br>
-        
         <div class="container-fluid">
             <div class="card shadow">
                 <div class="card-body">
@@ -49,7 +48,7 @@
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
-                                                        {{ form | crispy}}
+                                                        {{ form | crispy }}
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">

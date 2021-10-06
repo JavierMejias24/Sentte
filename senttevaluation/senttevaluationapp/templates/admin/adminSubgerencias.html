@@ -1,10 +1,11 @@
 {% include 'base.html' %}
 {% include 'sidebars/adminSidebar.html' %}
+{% load crispy_forms_tags %}
 <body>
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu' ></i>
-            <span class="text">Sub-Gerencias</span>
+            <span class="text">Subgerencias</span>
         </div>
         <br>
         <div class="container-fluid">
@@ -43,7 +44,7 @@
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
-                                                        {{ form.as_p }}
+                                                        {{ form | crispy }}
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">
