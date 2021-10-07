@@ -4,8 +4,8 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.views.generic import View
-from .models import Cargo, AccionClave, Competencia, Gerencia, Empleado, SubGerencia, Perfil
-from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, GerenciaForm, SubgerenciaForm
+from .models import Cargo, AccionClave, Competencia, DetalleEv, Gerencia, Empleado, PerfilRol, SubGerencia, Perfil
+from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, EvaluacionForm, GerenciaForm, PerfilRolForm, SubgerenciaForm
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -205,13 +205,19 @@ def admin_usuarios(request):
     empleados = Empleado.objects.all()
     contexto = {
         'empleados': empleados,
-        'form': EmpleadoForm()
+        'form': EmpleadoForm(), 
+        'form1': PerfilRolForm()
     }
     if request.method == 'POST':
         formulario = EmpleadoForm(data=request.POST)
+        formulario1 = PerfilRolForm(data=request.POST)
         if formulario.is_valid():
-            formulario.save()
-            return HttpResponseRedirect("adminUsuarios")
+            if formulario1.is_valid():
+                formulario.save()
+                formulario1.save()
+                return HttpResponseRedirect("adminUsuarios")
+            else:
+              return HttpResponseRedirect("adminUsuarios")  
         else:
             return HttpResponseRedirect("adminUsuarios")
     return render(request, "admin/adminUsuarios.html",contexto)
@@ -247,7 +253,8 @@ def evaluador_inicio(request):
     return render(request, "evaluador/evaluadorInicio.html")
 
 def evaluador_evaluacion(request):
-    return render(request, "evaluador/evaluadorEvaluacion.html")
+    empleados = Empleado.objects.all()
+    return render(request, "evaluador/evaluadorEvaluacion.html", {'empleados':empleados})
 
 def evaluador_autovaluacion(request):
     return render(request, "evaluador/evaluadorAutovaluacion.html")
@@ -256,7 +263,13 @@ def evaluador_ayuda(request):
     return render(request, "evaluador/evaluadorAyuda.html")
 
 def evaluador_formulario(request):
-    return render(request, "evaluador/evaluadorFormulario.html")
+    competencias = Competencia.objects.all()
+    accionclaves = AccionClave.objects.all()
+    contexto = {
+        'competencias':competencias,
+        'accionclaves':accionclaves,
+    }
+    return render(request, "evaluador/evaluadorFormulario.html", contexto)
 
 # ----------------------------------  Colaborador ---------------------------------.
 

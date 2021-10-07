@@ -3,7 +3,7 @@ from django import forms
 from django.db.models.base import ModelBase
 from django.forms import fields
 from django.forms.models import model_to_dict
-from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, PerfilRol, SubGerencia
+from .models import AccionClave, Competencia, DetalleEv, Empleado, Cargo, Gerencia, PerfilRol, SubGerencia
 
 class EmpleadoForm(forms.ModelForm):
     class Meta:
@@ -185,3 +185,9 @@ class SubgerenciaForm(forms.ModelForm):
             ),
             'IdGerencia': forms.Select()
         }
+
+class EvaluacionForm(forms.ModelForm):
+
+    class Meta:
+        model = DetalleEv
+        fields = '__all__'

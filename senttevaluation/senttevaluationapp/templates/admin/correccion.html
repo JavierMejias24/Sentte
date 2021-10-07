@@ -1,101 +1,47 @@
 {% include 'base.html' %}
-{% include 'sidebars/adminSidebar.html' %}
+{% include 'sidebars/evaluadorsidebar.html' %}
+
 <body>
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu' ></i>
-            <span class="text">Usuarios</span>
+            <span class="text">Evaluacion</span>
         </div>
         <br>
         <div class="container-fluid">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="content-header row">
-                        <div class="content-header-left col-md-6 col-12 mb-2">
-                            <h3 class="content-header-title"> Mantenedor Usuarios </h3>
-                            <br>
-                            <div class="col-sm-12 col-md-6">
-                                <div id="tablaUsuarios_filter" class="dataTables_filter"> 
-                                    <label>
-                                        Buscar:
-                                        <input class="form-control" id="buscar" type="text" placeholder="Search..">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-header-right col-md-6 col-12">
-                            <div class="media-body media-right text-right">
-                                <br>
-                                <button type="button" id="btn" class="btn btn-success" data-toggle='modal' data-target="#modalAgregar" style="opacity: 0.5; height: 50px; width: 100px;">
-                                    <a href="#" class="bx bxs-add-to-queue" style="opacity: 1; color: black;">Agregar</a>
-                                </button>
-                                <div class="modal fade" id='modalAgregar'>
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Crear Usuario</h4>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action='' method="POST">
-                                                    {% csrf_token %}
-                                                    <div class="media-body text-left">
-                                                        {{ form.as_p }}
-                                                    </div>
-                                                    <br><br>
-                                                    <div class="d-flex justify-content-end">
-                                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                                        &nbsp;
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div id="accordion">
+                {% for competencia in competencias %}
+                {% for accionclave in accionclaves %}
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                          Competencia: {{ competencia.NombreCompetencia }}
+                        </a>
                     </div>
-                    <div class="container-fluid" style="overflow: hidden; position: realtive; border: 0px; width: 100%;">
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr> 
-                                    <th>Rut</th>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Perfil Evaluacion</th>
-                                    <th>Area</th>
-                                    <th>Gerencia</th>
-                                    <th>SubGerencia</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabla">
-                                {% for empleado in empleados %}
-                                <tr>
-                                    <td data-label="Rut">{{ empleado.Rut }}</td>
-                                    <td data-label="Nombre">{{ empleado.Nombre }}</td>
-                                    <td data-label="Correo">{{ empleado.Correo }}</td>
-                                    <td data-label="P.Evaluacion">No se</td>
-                                    <td data-label="Area">{{ empleado.IdSubGerencia.IdGerencia.IdArea }}</td>
-                                    <td data-label="Gerencia">{{ empleado.IdSubGerencia.IdGerencia }}</td>
-                                    <td data-label="Subgerencia">{{ empleado.IdSubGerencia }}</td>
-                                    <td>
-                                        <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                            <a href="{% url 'adminUsuariosModificar' empleado.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                        </button>
-                                        <button data-name="{{ empleado.Nombre }}" type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
-                                            <a href="{% url 'adminUsuariosEliminar' empleado.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                        </button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <p class="text-primary">Definicion:</p>  
+                                    {{ competencia.Definicion }}
+                                    <br><br>
+                                </div>
+                                <p class="text-primary">Comportamientos esperados</p>  
+                                <ul class="nav-links">
+                                    <li>
+                                        <p>
+                                          {{ accionclave.Descripcion }} 
+                                        </p>
+                                    </li>
+                                    {%endfor%}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {%endfor%}
             </div>
         </div>
-        <br><br><br>
     </section>
+    <br><br><br>
 </body>

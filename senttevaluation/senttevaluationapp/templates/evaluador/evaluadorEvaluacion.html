@@ -11,6 +11,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!------------------------------- Tarjeta -------------------------------->
+                {%for empleado in empleados%}
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
@@ -19,128 +20,17 @@
                         <div class="card-content">
                             <div class="card-body" style="font-size:13px">
                                 <form method="post" action="">
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                        voluptates debitis error consectetur, id inventore ducimus
-                                        incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                    </p>
+                                    <p>Nombre: {{empleado.Nombre}}</p>
+                                    <p>Rut: {{empleado.Rut}}</p>
+                                    <p>Correo: {{empleado.Correo}}</p>
+                                    <br>
                                     <a href="evaluadorFormulario" class="btn btn-info" role="button">Comenzar</a>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!------------------------------- Tarjeta -------------------------------->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                    voluptates debitis error consectetur, id inventore ducimus
-                                    incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!------------------------------- Tarjeta -------------------------------->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                    voluptates debitis error consectetur, id inventore ducimus
-                                    incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!------------------------------- Tarjeta -------------------------------->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                    voluptates debitis error consectetur, id inventore ducimus
-                                    incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!------------------------------- Tarjeta -------------------------------->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                    voluptates debitis error consectetur, id inventore ducimus
-                                    incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!------------------------------- Tarjeta -------------------------------->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                    voluptates debitis error consectetur, id inventore ducimus
-                                    incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!------------------------------- Tarjeta -------------------------------->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                    voluptates debitis error consectetur, id inventore ducimus
-                                    incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!------------------------------- Tarjeta -------------------------------->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                    voluptates debitis error consectetur, id inventore ducimus
-                                    incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {%endfor%}
             </div>
         </div>
     </section>
