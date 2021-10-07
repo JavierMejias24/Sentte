@@ -40,6 +40,7 @@ class PerfilRol(models.Model):
 class Empleado(models.Model):
     Rut = models.CharField(max_length=12, unique=True)
     Nombre = models.CharField(max_length=50)
+    FechaIngreso = models.DateField()
     Contraseña = models.CharField(max_length=50)
     Correo = models.CharField(max_length=50, unique=True)
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
