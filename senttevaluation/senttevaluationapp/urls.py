@@ -3,7 +3,7 @@ from senttevaluationapp import views
 
 urlpatterns = [
 # ----------------------------------  Login ---------------------------------.
-    path('login', views.login, name="Login"),
+    path('', views.login, name="Login"),
 # ----------------------------------  Administrador ---------------------------------------------.
     path('adminInicio', views.admin_inicio, name="adminInicio"),
     path('adminAcciones', views.admin_acciones, name="adminAcciones"),

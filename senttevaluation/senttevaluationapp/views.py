@@ -18,10 +18,10 @@ def login(request):
     if request.method == 'POST':
         formulario = LoginForm(data=request.POST)
         if formulario.is_valid():
-            formulario.save()
-            return HttpResponseRedirect("login.html")
+            
+            return HttpResponseRedirect("adminInicio")
         else:
-            return HttpResponseRedirect("login.html")
+            return HttpResponseRedirect("adminInicio")
     return render(request, "login.html", contexto)
 
 # ----------------------------------  Administrador ---------------------------------.
@@ -37,7 +37,7 @@ def admin_acciones(request):
         'form': AccionesForm()
     }
     if request.method == 'POST':
-        formulario = AccionesForm(data=request.POST)
+        formulario = AccionesForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect("adminAcciones")
@@ -73,7 +73,7 @@ def admin_cargos(request):
         'form': CargoForm()
     }
     if request.method == 'POST':
-        formulario = CargoForm(data=request.POST)
+        formulario = CargoForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             print("Agregado con exito")
@@ -111,7 +111,7 @@ def admin_competencias(request):
         'form': CompetenciaForm()
     }
     if request.method == 'POST':
-        formulario = CompetenciaForm(data=request.POST)
+        formulario = CompetenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect("adminCompetencias")
@@ -148,7 +148,7 @@ def admin_gerencias(request):
         'form': GerenciaForm()
     }
     if request.method == 'POST':
-        formulario = GerenciaForm(data=request.POST)
+        formulario = GerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect("adminGerencias")
@@ -184,7 +184,7 @@ def admin_subgerencias(request):
         'form': SubgerenciaForm()
     }
     if request.method == 'POST':
-        formulario = SubgerenciaForm(data=request.POST)
+        formulario = SubgerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect("adminSubgerencias")
@@ -213,7 +213,7 @@ def eliminar_subgerencia(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Empleado ----------------.
-def admin_usuarios(request):
+def admin_usuarios(self,request,*arg, **kwargs):
     empleados = Empleado.objects.all()
     contexto = {
         'empleados': empleados,
@@ -221,15 +221,14 @@ def admin_usuarios(request):
         'form1': PerfilRolForm()
     }
     if request.method == 'POST':
-        formulario = EmpleadoForm(data=request.POST)
-        formulario1 = PerfilRolForm(data=request.POST)
-        if formulario.is_valid():
-            if formulario1.is_valid():
-                formulario.save()
-                formulario1.save()
-                return HttpResponseRedirect("adminUsuarios")
-            else:
-              return HttpResponseRedirect("adminUsuarios")  
+        self.object=self.get_object
+        formulario = self.EmpleadoForm(request.POST)
+        formulario1 = self.PerfilRolForm(request.POST)
+        if formulario.is_valid() and formulario1.is_valid():
+            rolempleado = formulario1.save(commit=False)
+            rolempleado.empleado = formulario.save()
+            rolempleado.save()
+            return HttpResponseRedirect("adminUsuarios")
         else:
             return HttpResponseRedirect("adminUsuarios")
     return render(request, "admin/adminUsuarios.html",contexto)
