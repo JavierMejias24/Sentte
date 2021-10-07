@@ -5,12 +5,24 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.views.generic import View
 from .models import Cargo, AccionClave, Competencia, DetalleEv, Gerencia, Empleado, PerfilRol, SubGerencia, Perfil
-from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, EvaluacionForm, GerenciaForm, PerfilRolForm, SubgerenciaForm
+from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, EvaluacionForm, GerenciaForm, PerfilRolForm, SubgerenciaForm, LoginForm
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
 def login(request):
-    return render(request, "registration/login.html")
+    empleados = Empleado.objects.all() 
+    contexto = {
+        'empleados':empleados,
+        'form': LoginForm()
+    }
+    if request.method == 'POST':
+        formulario = LoginForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect("login.html")
+        else:
+            return HttpResponseRedirect("login.html")
+    return render(request, "login.html", contexto)
 
 # ----------------------------------  Administrador ---------------------------------.
 
