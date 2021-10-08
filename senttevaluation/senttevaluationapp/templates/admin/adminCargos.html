@@ -89,8 +89,8 @@
                                                 <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
                                                     <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                                 </button>
-                                                <button data-name="{{ cargo.NombreCargo }}" type="button" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="{% url 'adminCargosEliminar' cargo.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                <button type="button" class="btn btn-danger" style="opacity: 0.5;">
+                                                    <a data-name="{{ cargo.NombreCargo }}" href="{% url 'adminCargosEliminar' cargo.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                                 </button>
                                             </td>
                                         </tr>

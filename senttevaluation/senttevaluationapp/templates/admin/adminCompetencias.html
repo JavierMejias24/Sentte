@@ -92,8 +92,8 @@
                                             <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                                 <a href="{% url 'adminCompetenciasModificar' competencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                             </button>
-                                            <button data-name="{{ competencia.NombreCompetencia }}" type="button"  class="btn btn-danger" style="opacity: 0.5;">
-                                                <a href="{% url 'adminCompetenciasEliminar' competencia.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                            <button  type="button" class="btn btn-danger" style="opacity: 0.5;">
+                                                <a data-name="{{ competencia.NombreCompetencia }}" href="{% url 'adminCompetenciasEliminar' competencia.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                             </button>
                                         </td>
                                     </tr>

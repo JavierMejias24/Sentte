@@ -91,8 +91,8 @@
                                                 <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                                     <a href="{% url 'adminAccionesModificar' accionclave.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                                 </button>
-                                                <button data-name="{{ accionclave.Descripcion }}" type="button" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="{% url 'adminAccionesEliminar' accionclave.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                <butto type="button" class="btn btn-danger" style="opacity: 0.5;">
+                                                    <a data-name="{{ accionclave.Descripcion }}" href="{% url 'adminAccionesEliminar' accionclave.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                                 </button>
                                             </td>
                                         </tr>
