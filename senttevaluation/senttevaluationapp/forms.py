@@ -1,17 +1,37 @@
-
 from django import forms
-from django.db.models.base import ModelBase
-from django.forms import fields
-from django.forms.models import model_to_dict
 from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, PerfilRol, SubGerencia
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = Empleado
+        fields = ['Rut','Contraseña']
+        labels = {
+            'Rut': 'Rut',
+            'Contraseña': 'Contraseña',
+        }
+        widgets = {
+            'Rut': forms.TextInput(
+                attrs = {
+                    'class':'form-control',
+                    'placeholder': 'Ingrese rut',
+                }
+            ),
+            'Contraseña': forms.TextInput(
+                attrs = {
+                    'class':'form-control',
+                    'placeholder': 'Ingrese contraseña',
+                }
+            ),
+        }
 
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','Contraseña','Correo','IdSubGerencia','IdRol']
+        fields = ['Rut','Nombre','FechaIngreso','Contraseña','Correo','IdSubGerencia','IdRol']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
+            'FechaIngreso': 'Fecha de ingreso',
             'Contraseña': 'Contraseña',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
@@ -30,6 +50,8 @@ class EmpleadoForm(forms.ModelForm):
                     'placeholder': 'Ingrese nombre y apellidos',
                 }
             ),
+            'FechaIngreso': forms.SelectDateWidget(
+            ),
             'Contraseña': forms.TextInput(
                 attrs = {
                     'class':'form-control',
@@ -44,7 +66,7 @@ class EmpleadoForm(forms.ModelForm):
             ),
             'IdSubGerencia': forms.Select(
             ),
-            'IdRol': forms.Select(                
+            'IdRol': forms.Select(
                 choices=(
                     (1, "Evaluador"),
                     (2, "Evaluado"),
