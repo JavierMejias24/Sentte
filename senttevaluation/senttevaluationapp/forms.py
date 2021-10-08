@@ -9,10 +9,10 @@ from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, PerfilR
 class LoginForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Contraseña']
+        fields = ['Rut','Password']
         labels = {
             'Rut': 'Rut',
-            'Contraseña': 'Contraseña',
+            'Password': 'Contraseña',
         }
         widgets = {
             'Rut': forms.TextInput(
@@ -21,7 +21,7 @@ class LoginForm(forms.ModelForm):
                     'placeholder': 'Ingrese rut',
                 }
             ),
-            'Contraseña': forms.TextInput(
+            'Password': forms.TextInput(
                 attrs = {
                     'class':'form-control',
                     'placeholder': 'Ingrese contraseña',
@@ -32,12 +32,12 @@ class LoginForm(forms.ModelForm):
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','FechaIngreso','Contraseña','Correo','IdSubGerencia','IdRol']
+        fields = ['Rut','Nombre','FechaIngreso','Password','Correo','IdSubGerencia','IdRol']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
             'FechaIngreso': 'Fecha de ingreso',
-            'Contraseña': 'Contraseña',
+            'Password': 'Contraseña',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
             'IdRol': 'Rol',
@@ -57,7 +57,7 @@ class EmpleadoForm(forms.ModelForm):
             ),
             'FechaIngreso': forms.SelectDateWidget(
             ),
-            'Contraseña': forms.TextInput(
+            'Password': forms.TextInput(
                 attrs = {
                     'class':'form-control',
                     'placeholder': 'Ingrese contraseña',
