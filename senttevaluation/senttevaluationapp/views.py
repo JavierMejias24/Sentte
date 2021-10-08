@@ -87,7 +87,7 @@ def admin_cargos(request):
     try:
         paginator = Paginator(cargos, 8)
         cargos = paginator.page(page)
-    except:
+    except FileNotFoundError:
         raise Http404
 
     contexto = {
@@ -138,7 +138,7 @@ def admin_competencias(request):
     try:
         paginator = Paginator(competencias, 8)
         competencias = paginator.page(page)
-    except:
+    except FileNotFoundError:
         raise Http404
 
     contexto = {
@@ -188,7 +188,7 @@ def admin_gerencias(request):
     try:
         paginator = Paginator(gerencias, 8)
         gerencias = paginator.page(page)
-    except:
+    except FileNotFoundError:
         raise Http404
 
     contexto = {
@@ -237,7 +237,7 @@ def admin_subgerencias(request):
     try:
         paginator = Paginator(subgerencias, 8)
         subgerencias = paginator.page(page)
-    except:
+    except FileNotFoundError:
         raise Http404
 
     contexto = {
@@ -286,7 +286,7 @@ def admin_usuarios(request):
     try:
         paginator = Paginator(empleados, 8)
         empleados = paginator.page(page)
-    except:
+    except FileNotFoundError:
         raise Http404
 
     contexto = {
