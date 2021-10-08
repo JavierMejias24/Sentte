@@ -1,7 +1,18 @@
 {% include 'base.html' %}
-{% include 'sidebars/adminSidebar.html' %}
 {% load crispy_forms_tags %}
 <body>
+{% include 'sidebars/adminSidebar.html' %}
+    {% if messages %}
+        {% for m in messages %}
+            <script>
+                Swal.fire({
+                    "title": "Felicitaciones",
+                    "text": "{{ m }}",
+                    "icon": "success"                    
+                })
+            </script>
+        {% endfor %}
+    {% endif %}
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu' ></i>
@@ -78,8 +89,8 @@
                                                 <button type="button" id="btn" class="btn btn-primary" data-toggle='modal' data-target="#modalModificar" style="opacity: 0.5;">
                                                     <a href="{% url 'adminCargosModificar' cargo.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
                                                 </button>
-                                                <button data-name="{{ cargo.NombreCargo }}" type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="{% url 'adminCargosEliminar' cargo.id%}" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                <button data-name="{{ cargo.NombreCargo }}" type="button" class="btn btn-danger" style="opacity: 0.5;">
+                                                    <a href="{% url 'adminCargosEliminar' cargo.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                                 </button>
                                             </td>
                                         </tr>
