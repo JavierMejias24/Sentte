@@ -21,7 +21,7 @@ def login(request):
             
             return HttpResponseRedirect("adminInicio")
         else:
-            return HttpResponseRedirect("adminInicio")
+            return HttpResponseRedirect("login.html")
     return render(request, "login.html", contexto)
 
 # ----------------------------------  Administrador ---------------------------------.
@@ -213,7 +213,7 @@ def eliminar_subgerencia(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Empleado ----------------.
-def admin_usuarios(self,request,*arg, **kwargs):
+def admin_usuarios(request):
     empleados = Empleado.objects.all()
     contexto = {
         'empleados': empleados,
@@ -221,9 +221,8 @@ def admin_usuarios(self,request,*arg, **kwargs):
         'form1': PerfilRolForm()
     }
     if request.method == 'POST':
-        self.object=self.get_object
-        formulario = self.EmpleadoForm(request.POST)
-        formulario1 = self.PerfilRolForm(request.POST)
+        formulario = EmpleadoForm(request.POST)
+        formulario1 = PerfilRolForm(request.POST)
         if formulario.is_valid() and formulario1.is_valid():
             rolempleado = formulario1.save(commit=False)
             rolempleado.empleado = formulario.save()

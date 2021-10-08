@@ -41,7 +41,7 @@ class Empleado(models.Model):
     Rut = models.CharField(max_length=12, unique=True)
     Nombre = models.CharField(max_length=50)
     FechaIngreso = models.DateField()
-    Contraseña = models.CharField(max_length=50)
+    Password = models.CharField(max_length=50)
     Correo = models.CharField(max_length=50, unique=True)
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
     IdRol = models.ForeignKey(PerfilRol, on_delete=CASCADE, default=1)

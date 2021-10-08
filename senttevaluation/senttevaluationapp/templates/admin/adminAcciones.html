@@ -1,7 +1,18 @@
 {% include 'base.html' %}
-{% include 'sidebars/adminSidebar.html' %}
 {% load crispy_forms_tags %}
 <body>
+{% include 'sidebars/adminSidebar.html' %}
+    {% if messages %}
+        {% for m in messages %}
+            <script>
+                Swal.fire({
+                    "title": "Felicitaciones",
+                    "text": "{{ m }}",
+                    "icon": "success"
+                })
+            </script>
+        {% endfor %}
+    {% endif %}
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu' ></i>
@@ -72,16 +83,16 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabla">
-                                    {% for accionclave in accionclaves %}
+                                    {% for accionclave in entity %}
                                         <tr>
                                             <td data-label="Descripcion">{{ accionclave.Descripcion }}</td>
                                             <td data-label="Competencia">{{ accionclave.IdCompetencia }}</td>
                                             <td>
                                                 <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
                                                     <a href="{% url 'adminAccionesModificar' accionclave.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                                </button>                                                
-                                                <button data-name="{{ accionclave.Descripcion }}" type="button" id="btnEliminar" class="btn btn-danger" style="opacity: 0.5;">
-                                                    <a href="{% url 'adminAccionesEliminar' accionclave.id %}" class="bx bx-box" style="opacity: 1; color: black;"></a>
+                                                </button>
+                                                <butto type="button" class="btn btn-danger" style="opacity: 0.5;">
+                                                    <a data-name="{{ accionclave.Descripcion }}" href="{% url 'adminAccionesEliminar' accionclave.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
                                                 </button>
                                             </td>
                                         </tr>
@@ -89,6 +100,9 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div>
+                        {% include 'paginator.html' %}
                     </div>
                 </div>
             </div>

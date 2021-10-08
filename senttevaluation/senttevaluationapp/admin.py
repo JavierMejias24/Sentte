@@ -20,8 +20,8 @@ class SubGerenciaAdmin(admin.ModelAdmin):
 admin.site.register(SubGerencia, SubGerenciaAdmin)
 # ----------------------------------  Empleado ---------------------------------.
 class EmpleadoAdmin(admin.ModelAdmin):
-    list_display = ['Rut', 'Nombre', 'Contraseña', 'Correo', 'IdSubGerencia', 'IdRol']
-    list_editable = ['Nombre', 'Contraseña', 'Correo', 'IdSubGerencia', 'IdRol']
+    list_display = ['Rut', 'Nombre', 'Password', 'Correo', 'IdSubGerencia', 'IdRol']
+    list_editable = ['Nombre', 'Password', 'Correo', 'IdSubGerencia', 'IdRol']
 
 admin.site.register(Empleado, EmpleadoAdmin)
 # ----------------------------------  Perfil Rol ---------------------------------.
