@@ -38,8 +38,8 @@ def admin_acciones(request):
     try:
         paginator = Paginator(accioneclaves, 8)
         accioneclaves = paginator.page(page)
-    except:
-        raise Http404
+    except BaseException:
+        pass
 
     contexto = {
         'entity':accioneclaves,
@@ -87,8 +87,8 @@ def admin_cargos(request):
     try:
         paginator = Paginator(cargos, 8)
         cargos = paginator.page(page)
-    except:
-        raise Http404
+    except BaseException:
+        pass
 
     contexto = {
         'entity':cargos,
@@ -138,8 +138,8 @@ def admin_competencias(request):
     try:
         paginator = Paginator(competencias, 8)
         competencias = paginator.page(page)
-    except:
-        raise Http404
+    except BaseException:
+        pass
 
     contexto = {
         'entity': competencias,
@@ -188,8 +188,8 @@ def admin_gerencias(request):
     try:
         paginator = Paginator(gerencias, 8)
         gerencias = paginator.page(page)
-    except:
-        raise Http404
+    except BaseException:
+        pass
 
     contexto = {
         'entity': gerencias,
@@ -237,8 +237,8 @@ def admin_subgerencias(request):
     try:
         paginator = Paginator(subgerencias, 8)
         subgerencias = paginator.page(page)
-    except:
-        raise Http404
+    except BaseException:
+        pass
 
     contexto = {
         'entity': subgerencias,
@@ -286,8 +286,8 @@ def admin_usuarios(request):
     try:
         paginator = Paginator(empleados, 8)
         empleados = paginator.page(page)
-    except:
-        raise Http404
+    except BaseException:
+        pass
 
     contexto = {
         'entity': empleados,
