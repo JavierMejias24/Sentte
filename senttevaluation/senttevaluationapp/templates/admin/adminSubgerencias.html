@@ -71,7 +71,7 @@
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                {% for subgerencia in subgerencias %}
+                                {% for subgerencia in entity %}
                                     <tr>
                                         <td data-label="Subgerencia">{{ subgerencia.NombreSubgerencia }}</td>
                                         <td data-label="Gerencia">{{ subgerencia.IdGerencia }}</td>
@@ -87,6 +87,9 @@
                                 {% endfor %}
                             </tbody>
                         </table>            
+                    </div>
+                    <div>
+                        {% include 'paginator.html' %}
                     </div>
                 </div>
             </div>

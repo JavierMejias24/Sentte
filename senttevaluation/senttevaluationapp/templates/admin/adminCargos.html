@@ -71,7 +71,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabla">
-                                    {% for cargo in cargos %}
+                                    {% for cargo in entity %}
                                         <tr>
                                             <td data-label="N.Cargo">{{ cargo.NombreCargo }}</td>
                                             <td>
@@ -86,6 +86,9 @@
                                     {% endfor %}
                                 </tbody>
                             </table>                
+                        </div>
+                        <div>
+                            {% include 'paginator.html' %}
                         </div>
                     </div>
                 </div> 

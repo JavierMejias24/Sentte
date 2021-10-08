@@ -50,7 +50,6 @@
                                                     <div class="media-body text-left">
                                                         {{ form | crispy }}
                                                         {{ form1 | crispy }}
-                                                        
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">
@@ -83,7 +82,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tabla">
-                                        {% for empleado in empleados %}
+                                        {% for empleado in entity %}
                                             <tr>
                                                 <td data-label="Rut">{{ empleado.Rut }}</td>
                                                 <td data-label="Nombre">{{ empleado.Nombre }}</td>
@@ -101,6 +100,9 @@
                                             </tr>
                                         {% endfor %}
                                     </tbody>
+                                    <div>
+                                        {% include 'paginator.html' %}
+                                    </div>
                                 </table>
                             </div>
                         </div>
