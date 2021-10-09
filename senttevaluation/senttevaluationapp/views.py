@@ -1,33 +1,34 @@
 from django.contrib.auth import authenticate
 from django.core.files.base import ContentFile
 from django.db.models.query import InstanceCheckMeta
+from django.db.models.query_utils import Q
 from django.http.request import HttpRequest
 from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.views.generic import View
 from .models import Cargo, AccionClave, Competencia, DetalleEv, Gerencia, Empleado, PerfilRol, SubGerencia, Perfil
-from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, EvaluacionForm, GerenciaForm, PerfilRolForm, SubgerenciaForm, LoginForm
+from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, EvaluacionForm, GerenciaForm, PerfilRolForm, PerilForm, SubgerenciaForm, LoginForm
 from django.contrib import messages
 
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
 def login(request):
-    empleados = Empleado.objects.all() 
-    contexto = {
-        'empleados':empleados,
-        'form': LoginForm()
-    }
-    if request.method == 'POST':
-        formulario = LoginForm(request.POST)
-        if formulario.is_valid():
-            
-            return HttpResponseRedirect("adminInicio")
+
+    usuario = request.POST.get('name')
+    contraseña = request.POST.get('contraseña')
+    if (usuario == "root" and contraseña == "admiñn"):
+        return HttpResponseRedirect("adminInicio")
+    else:
+        if usuario:
+            empleado = Empleado.objects.filter(Q (Rut = usuario))
+            if empleado:
+                return HttpResponseRedirect("colaboradorInicio")
+            else:
+                return render(request, "login.html")
         else:
-            #aqui debe ir un mensaje
-            return render(request, "login.html", contexto)
-    return render(request, "login.html", contexto)
+            return render(request, "login.html")
 
 # ----------------------------------  Administrador ---------------------------------.
 
@@ -232,15 +233,18 @@ def admin_usuarios(request):
     contexto = {
         'empleados': empleados,
         'form': EmpleadoForm(), 
-        'form1': PerfilRolForm()
+        'form1': PerfilRolForm(),
+        'form2': PerilForm()
     }
     if request.method == 'POST':
         formulario = EmpleadoForm(request.POST)
         formulario1 = PerfilRolForm(request.POST)
-        if formulario.is_valid() and formulario1.is_valid():
+        formulario2 = PerilForm(request.POST)
+        if formulario.is_valid() and formulario1.is_valid() and formulario2.is_valid():
             rolempleado = formulario.save(commit=False)
             rolempleado.IdRol = formulario1.save()
             rolempleado.save()
+            formulario2.save()
             messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
