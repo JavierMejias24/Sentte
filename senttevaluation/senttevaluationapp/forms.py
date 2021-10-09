@@ -32,7 +32,7 @@ class LoginForm(forms.ModelForm):
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','FechaIngreso','Password','Correo','IdSubGerencia','IdRol']
+        fields = ['Rut','Nombre','FechaIngreso','Password','Correo','IdSubGerencia']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
@@ -40,7 +40,7 @@ class EmpleadoForm(forms.ModelForm):
             'Password': 'Contraseña',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
-            'IdRol': 'Rol',
+            
         }
         widgets = {
             'Rut': forms.TextInput(
@@ -71,13 +71,7 @@ class EmpleadoForm(forms.ModelForm):
             ),
             'IdSubGerencia': forms.Select(
             ),
-            'IdRol': forms.Select(
-                choices=(
-                    (1, "Evaluador"),
-                    (2, "Evaluado"),
-                    (3, "Calibrador"),
-                )
-            )
+            
         }
       
 class PerfilRolForm(forms.ModelForm):

@@ -6,7 +6,7 @@
         {% for m in messages %}
             <script>
                 Swal.fire({
-                    "title": "Felicitaciones",
+                    "title": "Registro",
                     "text": "{{ m }}",
                     "icon": "success"                    
                 })
@@ -82,17 +82,17 @@
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                {% for subgerencia in entity %}
+                                {% for subgerencia in subgerencias %}
                                     <tr>
                                         <td data-label="Subgerencia">{{ subgerencia.NombreSubgerencia }}</td>
                                         <td data-label="Gerencia">{{ subgerencia.IdGerencia }}</td>
                                         <td>
-                                            <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                <a href="{% url 'adminSubgerenciasModificar' subgerencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                            <button  type="button" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a data-name="{{ subgerencia.NombreSubgerencia }}" href="{% url 'adminSubgerenciasEliminar' subgerencia.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                            </button>
+                                            <a class="btn btn-primary" href="{% url 'adminSubgerenciasModificar' subgerencia.id %}" style="opacity: 0.5;">
+                                                <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                            </a>
+                                            <a class="btn btn-danger" data-name="{{ subgerencia.NombreSubgerencia }}" href="{% url 'adminSubgerenciasEliminar' subgerencia.id %}" id="btnEliminar"  style="opacity: 0.5;">
+                                                <p class="bx bx-box" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                            </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

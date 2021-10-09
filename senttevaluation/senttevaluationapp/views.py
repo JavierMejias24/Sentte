@@ -1,11 +1,15 @@
+from django.contrib.auth import authenticate
 from django.core.files.base import ContentFile
 from django.db.models.query import InstanceCheckMeta
 from django.http.request import HttpRequest
+from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.views.generic import View
 from .models import Cargo, AccionClave, Competencia, DetalleEv, Gerencia, Empleado, PerfilRol, SubGerencia, Perfil
 from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, EvaluacionForm, GerenciaForm, PerfilRolForm, SubgerenciaForm, LoginForm
+from django.contrib import messages
+
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -16,12 +20,13 @@ def login(request):
         'form': LoginForm()
     }
     if request.method == 'POST':
-        formulario = LoginForm(data=request.POST)
+        formulario = LoginForm(request.POST)
         if formulario.is_valid():
             
             return HttpResponseRedirect("adminInicio")
         else:
-            return HttpResponseRedirect("login.html")
+            #aqui debe ir un mensaje
+            return render(request, "login.html", contexto)
     return render(request, "login.html", contexto)
 
 # ----------------------------------  Administrador ---------------------------------.
@@ -31,7 +36,7 @@ def admin_inicio(request):
 
 # -- ------------Acciones Claves----------------.
 def admin_acciones(request):
-    accioneclaves = AccionClave.objects.all() 
+    accioneclaves = AccionClave.objects.all().order_by('id') 
     contexto = {
         'accionclaves':accioneclaves,
         'form': AccionesForm()
@@ -40,8 +45,10 @@ def admin_acciones(request):
         formulario = AccionesForm(request.POST)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminAcciones")
         else:
+            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminAcciones")
     return render(request, "admin/adminAcciones.html", contexto)
 
@@ -67,7 +74,7 @@ def eliminar_acciones(request, id):
 
 # -- ------------ Cargos ----------------.
 def admin_cargos(request):
-    cargos = Cargo.objects.all()
+    cargos = Cargo.objects.all().order_by('NombreCargo')
     contexto = {
         'cargos':cargos,
         'form': CargoForm()
@@ -76,9 +83,10 @@ def admin_cargos(request):
         formulario = CargoForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            print("Agregado con exito")
+            messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminCargos")
         else:
+            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminCargos")
     return render(request,"admin/adminCargos.html", contexto)
 
@@ -105,7 +113,7 @@ def eliminar_cargos(request, id):
 
 # -- ------------ Competencias ----------------.
 def admin_competencias(request):
-    competencias = Competencia.objects.all()
+    competencias = Competencia.objects.all().order_by('NombreCompetencia')
     contexto1 = {
         'competencias': competencias,
         'form': CompetenciaForm()
@@ -114,8 +122,10 @@ def admin_competencias(request):
         formulario = CompetenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminCompetencias")
         else:
+            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminCompetencias")
     return render(request, "admin/adminCompetencias.html", contexto1)
 
@@ -142,7 +152,7 @@ def eliminar_competencias(request, id):
 
 # -- ------------ Gerencias ----------------.
 def admin_gerencias(request):
-    gerencias = Gerencia.objects.all()
+    gerencias = Gerencia.objects.all().order_by('NombreGerencia')
     contexto = {
         'gerencias': gerencias,
         'form': GerenciaForm()
@@ -151,8 +161,10 @@ def admin_gerencias(request):
         formulario = GerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminGerencias")
         else:
+            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminGerencias")
     return render(request, "admin/adminGerencias.html", contexto)
 
@@ -178,7 +190,7 @@ def eliminar_gerencias(request, id):
 
 # -- ------------ Sub-gerencias ----------------.
 def admin_subgerencias(request):
-    subgerencias = SubGerencia.objects.all()
+    subgerencias = SubGerencia.objects.all().order_by('NombreSubgerencia')
     contexto = {
         'subgerencias': subgerencias,
         'form': SubgerenciaForm()
@@ -187,8 +199,10 @@ def admin_subgerencias(request):
         formulario = SubgerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminSubgerencias")
         else:
+            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminSubgerencias")
     return render(request, "admin/adminSubgerencias.html", contexto)
 
@@ -214,7 +228,7 @@ def eliminar_subgerencia(request, id):
 
 # -- ------------ Empleado ----------------.
 def admin_usuarios(request):
-    empleados = Empleado.objects.all()
+    empleados = Empleado.objects.all().order_by('Rut')
     contexto = {
         'empleados': empleados,
         'form': EmpleadoForm(), 
@@ -224,11 +238,13 @@ def admin_usuarios(request):
         formulario = EmpleadoForm(request.POST)
         formulario1 = PerfilRolForm(request.POST)
         if formulario.is_valid() and formulario1.is_valid():
-            rolempleado = formulario1.save(commit=False)
-            rolempleado.empleado = formulario.save()
+            rolempleado = formulario.save(commit=False)
+            rolempleado.IdRol = formulario1.save()
             rolempleado.save()
+            messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
+            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminUsuarios")
     return render(request, "admin/adminUsuarios.html",contexto)
 

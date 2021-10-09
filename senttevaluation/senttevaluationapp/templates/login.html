@@ -9,11 +9,17 @@
     </head>
     <body>
         <div class="container" id="container">
-            <form method='POST'>
+            <form method='GET'>
+                {% csrf_token %}
                 <img id="imglogo" src="{% static 'img/logo.png' %}" alt="profileImg">
                 <br>
                 <h5>Ingrese sus credenciales</h5>
-                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username"></label>
+                </div>
+                <div class="form-group">
+
+                </div>
                 {{ form | crispy }}
                 <button id="bntVerificar">Iniciar sesión</button>
             </form>
