@@ -1,5 +1,6 @@
 from django.urls import path, include
 from senttevaluationapp import views
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
 # ----------------------------------  Login ---------------------------------.

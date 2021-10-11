@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models.deletion import CASCADE, PROTECT
 from django.core.validators import RegexValidator, EmailValidator
+from django.contrib.auth.models import User
+from django.db.models.expressions import Case
 
 # Create your models here.
 
@@ -24,6 +26,18 @@ class SubGerencia(models.Model):
     def __str__(self):
         return self.NombreSubgerencia
     
+class Empleado(models.Model):
+    Rut = models.CharField(max_length=12, unique=True, validators=[RegexValidator(regex=r'^(\d{1,3}(?:.\d{1,3}){2}-[\dkK])$' )])
+    Nombre = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    FechaIngreso = models.DateField()
+    Password = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    Correo = models.CharField(max_length=50, unique=True, validators=[EmailValidator])
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
+
+    def __str__(self):
+        return self.Nombre 
+
 class PerfilRol(models.Model):
     Roles = [
         (1, "Evaluador"),
@@ -31,24 +45,14 @@ class PerfilRol(models.Model):
         (3, "Calibrador"),
     ]
     Rol = models.IntegerField(choices=Roles, default=1)
-    RelacionEvaluado = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    RelacionEvaluado = models.CharField(max_length=50, blank=True, default='',validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     NombreEvaluador = models.CharField(max_length=50, blank=True, default='', validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     NombreCalibrador = models.CharField(max_length=50, blank=True, default='', validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE)
 
     def __str__(self):
         return self.get_Rol_display()
 
-class Empleado(models.Model):
-    Rut = models.CharField(max_length=12, unique=True, validators=[RegexValidator(regex=r'^(\d{1,3}(?:.\d{1,3}){2}-[\dkK])$' )])
-    Nombre = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    FechaIngreso = models.DateField()
-    Password = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    Correo = models.CharField(max_length=50, unique=True, validators=[EmailValidator])
-    IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
-    IdRol = models.ForeignKey(PerfilRol, on_delete=CASCADE)
-
-    def __str__(self):
-        return self.Nombre 
 
 class Cargo(models.Model):
     NombreCargo = models.CharField(max_length=50, unique=True ,validators=[RegexValidator(regex=r'^[a-zA-Z]')])

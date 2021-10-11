@@ -1,16 +1,16 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.db.models.query import InstanceCheckMeta
 from django.db.models.query_utils import Q
 from django.http.request import HttpRequest
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UsernameField
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.views.generic import View
-from .models import Cargo, AccionClave, Competencia, DetalleEv, Gerencia, Empleado, PerfilRol, SubGerencia, Perfil
-from .forms import CompetenciaForm, EmpleadoForm, CargoForm, AccionesForm, EvaluacionForm, GerenciaForm, PerfilRolForm, PerilForm, SubgerenciaForm, LoginForm
+from .models import *
+from .forms import *
 from django.contrib import messages
-
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -18,20 +18,23 @@ def login(request):
 
     usuario = request.POST.get('name')
     contraseña = request.POST.get('contraseña')
-    if (usuario == "root" and contraseña == "admiñn"):
+    empleado = Empleado.objects.filter(Q (Rut = usuario))
+    verificar = User.objects.filter(Q(username=usuario))
+    if usuario == "root" and contraseña == "proyectosentte":
         return HttpResponseRedirect("adminInicio")
     else:
         if usuario:
-            empleado = Empleado.objects.filter(Q (Rut = usuario))
-            if empleado:
-                return HttpResponseRedirect("colaboradorInicio")
+            cuentausuario = User.objects.filter(Q (username = usuario))
+            cuentacontra = User.objects.filter(Q (password = contraseña))
+            if cuentausuario and cuentacontra:
+                return HttpResponseRedirect("evaluadorInicio")
             else:
                 return render(request, "login.html")
         else:
             return render(request, "login.html")
 
 # ----------------------------------  Administrador ---------------------------------.
-
+@login_required
 def admin_inicio(request):
     return render(request, "admin/adminInicio.html")
 
@@ -234,17 +237,25 @@ def admin_usuarios(request):
         'empleados': empleados,
         'form': EmpleadoForm(), 
         'form1': PerfilRolForm(),
-        'form2': PerilForm()
+        'form2': PerilForm(),
+        'form3': UserForm()
     }
     if request.method == 'POST':
-        formulario = EmpleadoForm(request.POST)
-        formulario1 = PerfilRolForm(request.POST)
-        formulario2 = PerilForm(request.POST)
-        if formulario.is_valid() and formulario1.is_valid() and formulario2.is_valid():
-            rolempleado = formulario.save(commit=False)
-            rolempleado.IdRol = formulario1.save()
+        formularioPerfil = PerilForm(request.POST)
+        form = UserForm(request.POST)
+        formEmpleado = EmpleadoForm(request.POST)
+        formPerfilrol = PerfilRolForm(request.POST)
+
+        if form.is_valid() and formularioPerfil.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
+            
+            usuario = formEmpleado.save(commit=False)
+            usuario.user = form.save()
+            usuario.save()
+            rolempleado = formPerfilrol.save(commit=False)
+            rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
-            formulario2.save()
+            formularioPerfil.save()
+
             messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminUsuarios")
         else:

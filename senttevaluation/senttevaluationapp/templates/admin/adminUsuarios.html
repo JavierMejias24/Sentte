@@ -56,13 +56,15 @@
 
                                             <!-- Modal body -->
                                             <div class="modal-body">
-                                                <form action='' method="POST">
+                                                <form class="form" method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
+                                                       
                                                         {{ form | crispy }}
-                                                        {{ form2 | crispy }}
                                                         {{ form1 | crispy }}
-                                                        
+                                                        {{ form2 | crispy }}
+                                                        {{ form3 | crispy }}
+
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">

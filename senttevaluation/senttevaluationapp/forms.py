@@ -1,10 +1,22 @@
 from django import forms
 from django.db.models.base import ModelBase
-from django.forms import fields
 from django.forms.models import model_to_dict
 from .models import AccionClave, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
-from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, PerfilRol, SubGerencia
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
+
+
+class UserForm(UserCreationForm):
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirma contraseña', widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2']
+        help_text = {k:"" for k in fields}
+        labels = {
+            'username': 'Usuario',
+        }
 
 class LoginForm(forms.ModelForm):
     class Meta:
@@ -78,6 +90,10 @@ class PerilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = '__all__'
+        labels = {
+            'NombrePerfil': 'Nombre Perfil',
+            'IdCargo': 'Cargo',
+        }
       
 class PerfilRolForm(forms.ModelForm):
     class Meta:
@@ -87,7 +103,7 @@ class PerfilRolForm(forms.ModelForm):
             'Rol': 'Rol',
             'RelacionEvaluado': 'Relacion con el evaluado',
             'NombreEvaluador': 'Nombre del evaluador',
-            'NombreCalibrador': 'Nombredel calibrador',
+            'NombreCalibrador': 'Nombre del calibrador',
         }
         widgets = {
             'Rol': forms.Select(
