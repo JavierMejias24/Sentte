@@ -1,5 +1,5 @@
 {% include 'base.html' %}
-{% include 'sidebars/evaluadorsidebar.html' %}
+{% include 'sidebars/adminSidebar.html' %}
 <body>
     <section class="home-section">
         <div class="home-content">
@@ -9,7 +9,28 @@
         <br>
         <!-- Se genera un contenedor para el cuerpo principal, donde va a ir la info -->
         <div class="container-fluid">
+            <!-- Se crea una tarjeta que actua como contenedor -->
+            <div class="card shadow mb-4">
+                <!-- Se crea el titulo del "contenedor"-->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold">Sistema de Gestión y Retroalimentación del Desempeño</h6>
+                </div>
+                <!-- En el cuerpo de la tarjeta se diven en varias columnas para poner la informacion -->
+                <div class="card-body">
+                    <p>PABLO ANDRES LOBOS NAVIA, bienvenido/a al “Sistema de Gestión y Retroalimentación del Desempeño”, importante herramienta que ha sido desarrollada por estudiantes del Duoc con el fin de que pueda gestionar el desarrollo de las personas de su equipo de trabajo, alineando y planificando su desempeño, por medio de la evaluación de competencias.</p>
+                    
+                    <p>El Sistema de Gestión y Retroalimentación del Desempeño se compone de tres fases: planificación, seguimiento y evaluación, durante las cuales deberá realizar distintos pasos que iremos informando oportunamente.</p>
+                      
+                    <p>Lo invitamos a participar de manera activa y comprometida en este proceso, para que podamos contar con un sistema que apoye un modelo de gestión de personas eficiente y de calidad.</p>
+                    
+                    <p> Gerencia de Recursos Humanos </p>
+            </div>
+        </div>
+        <!-- Se genera un contenedor para el cuerpo principal, donde va a ir la info -->
+        <div class="container-fluid">
             <div class="row">
+                {% if user.username == empleado.user.username %}
+                {%endif%}
                 <!------------------------------- Tarjeta -------------------------------->
                 {%for empleado in empleados%}
                 <div class="col-md-4">
@@ -33,5 +54,6 @@
                 {%endfor%}
             </div>
         </div>
+        <br>
     </section>
 </body>

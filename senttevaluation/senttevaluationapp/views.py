@@ -39,6 +39,7 @@ def admin_inicio(request):
     return render(request, "admin/adminInicio.html")
 
 # -- ------------Acciones Claves----------------.
+@login_required
 def admin_acciones(request):
     accioneclaves = AccionClave.objects.all().order_by('id') 
     contexto = {
@@ -56,6 +57,7 @@ def admin_acciones(request):
             return HttpResponseRedirect("adminAcciones")
     return render(request, "admin/adminAcciones.html", contexto)
 
+@login_required
 def editar_acciones(request, id):
     acciones = get_object_or_404(AccionClave, id=id)
     data = {
@@ -70,6 +72,7 @@ def editar_acciones(request, id):
             data["form"] = formulario
     return render(request, "admin/adminAccionesModificar.html", data)
 
+@login_required
 def eliminar_acciones(request, id):
     acciones = get_object_or_404(AccionClave, id=id)
     acciones.delete()
@@ -77,6 +80,7 @@ def eliminar_acciones(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Cargos ----------------.
+@login_required
 def admin_cargos(request):
     cargos = Cargo.objects.all().order_by('NombreCargo')
     contexto = {
@@ -94,6 +98,7 @@ def admin_cargos(request):
             return HttpResponseRedirect("adminCargos")
     return render(request,"admin/adminCargos.html", contexto)
 
+@login_required
 def editar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
     data = {
@@ -108,6 +113,7 @@ def editar_cargos(request, id):
             data["form"] = formulario
     return render(request, "admin/adminCargosModificar.html", data)
 
+@login_required
 def eliminar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
     cargos.delete()
@@ -116,6 +122,7 @@ def eliminar_cargos(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Competencias ----------------.
+@login_required
 def admin_competencias(request):
     competencias = Competencia.objects.all().order_by('NombreCompetencia')
     contexto1 = {
@@ -133,6 +140,7 @@ def admin_competencias(request):
             return HttpResponseRedirect("adminCompetencias")
     return render(request, "admin/adminCompetencias.html", contexto1)
 
+@login_required
 def editar_competencias(request, id):
     competencias = get_object_or_404(Competencia, id=id)
     data = {
@@ -147,6 +155,7 @@ def editar_competencias(request, id):
             data["form"] = formulario
     return render(request, "admin/adminCompetenciasModificar.html", data)
 
+@login_required
 def eliminar_competencias(request, id):
     competencias = get_object_or_404(Competencia, id=id)
     competencias.delete()
@@ -155,6 +164,7 @@ def eliminar_competencias(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Gerencias ----------------.
+@login_required
 def admin_gerencias(request):
     gerencias = Gerencia.objects.all().order_by('NombreGerencia')
     contexto = {
@@ -172,6 +182,7 @@ def admin_gerencias(request):
             return HttpResponseRedirect("adminGerencias")
     return render(request, "admin/adminGerencias.html", contexto)
 
+@login_required
 def editar_gerencias(request, id):
     gerencias = get_object_or_404(Gerencia, id=id)
     data = {
@@ -186,6 +197,7 @@ def editar_gerencias(request, id):
             data["form"] = formulario
     return render(request, "admin/adminGerenciasModificar.html", data)
 
+@login_required
 def eliminar_gerencias(request, id):
     gerencias = get_object_or_404(Gerencia, id=id)
     gerencias.delete()
@@ -193,6 +205,7 @@ def eliminar_gerencias(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Sub-gerencias ----------------.
+@login_required
 def admin_subgerencias(request):
     subgerencias = SubGerencia.objects.all().order_by('NombreSubgerencia')
     contexto = {
@@ -210,6 +223,7 @@ def admin_subgerencias(request):
             return HttpResponseRedirect("adminSubgerencias")
     return render(request, "admin/adminSubgerencias.html", contexto)
 
+@login_required
 def editar_subgerencia(request, id):
     subgerencias = get_object_or_404(SubGerencia, id=id)
     data = {
@@ -224,6 +238,7 @@ def editar_subgerencia(request, id):
             data["form"] = formulario
     return render(request, "admin/adminSubgerenciasModificar.html", data)
 
+@login_required
 def eliminar_subgerencia(request, id):
     subgerencias = get_object_or_404(SubGerencia, id=id)
     subgerencias.delete()
@@ -231,6 +246,7 @@ def eliminar_subgerencia(request, id):
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Empleado ----------------.
+@login_required
 def admin_usuarios(request):
     empleados = Empleado.objects.all().order_by('Rut')
     contexto = {
@@ -263,6 +279,7 @@ def admin_usuarios(request):
             return HttpResponseRedirect("adminUsuarios")
     return render(request, "admin/adminUsuarios.html",contexto)
 
+@login_required
 def editar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     data = {
@@ -277,6 +294,7 @@ def editar_usuario(request, id):
             data["form"] = formulario
     return render(request, "admin/adminUsuariosModificar.html", data)
 
+@login_required
 def eliminar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     empleados.delete()
@@ -284,6 +302,7 @@ def eliminar_usuario(request, id):
 
 # -----------------------------------------------------------------------------------------------.
 
+@login_required
 def admin_ayuda(request):
     return render(request, "admin/adminAyuda.html")
 

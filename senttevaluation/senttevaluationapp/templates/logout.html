@@ -1,5 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% include 'base.html' %}
 <!doctype html>
 <html lang="es">
     <head>
@@ -14,13 +15,12 @@
                 {% csrf_token %}
                 <img id="imglogo" src="{% static 'img/logo.png' %}" alt="profileImg">
                 <br>
-                <h5>Ingrese sus credenciales</h5>
-                <div class="form-group">
-                    {{form.as_p}}
+                <h5>Se ha cerrado la Sesion</h5>
 
-                    
-                </div>
-                <button id="bntVerificar">Iniciar sesión</button>
+                <button >
+                    <a  role="button" href="http://localhost:8000/login/" >Volver al Inicio</a>
+                </button>
+                
             </form>
         </center>
         </div>
