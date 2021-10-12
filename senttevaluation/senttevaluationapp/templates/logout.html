@@ -7,22 +7,23 @@
         <meta charset="utf-8">
         <title>Sentte</title>
         <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+        <link rel="stylesheet" type="text/css" href="{%static 'stylesheets/login.css' %}">  
     </head>
     <body>
-        <div class="container" id="container">
-            <center>
-            <form method='POST'>
-                {% csrf_token %}
-                <img id="imglogo" src="{% static 'img/logo.png' %}" alt="profileImg">
-                <br>
-                <h5>Se ha cerrado la Sesion</h5>
-
-                <button >
-                    <a  role="button" href="http://localhost:8000/login/" >Volver al Inicio</a>
-                </button>
-                
+        <div class="login">
+            <div class="login-triangle"></div>
+            
+            <h2 class="login-header">Iniciar Sesion
+                <img src="{% static 'img/logo.png' %}" alt="profileImg" style="width: 30px; height: 30px;">
+            </h2>
+            <form class="login-container" >
+               
+                <a href="http://localhost:8000/login/"></a>
+              
             </form>
-        </center>
-        </div>
+            
+          </div>
     </body>
 </html>
