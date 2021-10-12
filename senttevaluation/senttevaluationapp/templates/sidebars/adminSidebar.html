@@ -54,7 +54,7 @@
   </li>   
   {% endif %}
   <!-- Evaluador -->
-  {% if perms.sessions.view_session %}
+  {% if perms.senttevaluationapp.view_planaccion %}
     <li>
     <a href="http://localhost:8000/adminInicio">
       <i class='bx bx-home'></i>
@@ -90,7 +90,7 @@
             <div class="profile_name">{{user.username}}</div>
             <div class="job">Usuario del sistema</div>
           </div>
-          <i class='bx bx-log-out'> 
+          <i> 
             <a class='bx bx-log-out' href="{% url 'logout' %}"></a>
           </i>
           

@@ -11,6 +11,8 @@ from django.views.generic import View
 from .models import *
 from .forms import *
 from django.contrib import messages
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -271,7 +273,68 @@ def admin_usuarios(request):
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
             formularioPerfil.save()
+            cuentausuario = form.save()
 
+            #Permiso Cargos
+            content_type = ContentType.objects.get_for_model(Cargo)
+            permission1 = Permission.objects.get( codename = 'view_cargo', content_type = content_type)
+            cuentausuario.user_permissions.add(permission1)
+
+            #Permiso Sub Gerencia
+            content_type1 = ContentType.objects.get_for_model(SubGerencia)
+            permission2 = Permission.objects.get( codename = 'view_subgerencia', content_type = content_type1)
+            cuentausuario.user_permissions.add(permission2)
+
+            #Permiso Accion Clave
+            content_type2 = ContentType.objects.get_for_model(AccionClave)
+            permission3 = Permission.objects.get( codename = 'view_accionclave', content_type = content_type2)
+            cuentausuario.user_permissions.add(permission3)
+
+            #Permiso Area
+            content_type3 = ContentType.objects.get_for_model(Area)
+            permission4 = Permission.objects.get( codename = 'view_area', content_type = content_type3)
+            cuentausuario.user_permissions.add(permission4)
+
+            #Permiso Competencia
+            content_type4 = ContentType.objects.get_for_model(Competencia)
+            permission5 = Permission.objects.get( codename = 'view_competencia', content_type = content_type4)
+            cuentausuario.user_permissions.add(permission5)
+
+            #Permiso Detalle Evaluacion
+            content_type5 = ContentType.objects.get_for_model(DetalleEv)
+            permission6 = Permission.objects.get( codename = 'view_detalleev', content_type = content_type5)
+            cuentausuario.user_permissions.add(permission6)
+
+            #Permiso Empleado
+            content_type6 = ContentType.objects.get_for_model(Empleado)
+            permission7 = Permission.objects.get( codename = 'view_empleado', content_type = content_type6)
+            cuentausuario.user_permissions.add(permission7)
+
+            #Permiso Evaluacion
+            content_type7 = ContentType.objects.get_for_model(Evaluacion)
+            permission8 = Permission.objects.get( codename = 'view_evaluacion', content_type = content_type7)
+            cuentausuario.user_permissions.add(permission8)
+
+            #Permiso Gerencia
+            content_type8 = ContentType.objects.get_for_model(Gerencia)
+            permission9 = Permission.objects.get( codename = 'view_gerencia', content_type = content_type8)
+            cuentausuario.user_permissions.add(permission9)
+
+            #Permiso Perfil
+            content_type9 = ContentType.objects.get_for_model(Perfil)
+            permission10 = Permission.objects.get( codename = 'view_perfil', content_type = content_type9)
+            cuentausuario.user_permissions.add(permission10)
+
+            #Permiso Perfil Rol
+            content_type10 = ContentType.objects.get_for_model(PerfilRol)
+            permission11 = Permission.objects.get( codename = 'view_perfilrol', content_type = content_type10)
+            cuentausuario.user_permissions.add(permission11)
+
+            #Permiso Plan accion
+            content_type11 = ContentType.objects.get_for_model(PlanAccion)
+            permission12 = Permission.objects.get( codename = 'view_planaccion', content_type = content_type11)
+            cuentausuario.user_permissions.add(permission12)
+            
             messages.success(request, "Guardado con exito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
@@ -309,19 +372,28 @@ def admin_ayuda(request):
 # -----------------------------------------------------------------------------------------------.
 
 # ----------------------------------  Evaluador ---------------------------------.
+@login_required
 def evaluador_inicio(request):
     return render(request, "evaluador/evaluadorInicio.html")
 
+@login_required
 def evaluador_evaluacion(request):
     empleados = Empleado.objects.all()
-    return render(request, "evaluador/evaluadorEvaluacion.html", {'empleados':empleados})
+    
+    contexto = {
+        'empleados':empleados,
+    }
+    return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
 
+@login_required
 def evaluador_autovaluacion(request):
     return render(request, "evaluador/evaluadorAutovaluacion.html")
 
+@login_required
 def evaluador_ayuda(request):
     return render(request, "evaluador/evaluadorAyuda.html")
 
+@login_required
 def evaluador_formulario(request):
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
@@ -332,23 +404,27 @@ def evaluador_formulario(request):
     return render(request, "evaluador/evaluadorFormulario.html", contexto)
 
 # ----------------------------------  Colaborador ---------------------------------.
-
+@login_required
 def colaborador_inicio(request):
     return render(request, "colaborador/colaboradorInicio.html")
 
+@login_required
 def colaborador_ayuda(request):
     return render(request, "colaborador/colaboradorAyuda.html")
 
+@login_required
 def colaborador_autovaluacion(request):
     return render(request, "colaborador/colaboradorAutovaluacion.html")
 
 # ----------------------------------  Calibrador ---------------------------------.
-
+@login_required
 def calibrador_inicio(request):
     return render(request, "calibrador/calibradorInicio.html")
-    
+
+@login_required
 def calibrador_ayuda(request):
     return render(request, "calibrador/calibradorAyuda.html")
 
+@login_required
 def calibrador_evaluaciones(request):
     return render(request, "calibrador/calibradorEvaluaciones.html")
