@@ -17,41 +17,17 @@ class UserForm(UserCreationForm):
         labels = {
             'username': 'Usuario',
         }
-
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = Empleado
-        fields = ['Rut','Password']
-        labels = {
-            'Rut': 'Rut',
-            'Password': 'Contraseña',
-        }
-        widgets = {
-            'Rut': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Ingrese rut',
-                }
-            ),
-            'Password': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Ingrese contraseña',
-                }
-            ),
-        }
-
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','FechaIngreso','Password','Correo','IdSubGerencia']
+        fields = ['Rut','Nombre','FechaIngreso','Correo','IdSubGerencia', 'IdPerfil']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
             'FechaIngreso': 'Fecha de ingreso',
-            'Password': 'Contraseña',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
+            'IdPerfil': 'Perfil',
             
         }
         widgets = {
@@ -81,8 +57,10 @@ class EmpleadoForm(forms.ModelForm):
                     'placeholder': 'Ingrese correo',
                 }
             ),
-            'IdSubGerencia': forms.Select(
-            ),
+            
+            'IdSubGerencia': forms.Select(),
+
+            'IdPerfil': forms.Select(),
             
         }
 

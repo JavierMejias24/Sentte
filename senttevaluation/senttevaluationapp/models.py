@@ -1,9 +1,8 @@
-from django.contrib.auth import default_app_config
 from django.db import models
 from django.db.models.deletion import CASCADE, PROTECT
 from django.core.validators import RegexValidator, EmailValidator
 from django.contrib.auth.models import User
-from django.db.models.expressions import Case
+
 
 # Create your models here.
 
