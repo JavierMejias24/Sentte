@@ -60,10 +60,12 @@
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
                                                        
-                                                        {{ form | crispy }}
-                                                        {{ form1 | crispy }}
-                                                        {{ form2 | crispy }}
                                                         {{ form3 | crispy }}
+                                                        {{ form | crispy }}
+                                                        {{ form2 | crispy }}
+                                                        {{ form1 | crispy }}
+                                                        
+                                                        
                                                         
 
                                                     </div>
@@ -103,7 +105,7 @@
                                                 <td data-label="Rut">{{ empleado.Rut }}</td>
                                                 <td data-label="Nombre">{{ empleado.Nombre }}</td>
                                                 <td data-label="Correo">{{ empleado.Correo }}</td>
-                                                <td data-label="P.Evaluacion">No se</td>
+                                                <td data-label="P.Evaluacion">{{ empleado.IdPerfil }}</td>
                                                
                                                 <td>
                                                     <a class="btn btn-primary" href="{% url 'adminUsuariosModificar' empleado.id %}" style="opacity: 0.5;">

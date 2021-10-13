@@ -127,9 +127,11 @@ def eliminar_cargos(request, id):
 @login_required
 def admin_competencias(request):
     competencias = Competencia.objects.all().order_by('NombreCompetencia')
+    perfil = Perfil.objects.all()
     contexto1 = {
         'competencias': competencias,
-        'form': CompetenciaForm()
+        'form': CompetenciaForm(),
+        'perfil':perfil
     }
     if request.method == 'POST':
         formulario = CompetenciaForm(request.POST)
@@ -272,7 +274,10 @@ def admin_usuarios(request):
             rolempleado = formPerfilrol.save(commit=False)
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
-            formularioPerfil.save()
+            perfil = formEmpleado.save(commit=False)
+            perfil.IdPerfil = formularioPerfil.save()
+            perfil.save()
+
             cuentausuario = form.save()
 
             #Permiso Cargos

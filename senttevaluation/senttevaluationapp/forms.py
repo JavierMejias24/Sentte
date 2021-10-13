@@ -1,6 +1,7 @@
 from django import forms
 from django.db.models.base import ModelBase
 from django.forms.models import model_to_dict
+from django.forms.widgets import Select
 from .models import AccionClave, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -20,14 +21,13 @@ class UserForm(UserCreationForm):
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','FechaIngreso','Correo','IdSubGerencia', 'IdPerfil']
+        fields = ['Rut','Nombre','FechaIngreso','Correo','IdSubGerencia']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
             'FechaIngreso': 'Fecha de ingreso',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
-            'IdPerfil': 'Perfil',
             
         }
         widgets = {
@@ -59,8 +59,6 @@ class EmpleadoForm(forms.ModelForm):
             ),
             
             'IdSubGerencia': forms.Select(),
-
-            'IdPerfil': forms.Select(),
             
         }
 
@@ -69,19 +67,18 @@ class PerilForm(forms.ModelForm):
         model = Perfil
         fields = '__all__'
         labels = {
-            'NombrePerfil': 'Nombre Perfil',
-            'IdCargo': 'Cargo',
+            'NombrePerfil': 'Nombre Perfil'
         }
       
 class PerfilRolForm(forms.ModelForm):
     class Meta:
         model = PerfilRol
-        fields = ['Rol','RelacionEvaluado','NombreEvaluador','NombreCalibrador']
+        fields = ['Rol','RelacionEvaluado','IdEvaluador','IdCalibrador']
         labels = {
             'Rol': 'Rol',
             'RelacionEvaluado': 'Relacion con el evaluado',
-            'NombreEvaluador': 'Nombre del evaluador',
-            'NombreCalibrador': 'Nombre del calibrador',
+            'IdEvaluador': 'Nombre del evaluador',
+            'IdCalibrador': 'Nombre del calibrador',
         }
         widgets = {
             'Rol': forms.Select(
@@ -97,26 +94,17 @@ class PerfilRolForm(forms.ModelForm):
                     'placeholder': 'Ingrese la relación',
                 }
             ),
-            'NombreEvaluador': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Ingrese el nombre del evaluador',
-                }
-            ),
-            'NombreCalibrador': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Ingrese el nombre del calibrador',
-                }
-            )            
+            'IdEvaluador': forms.Select(),
+            'IdCalibrador': forms.Select(),
         }
 
 class CargoForm(forms.ModelForm):
     class Meta:
         model = Cargo
-        fields = ['NombreCargo']
+        fields = ['NombreCargo', 'IdPerfil']
         labels = {
             'NombreCargo': 'Nombre Cargo',
+            'IdPerfil': 'Perfil',
         }
         widgets = {
             'NombreCargo': forms.TextInput(
@@ -124,7 +112,8 @@ class CargoForm(forms.ModelForm):
                     'class':'form-control',
                     'placeholder': 'Ingrese nombre del cargo',
                 }
-            )
+            ),
+            'IdPerfil': forms.Select(),
         }
 
 class CompetenciaForm(forms.ModelForm):
