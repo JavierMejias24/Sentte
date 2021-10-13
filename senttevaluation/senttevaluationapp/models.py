@@ -33,7 +33,14 @@ class Cargo(models.Model):
         return self.NombreCargo
 
 class Perfil(models.Model):
-    NombrePerfil = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    perfil = [
+        ("administrativo","Administrativo"),
+        ("auxiliares","Auxiliares"),
+        ("gerente","Gerente"),
+        ("jefatura","Jefatura"),
+        ("supervisor","Supervisor"),
+    ]
+    NombrePerfil = models.CharField(max_length=50, choices=perfil, default=1)
     IdCargo = models.ForeignKey(Cargo, on_delete=CASCADE, default=1)
 
     def __str__(self):
