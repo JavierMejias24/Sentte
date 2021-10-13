@@ -21,13 +21,14 @@ class UserForm(UserCreationForm):
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','FechaIngreso','Correo','IdSubGerencia']
+        fields = ['Rut','Nombre','FechaIngreso','Correo','IdSubGerencia', 'IdPerfil']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
             'FechaIngreso': 'Fecha de ingreso',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
+            'IdPerfil':'Perfil',
             
         }
         widgets = {
@@ -57,8 +58,8 @@ class EmpleadoForm(forms.ModelForm):
                     'placeholder': 'Ingrese correo',
                 }
             ),
-            
             'IdSubGerencia': forms.Select(),
+            'IdPerfil': forms.Select(),
             
         }
 
@@ -73,12 +74,12 @@ class PerilForm(forms.ModelForm):
 class PerfilRolForm(forms.ModelForm):
     class Meta:
         model = PerfilRol
-        fields = ['Rol','RelacionEvaluado','IdEvaluador','IdCalibrador']
+        fields = ['Rol','RelacionEvaluado','NombreEvaluador','NombreCalibrador']
         labels = {
             'Rol': 'Rol',
             'RelacionEvaluado': 'Relacion con el evaluado',
-            'IdEvaluador': 'Nombre del evaluador',
-            'IdCalibrador': 'Nombre del calibrador',
+            'NombreEvaluador': 'Nombre del evaluador',
+            'NombreCalibrador': 'Nombre del calibrador',
         }
         widgets = {
             'Rol': forms.Select(
@@ -94,8 +95,18 @@ class PerfilRolForm(forms.ModelForm):
                     'placeholder': 'Ingrese la relación',
                 }
             ),
-            'IdEvaluador': forms.Select(),
-            'IdCalibrador': forms.Select(),
+            'NombreEvaluador': forms.TextInput(
+                attrs = {
+                    'class':'form-control',
+                    'placeholder':'Ingrese nombre Evaluador'
+                }
+            ),
+            'NombreCalibrador': forms.TextInput(
+                attrs = {
+                    'class':'form-control',
+                    'placeholder':'Ingrese nombre Calibrador'
+                }
+            ),
         }
 
 class CargoForm(forms.ModelForm):

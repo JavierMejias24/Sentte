@@ -257,16 +257,15 @@ def admin_usuarios(request):
         'empleados': empleados,
         'form': EmpleadoForm(), 
         'form1': PerfilRolForm(),
-        'form2': PerilForm(),
         'form3': UserForm()
     }
     if request.method == 'POST':
-        formularioPerfil = PerilForm(request.POST)
+        
         form = UserForm(request.POST)
         formEmpleado = EmpleadoForm(request.POST)
         formPerfilrol = PerfilRolForm(request.POST)
 
-        if form.is_valid() and formularioPerfil.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
+        if form.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
             
             usuario = formEmpleado.save(commit=False)
             usuario.user = form.save()
@@ -274,9 +273,7 @@ def admin_usuarios(request):
             rolempleado = formPerfilrol.save(commit=False)
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
-            perfil = formEmpleado.save(commit=False)
-            perfil.IdPerfil = formularioPerfil.save()
-            perfil.save()
+            
 
             cuentausuario = form.save()
 
@@ -399,14 +396,17 @@ def evaluador_ayuda(request):
     return render(request, "evaluador/evaluadorAyuda.html")
 
 @login_required
-def evaluador_formulario(request):
+def evaluador_formulario(request, id):
+    empleados = get_object_or_404(Empleado, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
-    contexto = {
+    data = {
+        'empleados': Empleado.objects.get(Nombre = empleados),
         'competencias':competencias,
         'accionclaves':accionclaves,
     }
-    return render(request, "evaluador/evaluadorFormulario.html", contexto)
+    
+    return render(request, "evaluador/evaluadorFormulario.html", data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required

@@ -8,9 +8,12 @@
             <span class="text">Evaluacion</span>
         </div>
         <br>
+        
         <div class="container-fluid">
             <div id="accordion">
                 {% for competencia in competencias %}
+                {%if empleados.IdPerfil == competencia.IdPerfil%}
+                {{empleados.IdPerfil}}
                 <div class="card">
                     <div class="card-header">
                         <a class="card-link" data-toggle="collapse" href="#collapseOne">
@@ -41,9 +44,12 @@
                         </div>
                     </div>
                 </div>
+                
+                {%endif%}
                 {%endfor%}
             </div>
         </div>
+        
     </section>
     <br><br><br>
 </body>
