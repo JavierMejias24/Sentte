@@ -1,46 +1,35 @@
 from django import forms
 from django.db.models.base import ModelBase
-from django.forms import fields
 from django.forms.models import model_to_dict
-from .models import AccionClave, Competencia, DetalleEv, Empleado, Cargo, Gerencia, PerfilRol, SubGerencia
-from .models import AccionClave, Competencia, Empleado, Cargo, Gerencia, PerfilRol, SubGerencia
+from django.forms.widgets import Select
+from .models import AccionClave, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
-class LoginForm(forms.ModelForm):
+
+class UserForm(UserCreationForm):
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirma contraseña', widget=forms.PasswordInput)
     class Meta:
-        model = Empleado
-        fields = ['Rut','Password']
+        model = User
+        fields = ['username', 'password1', 'password2']
+        help_text = {k:"" for k in fields}
         labels = {
-            'Rut': 'Rut',
-            'Password': 'Contraseña',
+            'username': 'Usuario',
         }
-        widgets = {
-            'Rut': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Ingrese rut',
-                }
-            ),
-            'Password': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Ingrese contraseña',
-                }
-            ),
-        }
-
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','FechaIngreso','Password','Correo','IdSubGerencia','IdRol']
+        fields = ['Rut','Nombre','FechaIngreso','Correo','IdSubGerencia', 'IdPerfil']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
             'FechaIngreso': 'Fecha de ingreso',
-            'Password': 'Contraseña',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
-            'IdRol': 'Rol',
+            'IdPerfil':'Perfil',
+            
         }
         widgets = {
             'Rut': forms.TextInput(
@@ -69,15 +58,17 @@ class EmpleadoForm(forms.ModelForm):
                     'placeholder': 'Ingrese correo',
                 }
             ),
-            'IdSubGerencia': forms.Select(
-            ),
-            'IdRol': forms.Select(
-                choices=(
-                    (1, "Evaluador"),
-                    (2, "Evaluado"),
-                    (3, "Calibrador"),
-                )
-            )
+            'IdSubGerencia': forms.Select(),
+            'IdPerfil': forms.Select(),
+            
+        }
+
+class PerilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = '__all__'
+        labels = {
+            'NombrePerfil': 'Nombre Perfil'
         }
       
 class PerfilRolForm(forms.ModelForm):
@@ -88,7 +79,7 @@ class PerfilRolForm(forms.ModelForm):
             'Rol': 'Rol',
             'RelacionEvaluado': 'Relacion con el evaluado',
             'NombreEvaluador': 'Nombre del evaluador',
-            'NombreCalibrador': 'Nombredel calibrador',
+            'NombreCalibrador': 'Nombre del calibrador',
         }
         widgets = {
             'Rol': forms.Select(
@@ -107,23 +98,24 @@ class PerfilRolForm(forms.ModelForm):
             'NombreEvaluador': forms.TextInput(
                 attrs = {
                     'class':'form-control',
-                    'placeholder': 'Ingrese el nombre del evaluador',
+                    'placeholder':'Ingrese nombre Evaluador'
                 }
             ),
             'NombreCalibrador': forms.TextInput(
                 attrs = {
                     'class':'form-control',
-                    'placeholder': 'Ingrese el nombre del calibrador',
+                    'placeholder':'Ingrese nombre Calibrador'
                 }
-            )            
+            ),
         }
 
 class CargoForm(forms.ModelForm):
     class Meta:
         model = Cargo
-        fields = ['NombreCargo']
+        fields = ['NombreCargo', 'IdPerfil']
         labels = {
             'NombreCargo': 'Nombre Cargo',
+            'IdPerfil': 'Perfil',
         }
         widgets = {
             'NombreCargo': forms.TextInput(
@@ -131,7 +123,8 @@ class CargoForm(forms.ModelForm):
                     'class':'form-control',
                     'placeholder': 'Ingrese nombre del cargo',
                 }
-            )
+            ),
+            'IdPerfil': forms.Select(),
         }
 
 class CompetenciaForm(forms.ModelForm):

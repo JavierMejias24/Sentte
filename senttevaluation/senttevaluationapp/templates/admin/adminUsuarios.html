@@ -6,7 +6,7 @@
         {% for m in messages %}
             <script>
                 Swal.fire({
-                    "title": "Felicitaciones",
+                    "title": "Registro",
                     "text": "{{ m }}",
                     "icon": "success"                    
                 })
@@ -56,11 +56,14 @@
 
                                             <!-- Modal body -->
                                             <div class="modal-body">
-                                                <form action='' method="POST">
+                                                <form class="form" method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
+                                                       
+                                                        {{ form3 | crispy }}
                                                         {{ form | crispy }}
                                                         {{ form1 | crispy }}
+                                                        
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">
@@ -93,20 +96,20 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tabla">
-                                        {% for empleado in entity %}
+                                        {% for empleado in empleados %}
                                             <tr>
                                                 <td data-label="Rut">{{ empleado.Rut }}</td>
                                                 <td data-label="Nombre">{{ empleado.Nombre }}</td>
                                                 <td data-label="Correo">{{ empleado.Correo }}</td>
-                                                <td data-label="P.Evaluacion">No se</td>
+                                                <td data-label="P.Evaluacion">{{ empleado.IdPerfil }}</td>
                                                
                                                 <td>
-                                                    <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                        <a href="{% url 'adminUsuariosModificar' empleado.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                                    </button>
-                                                    <button  type="button" class="btn btn-danger" style="opacity: 0.5;">
-                                                        <a data-name="{{ empleado.Nombre }}" href="{% url 'adminUsuariosEliminar' empleado.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                                    </button>
+                                                    <a class="btn btn-primary" href="{% url 'adminUsuariosModificar' empleado.id %}" style="opacity: 0.5;">
+                                                        <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                                    </a>
+                                                    <a class="btn btn-danger" data-name="{{ empleado.Nombre }}" href="{% url 'adminUsuariosEliminar' empleado.id %}" id="btnEliminar"  style="opacity: 0.5;">
+                                                        <p class="bx bx-box" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

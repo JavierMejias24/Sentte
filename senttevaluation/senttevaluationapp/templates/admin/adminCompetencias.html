@@ -6,7 +6,7 @@
         {% for m in messages %}
             <script>
                 Swal.fire({
-                    "title": "Felicitaciones",
+                    "title": "Registro",
                     "text": "{{ m }}",
                     "icon": "success"                    
                 })
@@ -55,7 +55,15 @@
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
+                                                        
                                                         {{ form | crispy}}
+                                                        
+                                                        {% for perfil in perfil %}
+                                                        
+                                                        <p>{{ perfil.IdCargo}}</p>
+                                                        
+                                                        {% endfor %}
+
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">
@@ -83,18 +91,18 @@
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                {% for competencia in entity %}
+                                {% for competencia in competencias %}
                                     <tr>
                                         <td data-label="Competencia">{{ competencia.NombreCompetencia }}</td>
                                         <td data-label="Definicion">{{ competencia.Definicion }}</td>
                                         <td data-label="Perfil">{{ competencia.IdPerfil}}</td>
                                         <td>
-                                            <button type="button" id="btn" class="btn btn-primary" style="opacity: 0.5;">
-                                                <a href="{% url 'adminCompetenciasModificar' competencia.id %}" class="bx bx-edit-alt" style="opacity: 1; color: black;"></a>
-                                            </button>
-                                            <button  type="button" class="btn btn-danger" style="opacity: 0.5;">
-                                                <a data-name="{{ competencia.NombreCompetencia }}" href="{% url 'adminCompetenciasEliminar' competencia.id %}" id="btnEliminar" class="bx bx-box" style="opacity: 1; color: black;"></a>
-                                            </button>
+                                            <a class="btn btn-primary" href="{% url 'adminCompetenciasModificar' competencia.id %}" style="opacity: 0.5;">
+                                                <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                            </a>
+                                            <a class="btn btn-danger" data-name="{{ competencia.NombreCompetencia }}" href="{% url 'adminCompetenciasEliminar' competencia.id %}" id="btnEliminar"  style="opacity: 0.5;">
+                                                <p class="bx bx-box" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                            </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

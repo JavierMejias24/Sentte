@@ -8,6 +8,8 @@
   </div>
   <!-- Se realizan las opciones del menu lateral -->
   <ul class="nav-links">
+    <!-- Administrador -->
+    {% if perms.auth.add_permission %}
     <li>
         <a href="http://localhost:8000/adminInicio">
           <i class='bx bx-home'></i>
@@ -37,25 +39,47 @@
         <i class='bx bx-street-view'></i>
         <span class="link_name">Gerencias</span>
       </a>
-  </li>
-  <li>
+    </li>
+    <li>
       <a href="http://localhost:8000/adminUsuarios">
         <i class='bx bx-id-card'></i>
         <span class="link_name">Usuarios</span>
       </a>
-  </li>
-  <li>
+    </li>
+    <li>
       <a href="http://localhost:8000/adminSubgerencias">
         <i class='bx bx-group'></i>
         <span class="link_name">Subgerencias</span>
       </a>
   </li>   
-  <li>
+  {% endif %}
+  <!-- Evaluador -->
+  {% if perms.senttevaluationapp.view_planaccion %}
+    <li>
+    <a href="http://localhost:8000/adminInicio">
+      <i class='bx bx-home'></i>
+      <span class="link_name">Inicio</span>
+    </a>
+    </li>
+    <li>
+      <a href="http://localhost:8000/evaluadorEvaluacion">
+        <i class='bx bx-file'></i>
+        <span class="link_name">Evaluar</span>
+      </a>
+    </li>
+    <li>
+      <a href="http://localhost:8000/evaluadorAutovaluacion">
+        <i class='bx bx-calendar-check'></i>
+        <span class="link_name">AutoEvaluacion</span>
+      </a>
+    </li>
+  {% endif %}
+    <li>
       <a href="http://localhost:8000/adminAyuda">
         <i class='bx bx-donate-heart'></i>
         <span class="link_name">Ayuda</span>
       </a>
-  </li>
+    </li>
     <!-- Se crea la visual del perfil abajo del menu -->
     <li>
         <div class="profile-details">
@@ -63,10 +87,13 @@
             <img src="{% static 'img/foto_perfil.jpg' %}" alt="profileImg">
           </div>
           <div class="name-job">
-            <div class="profile_name">Julio Profe</div>
-            <div class="job">Administrador</div>
+            <div class="profile_name">{{user.username}}</div>
+            <div class="job">Usuario del sistema</div>
           </div>
-          <i class='bx bx-log-out' ></i>
+          <i> 
+            <a class='bx bx-log-out' href="{% url 'logout' %}"></a>
+          </i>
+          
         </div>
     </li>
   </ul>

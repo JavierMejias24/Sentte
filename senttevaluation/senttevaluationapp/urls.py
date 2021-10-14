@@ -1,9 +1,12 @@
 from django.urls import path, include
 from senttevaluationapp import views
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
 # ----------------------------------  Login ---------------------------------.
     path('', views.login, name="Login"),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
 # ----------------------------------  Administrador ---------------------------------------------.
     path('adminInicio', views.admin_inicio, name="adminInicio"),
     path('adminAcciones', views.admin_acciones, name="adminAcciones"),
@@ -29,7 +32,7 @@ urlpatterns = [
     path('evaluadorInicio', views.evaluador_inicio, name="evaluadorInicio"),
     path('evaluadorEvaluacion', views.evaluador_evaluacion, name="evaluadorEvaluacion"),
     path('evaluadorAutovaluacion', views.evaluador_autovaluacion, name="evaluadorAutovaluacion"),
-    path('evaluadorFormulario', views.evaluador_formulario, name="evaluadorAutovaluacion"),
+    path('evaluadorFormulario/<id>', views.evaluador_formulario, name="evaluadorFormulario"),
     path('evaluadorAyuda', views.evaluador_ayuda, name="evaluadorAyuda"),
 # ----------------------------------  Colaborador ----------------------------------------------------.
     path('colaboradorInicio', views.colaborador_inicio, name="colaboradorInicio"),

@@ -1,5 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% include 'base.html' %}
 <!doctype html>
 <html lang="es">
     <head>
@@ -13,19 +14,13 @@
     <body>
         <div class="login">
             <div class="login-triangle"></div>
-            
-            <h2 class="login-header">Iniciar Sesion
+            <h2 class="login-header">Se ha cerrado la sesion
                 <img src="{% static 'img/logo.png' %}" alt="profileImg" style="width: 30px; height: 30px;">
             </h2>
-          
-            <form class="login-container" method="POST">
-                {% csrf_token %}
-                <p>Usuario</p>
-                {{form.username}}
-                <br>
-                <p>Contraseña</p>
-                {{form.password}}
-              <p><input type="submit" value="Iniciar Sesion"></p>
+            <form class="login-container">
+               <center>
+                <a href="http://localhost:8000/login/" role="button" class="btn btn-info">Volver Principio</a>
+                </center>
             </form>
           </div>
     </body>
