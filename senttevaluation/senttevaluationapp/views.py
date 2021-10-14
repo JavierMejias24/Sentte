@@ -13,6 +13,8 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator
+from django.http import Http404
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -21,7 +23,7 @@ def login(request):
     usuario = request.POST.get('name')
     contraseña = request.POST.get('contraseña')
     empleado = Empleado.objects.filter(Q (Rut = usuario))
-    verificar = User.objects.filter(Q(username=usuario))
+    verificar = User.objects.filter(Q (username=usuario))
     if usuario == "root" and contraseña == "proyectosentte":
         return HttpResponseRedirect("adminInicio")
     else:
@@ -43,11 +45,21 @@ def admin_inicio(request):
 # -- ------------Acciones Claves----------------.
 @login_required
 def admin_acciones(request):
-    accioneclaves = AccionClave.objects.all().order_by('id') 
+    accioneclaves = AccionClave.objects.all().order_by('id')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(accioneclaves, 10)
+        accioneclaves = paginator.page(page)
+    except:
+        Http404
+
     contexto = {
-        'accionclaves':accioneclaves,
-        'form': AccionesForm()
+        'entity':accioneclaves,
+        'form': AccionesForm(),
+        'paginator': paginator
     }
+
     if request.method == 'POST':
         formulario = AccionesForm(request.POST)
         if formulario.is_valid():
@@ -85,10 +97,20 @@ def eliminar_acciones(request, id):
 @login_required
 def admin_cargos(request):
     cargos = Cargo.objects.all().order_by('NombreCargo')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(cargos, 10)
+        cargos = paginator.page(page)
+    except:
+        Http404
+
     contexto = {
-        'cargos':cargos,
-        'form': CargoForm()
+        'entity':cargos,
+        'form': CargoForm(),
+        'paginator': paginator
     }
+
     if request.method == 'POST':
         formulario = CargoForm(request.POST)
         if formulario.is_valid():
@@ -128,11 +150,21 @@ def eliminar_cargos(request, id):
 def admin_competencias(request):
     competencias = Competencia.objects.all().order_by('NombreCompetencia')
     perfil = Perfil.objects.all()
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(competencias, 10)
+        competencias = paginator.page(page)
+    except:
+        Http404
+
     contexto1 = {
-        'competencias': competencias,
+        'entity': competencias,
         'form': CompetenciaForm(),
-        'perfil':perfil
+        'perfil':perfil,
+        'paginator': paginator
     }
+
     if request.method == 'POST':
         formulario = CompetenciaForm(request.POST)
         if formulario.is_valid():
@@ -171,10 +203,20 @@ def eliminar_competencias(request, id):
 @login_required
 def admin_gerencias(request):
     gerencias = Gerencia.objects.all().order_by('NombreGerencia')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(gerencias, 10)
+        gerencias = paginator.page(page)
+    except:
+        Http404
+
     contexto = {
-        'gerencias': gerencias,
-        'form': GerenciaForm()
+        'entity': gerencias,
+        'form': GerenciaForm(),
+        'paginator': paginator
     }
+
     if request.method == 'POST':
         formulario = GerenciaForm(request.POST)
         if formulario.is_valid():
@@ -212,10 +254,20 @@ def eliminar_gerencias(request, id):
 @login_required
 def admin_subgerencias(request):
     subgerencias = SubGerencia.objects.all().order_by('NombreSubgerencia')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(subgerencias, 10)
+        subgerencias = paginator.page(page)
+    except:
+        Http404
+
     contexto = {
-        'subgerencias': subgerencias,
-        'form': SubgerenciaForm()
+        'entity': subgerencias,
+        'form': SubgerenciaForm(),
+        'paginator': paginator
     }
+
     if request.method == 'POST':
         formulario = SubgerenciaForm(request.POST)
         if formulario.is_valid():
@@ -253,11 +305,20 @@ def eliminar_subgerencia(request, id):
 @login_required
 def admin_usuarios(request):
     empleados = Empleado.objects.all().order_by('Rut')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(empleados, 10)
+        empleados = paginator.page(page)
+    except:
+        Http404
+
     contexto = {
-        'empleados': empleados,
-        'form': EmpleadoForm(), 
+        'entity': empleados,
+        'form': EmpleadoForm(),
         'form1': PerfilRolForm(),
-        'form3': UserForm()
+        'form3': UserForm(),
+        'paginator': paginator
     }
     if request.method == 'POST':
         

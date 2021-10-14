@@ -60,7 +60,7 @@
                                                         
                                                         {% for perfil in perfil %}
                                                         
-                                                        <p>{{ perfil.IdCargo}}</p>
+                                                        <p>{{ perfil.IdCargo }}</p>
                                                         
                                                         {% endfor %}
 
@@ -91,7 +91,7 @@
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                {% for competencia in competencias %}
+                                {% for competencia in entity %}
                                     <tr>
                                         <td data-label="Competencia">{{ competencia.NombreCompetencia }}</td>
                                         <td data-label="Definicion">{{ competencia.Definicion }}</td>
