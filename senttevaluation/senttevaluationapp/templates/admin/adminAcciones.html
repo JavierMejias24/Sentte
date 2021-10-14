@@ -2,17 +2,7 @@
 {% load crispy_forms_tags %}
 <body>
 {% include 'sidebars/adminSidebar.html' %}
-    {% if messages %}
-        {% for m in messages %}
-            <script>
-                Swal.fire({
-                    "title": "Registro",
-                    "text": "{{ m }}",
-                    "icon": "success"
-                })
-            </script>
-        {% endfor %}
-    {% endif %}
+{% include 'mensajes.html' %}
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu' ></i>

@@ -57,17 +57,18 @@ def admin_acciones(request):
     contexto = {
         'entity':accioneclaves,
         'form': AccionesForm(),
-        'paginator': paginator
+        'paginator': paginator,
+        'titulo': 'Acción'
     }
 
     if request.method == 'POST':
         formulario = AccionesForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Acción guardada con éxito" )
+            messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminAcciones")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la información")
+            messages.warning(request, "No se pudo guardar")
             return HttpResponseRedirect("adminAcciones")
     return render(request, "admin/adminAcciones.html", contexto)
 
@@ -81,7 +82,7 @@ def editar_acciones(request, id):
         formulario = AccionesForm(data=request.POST, instance=acciones)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Acción editada con éxito" )
+            messages.success(request, "Editada con éxito" )
             return redirect(to="adminAcciones")
         else:
             data["form"] = formulario
@@ -91,7 +92,7 @@ def editar_acciones(request, id):
 def eliminar_acciones(request, id):
     acciones = get_object_or_404(AccionClave, id=id)
     acciones.delete()
-    messages.success(request, "Acción eliminada con éxito" )
+    messages.success(request, "Eliminada con éxito" )
     return redirect(to='adminAcciones')
 # -----------------------------------------------------------------------------------------------.
 
@@ -110,17 +111,18 @@ def admin_cargos(request):
     contexto = {
         'entity':cargos,
         'form': CargoForm(),
-        'paginator': paginator
+        'paginator': paginator,
+        'titulo': 'Cargo'
     }
 
     if request.method == 'POST':
         formulario = CargoForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Cargo guardado con éxito" )
+            messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminCargos")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
+            messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminCargos")
     return render(request,"admin/adminCargos.html", contexto)
 
@@ -134,7 +136,7 @@ def editar_cargos(request, id):
         formulario = CargoForm(data=request.POST, instance=cargos)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Cargo editado con éxito" )
+            messages.success(request, "Editado con éxito" )
             return redirect(to="adminCargos")
         else:
             data["form"] = formulario
@@ -144,7 +146,7 @@ def editar_cargos(request, id):
 def eliminar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
     cargos.delete()
-    messages.success(request, "Cargo eliminado con éxito" )
+    messages.success(request, "Eliminado con éxito" )
     return redirect(to="adminCargos")
 
 # -----------------------------------------------------------------------------------------------.
@@ -166,17 +168,18 @@ def admin_competencias(request):
         'entity': competencias,
         'form': CompetenciaForm(),
         'perfil':perfil,
-        'paginator': paginator
+        'paginator': paginator,
+        'titulo': 'Competencia'
     }
 
     if request.method == 'POST':
         formulario = CompetenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminCompetencias")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
+            messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminCompetencias")
     return render(request, "admin/adminCompetencias.html", contexto1)
 
@@ -190,6 +193,7 @@ def editar_competencias(request, id):
         formulario = CompetenciaForm(data=request.POST, instance=competencias)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Editada con éxito" )
             return redirect(to="adminCompetencias")
         else:
             data["form"] = formulario
@@ -199,6 +203,7 @@ def editar_competencias(request, id):
 def eliminar_competencias(request, id):
     competencias = get_object_or_404(Competencia, id=id)
     competencias.delete()
+    messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminCompetencias")
 
 # -----------------------------------------------------------------------------------------------.
@@ -218,17 +223,18 @@ def admin_gerencias(request):
     contexto = {
         'entity': gerencias,
         'form': GerenciaForm(),
-        'paginator': paginator
+        'paginator': paginator,
+        'titulo': 'Gerencia'
     }
 
     if request.method == 'POST':
         formulario = GerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminGerencias")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
+            messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminGerencias")
     return render(request, "admin/adminGerencias.html", contexto)
 
@@ -242,6 +248,7 @@ def editar_gerencias(request, id):
         formulario = GerenciaForm(data=request.POST, instance=gerencias)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Editada con éxito" )
             return redirect(to="adminGerencias")
         else:
             data["form"] = formulario
@@ -251,6 +258,7 @@ def editar_gerencias(request, id):
 def eliminar_gerencias(request, id):
     gerencias = get_object_or_404(Gerencia, id=id)
     gerencias.delete()
+    messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminGerencias")
 # -----------------------------------------------------------------------------------------------.
 
@@ -269,17 +277,18 @@ def admin_subgerencias(request):
     contexto = {
         'entity': subgerencias,
         'form': SubgerenciaForm(),
-        'paginator': paginator
+        'paginator': paginator,
+        'titulo': 'Subgerencia'
     }
 
     if request.method == 'POST':
         formulario = SubgerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminSubgerencias")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
+            messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminSubgerencias")
     return render(request, "admin/adminSubgerencias.html", contexto)
 
@@ -293,6 +302,7 @@ def editar_subgerencia(request, id):
         formulario = SubgerenciaForm(data=request.POST, instance=subgerencias)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Editada con éxito" )
             return redirect(to="adminSubgerencias")
         else:
             data["form"] = formulario
@@ -302,6 +312,7 @@ def editar_subgerencia(request, id):
 def eliminar_subgerencia(request, id):
     subgerencias = get_object_or_404(SubGerencia, id=id)
     subgerencias.delete()
+    messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminSubgerencias")
 # -----------------------------------------------------------------------------------------------.
 
@@ -322,7 +333,8 @@ def admin_usuarios(request):
         'form': EmpleadoForm(),
         'form1': PerfilRolForm(),
         'form3': UserForm(),
-        'paginator': paginator
+        'paginator': paginator,
+        'titulo': 'Empleado'
     }
 
     if request.method == 'POST':
@@ -402,7 +414,7 @@ def admin_usuarios(request):
             permission12 = Permission.objects.get( codename = 'view_planaccion', content_type = content_type11)
             cuentausuario.user_permissions.add(permission12)
             
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
             messages.warning(request, "Se verifico y no se pudo guardar la informacion")
