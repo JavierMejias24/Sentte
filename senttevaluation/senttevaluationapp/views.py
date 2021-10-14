@@ -64,10 +64,10 @@ def admin_acciones(request):
         formulario = AccionesForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Acción guardada con éxito" )
             return HttpResponseRedirect("adminAcciones")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
+            messages.warning(request, "Se verifico y no se pudo guardar la información")
             return HttpResponseRedirect("adminAcciones")
     return render(request, "admin/adminAcciones.html", contexto)
 
@@ -81,6 +81,7 @@ def editar_acciones(request, id):
         formulario = AccionesForm(data=request.POST, instance=acciones)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Acción editada con éxito" )
             return redirect(to="adminAcciones")
         else:
             data["form"] = formulario
@@ -90,6 +91,7 @@ def editar_acciones(request, id):
 def eliminar_acciones(request, id):
     acciones = get_object_or_404(AccionClave, id=id)
     acciones.delete()
+    messages.success(request, "Acción eliminada con éxito" )
     return redirect(to='adminAcciones')
 # -----------------------------------------------------------------------------------------------.
 
@@ -115,7 +117,7 @@ def admin_cargos(request):
         formulario = CargoForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Cargo guardado con éxito" )
             return HttpResponseRedirect("adminCargos")
         else:
             messages.warning(request, "Se verifico y no se pudo guardar la informacion")
@@ -132,6 +134,7 @@ def editar_cargos(request, id):
         formulario = CargoForm(data=request.POST, instance=cargos)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Cargo editado con éxito" )
             return redirect(to="adminCargos")
         else:
             data["form"] = formulario
@@ -141,6 +144,7 @@ def editar_cargos(request, id):
 def eliminar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
     cargos.delete()
+    messages.success(request, "Cargo eliminado con éxito" )
     return redirect(to="adminCargos")
 
 # -----------------------------------------------------------------------------------------------.
@@ -320,6 +324,7 @@ def admin_usuarios(request):
         'form3': UserForm(),
         'paginator': paginator
     }
+
     if request.method == 'POST':
         
         form = UserForm(request.POST)
@@ -335,7 +340,6 @@ def admin_usuarios(request):
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
             
-
             cuentausuario = form.save()
 
             #Permiso Cargos
@@ -415,6 +419,7 @@ def editar_usuario(request, id):
         formulario = EmpleadoForm(data=request.POST, instance=empleados)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Editado con éxito" )
             return redirect(to="adminUsuarios")
         else:
             data["form"] = formulario
@@ -424,6 +429,7 @@ def editar_usuario(request, id):
 def eliminar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     empleados.delete()
+    messages.success(request, "Eliminado con éxito" )
     return redirect(to="adminUsuarios")
 
 # -----------------------------------------------------------------------------------------------.

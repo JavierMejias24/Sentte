@@ -1,35 +1,31 @@
 from django import forms
 from django.db.models.base import ModelBase
+from django.db.models.fields import DateField
 from django.forms.models import model_to_dict
 from django.forms.widgets import Select
 from .models import AccionClave, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-
-
 class UserForm(UserCreationForm):
+    username = forms.CharField(label='Usuario', widget=forms.TextInput)
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirma contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
-        help_text = {k:"" for k in fields}
-        labels = {
-            'username': 'Usuario',
-        }
+
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut','Nombre','FechaIngreso','Correo','IdSubGerencia', 'IdPerfil']
+        fields = ['Rut', 'Nombre', 'FechaIngreso', 'Correo', 'IdSubGerencia', 'IdPerfil']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
             'FechaIngreso': 'Fecha de ingreso',
             'Correo': 'Correo',
             'IdSubGerencia': 'Subgerencia',
-            'IdPerfil':'Perfil',
-            
+            'IdPerfil': 'Perfil',
         }
         widgets = {
             'Rut': forms.TextInput(
@@ -44,7 +40,10 @@ class EmpleadoForm(forms.ModelForm):
                     'placeholder': 'Ingrese nombre y apellidos',
                 }
             ),
-            'FechaIngreso': forms.SelectDateWidget(
+            'FechaIngreso': forms.TextInput(
+                attrs = {
+                    'type': 'date',
+                }
             ),
             'Password': forms.TextInput(
                 attrs = {
@@ -60,7 +59,6 @@ class EmpleadoForm(forms.ModelForm):
             ),
             'IdSubGerencia': forms.Select(),
             'IdPerfil': forms.Select(),
-            
         }
 
 class PerilForm(forms.ModelForm):
@@ -74,7 +72,7 @@ class PerilForm(forms.ModelForm):
 class PerfilRolForm(forms.ModelForm):
     class Meta:
         model = PerfilRol
-        fields = ['Rol','RelacionEvaluado','NombreEvaluador','NombreCalibrador']
+        fields = ['Rol', 'RelacionEvaluado', 'NombreEvaluador', 'NombreCalibrador']
         labels = {
             'Rol': 'Rol',
             'RelacionEvaluado': 'Relacion con el evaluado',
@@ -130,7 +128,7 @@ class CargoForm(forms.ModelForm):
 class CompetenciaForm(forms.ModelForm):
     class Meta:
         model = Competencia
-        fields = ['NombreCompetencia','Definicion','IdPerfil']
+        fields = ['NombreCompetencia', 'Definicion', 'IdPerfil']
         labels = {
             'NombreCompetencia': 'Nombre competencia',
             'Definicion': 'Definicion',
@@ -155,7 +153,7 @@ class CompetenciaForm(forms.ModelForm):
 class AccionesForm(forms.ModelForm):
     class Meta:
         model = AccionClave        
-        fields = ['Descripcion','IdCompetencia']
+        fields = ['Descripcion', 'IdCompetencia']
         labels = {
             'Descripcion': 'Descripción',
             'IdCompetencia': 'Competencia',
@@ -173,7 +171,7 @@ class AccionesForm(forms.ModelForm):
 class GerenciaForm(forms.ModelForm):
     class Meta:
         model = Gerencia
-        fields = ['NombreGerencia','IdArea']
+        fields = ['NombreGerencia', 'IdArea']
         labels = {
             'NombreGerencia': 'Nombre gerencia',
             'IdArea': 'Area',
@@ -191,7 +189,7 @@ class GerenciaForm(forms.ModelForm):
 class SubgerenciaForm(forms.ModelForm):
     class Meta:
         model = SubGerencia
-        fields = ['NombreSubgerencia','IdGerencia']
+        fields = ['NombreSubgerencia', 'IdGerencia']
         labels = {
             'NombreSubgerencia': 'Nombre subgerencia',
             'IdGerencia': 'Gerencia',
