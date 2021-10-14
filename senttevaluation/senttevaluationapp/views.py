@@ -173,7 +173,7 @@ def admin_competencias(request):
         formulario = CompetenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Competencia guardada con éxito" )
             return HttpResponseRedirect("adminCompetencias")
         else:
             messages.warning(request, "Se verifico y no se pudo guardar la informacion")
@@ -190,6 +190,7 @@ def editar_competencias(request, id):
         formulario = CompetenciaForm(data=request.POST, instance=competencias)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Competencia editada con éxito" )
             return redirect(to="adminCompetencias")
         else:
             data["form"] = formulario
@@ -199,6 +200,7 @@ def editar_competencias(request, id):
 def eliminar_competencias(request, id):
     competencias = get_object_or_404(Competencia, id=id)
     competencias.delete()
+    messages.success(request, "Competencia eliminada con éxito" )
     return redirect(to="adminCompetencias")
 
 # -----------------------------------------------------------------------------------------------.
@@ -225,7 +227,7 @@ def admin_gerencias(request):
         formulario = GerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Gerencia guardada con éxito" )
             return HttpResponseRedirect("adminGerencias")
         else:
             messages.warning(request, "Se verifico y no se pudo guardar la informacion")
@@ -242,6 +244,7 @@ def editar_gerencias(request, id):
         formulario = GerenciaForm(data=request.POST, instance=gerencias)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Gerencia editada con éxito" )
             return redirect(to="adminGerencias")
         else:
             data["form"] = formulario
@@ -251,6 +254,7 @@ def editar_gerencias(request, id):
 def eliminar_gerencias(request, id):
     gerencias = get_object_or_404(Gerencia, id=id)
     gerencias.delete()
+    messages.success(request, "Gerencia eliminada con éxito" )
     return redirect(to="adminGerencias")
 # -----------------------------------------------------------------------------------------------.
 
@@ -276,7 +280,7 @@ def admin_subgerencias(request):
         formulario = SubgerenciaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Subgerencia guardada con éxito" )
             return HttpResponseRedirect("adminSubgerencias")
         else:
             messages.warning(request, "Se verifico y no se pudo guardar la informacion")
@@ -293,6 +297,7 @@ def editar_subgerencia(request, id):
         formulario = SubgerenciaForm(data=request.POST, instance=subgerencias)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Subgerencia editada con éxito" )
             return redirect(to="adminSubgerencias")
         else:
             data["form"] = formulario
@@ -302,6 +307,7 @@ def editar_subgerencia(request, id):
 def eliminar_subgerencia(request, id):
     subgerencias = get_object_or_404(SubGerencia, id=id)
     subgerencias.delete()
+    messages.success(request, "Subgerencia eliminada con éxito" )
     return redirect(to="adminSubgerencias")
 # -----------------------------------------------------------------------------------------------.
 
@@ -402,7 +408,7 @@ def admin_usuarios(request):
             permission12 = Permission.objects.get( codename = 'view_planaccion', content_type = content_type11)
             cuentausuario.user_permissions.add(permission12)
             
-            messages.success(request, "Guardado con exito" )
+            messages.success(request, "Empleado guardado con éxito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
             messages.warning(request, "Se verifico y no se pudo guardar la informacion")
@@ -419,7 +425,7 @@ def editar_usuario(request, id):
         formulario = EmpleadoForm(data=request.POST, instance=empleados)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Editado con éxito" )
+            messages.success(request, "Empleado editado con éxito" )
             return redirect(to="adminUsuarios")
         else:
             data["form"] = formulario
@@ -429,7 +435,7 @@ def editar_usuario(request, id):
 def eliminar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     empleados.delete()
-    messages.success(request, "Eliminado con éxito" )
+    messages.success(request, "Empleado eliminado con éxito" )
     return redirect(to="adminUsuarios")
 
 # -----------------------------------------------------------------------------------------------.
