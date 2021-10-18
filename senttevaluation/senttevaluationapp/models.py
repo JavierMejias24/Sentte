@@ -13,7 +13,7 @@ from django.forms.widgets import NullBooleanSelect
 # Create your models here.
 
 class Area(models.Model):
-    NombreArea = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    NombreArea = models.CharField(max_length=50, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
 
     def __str__(self):
         return self.NombreArea
@@ -26,7 +26,7 @@ class Gerencia(models.Model):
         return self.NombreGerencia
 
 class SubGerencia(models.Model):
-    NombreSubgerencia = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    NombreSubgerencia = models.CharField(max_length=50, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     IdGerencia = models.ForeignKey(Gerencia, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
@@ -89,7 +89,7 @@ class DetalleEv(models.Model):
     IdPlanAccion = models.ForeignKey(PlanAccion, on_delete=CASCADE, default=1)
 
 class Competencia(models.Model):
-    NombreCompetencia = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    NombreCompetencia = models.CharField(max_length=50, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Definicion = models.CharField(max_length=1000, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE, default=1)
 
@@ -97,7 +97,7 @@ class Competencia(models.Model):
         return self.NombreCompetencia
 
 class AccionClave(models.Model):
-    Descripcion = models.CharField(max_length=1000, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    Descripcion = models.CharField(max_length=1000, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     IdCompetencia = models.ForeignKey(Competencia, on_delete=CASCADE, default=1)
 
     def __str__(self):
