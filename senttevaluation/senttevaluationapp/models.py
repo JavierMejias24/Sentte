@@ -1,29 +1,22 @@
-from re import I
 from django.db import models
-from django.db.models import query
-from django.db.models.deletion import CASCADE, PROTECT
+from django.db.models.deletion import CASCADE
 from django.core.validators import RegexValidator, EmailValidator
 from django.contrib.auth.models import User
-from django.db.models.expressions import Case
-from django.db.models.fields import BLANK_CHOICE_DASH
-from django.db.models.fields.related import ForeignKey
-from django.forms.widgets import NullBooleanSelect
-
 
 # Create your models here.
 
-class Area(models.Model):
-    NombreArea = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-
-    def __str__(self):
-        return self.NombreArea
-
 class Gerencia(models.Model):
     NombreGerencia = models.CharField(max_length=50, unique=True ,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    IdArea = models.ForeignKey(Area, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.NombreGerencia
+
+class Area(models.Model):
+    NombreArea = models.CharField(max_length=50, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    IdGerencia = models.ForeignKey(Gerencia, on_delete=CASCADE, default=1)
+
+    def __str__(self):
+        return self.NombreArea
 
 class SubGerencia(models.Model):
     NombreSubgerencia = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])

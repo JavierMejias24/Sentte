@@ -171,10 +171,9 @@ class AccionesForm(forms.ModelForm):
 class GerenciaForm(forms.ModelForm):
     class Meta:
         model = Gerencia
-        fields = ['NombreGerencia', 'IdArea']
+        fields = ['NombreGerencia']
         labels = {
-            'NombreGerencia': 'Nombre gerencia',
-            'IdArea': 'Area',
+            'NombreGerencia': 'Nombre gerencia'
         }
         widgets = {
             'NombreGerencia': forms.TextInput(
@@ -183,7 +182,6 @@ class GerenciaForm(forms.ModelForm):
                     'placeholder': 'Ingrese nombre de la gerencia',
                 }
             ),
-            'IdArea': forms.Select()
         }
 
 class SubgerenciaForm(forms.ModelForm):
