@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'senttevaluation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'xe',
-        'USER': 'SENTTE',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
+        'NAME': 'SENTTE',
+        'USER': 'admin',
+        'PASSWORD': 'casa2824',
+        'HOST': 'sentte.cwzvowaetioq.us-east-1.rds.amazonaws.com',
         'PORT': '1521',
     }
 }
