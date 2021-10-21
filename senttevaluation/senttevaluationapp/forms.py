@@ -3,7 +3,7 @@ from django.db.models.base import ModelBase
 from django.db.models.fields import DateField
 from django.forms.models import model_to_dict
 from django.forms.widgets import Select
-from .models import AccionClave, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
+from .models import AccionClave, Area, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -171,10 +171,9 @@ class AccionesForm(forms.ModelForm):
 class GerenciaForm(forms.ModelForm):
     class Meta:
         model = Gerencia
-        fields = ['NombreGerencia', 'IdArea']
+        fields = ['NombreGerencia']
         labels = {
-            'NombreGerencia': 'Nombre gerencia',
-            'IdArea': 'Area',
+            'NombreGerencia': 'Nombre gerencia'
         }
         widgets = {
             'NombreGerencia': forms.TextInput(
@@ -182,10 +181,26 @@ class GerenciaForm(forms.ModelForm):
                     'class':'form-control',
                     'placeholder': 'Ingrese nombre de la gerencia',
                 }
+            )
+        }
+
+class AreaFrom(forms.ModelForm):
+    class Meta:
+        model= Area
+        fields = ['NombreArea', 'IdGerencia']
+        labels = {
+            'NombreArea':'Nombre Area',
+            'IdGerencia':'Gerencia'
+        }
+        widgets = {
+            'NombreArea': forms.TextInput(
+                attrs= {
+                    'class':'form-control',
+                    'placeholder':'Ingrese nombre del area',
+                }
             ),
             'IdArea': forms.Select()
         }
-
 class SubgerenciaForm(forms.ModelForm):
     class Meta:
         model = SubGerencia
