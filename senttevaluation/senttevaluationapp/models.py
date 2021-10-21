@@ -12,18 +12,20 @@ from django.forms.widgets import NullBooleanSelect
 
 # Create your models here.
 
-class Area(models.Model):
-    NombreArea = models.CharField(max_length=50, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-
-    def __str__(self):
-        return self.NombreArea
 
 class Gerencia(models.Model):
     NombreGerencia = models.CharField(max_length=50, unique=True ,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    IdArea = models.ForeignKey(Area, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.NombreGerencia
+
+class Area(models.Model):
+    NombreArea = models.CharField(max_length=50, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    IdGerencia = models.ForeignKey(Gerencia, on_delete=models.CASCADE, default=1)
+    
+    def __str__(self):
+        return self.NombreArea
+
 
 class SubGerencia(models.Model):
     NombreSubgerencia = models.CharField(max_length=50, unique=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
