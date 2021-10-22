@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
+from django.db.models.fields import CharField
 from django.db.models.query import InstanceCheckMeta
 from django.db.models.query_utils import Q
 from django.http.request import HttpRequest
@@ -112,7 +113,7 @@ def admin_cargos(request):
         'entity':cargos,
         'form': CargoForm(),
         'paginator': paginator,
-        'titulo': 'Cargo'
+        'titulo': 'Cargo',
     }
 
     if request.method == 'POST':
@@ -122,8 +123,7 @@ def admin_cargos(request):
             messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminCargos")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
-            return HttpResponseRedirect("adminCargos")
+            messages.error(request, "No se pudo guardar la información")
     return render(request,"admin/adminCargos.html", contexto)
 
 @login_required
@@ -179,7 +179,7 @@ def admin_competencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminCompetencias")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
+            messages.error(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminCompetencias")
     return render(request, "admin/adminCompetencias.html", contexto1)
 
@@ -234,7 +234,7 @@ def admin_gerencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminGerencias")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
+            messages.error(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminGerencias")
     return render(request, "admin/adminGerencias.html", contexto)
 
@@ -288,7 +288,7 @@ def admin_subgerencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminSubgerencias")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
+            messages.error(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminSubgerencias")
     return render(request, "admin/adminSubgerencias.html", contexto)
 
@@ -417,7 +417,7 @@ def admin_usuarios(request):
             messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
+            messages.error(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminUsuarios")
     return render(request, "admin/adminUsuarios.html",contexto)
 

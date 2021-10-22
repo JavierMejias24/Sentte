@@ -36,6 +36,7 @@ class Cargo(models.Model):
 
     def __str__(self):
         return self.NombreCargo
+
 class Empleado(models.Model):
     Rut = models.CharField(max_length=12, unique=True, validators=[RegexValidator(regex=r'^(\d{1,3}(?:.\d{1,3}){2}-[\dkK])$' )])
     Nombre = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
