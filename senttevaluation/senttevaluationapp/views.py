@@ -47,7 +47,6 @@ def admin_inicio(request):
 def admin_acciones(request):
     accioneclaves = AccionClave.objects.all().order_by('id')
     page = request.GET.get('page', 1)
-
     try:
         paginator = Paginator(accioneclaves, 10)
         accioneclaves = paginator.page(page)
@@ -56,11 +55,17 @@ def admin_acciones(request):
 
     contexto = {
         'entity':accioneclaves,
-        'form': AccionesForm(),
         'paginator': paginator,
+        'titulo': 'Cargo'
+    }
+    return render(request, "admin/adminAcciones.html", contexto)
+
+@login_required
+def agregar_acciones(request):
+    contexto = {
+        'form': AccionesForm(),
         'titulo': 'Acción'
     }
-
     if request.method == 'POST':
         formulario = AccionesForm(request.POST)
         if formulario.is_valid():
@@ -70,7 +75,7 @@ def admin_acciones(request):
         else:
             messages.warning(request, "No se pudo guardar")
             return HttpResponseRedirect("adminAcciones")
-    return render(request, "admin/adminAcciones.html", contexto)
+    return render(request, "admin/adminAgregarAcciones.html", contexto)
 
 @login_required
 def editar_acciones(request, id):
@@ -110,8 +115,15 @@ def admin_cargos(request):
 
     contexto = {
         'entity':cargos,
-        'form': CargoForm(),
         'paginator': paginator,
+        'titulo': 'Cargo'
+    }
+    return render(request,"admin/adminCargos.html", contexto)
+
+@login_required
+def agregar_cargos(request):
+    contexto = {
+        'form': CargoForm(),
         'titulo': 'Cargo'
     }
 
@@ -124,7 +136,7 @@ def admin_cargos(request):
         else:
             messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminCargos")
-    return render(request,"admin/adminCargos.html", contexto)
+    return render(request,"admin/adminAgregarCargos.html", contexto)
 
 @login_required
 def editar_cargos(request, id):
@@ -166,12 +178,19 @@ def admin_competencias(request):
 
     contexto1 = {
         'entity': competencias,
-        'form': CompetenciaForm(),
         'perfil':perfil,
         'paginator': paginator,
         'titulo': 'Competencia'
     }
+    return render(request, "admin/adminCompetencias.html", contexto1)
 
+@login_required
+def agregar_competencias(request):
+    contexto1 = {
+        
+        'form': CompetenciaForm(),
+        'titulo': 'Competencia'
+    }
     if request.method == 'POST':
         formulario = CompetenciaForm(request.POST)
         if formulario.is_valid():
@@ -181,7 +200,7 @@ def admin_competencias(request):
         else:
             messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminCompetencias")
-    return render(request, "admin/adminCompetencias.html", contexto1)
+    return render(request, "admin/adminAgregarCompetencias.html", contexto1)
 
 @login_required
 def editar_competencias(request, id):
@@ -222,11 +241,17 @@ def admin_gerencias(request):
 
     contexto = {
         'entity': gerencias,
-        'form': GerenciaForm(),
         'paginator': paginator,
         'titulo': 'Gerencia'
     }
+    return render(request, "admin/adminGerencias.html", contexto)
 
+@login_required
+def agregar_gerencias(request):
+    contexto = {
+        'form': GerenciaForm(),
+        'titulo': 'Gerencia'
+    }
     if request.method == 'POST':
         formulario = GerenciaForm(request.POST)
         if formulario.is_valid():
@@ -236,7 +261,7 @@ def admin_gerencias(request):
         else:
             messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminGerencias")
-    return render(request, "admin/adminGerencias.html", contexto)
+    return render(request, "admin/adminAgregarGerencias.html", contexto)
 
 @login_required
 def editar_gerencias(request, id):
@@ -276,8 +301,16 @@ def admin_subgerencias(request):
 
     contexto = {
         'entity': subgerencias,
-        'form': SubgerenciaForm(),
         'paginator': paginator,
+        'titulo': 'Subgerencia'
+    }
+    return render(request, "admin/adminSubgerencias.html", contexto)
+
+@login_required
+def agregar_subgerencias(request):
+
+    contexto = {
+        'form': SubgerenciaForm(),
         'titulo': 'Subgerencia'
     }
 
@@ -290,7 +323,8 @@ def admin_subgerencias(request):
         else:
             messages.warning(request, "No se pudo guardar la informacion")
             return HttpResponseRedirect("adminSubgerencias")
-    return render(request, "admin/adminSubgerencias.html", contexto)
+    return render(request, "admin/adminAgregarSubgerencias.html", contexto)
+
 
 @login_required
 def editar_subgerencia(request, id):
@@ -330,10 +364,18 @@ def admin_usuarios(request):
 
     contexto = {
         'entity': empleados,
+        'paginator': paginator,
+        'titulo': 'Empleado'
+    }
+    return render(request, "admin/adminUsuarios.html",contexto)
+
+@login_required
+def agregar_usuario(request):
+
+    contexto = {
         'form': EmpleadoForm(),
         'form1': PerfilRolForm(),
         'form3': UserForm(),
-        'paginator': paginator,
         'titulo': 'Empleado'
     }
 
@@ -419,7 +461,8 @@ def admin_usuarios(request):
         else:
             messages.warning(request, "Se verifico y no se pudo guardar la informacion")
             return HttpResponseRedirect("adminUsuarios")
-    return render(request, "admin/adminUsuarios.html",contexto)
+    return render(request, "admin/adminAgregarUsuarios.html",contexto)
+
 
 @login_required
 def editar_usuario(request, id):
