@@ -73,8 +73,7 @@ def agregar_acciones(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminAcciones")
         else:
-            messages.warning(request, "No se pudo guardar")
-            return HttpResponseRedirect("adminAcciones")
+            contexto["form"] = formulario
     return render(request, "admin/adminAgregarAcciones.html", contexto)
 
 @login_required
@@ -134,8 +133,7 @@ def agregar_cargos(request):
             messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminCargos")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
-            return HttpResponseRedirect("adminCargos")
+            contexto["form"] = formulario
     return render(request,"admin/adminAgregarCargos.html", contexto)
 
 @login_required
@@ -198,8 +196,7 @@ def agregar_competencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminCompetencias")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
-            return HttpResponseRedirect("adminCompetencias")
+            contexto1["form"] = formulario
     return render(request, "admin/adminAgregarCompetencias.html", contexto1)
 
 @login_required
@@ -259,8 +256,7 @@ def agregar_gerencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminGerencias")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
-            return HttpResponseRedirect("adminGerencias")
+            contexto["form"] = formulario
     return render(request, "admin/adminAgregarGerencias.html", contexto)
 
 @login_required
@@ -321,8 +317,7 @@ def agregar_subgerencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminSubgerencias")
         else:
-            messages.warning(request, "No se pudo guardar la informacion")
-            return HttpResponseRedirect("adminSubgerencias")
+            contexto["form"] = formulario
     return render(request, "admin/adminAgregarSubgerencias.html", contexto)
 
 
@@ -459,8 +454,9 @@ def agregar_usuario(request):
             messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
-            messages.warning(request, "Se verifico y no se pudo guardar la informacion")
-            return HttpResponseRedirect("adminUsuarios")
+            contexto["form"] = formEmpleado,
+            contexto["form1"] = formPerfilrol,
+            contexto["form3"] = form
     return render(request, "admin/adminAgregarUsuarios.html",contexto)
 
 
