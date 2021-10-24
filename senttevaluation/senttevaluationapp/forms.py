@@ -129,11 +129,11 @@ class CargoForm(forms.ModelForm):
 class CompetenciaForm(forms.ModelForm):
     class Meta:
         model = Competencia
-        fields = ['NombreCompetencia', 'Definicion']
+        fields = ['NombreCompetencia', 'Definicion', 'IdPerfil']
         labels = {
             'NombreCompetencia': 'Nombre competencia',
             'Definicion': 'Definicion',
-            
+            'IdPerfil': 'Perfil',
         }
         widgets = {
             'NombreCompetencia': forms.TextInput(
@@ -148,7 +148,7 @@ class CompetenciaForm(forms.ModelForm):
                     'placeholder': 'Ingrese definición',
                 }
             ),
-            
+            'IdPerfil': forms.Select(),
         }
 
 class AccionesForm(forms.ModelForm):
