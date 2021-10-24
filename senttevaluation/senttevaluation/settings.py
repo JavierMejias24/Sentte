@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'senttevaluation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'XE',
+        'NAME': 'sistema',
         'USER': 'SENTTE',
         'PASSWORD': '123',
         'HOST': 'localhost',
