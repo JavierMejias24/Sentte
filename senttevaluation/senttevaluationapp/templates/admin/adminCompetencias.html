@@ -83,18 +83,14 @@
                             </thead>
                             <tbody id="tabla">
                                 {% for competencia in entity %}
-                               
+                                {% for perfilcomp in perfilcomp %}
+                                {%if competencia.id == perfilcom.IdCompetencia%}
                                 
                                 
                                     <tr>
                                         <td data-label="Competencia">{{ competencia.NombreCompetencia }}</td>
                                         <td data-label="Definicion">{{ competencia.Definicion }}</td>
-                                        {% for perfilcomp in perfilcomp %}
-                                        {%if perfilcomp.IdCompetencia == competencia.id%}
                                         <td data-label="nombrecompetencia">{{perfilcomp.IdPerfil}}</td>
-                                        {%endif%}
-                                        {% endfor %}
-                                        
                                         <td>
                                             <a class="btn btn-primary" href="{% url 'adminCompetenciasModificar' competencia.id %}" style="opacity: 0.5;">
                                                 <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
@@ -105,8 +101,8 @@
                                         </td>
                                     </tr>
                                 
-                                
-                                
+                                {%endif%}
+                                {% endfor %}
                                 {% endfor %}
                             </tbody>
                         </table>
