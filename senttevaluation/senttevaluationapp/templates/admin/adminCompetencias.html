@@ -28,9 +28,10 @@
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
                                 <br>
-                                <button type="button" id="btn" class="btn btn-success" data-toggle='modal' data-target="#modalAgregar" style="opacity: 0.5; height: 50px; width: 100px;">
-                                    <a href="#" class="bx bxs-add-to-queue" style="opacity: 1; color: black;">Agregar</a>
-                                </button>
+                                <a class="btn btn-success" href="http://localhost:8000/adminAgregarCompetencias" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
+                                    Agregar
+                                    <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
+                                </a>
                                 <!-- Modal Agregar -->
                                 <div class="modal fade" id='modalAgregar'>
                                     <div class="modal-dialog">
@@ -82,10 +83,18 @@
                             </thead>
                             <tbody id="tabla">
                                 {% for competencia in entity %}
+                               
+                                
+                                
                                     <tr>
                                         <td data-label="Competencia">{{ competencia.NombreCompetencia }}</td>
                                         <td data-label="Definicion">{{ competencia.Definicion }}</td>
-                                        <td data-label="Perfil">{{ competencia.IdPerfil}}</td>
+                                        {% for perfilcomp in perfilcomp %}
+                                        {%if perfilcomp.IdCompetencia == competencia.id%}
+                                        <td data-label="nombrecompetencia">{{perfilcomp.IdPerfil}}</td>
+                                        {%endif%}
+                                        {% endfor %}
+                                        
                                         <td>
                                             <a class="btn btn-primary" href="{% url 'adminCompetenciasModificar' competencia.id %}" style="opacity: 0.5;">
                                                 <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
@@ -95,6 +104,9 @@
                                             </a>
                                         </td>
                                     </tr>
+                                
+                                
+                                
                                 {% endfor %}
                             </tbody>
                         </table>

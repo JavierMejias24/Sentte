@@ -9,13 +9,13 @@
   <!-- Se realizan las opciones del menu lateral -->
   <ul class="nav-links">
     <!-- Administrador -->
-    {% if perms.auth.add_permission %}
     <li>
         <a href="http://localhost:8000/adminInicio">
           <i class='bx bx-home'></i>
           <span class="link_name">Inicio</span>
         </a>
     </li>
+    {% if perms.auth.add_permission %}
     <li>
         <a href="http://localhost:8000/adminAcciones">
           <i class='bx bx-task'></i>
@@ -55,12 +55,6 @@
   {% endif %}
   <!-- Evaluador -->
   {% if perms.senttevaluationapp.view_planaccion %}
-    <li>
-    <a href="http://localhost:8000/adminInicio">
-      <i class='bx bx-home'></i>
-      <span class="link_name">Inicio</span>
-    </a>
-    </li>
     <li>
       <a href="http://localhost:8000/evaluadorEvaluacion">
         <i class='bx bx-file'></i>

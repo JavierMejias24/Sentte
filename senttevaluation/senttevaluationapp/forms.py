@@ -1,6 +1,7 @@
 from django import forms
 from django.db.models.base import ModelBase
 from django.db.models.fields import DateField
+from django.forms import widgets
 from django.forms.models import model_to_dict
 from django.forms.widgets import Select
 from .models import AccionClave, Area, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
@@ -128,11 +129,11 @@ class CargoForm(forms.ModelForm):
 class CompetenciaForm(forms.ModelForm):
     class Meta:
         model = Competencia
-        fields = ['NombreCompetencia', 'Definicion', 'IdPerfil']
+        fields = ['NombreCompetencia', 'Definicion']
         labels = {
             'NombreCompetencia': 'Nombre competencia',
             'Definicion': 'Definicion',
-            'IdPerfil': 'Perfil',
+            
         }
         widgets = {
             'NombreCompetencia': forms.TextInput(
@@ -147,7 +148,7 @@ class CompetenciaForm(forms.ModelForm):
                     'placeholder': 'Ingrese definición',
                 }
             ),
-            'IdPerfil': forms.Select()
+            
         }
 
 class AccionesForm(forms.ModelForm):
@@ -173,7 +174,7 @@ class GerenciaForm(forms.ModelForm):
         model = Gerencia
         fields = ['NombreGerencia']
         labels = {
-            'NombreGerencia': 'Nombre gerencia'
+            'NombreGerencia': 'Nombre gerencia'            
         }
         widgets = {
             'NombreGerencia': forms.TextInput(
@@ -181,12 +182,12 @@ class GerenciaForm(forms.ModelForm):
                     'class':'form-control',
                     'placeholder': 'Ingrese nombre de la gerencia',
                 }
-            )
+            ),
         }
 
 class AreaFrom(forms.ModelForm):
     class Meta:
-        model= Area
+        model=Area
         fields = ['NombreArea', 'IdGerencia']
         labels = {
             'NombreArea':'Nombre Area',
@@ -201,6 +202,7 @@ class AreaFrom(forms.ModelForm):
             ),
             'IdArea': forms.Select()
         }
+
 class SubgerenciaForm(forms.ModelForm):
     class Meta:
         model = SubGerencia
