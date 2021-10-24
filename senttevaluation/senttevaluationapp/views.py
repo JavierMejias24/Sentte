@@ -165,6 +165,7 @@ def eliminar_cargos(request, id):
 @login_required
 def admin_competencias(request):
     competencias = Competencia.objects.all().order_by('NombreCompetencia')
+    perfilcomp = PerfilComp.objects.all()
     perfil = Perfil.objects.all()
     page = request.GET.get('page', 1)
 
@@ -176,6 +177,7 @@ def admin_competencias(request):
 
     contexto1 = {
         'entity': competencias,
+        'perfilcomp':perfilcomp,
         'perfil':perfil,
         'paginator': paginator,
         'titulo': 'Competencia'
