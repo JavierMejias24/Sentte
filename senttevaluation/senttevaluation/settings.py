@@ -91,9 +91,11 @@ DATABASES = {
         'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '1521',
-    }
+    },
+    'OPTIONS': {
+        'use_returning_into': False,
+    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
