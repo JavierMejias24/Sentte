@@ -114,7 +114,5 @@ class AccionClave(models.Model):
 class EmpleadoEliminado(models.Model):
     Rut = models.CharField(max_length=12)
     Nombre = models.CharField(max_length=50)
-    Contraseña = models.CharField(max_length=50)
-    Rol = models.CharField(max_length=50)
     Correo = models.CharField(max_length=50)
     FechaEliminacion = models.DateField(auto_now=True)
