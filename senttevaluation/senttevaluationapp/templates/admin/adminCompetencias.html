@@ -28,7 +28,7 @@
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
                                 <br>
-                                <a class="btn btn-success" href="https://8359-45-166-145-73.ngrok.io/adminAgregarCompetencias" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
+                                <a class="btn btn-success" href="/adminAgregarCompetencias" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
                                     Agregar
                                     <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
                                 </a>
@@ -83,14 +83,10 @@
                             </thead>
                             <tbody id="tabla">
                                 {% for competencia in entity %}
-                                {% for perfilcomp in perfilcomp %}
-                                {%if competencia.id == perfilcom.IdCompetencia%}
-                                
-                                
                                     <tr>
                                         <td data-label="Competencia">{{ competencia.NombreCompetencia }}</td>
                                         <td data-label="Definicion">{{ competencia.Definicion }}</td>
-                                        <td data-label="nombrecompetencia">{{perfilcomp.IdPerfil}}</td>
+                                        <td data-label="nombrecompetencia">{{competencia.IdPerfil}}</td>
                                         <td>
                                             <a class="btn btn-primary" href="{% url 'adminCompetenciasModificar' competencia.id %}" style="opacity: 0.5;">
                                                 <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
@@ -100,9 +96,6 @@
                                             </a>
                                         </td>
                                     </tr>
-                                
-                                {%endif%}
-                                {% endfor %}
                                 {% endfor %}
                             </tbody>
                         </table>
