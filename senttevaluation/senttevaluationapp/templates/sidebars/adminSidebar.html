@@ -10,44 +10,44 @@
   <ul class="nav-links">
     <!-- Administrador -->
     <li>
-        <a href="https://8359-45-166-145-73.ngrok.io/adminInicio">
+        <a href="/adminInicio">
           <i class='bx bx-home'></i>
           <span class="link_name">Inicio</span>
         </a>
     </li>
     {% if perms.auth.add_permission %}
     <li>
-        <a href="https://8359-45-166-145-73.ngrok.io/adminAcciones">
+        <a href="/adminAcciones">
           <i class='bx bx-task'></i>
           <span class="link_name">Acciones</span>
         </a>
     </li>
     <li>
-        <a href="https://8359-45-166-145-73.ngrok.io/adminCargos">
+        <a href="/adminCargos">
           <i class='bx bx-briefcase-alt'></i>
           <span class="link_name">Cargos</span>
         </a>
     </li>
     <li>
-        <a href="https://8359-45-166-145-73.ngrok.io/adminCompetencias">
+        <a href="/adminCompetencias">
           <i class='bx bx-trophy'></i>
           <span class="link_name">Competencias</span>
         </a>
     </li>
     <li>
-      <a href="https://8359-45-166-145-73.ngrok.io/adminGerencias">
+      <a href="/adminGerencias">
         <i class='bx bx-street-view'></i>
         <span class="link_name">Gerencias</span>
       </a>
     </li>
     <li>
-      <a href="https://8359-45-166-145-73.ngrok.io/adminUsuarios">
+      <a href="/adminUsuarios">
         <i class='bx bx-id-card'></i>
         <span class="link_name">Usuarios</span>
       </a>
     </li>
     <li>
-      <a href="https://8359-45-166-145-73.ngrok.io/adminSubgerencias">
+      <a href="/adminSubgerencias">
         <i class='bx bx-group'></i>
         <span class="link_name">Subgerencias</span>
       </a>
@@ -56,20 +56,20 @@
   <!-- Evaluador -->
   {% if perms.senttevaluationapp.view_planaccion %}
     <li>
-      <a href="https://8359-45-166-145-73.ngrok.io/evaluadorEvaluacion">
+      <a href="/evaluadorEvaluacion">
         <i class='bx bx-file'></i>
         <span class="link_name">Evaluar</span>
       </a>
     </li>
     <li>
-      <a href="https://8359-45-166-145-73.ngrok.io/evaluadorAutovaluacion">
+      <a href="/evaluadorAutovaluacion">
         <i class='bx bx-calendar-check'></i>
         <span class="link_name">AutoEvaluacion</span>
       </a>
     </li>
   {% endif %}
     <li>
-      <a href="https://8359-45-166-145-73.ngrok.io/adminAyuda">
+      <a href="/adminAyuda">
         <i class='bx bx-donate-heart'></i>
         <span class="link_name">Ayuda</span>
       </a>
