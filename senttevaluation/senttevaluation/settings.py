@@ -91,10 +91,7 @@ DATABASES = {
         'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '1521',
-    },
-    'OPTIONS': {
-        'use_returning_into': False,
-    },
+    }
 }
 
 # Password validation
