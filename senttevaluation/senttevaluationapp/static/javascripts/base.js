@@ -1,5 +1,13 @@
 $(document).ready(function(){
-    var btnEliminar = document.querySelectorAll("#btnEliminar");
+  //Javascript buscar
+  $("#buscar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tabla tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  //Javascript eliminar
+  var btnEliminar = document.querySelectorAll("#btnEliminar");
     btnEliminar.forEach(btn => {
         btn.addEventListener('click', (e) => {
             var confirmacion = btn.dataset.isConfirmed

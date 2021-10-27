@@ -1,13 +1,7 @@
-from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.core.files.base import ContentFile
-from django.db.models.query import InstanceCheckMeta
 from django.db.models.query_utils import Q
-from django.http.request import HttpRequest
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UsernameField
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
-from django.views.generic import View
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
 from .forms import *
 from django.contrib import messages

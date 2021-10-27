@@ -7,19 +7,17 @@
         <meta charset="utf-8">
         <title>Sentte</title>
         <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
         <link rel="stylesheet" type="text/css" href="{%static 'stylesheets/login.css' %}">  
     </head>
     <body>
         <div class="login">
             <div class="login-triangle"></div>
-            <h2 class="login-header">Se ha cerrado la sesion
+            <h2 class="login-header">Se ha cerrado la sesión
                 <img src="{% static 'img/logo.png' %}" alt="profileImg" style="width: 30px; height: 30px;">
             </h2>
             <form class="login-container">
                <center>
-                <a href="http://localhost:8000/login/" role="button" class="btn btn-info">Volver Principio</a>
+                <a href="/login/" role="button" class="btn btn-info">Volver Principio</a>
                 </center>
             </form>
           </div>

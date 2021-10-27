@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Area, Gerencia, SubGerencia, Empleado, PerfilRol, Cargo, Perfil, Evaluacion, PlanAccion, DetalleEv, AccionClave, Competencia, AccionClave
+from .models import *
 
 # Register your models here.
-
 
 # ----------------------------------  Area ---------------------------------.
 admin.site.register(Area)
