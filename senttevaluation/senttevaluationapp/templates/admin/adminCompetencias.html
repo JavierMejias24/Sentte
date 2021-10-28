@@ -46,15 +46,10 @@
                                                 <form action='' method="POST">
                                                     {% csrf_token %}
                                                     <div class="media-body text-left">
-                                                        
                                                         {{ form | crispy}}
-                                                        
                                                         {% for perfil in perfil %}
-                                                        
-                                                        <p>{{ perfil.IdCargo }}</p>
-                                                        
+                                                            <p>{{ perfil.IdCargo }}</p>
                                                         {% endfor %}
-
                                                     </div>
                                                     <br><br>
                                                     <div class="d-flex justify-content-end">

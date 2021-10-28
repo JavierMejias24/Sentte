@@ -18,6 +18,7 @@ from django.contrib.auth.decorators import login_required
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-m0(e-3=inlk6k84ec+2^kn)98a@4iam6ic4g3!&0tnq@8t+3au
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.ngrok.io', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -86,13 +87,14 @@ WSGI_APPLICATION = 'senttevaluation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'XE',
+        'NAME': 'xe',
         'USER': 'SENTTE',
         'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '1521',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

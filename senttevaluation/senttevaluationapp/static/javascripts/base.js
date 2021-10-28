@@ -1,12 +1,12 @@
 $(document).ready(function(){
-  //Javascript para buscar
+  //Javascript buscar
   $("#buscar").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#tabla tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-  //Javascript para eliminar
+  //Javascript eliminar
   var btnEliminar = document.querySelectorAll("#btnEliminar");
     btnEliminar.forEach(btn => {
         btn.addEventListener('click', (e) => {
