@@ -479,6 +479,8 @@ def editar_usuario(request, id):
 @login_required
 def eliminar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
+    usuario = get_object_or_404(User, username=empleados.user)
+    usuario.delete()
     empleados.delete()
     messages.success(request, "Eliminado con éxito" )
     return redirect(to="adminUsuarios")
