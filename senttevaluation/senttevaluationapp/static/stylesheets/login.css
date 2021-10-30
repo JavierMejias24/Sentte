@@ -87,3 +87,11 @@ body {
 .login input[type="submit"]:focus {
   border-color: rgb(94, 108, 119);
 }
+
+@media (max-width: 768px){
+  body {
+    background: rgb(253, 254, 255);
+
+  }
+
+}

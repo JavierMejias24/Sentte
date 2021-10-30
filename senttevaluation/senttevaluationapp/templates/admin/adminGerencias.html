@@ -66,7 +66,6 @@
                             <thead class="thead-dark">
                                 <tr> 
                                     <th>Nombre</th>
-                                    <th>Area</th>
                                     <br>
                                     <th>Opciones</th>
                                 </tr>
@@ -75,7 +74,6 @@
                                 {% for gerencia in entity %}
                                     <tr>
                                         <td data-label="Gerencia">{{ gerencia.NombreGerencia }}</td>
-                                        <td data-label="Area">{{ gerencia.IdArea}}</td>
                                         <td>
                                             <a class="btn btn-primary" href="{% url 'adminGerenciasModificar' gerencia.id %}" style="opacity: 0.5;">
                                                 <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
