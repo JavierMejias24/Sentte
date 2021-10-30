@@ -117,7 +117,6 @@
   background: none;
   width: 78px;
 }
-
 .sidebar .profile-details .profile-content{
   display: flex;
   align-items: center;
@@ -163,6 +162,8 @@
   width: calc(100% - 78px);
 }
 .home-section .home-content{
+  margin-left: auto;
+  margin-right: auto;
   height: 60px;
   display: flex;
   align-items: center;
@@ -182,7 +183,6 @@
 }
 
 @media (max-width: 768px){
-  
   .sidebar.close{
     width: 70px;
   }
@@ -204,5 +204,4 @@
   .sidebar .profile-details{
     width: 100%;
   }
-
 }

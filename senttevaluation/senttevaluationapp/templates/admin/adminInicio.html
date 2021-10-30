@@ -3,18 +3,27 @@
 {% include 'sidebars/adminSidebar.html' %}
 <body>
     <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Inicio</span>
-        </div>
+            <div class="card shadow">
+                <div class="card body">
+                    <div class="home-content">
+                        <span class="text">Inicio</span>
+                    </div>
+                </div>
+            </div>
         <br>
-        <div class="container">
+        <br>
+        <br>
+        <div class="container fluid">
         <center>
-            <h1>Bienvenido {{user.username}}</h1>
-            <p>
-                Este es la fase temprana del sistema de evaluacion de desempeño laboral Sentte.
-                Para acceder a sus funciones, existe un menu lateral en la parte izquierda.
-            </p>  
+            <div class="card shadow">
+                <div class="card body">
+                    <h1>Bienvenido {{ user.username }}</h1>
+                    <p>
+                        Este es la fase temprana del sistema de evaluacion de desempeño laboral Sentte.
+                        Para acceder a sus funciones, existe un menu lateral en la parte izquierda.
+                    </p>
+                </div>
+            </div>
         </center>
         </div>
     </section>
