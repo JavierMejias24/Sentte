@@ -12,64 +12,62 @@
             </div>
         </div>
         <br>
-        </div>
         <div class="container-fluid">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <div class="content-header row">
-                            <div class="content-header-left col-md-6 col-12 mb-2">
-                                <h3 class="content-header-title"> Mantenedor de Cargos </h3>
-                                <br>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="tablaUsuarios_filter" class="dataTables_filter"> 
-                                        <label>
-                                            Buscar:
-                                            <input class="form-control" id="buscar" type="text" placeholder="Search..">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content-header-right col-md-6 col-12">
-                                <div class="media-body media-right text-right">
-                                <br>
-                                <a class="btn btn-success" href="/adminAgregarCargos" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
-                                    Agregar
-                                    <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
-                                </a>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="content-header row">
+                        <div class="content-header-left col-md-6 col-12 mb-2">
+                            <h3 class="content-header-title"> Mantenedor de {{ page }} </h3>
+                            <br>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="tablaUsuarios_filter" class="dataTables_filter"> 
+                                    <label>
+                                        Buscar:
+                                        <input class="form-control" id="buscar" type="text" placeholder="Search..">
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="container-fluid" style="overflow: hidden; position: realtive; border: 0px; width: 100%;">
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <tr> 
-                                        <th>Nombre del cargo</th>
-                                        <br>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabla">
-                                    {% for cargo in entity %}
-                                        <tr>
-                                            <td data-label="N.Cargo">{{ cargo.NombreCargo }}</td>
-                                            <td>
-                                                <a class="btn btn-primary" href="{% url 'adminCargosModificar' cargo.id %}" style="opacity: 0.5;">
-                                                    <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
-                                                </a>
-                                                <a class="btn btn-danger" data-name="{{ cargo.NombreCargo }}" href="{% url 'adminCargosEliminar' cargo.id %}" id="btnEliminar"  style="opacity: 0.5;">
-                                                    <p class="bx bx-box" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>                
-                        </div>
-                        <div>
-                            {% include 'paginator.html' %}
+                        <div class="content-header-right col-md-6 col-12">
+                            <div class="media-body media-right text-right">
+                            <br>
+                            <a class="btn btn-success" href="/adminAgregarCargos" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
+                                Agregar
+                                <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
+                            </a>
+                            </div>
                         </div>
                     </div>
-                </div> 
+                    <div class="container-fluid" style="overflow: hidden; position: realtive; border: 0px; width: 100%;">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr> 
+                                    <th>Nombre del cargo</th>
+                                    <br>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla">
+                                {% for cargo in entity %}
+                                    <tr>
+                                        <td data-label="N.Cargo">{{ cargo.NombreCargo }}</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="{% url 'adminCargosModificar' cargo.id %}" style="opacity: 0.5;">
+                                                <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                            </a>
+                                            <a class="btn btn-danger" data-name="{{ cargo.NombreCargo }}" href="{% url 'adminCargosEliminar' cargo.id %}" id="btnEliminar"  style="opacity: 0.5;">
+                                                <p class="bx bx-box" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>                
+                    </div>
+                    <div>
+                        {% include 'paginator.html' %}
+                    </div>
+                </div>
             </div>
         </div>
         <br><br><br>
