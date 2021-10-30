@@ -6,9 +6,9 @@ body {
 }
 
 .login {
-  width: 400px;
-  margin: 16px auto;
-  font-size: 16px;
+    width: 400px;
+    margin: 16px auto;
+    font-size: 16px;
 }
 
 /* Reset top and bottom margins from certain elements */
@@ -24,7 +24,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   border: 12px solid transparent;
-  border-bottom-color: rgb(94, 108, 119);
+  border-bottom-color: rgb(94, 108, 119);;
 }
 
 .login-header {
@@ -89,7 +89,10 @@ body {
 }
 
 @media (max-width: 760px){
-  .login {
-      margin: 10px;
-  }
+    .login {
+        width: 300px;
+        margin: 16px auto;
+        font-size: 16px;
+    }
 }
+
