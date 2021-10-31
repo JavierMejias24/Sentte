@@ -13,11 +13,8 @@ from django.http import Http404
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
 def login(request):
-
     usuario = request.POST.get('name')
     contraseña = request.POST.get('contraseña')
-    empleado = Empleado.objects.filter(Q (Rut = usuario))
-    verificar = User.objects.filter(Q (username=usuario))
     if usuario == "root" and contraseña == "proyectosentte":
         return HttpResponseRedirect("adminInicio")
     else:
@@ -93,11 +90,13 @@ def editar_acciones(request, id):
     return render(request, "admin/adminAccionesModificar.html", data)
 
 @login_required
-def eliminar_acciones(request, id):
-    acciones = get_object_or_404(AccionClave, id=id)
-    acciones.delete()
-    messages.success(request, "Eliminada con éxito" )
-    return redirect(to='adminAcciones')
+def eliminar_usuario(request, id):
+    empleados = get_object_or_404(Empleado, id=id)
+    usuario = get_object_or_404(User, username=empleados.user)
+    usuario.delete()
+    empleados.delete()
+    messages.success(request, "Eliminado con éxito" )
+    return redirect(to="adminUsuarios")
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Cargos ----------------.
