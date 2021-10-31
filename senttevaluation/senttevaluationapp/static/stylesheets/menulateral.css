@@ -5,6 +5,10 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+.titulo{
+  margin-left: auto;
+  margin-right: auto;
+}
 .sidebar{
   position: fixed;
   top: 0;
@@ -26,7 +30,7 @@
 }
 .sidebar .logo-details i{
   font-size: 30px;
-  color: #fff;
+  color: rgb(255, 0, 0);
   height: 50px;
   min-width: 78px;
   text-align: center;

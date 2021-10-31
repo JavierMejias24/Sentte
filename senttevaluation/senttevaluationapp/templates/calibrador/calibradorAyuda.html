@@ -1,11 +1,14 @@
 {% load static %}
 {% include 'base.html' %}
-{% include 'sidebars/calibradorSidebar.html' %}
 <body>
+{% include 'sidebars/calibradorSidebar.html' %}
     <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Ayuda</span>
+        <div class="card shadow">
+            <div class="card body">
+                <div class="home-content">
+                    <span class="text">{{ page }}</span>
+                </div>
+            </div>
         </div>
         <br>
         <div class="container-fluid">

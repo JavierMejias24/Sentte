@@ -34,7 +34,10 @@ def login(request):
 # ----------------------------------  Administrador ---------------------------------.
 @login_required
 def admin_inicio(request):
-    return render(request, "admin/adminInicio.html")
+    contexto = {
+        'page': 'Inicio'
+    }
+    return render(request, "admin/adminInicio.html", contexto)
 
 # -- ------------Acciones Claves----------------.
 @login_required
@@ -50,7 +53,8 @@ def admin_acciones(request):
     contexto = {
         'entity':accioneclaves,
         'paginator': paginator,
-        'titulo': 'Cargo'
+        'titulo': 'Cargo',
+        'page': 'Acciones'
     }
     return render(request, "admin/adminAcciones.html", contexto)
 
@@ -58,7 +62,8 @@ def admin_acciones(request):
 def agregar_acciones(request):
     contexto = {
         'form': AccionesForm(),
-        'titulo': 'Acción'
+        'titulo': 'Acción',
+        'page': 'Acciones'
     }
     if request.method == 'POST':
         formulario = AccionesForm(request.POST)
@@ -74,7 +79,8 @@ def agregar_acciones(request):
 def editar_acciones(request, id):
     acciones = get_object_or_404(AccionClave, id=id)
     data = {
-        'form':  AccionesForm(instance=acciones)
+        'form':  AccionesForm(instance=acciones),
+        'page': 'Acciones'
     }
     if request.method == 'POST':
         formulario = AccionesForm(data=request.POST, instance=acciones)
@@ -109,7 +115,8 @@ def admin_cargos(request):
     contexto = {
         'entity':cargos,
         'paginator': paginator,
-        'titulo': 'Cargo'
+        'titulo': 'Cargo',
+        'page': 'Cargos'
     }
     return render(request,"admin/adminCargos.html", contexto)
 
@@ -117,7 +124,8 @@ def admin_cargos(request):
 def agregar_cargos(request):
     contexto = {
         'form': CargoForm(),
-        'titulo': 'Cargo'
+        'titulo': 'Cargo',
+        'page': 'Cargos'
     }
 
     if request.method == 'POST':
@@ -134,7 +142,8 @@ def agregar_cargos(request):
 def editar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
     data = {
-        'form':  CargoForm(instance=cargos)
+        'form':  CargoForm(instance=cargos),
+        'page': 'Cargos'
     }
     if request.method == 'POST':
         formulario = CargoForm(data=request.POST, instance=cargos)
@@ -172,7 +181,8 @@ def admin_competencias(request):
         'entity': competencias,
         'perfil':perfil,
         'paginator': paginator,
-        'titulo': 'Competencia'
+        'titulo': 'Competencia',
+        'page': 'Competencias'
     }
     return render(request, "admin/adminCompetencias.html", contexto1)
 
@@ -181,7 +191,8 @@ def agregar_competencias(request):
     contexto1 = {
         
         'form': CompetenciaForm(),
-        'titulo': 'Competencia'
+        'titulo': 'Competencia',
+        'page': 'Competencias'
     }
     if request.method == 'POST':
         formulario = CompetenciaForm(request.POST)
@@ -197,7 +208,8 @@ def agregar_competencias(request):
 def editar_competencias(request, id):
     competencias = get_object_or_404(Competencia, id=id)
     data = {
-        'form':  CompetenciaForm(instance=competencias)
+        'form':  CompetenciaForm(instance=competencias),
+        'page': 'Competencias'
     }
     if request.method == 'POST':
         formulario = CompetenciaForm(data=request.POST, instance=competencias)
@@ -233,7 +245,8 @@ def admin_gerencias(request):
     contexto = {
         'entity': gerencias,
         'paginator': paginator,
-        'titulo': 'Gerencia'
+        'titulo': 'Gerencia',
+        'page': 'Gerencias'
     }
     return render(request, "admin/adminGerencias.html", contexto)
 
@@ -241,7 +254,8 @@ def admin_gerencias(request):
 def agregar_gerencias(request):
     contexto = {
         'form': GerenciaForm(),
-        'titulo': 'Gerencia'
+        'titulo': 'Gerencia',
+        'page': 'Gerencias'
     }
     if request.method == 'POST':
         formulario = GerenciaForm(request.POST)
@@ -257,7 +271,8 @@ def agregar_gerencias(request):
 def editar_gerencias(request, id):
     gerencias = get_object_or_404(Gerencia, id=id)
     data = {
-        'form':  GerenciaForm(instance=gerencias)
+        'form':  GerenciaForm(instance=gerencias),
+        'page': 'Gerencias'
     }
     if request.method == 'POST':
         formulario = GerenciaForm(data=request.POST, instance=gerencias)
@@ -292,7 +307,8 @@ def admin_subgerencias(request):
     contexto = {
         'entity': subgerencias,
         'paginator': paginator,
-        'titulo': 'Subgerencia'
+        'titulo': 'Subgerencia',
+        'page': 'Subgerencias'
     }
     return render(request, "admin/adminSubgerencias.html", contexto)
 
@@ -301,7 +317,8 @@ def agregar_subgerencias(request):
 
     contexto = {
         'form': SubgerenciaForm(),
-        'titulo': 'Subgerencia'
+        'titulo': 'Subgerencia',
+        'page': 'Subgerencias'
     }
 
     if request.method == 'POST':
@@ -319,7 +336,8 @@ def agregar_subgerencias(request):
 def editar_subgerencia(request, id):
     subgerencias = get_object_or_404(SubGerencia, id=id)
     data = {
-        'form':  SubgerenciaForm(instance=subgerencias)
+        'form':  SubgerenciaForm(instance=subgerencias),
+        'page': 'Subgerencias'
     }
     if request.method == 'POST':
         formulario = SubgerenciaForm(data=request.POST, instance=subgerencias)
@@ -354,7 +372,8 @@ def admin_usuarios(request):
     contexto = {
         'entity': empleados,
         'paginator': paginator,
-        'titulo': 'Empleado'
+        'titulo': 'Empleado',
+        'page': 'Usuarios'
     }
     return render(request, "admin/adminUsuarios.html",contexto)
 
@@ -365,7 +384,8 @@ def agregar_usuario(request):
         'form': EmpleadoForm(),
         'form1': PerfilRolForm(),
         'form3': UserForm(),
-        'titulo': 'Empleado'
+        'titulo': 'Empleado',
+        'page': 'Usuarios'
     }
 
     if request.method == 'POST':
@@ -458,7 +478,8 @@ def agregar_usuario(request):
 def editar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     data = {
-        'form':  EmpleadoForm(instance=empleados)
+        'form':  EmpleadoForm(instance=empleados),
+        'page': 'Usuarios'
     }
     if request.method == 'POST':
         formulario = EmpleadoForm(data=request.POST, instance=empleados)
@@ -481,27 +502,36 @@ def eliminar_usuario(request, id):
 
 @login_required
 def admin_ayuda(request):
-    return render(request, "admin/adminAyuda.html")
+    contexto = {
+        'page': 'Ayuda'
+    }
+    return render(request, "admin/adminAyuda.html", contexto)
 
 # -----------------------------------------------------------------------------------------------.
 
 # ----------------------------------  Evaluador ---------------------------------.
 @login_required
 def evaluador_inicio(request):
-    return render(request, "evaluador/evaluadorInicio.html")
+    contexto = {
+        'page': 'Inicio'
+    }
+    return render(request, "evaluador/evaluadorInicio.html", contexto)
 
 @login_required
 def evaluador_evaluacion(request):
     empleados = Empleado.objects.all()
-    
     contexto = {
         'empleados':empleados,
+        'page': 'Evaluación',
     }
     return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
 
 @login_required
 def evaluador_autovaluacion(request):
-    return render(request, "evaluador/evaluadorAutovaluacion.html")
+    contexto = {
+        'page': 'Autoevaluación',
+    }
+    return render(request, "evaluador/evaluadorAutovaluacion.html", contexto)
 
 @login_required
 def evaluador_ayuda(request):
@@ -516,6 +546,7 @@ def evaluador_formulario(request, id):
         'empleados': Empleado.objects.get(Nombre = empleados),
         'competencias':competencias,
         'accionclaves':accionclaves,
+        'page': 'Formulario',
     }
     
     return render(request, "evaluador/evaluadorFormulario.html", data)
@@ -523,25 +554,43 @@ def evaluador_formulario(request, id):
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required
 def colaborador_inicio(request):
-    return render(request, "colaborador/colaboradorInicio.html")
+    contexto = {
+        'page': 'Inicio',
+    }
+    return render(request, "colaborador/colaboradorInicio.html", contexto)
 
 @login_required
 def colaborador_ayuda(request):
-    return render(request, "colaborador/colaboradorAyuda.html")
+    contexto = {
+        'page': 'Ayuda',
+    }
+    return render(request, "colaborador/colaboradorAyuda.html", contexto)
 
 @login_required
 def colaborador_autovaluacion(request):
-    return render(request, "colaborador/colaboradorAutovaluacion.html")
+    contexto = {
+        'page': 'Autoevaluación',
+    }
+    return render(request, "colaborador/colaboradorAutovaluacion.html", contexto)
 
 # ----------------------------------  Calibrador ---------------------------------.
 @login_required
 def calibrador_inicio(request):
-    return render(request, "calibrador/calibradorInicio.html")
+    contexto = {
+        'page': 'Inicio',
+    }
+    return render(request, "calibrador/calibradorInicio.html", contexto)
 
 @login_required
 def calibrador_ayuda(request):
-    return render(request, "calibrador/calibradorAyuda.html")
+    contexto = {
+        'page': 'Ayuda',
+    }
+    return render(request, "calibrador/calibradorAyuda.html", contexto)
 
 @login_required
 def calibrador_evaluaciones(request):
-    return render(request, "calibrador/calibradorEvaluaciones.html")
+    contexto = {
+        'page': 'Evaluaciones',
+    }
+    return render(request, "calibrador/calibradorEvaluaciones.html", contexto)

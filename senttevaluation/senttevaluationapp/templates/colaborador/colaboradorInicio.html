@@ -1,10 +1,13 @@
 {% include 'base.html' %}
-{% include 'sidebars/colaboradorSidebar.html' %}
 <body>
+{% include 'sidebars/colaboradorSidebar.html' %}
     <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Inicio</span>
+        <div class="card shadow">
+            <div class="card body">
+                <div class="home-content">
+                    <span class="text">{{ page }}</span>
+                </div>
+            </div>
         </div>
         <br>
         <div class="container-fluid">
