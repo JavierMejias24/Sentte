@@ -176,12 +176,26 @@ def admin_perfil(request):
         Http404
 
     contexto = {
+        'perfils':listarperfil(),
         'entity':perfils,
         'paginator': paginator,
         'titulo': 'Perfil',
         'page': 'Perfil'
     }
     return render(request,"admin/adminPerfil.html", contexto)
+
+def listarperfil():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("sp_listar_perfil", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
 
 @login_required
 def agregar_perfil(request):
