@@ -32,6 +32,10 @@ urlpatterns = [
     path('adminAgregarUsuarios', views.agregar_usuario, name="adminAgregarUsuarios"),
     path('adminUsuariosModificar/<id>/', views.editar_usuario, name="adminUsuariosModificar"),
     path('adminUsuariosEliminar/<id>/', views.eliminar_usuario, name="adminUsuariosEliminar"),
+    path('adminPerfil', views.admin_perfil, name="adminPerfil"),
+    path('adminAgregarPerfil', views.agregar_perfil, name="adminAgregarPerfil"),
+    path('adminModificarPerfil/<id>/', views.editar_perfil, name="adminModificarPerfil"),
+    path('adminEliminarPerfil/<id>/', views.eliminar_perfil, name="adminEliminarPerfil"),
     path('adminAyuda', views.admin_ayuda, name="adminAyuda"),
 # ----------------------------------  Evaluador ------------------------------------------------------.
     path('evaluadorInicio', views.evaluador_inicio, name="evaluadorInicio"),

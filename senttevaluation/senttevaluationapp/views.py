@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db import connection
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -9,7 +10,6 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from django.http import Http404
-from django.db import connection
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -163,6 +163,71 @@ def eliminar_cargos(request, id):
 
 # -----------------------------------------------------------------------------------------------.
 
+# -- ------------ Perfiles ----------------.
+@login_required
+def admin_perfil(request):
+    perfils = Perfil.objects.all()
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(perfils, 10)
+        perfils = paginator.page(page)
+    except:
+        Http404
+
+    contexto = {
+        'entity':perfils,
+        'paginator': paginator,
+        'titulo': 'Perfil',
+        'page': 'Perfil'
+    }
+    return render(request,"admin/adminPerfil.html", contexto)
+
+@login_required
+def agregar_perfil(request):
+    contexto = {
+        'form': PerfilForm(),
+        'titulo': 'Perfil',
+        'page': 'Perfil'
+    }
+
+    if request.method == 'POST':
+        formulario = PerfilForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Guardado con éxito" )
+            return HttpResponseRedirect("adminPerfil")
+        else:
+            contexto["form"] = formulario
+    return render(request,"admin/adminAgregarPerfil.html", contexto)
+
+
+@login_required
+def editar_perfil(request, id):
+    perfils = get_object_or_404(Perfil, id=id)
+    data = {
+        'form':  PerfilForm(instance=perfils),
+        'page': 'Perfil'
+    }
+    if request.method == 'POST':
+        formulario = PerfilForm(data=request.POST, instance=perfils)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Editado con éxito" )
+            return redirect(to="adminPerfil")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminModificarPerfil.html", data)
+
+@login_required
+def eliminar_perfil(request, id):
+    perfils = get_object_or_404(Perfil, id=id)
+    perfils.delete()
+    messages.success(request, "Eliminado con éxito" )
+    return redirect(to="adminPerfil")
+
+# -----------------------------------------------------------------------------------------------.
+
 # -- ------------ Competencias ----------------.
 @login_required
 def admin_competencias(request):
@@ -261,6 +326,7 @@ def listargerencia():
     for fila in out_cur:
         lista.append(fila)
     return lista
+
 
 @login_required
 def agregar_gerencias(request):

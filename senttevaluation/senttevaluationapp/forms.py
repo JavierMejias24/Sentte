@@ -174,6 +174,22 @@ class GerenciaForm(forms.ModelForm):
             ),
         }
 
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model=Perfil
+        fields = ['NombrePerfil']
+        labels = {
+            'NombrePerfil': 'Nombre Perfil'
+        }
+        widgets = {
+            'NombrePerfil': forms.TextInput(
+                attrs= {
+                    'class': 'form-control',
+                    'placeholder':'Ingrese nombre del prefil'
+                }
+            )
+        }
+
 class AreaFrom(forms.ModelForm):
     class Meta:
         model=Area

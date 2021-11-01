@@ -31,7 +31,7 @@
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
                                 <br>
-                                <a class="btn btn-success" href="/adminAgregarGerencias" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
+                                <a class="btn btn-success" href="/adminAgregarPerfil" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
                                     Agregar
                                     <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
                                 </a>
@@ -40,7 +40,7 @@
                                         <div class="modal-content">
                                             <!-- Modal Header -->
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Crear gerencias</h4>
+                                                <h4 class="modal-title">Crear perfil</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                               </div>
                                             <!-- Modal body -->
@@ -68,20 +68,20 @@
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr> 
-                                    <th>Nombre</th>
+                                    <th>Nombre del perfil</th>
                                     <br>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                {% for gerencia in entity %}
+                                {% for perfil in entity %}
                                     <tr>
-                                        <td data-label="Gerencia">{{ gerencia.NombreGerencia }}</td>
+                                        <td data-label="Perfil">{{ perfil.NombrePerfil }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{% url 'adminGerenciasModificar' gerencia.id %}" style="opacity: 0.5;">
+                                            <a class="btn btn-primary" href="{% url 'adminModificarPerfil' perfil.id %}" style="opacity: 0.5;">
                                                 <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
                                             </a>
-                                            <a class="btn btn-danger" data-name="{{ gerencia.NombreGerencia }}" href="{% url 'adminGerenciasEliminar' gerencia.id %}" id="btnEliminar"  style="opacity: 0.5;">
+                                            <a class="btn btn-danger" data-name="{{ perfil.NombrePerfil }}" href="{% url 'adminEliminarPerfil' perfil.id %}" id="btnEliminar"  style="opacity: 0.5;">
                                                 <p class="bx bx-box" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
                                             </a>
                                         </td>
