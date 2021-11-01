@@ -15,6 +15,7 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.db import connection
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -237,11 +238,24 @@ def admin_gerencias(request):
         Http404
 
     contexto = {
+        'gerencias':listargerencia(),
         'entity': gerencias,
         'paginator': paginator,
         'titulo': 'Gerencia'
     }
     return render(request, "admin/adminGerencias.html", contexto)
+
+def listargerencia():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("sp_listar_gerencia", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
 
 @login_required
 def agregar_gerencias(request):
