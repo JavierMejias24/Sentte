@@ -3,11 +3,13 @@
 <body>
 {% include 'sidebars/adminSidebar.html' %}
 {% include 'mensajes.html' %}
-    <!-- Icono del menu -->
     <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Usuarios</span>
+        <div class="card shadow">
+            <div class="card body">
+                <div class="home-content">
+                    <span class="text">{{ page }}</span>
+                </div>
+            </div>
         </div>
         <br>
         <div class="container-fluid">
@@ -15,33 +17,30 @@
                 <div class="card-body">
                     <div class="content-header row">
                         <div class="content-header-left col-md-6 col-12 mb-2">
-                            <h3 class="content-header-title"> Mantenedor Usuarios </h3>
+                            <h3 class="content-header-title"> Mantenedor de {{ page }} </h3>
                             <br>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="tablaUsuarios_filter" class="dataTables_filter"> 
-                                        <label>
-                                            Buscar:
-                                            <input class="form-control" id="buscar" type="text" placeholder="Search..">
-                                        </label>
-                                    </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="tablaUsuarios_filter" class="dataTables_filter"> 
+                                    <label>
+                                        Buscar:
+                                        <input class="form-control" id="buscar" type="text" placeholder="Search..">
+                                    </label>
                                 </div>
+                            </div>
                         </div>
-                        <!-- Esquina  superior derecha, agregar -->
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
-                                <!-- Llama a la funcion modalAgregar -->
                                 <br>
-                                <a class="btn btn-success" href="http://localhost:8000/adminAgregarUsuarios" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
+                                <a class="btn btn-success" href="/adminAgregarUsuarios" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
                                     Agregar
                                     <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <!-- Cuerpo de la tarjeta -->
+                    <br>
                     <div class="col-sm-12">  
                         <div id="tablaUsuarios_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                           <!-- Segunda parte: grilla -->
                             <div class="row">
                                 <table class="table">
                                     <thead class="thead-dark">
@@ -51,7 +50,6 @@
                                             <th>Correo</th>
                                             <th>Perfil Evaluacion</th>
                                             <th>opciones</th>
-                                          
                                         </tr>
                                     </thead>
                                     <tbody id="tabla">
@@ -61,7 +59,6 @@
                                                 <td data-label="Nombre">{{ empleado.Nombre }}</td>
                                                 <td data-label="Correo">{{ empleado.Correo }}</td>
                                                 <td data-label="P.Evaluacion">{{ empleado.IdPerfil }}</td>
-                                               
                                                 <td>
                                                     <a class="btn btn-primary" href="{% url 'adminUsuariosModificar' empleado.id %}" style="opacity: 0.5;">
                                                         <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>

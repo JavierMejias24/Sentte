@@ -2,11 +2,13 @@
 {% include 'sidebars/adminSidebar.html' %}
 {% load crispy_forms_tags %}
 <body>
-     <!-- Icono del menu -->
-     <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Mantenedor Subgerencias</span>
+    <section class="home-section">
+        <div class="card shadow">
+            <div class="card body">
+                <div class="home-content">
+                    <span class="text">{{ page }}</span>
+                </div>
+            </div>
         </div>
         <br>
         <div class="container-fluid">
@@ -14,7 +16,7 @@
                 <div class="card-body">
                     <div class="content-header row">
                         <div class="content-header-left col-md-6 col-12 mb-2">
-                            <h3 class="content-header-title"> Modificar Subgerencias </h3>
+                            <h3 class="content-header-title"> Modificar {{ page }} </h3>
                         </div>
                     </div>
                     <div class="col-sm-12">  
@@ -24,7 +26,7 @@
                             <div class="d-flex justify-content-end">
                                 <input type="submit" value="Guardar" class="btn btn-primary">
                                 &nbsp;
-                                <a href="http://localhost:8000/adminSubgerencias" value="Cancelar" class="btn btn-danger" role="button">Cancelar</a>
+                                <a href="/adminSubgerencias" value="Cancelar" class="btn btn-danger" role="button">Cancelar</a>
                             </div>
                         </form>
                     </div>

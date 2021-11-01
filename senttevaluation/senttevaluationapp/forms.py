@@ -1,10 +1,5 @@
 from django import forms
-from django.db.models.base import ModelBase
-from django.db.models.fields import DateField
-from django.forms import widgets
-from django.forms.models import model_to_dict
-from django.forms.widgets import Select
-from .models import AccionClave, Area, Competencia, DetalleEv, Empleado, Cargo, Gerencia, Perfil, PerfilRol, SubGerencia
+from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -44,12 +39,6 @@ class EmpleadoForm(forms.ModelForm):
             'FechaIngreso': forms.TextInput(
                 attrs = {
                     'type': 'date',
-                }
-            ),
-            'Password': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Ingrese contraseña',
                 }
             ),
             'Correo': forms.TextInput(
@@ -222,7 +211,6 @@ class SubgerenciaForm(forms.ModelForm):
         }
 
 class EvaluacionForm(forms.ModelForm):
-
     class Meta:
         model = DetalleEv
         fields = '__all__'

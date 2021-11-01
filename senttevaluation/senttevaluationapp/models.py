@@ -1,17 +1,9 @@
-from re import I
 from django.db import models
-from django.db.models import query
-from django.db.models.deletion import CASCADE, PROTECT
+from django.db.models.deletion import CASCADE
 from django.core.validators import RegexValidator, EmailValidator
 from django.contrib.auth.models import User
-from django.db.models.expressions import Case
-from django.db.models.fields import BLANK_CHOICE_DASH
-from django.db.models.fields.related import ForeignKey, OneToOneField
-from django.forms.widgets import NullBooleanSelect
-
 
 # Create your models here.
-
 
 class Gerencia(models.Model):
     NombreGerencia = models.CharField(max_length=50, unique=True ,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
@@ -25,7 +17,6 @@ class Area(models.Model):
     
     def __str__(self):
         return self.NombreArea
-
 
 class SubGerencia(models.Model):
     NombreSubgerencia = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
@@ -45,13 +36,14 @@ class Cargo(models.Model):
 
     def __str__(self):
         return self.NombreCargo
+
 class Empleado(models.Model):
-    Rut = models.CharField(max_length=12, unique=True, validators=[RegexValidator(regex=r'^(\d{1,3}(?:.\d{1,3}){2}-[\dkK])$' )])
-    Nombre = models.CharField(max_length=100, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    FechaIngreso = models.DateField()
-    Correo = models.CharField(max_length=100, unique=True, validators=[EmailValidator])
+    Rut = models.CharField(max_length=12, null=False, unique=True, validators=[RegexValidator(regex=r'^(\d{1,3}(?:.\d{1,3}){2}-[\dkK])$' )])
+    Nombre = models.CharField(max_length=100, null=False, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    FechaIngreso = models.DateField(null=False)
+    Correo = models.CharField(max_length=100, null=False, unique=True, validators=[EmailValidator])
     IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE, default=1)
-    user = models.OneToOneField(User, on_delete=CASCADE)
+    user = models.OneToOneField(User, unique=True ,null=False, on_delete=CASCADE)
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
 
     def __str__(self):
@@ -70,7 +62,7 @@ class PerfilRol(models.Model):
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE)
 
     def __str__(self):
-        return self.get_Rol_display()
+        return self.Rol
 
 class Evaluacion(models.Model):
     Estado = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
@@ -108,7 +100,5 @@ class AccionClave(models.Model):
 class EmpleadoEliminado(models.Model):
     Rut = models.CharField(max_length=12)
     Nombre = models.CharField(max_length=50)
-    Contraseña = models.CharField(max_length=50)
-    Rol = models.CharField(max_length=50)
     Correo = models.CharField(max_length=50)
     FechaEliminacion = models.DateField(auto_now=True)

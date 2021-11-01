@@ -7,11 +7,17 @@
                     "text": "{{ m }}",
                     "icon": 'success'
                 })
-            {% elif m.tags == 'warning' %}
+            {% elif m.tags == 'error' %}
                     Swal.fire({
                         "title": "{{ titulo }}",
                         "text": "{{ m }}",
                         "icon": 'error'
+                    })
+            {% elif m.tags == 'warning' %}
+                    Swal.fire({
+                        "title": "{{ titulo }}",
+                        "text": "{{ m }}",
+                        "icon": 'warning'
                     })
             {% endif %}
         </script>

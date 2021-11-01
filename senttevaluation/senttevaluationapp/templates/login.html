@@ -6,10 +6,8 @@
         <meta charset="utf-8">
         <title>Sentte</title>
         <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
-        <link rel="stylesheet" type="text/css" href="{%static 'stylesheets/estilologin.css' %}">  
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{%static 'stylesheets/login.css' %}">  
     </head>
     <body>
         <div class="login">
@@ -22,12 +20,12 @@
             <form class="login-container" method="POST">
                 {% csrf_token %}
                 <p>Usuario</p>
-                {{form.username}}
+                {{ form.username }}
                 <br>
                 <p>Contraseña</p>
-                {{form.password}}
+                {{ form.password }}
               <p><input type="submit" value="Iniciar Sesion"></p>
             </form>
-        </div>
+          </div>
     </body>
 </html>

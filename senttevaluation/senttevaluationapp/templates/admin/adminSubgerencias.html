@@ -4,9 +4,12 @@
 {% include 'sidebars/adminSidebar.html' %}
 {% include 'mensajes.html' %}
     <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Subgerencias</span>
+        <div class="card shadow">
+            <div class="card body">
+                <div class="home-content">
+                    <span class="text">{{ page }}</span>
+                </div>
+            </div>
         </div>
         <br>
         <div class="container-fluid">
@@ -14,7 +17,7 @@
                 <div class="card-body">
                     <div class="content-header row">
                         <div class="content-header-left col-md-6 col-12 mb-2">
-                            <h3 class="content-header-title"> Mantenedor de Subgerencias </h3>
+                            <h3 class="content-header-title"> Mantenedor de {{ page }} </h3>
                             <br>
                             <div class="col-sm-12 col-md-6">
                                 <div id="tablaUsuarios_filter" class="dataTables_filter"> 
@@ -28,21 +31,17 @@
                         <div class="content-header-right col-md-6 col-12">
                             <div class="media-body media-right text-right">
                                 <br>
-                                <a class="btn btn-success" href="http://localhost:8000/adminAgregarSubgerencias" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
+                                <a class="btn btn-success" href="/adminAgregarSubgerencias" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
                                     Agregar
                                     <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
                                 </a>
-                                
-                                <!-- Modal Agregar -->
                                 <div class="modal fade" id='modalAgregar'>
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <!-- Modal Header -->
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Crear Subgerencia</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                               </div>
-                                            <!-- Modal body -->
                                             <div class="modal-body">
                                                 <form action='' method="POST">
                                                     {% csrf_token %}

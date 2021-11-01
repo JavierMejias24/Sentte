@@ -5,6 +5,10 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+.titulo{
+  margin-left: auto;
+  margin-right: auto;
+}
 .sidebar{
   position: fixed;
   top: 0;
@@ -26,7 +30,7 @@
 }
 .sidebar .logo-details i{
   font-size: 30px;
-  color: #fff;
+  color: rgb(255, 0, 0);
   height: 50px;
   min-width: 78px;
   text-align: center;
@@ -117,7 +121,6 @@
   background: none;
   width: 78px;
 }
-
 .sidebar .profile-details .profile-content{
   display: flex;
   align-items: center;
@@ -163,6 +166,8 @@
   width: calc(100% - 78px);
 }
 .home-section .home-content{
+  margin-left: auto;
+  margin-right: auto;
   height: 60px;
   display: flex;
   align-items: center;
@@ -182,7 +187,6 @@
 }
 
 @media (max-width: 768px){
-  
   .sidebar.close{
     width: 70px;
   }
@@ -204,5 +208,4 @@
   .sidebar .profile-details{
     width: 100%;
   }
-
 }

@@ -1,42 +1,41 @@
 {% include 'base.html' %}
-{% include 'sidebars/adminSidebar.html' %}
 <body>
+{% include 'sidebars/adminSidebar.html' %}
     <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <span class="text">Evaluacion</span>
+        <div class="card shadow">
+            <div class="card body">
+                <div class="home-content">
+                    <span class="text">{{ page }}</span>
+                </div>
+            </div>
         </div>
         <br>
-        <!-- Se genera un contenedor para el cuerpo principal, donde va a ir la info -->
         <div class="container-fluid">
-            <!-- Se crea una tarjeta que actua como contenedor -->
             <div class="card shadow mb-4">
-                <!-- Se crea el titulo del "contenedor"-->
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold">Sistema de Gestión y Retroalimentación del Desempeño</h6>
                 </div>
-                <!-- En el cuerpo de la tarjeta se diven en varias columnas para poner la informacion -->
                 <div class="card-body">
-                    {% for empleado in empleados%}
-                    {%if empleado.user.username == user.username%}
-                   
-                    <p>{{empleado.Nombre}}, bienvenido/a al “Sistema de Gestión y Retroalimentación del Desempeño”, importante herramienta que ha sido desarrollada por estudiantes del Duoc con el fin de que pueda gestionar el desarrollo de las personas de su equipo de trabajo, alineando y planificando su desempeño, por medio de la evaluación de competencias.</p>
+                    {% for empleado in empleados %}
+                        {% if empleado.user.username == user.username %}
                     
-                    <p>El Sistema de Gestión y Retroalimentación del Desempeño se compone de tres fases: planificación, seguimiento y evaluación, durante las cuales deberá realizar distintos pasos que iremos informando oportunamente.</p>
-                      
-                    <p>Lo invitamos a participar de manera activa y comprometida en este proceso, para que podamos contar con un sistema que apoye un modelo de gestión de personas eficiente y de calidad.</p>
-                    
-                    <p> Gerencia de Recursos Humanos </p>
-                    {%endif%}
-                    {%endfor%}
+                            <p>{{ empleado.Nombre }}, bienvenido/a al “Sistema de Gestión y Retroalimentación del Desempeño”, 
+                                importante herramienta que ha sido desarrollada por estudiantes del Duoc con el fin de que 
+                                pueda gestionar el desarrollo de las personas de su equipo de trabajo, alineando y planificando 
+                                su desempeño, por medio de la evaluación de competencias.</p>
+                            <p>El Sistema de Gestión y Retroalimentación del Desempeño se compone de tres fases: planificación, 
+                                seguimiento y evaluación, durante las cuales deberá realizar distintos pasos que iremos informando 
+                                oportunamente.</p>
+                            <p>Lo invitamos a participar de manera activa y comprometida en este proceso, para que podamos contar 
+                                con un sistema que apoye un modelo de gestión de personas eficiente y de calidad.</p>
+                            <p> Gerencia de Recursos Humanos </p>
+                        {% endif %}
+                    {% endfor %}
             </div>
         </div>
-        <!-- Se genera un contenedor para el cuerpo principal, donde va a ir la info -->
         <div class="container-fluid">
             <div class="row">
-                
-                <!------------------------------- Tarjeta -------------------------------->
-                {%for empleado in empleados%}
+                {% for empleado in empleados %}
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
@@ -49,13 +48,13 @@
                                     <p>Rut: {{empleado.Rut}}</p>
                                     <p>Correo: {{empleado.Correo}}</p>
                                     <br>
-                                    <a href="{%url 'evaluadorFormulario' empleado.id%}" class="btn btn-info" role="button">Comenzar</a>
+                                    <a href="{% url 'evaluadorFormulario' empleado.id %}" class="btn btn-info" role="button">Comenzar</a>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                {%endfor%}
+                {% endfor %}
             </div>
         </div>
         <br>

@@ -3,51 +3,54 @@
 <div class="sidebar close">
   <!-- Se configura el logo con el nombre -->
   <div class="logo-details">
-    <i><img src="{% static 'img/logo.png' %}" width="50" height="50"></i>
-    <span class="logo_name">Sentte</span>
+    <a class="logo-details" href="/adminInicio">
+      <i><img src="{% static 'img/logo.png' %}" width="50" height="50"></i>
+      <span class="logo_name">Sentte</span>
+    </a>
+    <i class='bx bx-menu' id="btn" ></i>
   </div>
   <!-- Se realizan las opciones del menu lateral -->
   <ul class="nav-links">
     <!-- Administrador -->
     <li>
-        <a href="http://localhost:8000/adminInicio">
+        <a href="/adminInicio">
           <i class='bx bx-home'></i>
           <span class="link_name">Inicio</span>
         </a>
     </li>
     {% if perms.auth.add_permission %}
     <li>
-        <a href="http://localhost:8000/adminAcciones">
+        <a href="/adminAcciones">
           <i class='bx bx-task'></i>
           <span class="link_name">Acciones</span>
         </a>
     </li>
     <li>
-        <a href="http://localhost:8000/adminCargos">
+        <a href="/adminCargos">
           <i class='bx bx-briefcase-alt'></i>
           <span class="link_name">Cargos</span>
         </a>
     </li>
     <li>
-        <a href="http://localhost:8000/adminCompetencias">
+        <a href="/adminCompetencias">
           <i class='bx bx-trophy'></i>
           <span class="link_name">Competencias</span>
         </a>
     </li>
     <li>
-      <a href="http://localhost:8000/adminGerencias">
+      <a href="/adminGerencias">
         <i class='bx bx-street-view'></i>
         <span class="link_name">Gerencias</span>
       </a>
     </li>
     <li>
-      <a href="http://localhost:8000/adminUsuarios">
+      <a href="/adminUsuarios">
         <i class='bx bx-id-card'></i>
         <span class="link_name">Usuarios</span>
       </a>
     </li>
     <li>
-      <a href="http://localhost:8000/adminSubgerencias">
+      <a href="/adminSubgerencias">
         <i class='bx bx-group'></i>
         <span class="link_name">Subgerencias</span>
       </a>
@@ -56,20 +59,20 @@
   <!-- Evaluador -->
   {% if perms.senttevaluationapp.view_planaccion %}
     <li>
-      <a href="http://localhost:8000/evaluadorEvaluacion">
+      <a href="/evaluadorEvaluacion">
         <i class='bx bx-file'></i>
         <span class="link_name">Evaluar</span>
       </a>
     </li>
     <li>
-      <a href="http://localhost:8000/evaluadorAutovaluacion">
+      <a href="/evaluadorAutovaluacion">
         <i class='bx bx-calendar-check'></i>
         <span class="link_name">AutoEvaluacion</span>
       </a>
     </li>
   {% endif %}
     <li>
-      <a href="http://localhost:8000/adminAyuda">
+      <a href="/adminAyuda">
         <i class='bx bx-donate-heart'></i>
         <span class="link_name">Ayuda</span>
       </a>
@@ -81,7 +84,7 @@
             <img src="{% static 'img/foto_perfil.jpg' %}" alt="profileImg">
           </div>
           <div class="name-job">
-            <div class="profile_name">{{user.username}}</div>
+            <div class="profile_name">{{ user.username }}</div>
             <div class="job">Usuario del sistema</div>
           </div>
           <i> 
