@@ -90,13 +90,12 @@ def editar_acciones(request, id):
     return render(request, "admin/adminAccionesModificar.html", data)
 
 @login_required
-def eliminar_usuario(request, id):
-    empleados = get_object_or_404(Empleado, id=id)
-    usuario = get_object_or_404(User, username=empleados.user)
-    usuario.delete()
-    empleados.delete()
-    messages.success(request, "Eliminado con éxito" )
-    return redirect(to="adminUsuarios")
+def eliminar_acciones(request, id):
+    acciones = get_object_or_404(AccionClave, id=id)
+    acciones.delete()
+    messages.success(request, "Eliminada con éxito" )
+    return redirect(to="adminAcciones")
+
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Cargos ----------------.
@@ -493,6 +492,8 @@ def editar_usuario(request, id):
 @login_required
 def eliminar_usuario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
+    usuario = get_object_or_404(User, username=empleados.user)
+    usuario.delete()
     empleados.delete()
     messages.success(request, "Eliminado con éxito" )
     return redirect(to="adminUsuarios")
