@@ -5,9 +5,9 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-.titulo{
-  margin-left: auto;
-  margin-right: auto;
+#title{
+  z-index: 2;
+  position: fixed;
 }
 .sidebar{
   position: fixed;
@@ -39,7 +39,6 @@
 .sidebar.close .logo-details .bx-menu{
   position: static;
 }
-
 .sidebar .logo-details .logo_name{
   font-size: 22px;
   color: #fff;
@@ -153,7 +152,6 @@
 .sidebar.close .profile-details .job{
   display: none;
 }
-
 .sidebar .profile-details .job{
   font-size: 12px;
 }
@@ -204,17 +202,14 @@
     left: 0;
     transition: all 500ms ease;
   }
-
   .home-section{
     position:static;
     margin-left: 65px;
   }
-
   .sidebar .profile-details{
     width: 100%;
   }
-
-  .sidebar.close .logo-details .bx-menu{
+  .sidebar.close .logo-details{
     font-size: 30px;
     color: rgb(255, 255, 255);
     height: 50px;
@@ -222,5 +217,4 @@
     text-align: left;
     line-height: 50px;
   }
-
 }
