@@ -34,9 +34,15 @@
                                             {% for accionclave in accionclaves %}
                                                 {% if competencia.NombreCompetencia == accionclave.IdCompetencia.NombreCompetencia %}
                                                     <li>
+                                                        {% if  "Accountability" in competencia.NombreCompetencia %}
                                                         <p>
-                                                        {{ accionclave.Descripcion }} 
+                                                        {{ accionclave.Descripcion }} {{form2.Calificacion}}
                                                         </p>
+                                                        {%else%}
+                                                        <p>
+                                                            {{ accionclave.Descripcion }} 
+                                                        </p>
+                                                        {%endif%}
                                                     </li> 
                                                 {% endif %}
                                             {% endfor %}
@@ -60,7 +66,7 @@
                                 <div class="d-flex justify-content-end">
                                     <input type="submit" value="Guardar" class="btn btn-primary">
                                     &nbsp;
-                                    <a href="#" value="Cancelar" class="btn btn-danger" role="button">Cancelar</a>
+                                    <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button">Cancelar</a>
                                 </div>
                             </form>
                         </div>

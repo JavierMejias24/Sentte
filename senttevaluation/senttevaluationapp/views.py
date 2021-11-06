@@ -642,12 +642,15 @@ def evaluador_formulario(request, id):
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario', 
-        'form': PlanAccionForm()
+        'form': PlanAccionForm(),
+        'form2': EvaluacionForm(),
     }
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
-        if formulario.is_valid():
+        formulario2 = EvaluacionForm(request.POST)
+        if formulario.is_valid() and formulario2.is_valid():
             formulario.save()
+            formulario2.save()
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario.html",data)
