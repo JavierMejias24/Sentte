@@ -826,7 +826,7 @@ def evaluador_formulario(request, id):
         'accionclaves':accionclaves,
         'page': 'Formulario',
         'barra': barra,
-         'form': PlanAccionForm(),
+        'form': PlanAccionForm(),
         'form2': EvaluacionForm(),
     }
     if request.method == 'POST':
