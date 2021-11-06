@@ -3,20 +3,18 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <meta charset="utf-8">
         <title>Sentte</title>
-        <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}"/>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}"/>
         <link rel="stylesheet" type="text/css" href="{%static 'stylesheets/estilologin.css' %}">  
     </head>
     <body>
         <div class="login">
             <div class="login-triangle"></div>
-            
             <h2 class="login-header">Iniciar Sesion
                 <img src="{% static 'img/logo.png' %}" alt="profileImg" style="width: 30px; height: 30px;">
             </h2>
-          
             <form class="login-container" method="POST">
                 {% csrf_token %}
                 <p>Usuario</p>
