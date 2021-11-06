@@ -1,4 +1,5 @@
 {% include 'base.html' %}
+{% load crispy_forms_tags %}
 <body>
 {% include 'sidebars/adminSidebar.html' %}
     <section class="home-section">
@@ -16,7 +17,7 @@
                     {%if empleados.IdPerfil == competencia.IdPerfil%}
                         <div class="card">
                             <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                <a class="card-link" data-toggle="collapse">
                                     Competencia: {{ competencia.NombreCompetencia}}
                                 </a>
                             </div>
@@ -46,6 +47,28 @@
                         </div>
                     {% endif %}
                 {% endfor %}
+                {% for competencia in competencias %}
+                {% if  "Accountability" in competencia.NombreCompetencia %}
+                <br><br><br>
+                <div class="card">
+                    <div class="card-header">Plan de accion</div>
+                    <div class="card-body">
+                        <div class="col-sm-12">  
+                            <form action="" method="POST"> 
+                                {% csrf_token %}
+                                {{ form | crispy }}
+                                <div class="d-flex justify-content-end">
+                                    <input type="submit" value="Guardar" class="btn btn-primary">
+                                    &nbsp;
+                                    <a href="#" value="Cancelar" class="btn btn-danger" role="button">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {%endif%}
+                {%endfor%}
+                <br><br><br>
             </div>
         </div>
     </section>

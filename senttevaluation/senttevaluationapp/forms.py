@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import widgets
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -226,6 +227,30 @@ class SubgerenciaForm(forms.ModelForm):
             'IdGerencia': forms.Select()
         }
 
+
+class PlanAccionForm(forms.ModelForm):
+
+    class Meta:
+        model = PlanAccion
+        fields = ['Accion', 'Medicion']
+        labels = {
+            'Accion': 'Accion',
+            'Medicion': 'Medicion'
+        }
+        widgets = {
+            'Accion': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una accion',
+                }
+            ),
+            'Medicion': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una medicion',
+                }
+            )
+        }
 class EvaluacionForm(forms.ModelForm):
     class Meta:
         model = DetalleEv

@@ -636,14 +636,37 @@ def evaluador_formulario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
+    
     data = {
         'empleados': Empleado.objects.get(Nombre = empleados),
         'competencias':competencias,
         'accionclaves':accionclaves,
-        'page': 'Formulario',
+        'page': 'Formulario', 
+        'form': PlanAccionForm()
     }
-    
-    return render(request, "evaluador/evaluadorFormulario.html", data)
+    if request.method == 'POST':
+        formulario = PlanAccionForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request,'Guardado el plan de accion')   
+            return redirect(to="evaluadorEvaluacion")
+    return render(request, "evaluador/evaluadorFormulario.html",data)
+
+def guardar_planaccion(request):
+
+    contexto = {
+        'form': PlanAccionForm()
+    }
+    if request.method == 'POST':
+        formulario = PlanAccionForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request,'Guardado el plan de accion')
+            return HttpResponseRedirect('evaluadorEvaluacion')
+        else:
+            return HttpResponseRedirect('evaluadorFormulario')
+
+    return render(request, 'evaluador/evaluadorFormulario.html', contexto)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required
