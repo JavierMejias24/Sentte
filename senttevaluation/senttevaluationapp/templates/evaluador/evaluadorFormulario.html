@@ -62,7 +62,7 @@
                         <div class="col-sm-12">  
                             <form action="" method="POST"> 
                                 {% csrf_token %}
-                                {{ form | crispy }}
+                                {{ form | crispy }} 
                                 <div class="d-flex justify-content-end">
                                     <input type="submit" value="Guardar" class="btn btn-primary">
                                     &nbsp;
@@ -70,6 +70,13 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+                {%else%}
+                <div class="card">
+                    <div class="card-body">
+                        {{form2.ComentarioEvaluador.label}}
+                        {{form2.ComentarioEvaluador}}
                     </div>
                 </div>
                 {%endif%}
