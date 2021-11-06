@@ -32,16 +32,28 @@ def login(request):
 # ----------------------------------  Administrador ---------------------------------.
 @login_required
 def admin_inicio(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
-        'page': 'Inicio'
+        'page': 'Inicio',
+        'barra': barra,
     }
     return render(request, "admin/adminInicio.html", contexto)
 
 # -- ------------Acciones Claves----------------.
 @login_required
 def admin_acciones(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     accioneclaves = AccionClave.objects.all().order_by('id')
     page = request.GET.get('page', 1)
+
     try:
         paginator = Paginator(accioneclaves, 10)
         accioneclaves = paginator.page(page)
@@ -52,17 +64,25 @@ def admin_acciones(request):
         'entity':accioneclaves,
         'paginator': paginator,
         'titulo': 'Cargo',
-        'page': 'Acciones'
+        'page': 'Acciones',
+        'barra': barra,
     }
     return render(request, "admin/adminAcciones.html", contexto)
 
 @login_required
 def agregar_acciones(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'form': AccionesForm(),
         'titulo': 'Acción',
-        'page': 'Acciones'
+        'page': 'Acciones',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = AccionesForm(request.POST)
         if formulario.is_valid():
@@ -75,11 +95,19 @@ def agregar_acciones(request):
 
 @login_required
 def editar_acciones(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     acciones = get_object_or_404(AccionClave, id=id)
+
     data = {
         'form':  AccionesForm(instance=acciones),
-        'page': 'Acciones'
+        'page': 'Acciones',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = AccionesForm(data=request.POST, instance=acciones)
         if formulario.is_valid():
@@ -102,6 +130,11 @@ def eliminar_acciones(request, id):
 # -- ------------ Cargos ----------------.
 @login_required
 def admin_cargos(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     cargos = Cargo.objects.all().order_by('NombreCargo')
     page = request.GET.get('page', 1)
 
@@ -115,16 +148,23 @@ def admin_cargos(request):
         'entity':cargos,
         'paginator': paginator,
         'titulo': 'Cargo',
-        'page': 'Cargos'
+        'page': 'Cargos',
+        'barra': barra,
     }
     return render(request,"admin/adminCargos.html", contexto)
 
 @login_required
 def agregar_cargos(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'form': CargoForm(),
         'titulo': 'Cargo',
-        'page': 'Cargos'
+        'page': 'Cargos',
+        'barra': barra,
     }
 
     if request.method == 'POST':
@@ -139,10 +179,16 @@ def agregar_cargos(request):
 
 @login_required
 def editar_cargos(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     cargos = get_object_or_404(Cargo, id=id)
     data = {
         'form':  CargoForm(instance=cargos),
-        'page': 'Cargos'
+        'page': 'Cargos',
+        'barra': barra,
     }
     if request.method == 'POST':
         formulario = CargoForm(data=request.POST, instance=cargos)
@@ -166,6 +212,11 @@ def eliminar_cargos(request, id):
 # -- ------------ Perfiles ----------------.
 @login_required
 def admin_perfil(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     perfils = Perfil.objects.all()
     page = request.GET.get('page', 1)
 
@@ -180,7 +231,8 @@ def admin_perfil(request):
         'entity':perfils,
         'paginator': paginator,
         'titulo': 'Perfil',
-        'page': 'Perfil'
+        'page': 'Perfil',
+        'barra': barra,
     }
     return render(request,"admin/adminPerfil.html", contexto)
 
@@ -199,10 +251,16 @@ def listarperfil():
 
 @login_required
 def agregar_perfil(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'form': PerfilForm(),
         'titulo': 'Perfil',
-        'page': 'Perfil'
+        'page': 'Perfil',
+        'barra': barra,
     }
 
     if request.method == 'POST':
@@ -218,11 +276,19 @@ def agregar_perfil(request):
 
 @login_required
 def editar_perfil(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     perfils = get_object_or_404(Perfil, id=id)
+
     data = {
         'form':  PerfilForm(instance=perfils),
-        'page': 'Perfil'
+        'page': 'Perfil',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = PerfilForm(data=request.POST, instance=perfils)
         if formulario.is_valid():
@@ -245,6 +311,11 @@ def eliminar_perfil(request, id):
 # -- ------------ Competencias ----------------.
 @login_required
 def admin_competencias(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     competencias = Competencia.objects.all().order_by('NombreCompetencia')
     perfil = Perfil.objects.all()
     page = request.GET.get('page', 1)
@@ -260,18 +331,25 @@ def admin_competencias(request):
         'perfil':perfil,
         'paginator': paginator,
         'titulo': 'Competencia',
-        'page': 'Competencias'
+        'page': 'Competencias',
+        'barra': barra,
     }
     return render(request, "admin/adminCompetencias.html", contexto1)
 
 @login_required
 def agregar_competencias(request):
-    contexto1 = {
-        
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
+    contexto = {
         'form': CompetenciaForm(),
         'titulo': 'Competencia',
-        'page': 'Competencias'
+        'page': 'Competencias',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = CompetenciaForm(request.POST)
         if formulario.is_valid():
@@ -279,16 +357,24 @@ def agregar_competencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminCompetencias")
         else:
-            contexto1["form"] = formulario
-    return render(request, "admin/adminAgregarCompetencias.html", contexto1)
+            contexto["form"] = formulario
+    return render(request, "admin/adminAgregarCompetencias.html", contexto)
 
 @login_required
 def editar_competencias(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     competencias = get_object_or_404(Competencia, id=id)
+
     data = {
         'form':  CompetenciaForm(instance=competencias),
-        'page': 'Competencias'
+        'page': 'Competencias',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = CompetenciaForm(data=request.POST, instance=competencias)
         if formulario.is_valid():
@@ -311,6 +397,11 @@ def eliminar_competencias(request, id):
 # -- ------------ Gerencias ----------------.
 @login_required
 def admin_gerencias(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     gerencias = Gerencia.objects.all().order_by('NombreGerencia')
     page = request.GET.get('page', 1)
 
@@ -325,7 +416,8 @@ def admin_gerencias(request):
         'entity': gerencias,
         'paginator': paginator,
         'titulo': 'Gerencia',
-        'page': 'Gerencias'
+        'page': 'Gerencias',
+        'barra': barra,
     }
     return render(request, "admin/adminGerencias.html", contexto)
 
@@ -344,11 +436,18 @@ def listargerencia():
 
 @login_required
 def agregar_gerencias(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'form': GerenciaForm(),
         'titulo': 'Gerencia',
-        'page': 'Gerencias'
+        'page': 'Gerencias',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = GerenciaForm(request.POST)
         if formulario.is_valid():
@@ -361,11 +460,19 @@ def agregar_gerencias(request):
 
 @login_required
 def editar_gerencias(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     gerencias = get_object_or_404(Gerencia, id=id)
+
     data = {
         'form':  GerenciaForm(instance=gerencias),
-        'page': 'Gerencias'
+        'page': 'Gerencias',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = GerenciaForm(data=request.POST, instance=gerencias)
         if formulario.is_valid():
@@ -387,6 +494,11 @@ def eliminar_gerencias(request, id):
 # -- ------------ Sub-gerencias ----------------.
 @login_required
 def admin_subgerencias(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     subgerencias = SubGerencia.objects.all().order_by('NombreSubgerencia')
     page = request.GET.get('page', 1)
 
@@ -400,17 +512,23 @@ def admin_subgerencias(request):
         'entity': subgerencias,
         'paginator': paginator,
         'titulo': 'Subgerencia',
-        'page': 'Subgerencias'
+        'page': 'Subgerencias',
+        'barra': barra,
     }
     return render(request, "admin/adminSubgerencias.html", contexto)
 
 @login_required
 def agregar_subgerencias(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
 
     contexto = {
         'form': SubgerenciaForm(),
         'titulo': 'Subgerencia',
-        'page': 'Subgerencias'
+        'page': 'Subgerencias',
+        'barra': barra,
     }
 
     if request.method == 'POST':
@@ -423,14 +541,21 @@ def agregar_subgerencias(request):
             contexto["form"] = formulario
     return render(request, "admin/adminAgregarSubgerencias.html", contexto)
 
-
 @login_required
 def editar_subgerencia(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     subgerencias = get_object_or_404(SubGerencia, id=id)
+
     data = {
         'form':  SubgerenciaForm(instance=subgerencias),
-        'page': 'Subgerencias'
+        'page': 'Subgerencias',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = SubgerenciaForm(data=request.POST, instance=subgerencias)
         if formulario.is_valid():
@@ -452,6 +577,11 @@ def eliminar_subgerencia(request, id):
 # -- ------------ Empleado ----------------.
 @login_required
 def admin_usuarios(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     empleados = Empleado.objects.all().order_by('Rut')
     page = request.GET.get('page', 1)
 
@@ -465,19 +595,25 @@ def admin_usuarios(request):
         'entity': empleados,
         'paginator': paginator,
         'titulo': 'Empleado',
-        'page': 'Usuarios'
+        'page': 'Usuarios',
+        'barra': barra,
     }
     return render(request, "admin/adminUsuarios.html",contexto)
 
 @login_required
 def agregar_usuario(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
 
     contexto = {
         'form': EmpleadoForm(),
         'form1': PerfilRolForm(),
         'form3': UserForm(),
         'titulo': 'Empleado',
-        'page': 'Usuarios'
+        'page': 'Usuarios',
+        'barra': barra,
     }
 
     if request.method == 'POST':
@@ -568,11 +704,19 @@ def agregar_usuario(request):
 
 @login_required
 def editar_usuario(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     empleados = get_object_or_404(Empleado, id=id)
+
     data = {
         'form':  EmpleadoForm(instance=empleados),
-        'page': 'Usuarios'
+        'page': 'Usuarios',
+        'barra': barra,
     }
+
     if request.method == 'POST':
         formulario = EmpleadoForm(data=request.POST, instance=empleados)
         if formulario.is_valid():
@@ -596,8 +740,14 @@ def eliminar_usuario(request, id):
 
 @login_required
 def admin_ayuda(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
-        'page': 'Ayuda'
+        'page': 'Ayuda',
+        'barra': barra
     }
     return render(request, "admin/adminAyuda.html", contexto)
 
@@ -606,85 +756,155 @@ def admin_ayuda(request):
 # ----------------------------------  Evaluador ---------------------------------.
 @login_required
 def evaluador_inicio(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
-        'page': 'Inicio'
+        'page': 'Inicio',
+        'barra': barra,
     }
     return render(request, "evaluador/evaluadorInicio.html", contexto)
 
 @login_required
 def evaluador_evaluacion(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     empleados = Empleado.objects.all()
+
     contexto = {
         'empleados':empleados,
         'page': 'Evaluación',
+        'barra': barra,
     }
     return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
 
 @login_required
 def evaluador_autovaluacion(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'page': 'Autoevaluación',
+        'barra': barra,
     }
     return render(request, "evaluador/evaluadorAutovaluacion.html", contexto)
 
 @login_required
 def evaluador_ayuda(request):
-    return render(request, "evaluador/evaluadorAyuda.html")
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
+    contexto = {
+        'page': 'Ayuda',
+        'barra': barra,
+    }
+    return render(request, "evaluador/evaluadorAyuda.html", contexto)
 
 @login_required
 def evaluador_formulario(request, id):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     empleados = get_object_or_404(Empleado, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
+
     data = {
         'empleados': Empleado.objects.get(Nombre = empleados),
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario',
+        'barra': barra,
     }
-    
     return render(request, "evaluador/evaluadorFormulario.html", data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required
 def colaborador_inicio(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'page': 'Inicio',
+        'barra': barra,
     }
     return render(request, "colaborador/colaboradorInicio.html", contexto)
 
 @login_required
 def colaborador_ayuda(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'page': 'Ayuda',
+        'barra': barra,
     }
     return render(request, "colaborador/colaboradorAyuda.html", contexto)
 
 @login_required
 def colaborador_autovaluacion(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'page': 'Autoevaluación',
+        'barra': barra,
     }
     return render(request, "colaborador/colaboradorAutovaluacion.html", contexto)
 
 # ----------------------------------  Calibrador ---------------------------------.
 @login_required
 def calibrador_inicio(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'page': 'Inicio',
+        'barra': barra,
     }
     return render(request, "calibrador/calibradorInicio.html", contexto)
 
 @login_required
 def calibrador_ayuda(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'page': 'Ayuda',
+        'barra': barra,
     }
     return render(request, "calibrador/calibradorAyuda.html", contexto)
 
 @login_required
 def calibrador_evaluaciones(request):
+    if Empleado.objects.filter(EstadoBarra = 0):
+        barra = 'sidebar close'
+    else:
+        barra = 'sidebar'
+
     contexto = {
         'page': 'Evaluaciones',
+        'barra': barra,
     }
     return render(request, "calibrador/calibradorEvaluaciones.html", contexto)
