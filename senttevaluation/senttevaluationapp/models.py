@@ -45,7 +45,6 @@ class Empleado(models.Model):
     IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE, default=1)
     user = models.OneToOneField(User, unique=True ,null=False, on_delete=CASCADE)
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
-    EstadoBarra = models.IntegerField(default=0)
 
     def __str__(self):
         return self.Nombre 
