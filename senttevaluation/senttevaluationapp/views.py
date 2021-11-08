@@ -459,7 +459,71 @@ def eliminar_subgerencia(request, id):
     messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminSubgerencias")
 # -----------------------------------------------------------------------------------------------.
+# -- ------------ Area ----------------.
 
+@login_required
+def admin_areas(request):
+    areas  = Area.objects.all().order_by('NombreArea')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(areas, 10)
+        areas = paginator.page(page)
+    except:
+        Http404
+
+    contexto = {
+        'entity': areas,
+        'paginator': paginator,
+        'titulo': 'Areas',
+        'page': 'Areas',
+    }
+    return render(request, "admin/adminArea.html", contexto)
+
+@login_required
+def agregar_areas(request):
+    contexto = {
+        'form': AreaFrom(),
+        'titulo': 'Areas',
+        'page': 'Areas',
+    }
+
+    if request.method == 'POST':
+        formulario = AreaFrom(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Guardada con éxito" )
+            return HttpResponseRedirect("adminArea")
+        else:
+            contexto["form"] = formulario
+    return render(request, "admin/adminAgregarArea.html", contexto)
+
+@login_required
+def editar_area(request, id):
+    areas = get_object_or_404(Area, id=id)
+
+    data = {
+        'form':  AreaFrom(instance=areas),
+        'page': 'Areas',
+    }
+
+    if request.method == 'POST':
+        formulario = AreaFrom(data=request.POST, instance=areas)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Editada con éxito" )
+            return redirect(to="adminArea")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminAreaModificar.html", data)
+
+@login_required
+def eliminar_area(request, id):
+    areas = get_object_or_404(Area, id=id)
+    areas.delete()
+    messages.success(request, "Eliminada con éxito" )
+    return redirect(to="adminArea")
+# -----------------------------------------------------------------------------------------------.
 # -- ------------ Empleado ----------------.
 @login_required
 def admin_usuarios(request):
@@ -602,7 +666,17 @@ def eliminar_usuario(request, id):
     return redirect(to="adminUsuarios")
 
 # -----------------------------------------------------------------------------------------------.
+# ----------------------------------  Indicadores(graficos)  ---------------------------------.
 
+@login_required
+def admin_indicadores(request):
+    contexto = {
+        'page': 'Inidicadores',
+    }
+    return render(request, "admin/adminIndicadores.html", contexto)
+
+
+# -----------------------------------------------------------------------------------------------.
 @login_required
 def admin_ayuda(request):
     contexto = {

@@ -1,0 +1,40 @@
+{% include 'base.html' %}
+{% include 'sidebars/adminSidebar.html' %}
+{% load crispy_forms_tags %}
+<body>
+    <section class="home-section">
+        <div class="container-fluid" id="title">
+            <div class="card shadow">
+                <div class="card body">
+                    <div class="home-content">
+                        <span class="text">{{ page }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container-fluid">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="content-header row">
+                        <div class="content-header-left col-md-6 col-12 mb-2">
+                            <h3 class="content-header-title"> Modificar {{ page }} </h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">  
+                        <form action="" method="POST"> 
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <div class="d-flex justify-content-end">
+                                <input type="submit" value="Guardar" class="btn btn-primary">
+                                <a href="/adminArea" value="Cancelar" class="btn btn-dange" role="button">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+</body>

@@ -38,6 +38,11 @@ urlpatterns = [
     path('adminAgregarPerfil', views.agregar_perfil, name="adminAgregarPerfil"),
     path('adminModificarPerfil/<id>/', views.editar_perfil, name="adminModificarPerfil"),
     path('adminEliminarPerfil/<id>/', views.eliminar_perfil, name="adminEliminarPerfil"),
+    path('adminArea', views.admin_areas, name="adminArea"),
+    path('adminAgregarArea', views.agregar_areas, name="adminAgregarArea"),
+    path('adminAreaModificar/<id>/', views.editar_area, name="adminAreaModificar"),
+    path('adminAreaEliminar/<id>/', views.eliminar_area, name="adminAreaEliminar"),
+    path('adminIndicadores', views.admin_indicadores, name="adminIndicadores"),
     path('adminAyuda', views.admin_ayuda, name="adminAyuda"),
 # ----------------------------------  Evaluador ------------------------------------------------------.
     path('evaluadorInicio', views.evaluador_inicio, name="evaluadorInicio"),

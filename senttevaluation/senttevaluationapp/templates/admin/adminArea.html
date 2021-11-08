@@ -1,0 +1,83 @@
+{% include 'base.html' %}
+{% load crispy_forms_tags %}
+<body>
+{% include 'sidebars/adminSidebar.html' %}
+{% include 'mensajes.html' %}
+    <section class="home-section">
+        <div class="container-fluid" id="title">
+            <div class="card shadow">
+                <div class="card body">
+                    <div class="home-content">
+                        <span class="text">{{ page }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container-fluid">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="content-header row">
+                        <div class="content-header-left col-md-6 col-12 mb-2">
+                            <h3 class="content-header-title"> Mantenedor de {{ page }} </h3>
+                            <br>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="tablaUsuarios_filter" class="dataTables_filter"> 
+                                    <label>
+                                        Buscar:
+                                        <input class="form-control" id="buscar" type="text" placeholder="Search..">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-header-right col-md-6 col-12">
+                            <div class="media-body media-right text-right">
+                                <br>
+                                <a class="btn btn-success" href="/adminAgregarArea" style="opacity: 0.5; height: 50px; width: 150px; text-align: center;">
+                                    Agregar
+                                    <p class="bx bxs-add-to-queue" style="opacity: 1; color: white; width: 19px; height: 5px;"></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Nombre Area</th>
+                                        <th>Gerencia</th>
+                                        <br>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla">
+                                    {% for area in entity %}
+                                        <tr>
+                                            <td data-label="Descripcion">{{ area.NombreArea }}</td>
+                                            <td data-label="Competencia">{{ area.IdGerencia }}</td>
+                                            <td>
+                                                <a class="btn btn-primary" href="{% url 'adminAreaModificar' area.id %}" style="opacity: 0.5;">
+                                                    <p class="bx bx-edit-alt" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                                </a>
+                                                <a class="btn btn-danger" data-name="{{ area.NombreArea }}" href="{% url 'adminAreaEliminar' area.id %}" id="btnEliminar" style="opacity: 0.5;">
+                                                    <p class="bx bx-box" style="opacity: 1; color: black; width: 19px; height: 5px;"></p>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        {% include 'paginator.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+    </section>
+</body>

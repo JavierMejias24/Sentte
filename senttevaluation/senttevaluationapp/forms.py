@@ -233,7 +233,7 @@ class AreaFrom(forms.ModelForm):
             ),
             'IdArea': forms.Select(
                 attrs = {
-                    'class':'form-select'
+                    'class':'form-select' 
                 }
             )
         }
