@@ -43,9 +43,9 @@ class Empleado(models.Model):
     FechaIngreso = models.DateField(null=False)
     Correo = models.CharField(max_length=100, null=False, unique=True, validators=[EmailValidator])
     IdPerfil = models.ForeignKey(Perfil, on_delete=CASCADE, default=1)
-    user = models.OneToOneField(User, unique=True ,null=False, on_delete=CASCADE)
+    user = models.OneToOneField(User, unique=True, null=False, on_delete=CASCADE)
     IdSubGerencia = models.ForeignKey(SubGerencia, on_delete=CASCADE, default=1)
-    Imagen = models.ImageField(upload_to="usuarios", null=True, blank=True)
+    Imagen = models.ImageField(default="foto_perfil.jpg", upload_to="usuarios", null=True, blank=True)
 
     def __str__(self):
         return self.Nombre 
