@@ -90,6 +90,9 @@ class PerfilRolForm(forms.ModelForm):
                     (1, "Evaluador"),
                     (2, "Evaluado"),
                     (3, "Calibrador"),
+                },
+                attrs = {
+                    'class':'form-select'
                 }
             ),
             'RelacionEvaluado': forms.TextInput(

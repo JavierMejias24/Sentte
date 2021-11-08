@@ -583,7 +583,7 @@ def editar_usuario(request, id):
     }
 
     if request.method == 'POST':
-        formulario = EmpleadoForm(data=request.POST, instance=empleados)
+        formulario = EmpleadoForm(data=request.POST, files=request.FILES, instance=empleados)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "Editado con éxito" )
