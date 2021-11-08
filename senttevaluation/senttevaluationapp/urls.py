@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from senttevaluationapp import views
 from django.contrib.auth.views import LoginView, LogoutView
@@ -52,3 +54,6 @@ urlpatterns = [
     path('calibradorAyuda', views.calibrador_ayuda, name="calibradorAyuda"),
     path('calibradorEvaluaciones', views.calibrador_evaluaciones, name="calibradorEvaluaciones"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

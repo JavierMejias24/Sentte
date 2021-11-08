@@ -2,3 +2,4 @@ Django==3.2.7
 django-admin-interface
 cx_Oracle
 django-crispy-forms
+pillow

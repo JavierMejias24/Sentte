@@ -491,20 +491,17 @@ def agregar_usuario(request):
     }
 
     if request.method == 'POST':
-        
         form = UserForm(request.POST)
-        formEmpleado = EmpleadoForm(request.POST)
+        formEmpleado = EmpleadoForm(request.POST, request.FILES)
         formPerfilrol = PerfilRolForm(request.POST)
 
         if form.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
-            
             usuario = formEmpleado.save(commit=False)
             usuario.user = form.save()
             usuario.save()
             rolempleado = formPerfilrol.save(commit=False)
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
-            
             cuentausuario = form.save()
 
             #Permiso Cargos
