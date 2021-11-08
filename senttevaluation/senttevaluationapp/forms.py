@@ -49,7 +49,7 @@ class EmpleadoForm(forms.ModelForm):
                     'placeholder': 'Ingrese correo',
                 }
             ),
-            'Imagen': forms.ClearableFileInput(
+            'Imagen': forms.FileInput(
                 attrs = {
                     'class':'form-control',
                 }
