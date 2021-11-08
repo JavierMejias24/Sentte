@@ -88,9 +88,9 @@
         <div class="profile-details">
           <div class="profile-content">
             {% if user.is_staff %}
-              <img src="media/foto_perfil.jpg" alt="profileImg" width="52px" height="52px">
+              <img src="/media/foto_perfil.jpg" alt="profileImg" width="52px" height="52px">
             {% else %}
-              <img src="media/{{ request.user.empleado.Imagen }}" alt="profileImg" width="52px" height="52px">
+              <img src="/media/{{ request.user.empleado.Imagen }}" alt="profileImg" width="52px" height="52px">
             {% endif %}
           </div>
           <div class="name-job">
@@ -101,7 +101,7 @@
             <div class="job">{{ request.user.empleado.Correo }}</div>
             {% endif %}
           </div>
-          <i> 
+          <i>
             <a class='bx bx-log-out' href="{% url 'logout' %}"></a>
           </i>
         </div>
