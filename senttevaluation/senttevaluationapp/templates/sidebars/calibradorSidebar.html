@@ -32,13 +32,15 @@
     <li>
         <div class="profile-details">
           <div class="profile-content">
-            <img src="{% static 'img/foto_perfil.jpg' %}" alt="profileImg">
+            <img src="media/{{ request.user.empleado.Imagen }}" alt="profileImg" width="52px" height="52px">
           </div>
           <div class="name-job">
-            <div class="profile_name">Julio Profe</div>
-            <div class="job">Calibrador</div>
+            <div class="profile_name">{{ user.username }}</div>
+            <div class="job">{{ request.user.empleado.Correo }}</div>
           </div>
-          <i class='bx bx-log-out' ></i>
+          <i> 
+            <a class='bx bx-log-out' href="{% url 'logout' %}"></a>
+          </i>
         </div>
     </li>
   </ul>
