@@ -15,12 +15,13 @@ class UserForm(UserCreationForm):
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
-        fields = ['Rut', 'Nombre', 'FechaIngreso', 'Correo', 'IdSubGerencia', 'IdPerfil']
+        fields = ['Rut', 'Nombre', 'FechaIngreso', 'Correo', 'Imagen', 'IdSubGerencia', 'IdPerfil']
         labels = {
             'Rut': 'Rut del empleado',
             'Nombre': 'Nombre',
             'FechaIngreso': 'Fecha de ingreso',
             'Correo': 'Correo',
+            'Imagen': 'Foto para perfil',
             'IdSubGerencia': 'Subgerencia',
             'IdPerfil': 'Perfil',
         }
@@ -42,16 +43,28 @@ class EmpleadoForm(forms.ModelForm):
                     'type': 'date',
                 }
             ),
-            'Correo': forms.TextInput(
+            'Correo': forms.EmailInput(
                 attrs = {
                     'class':'form-control',
                     'placeholder': 'Ingrese correo',
                 }
             ),
-            'IdSubGerencia': forms.Select(),
-            'IdPerfil': forms.Select(),
+            'Imagen': forms.ClearableFileInput(
+                attrs = {
+                    'class':'form-control',
+                }
+            ),
+            'IdSubGerencia': forms.Select(
+                attrs = {
+                    'class':'form-select'
+                }
+            ),
+            'IdPerfil': forms.Select(
+                attrs = {
+                    'class':'form-select'
+                }
+            ),
         }
-
 class PerilForm(forms.ModelForm):
     class Meta:
         model = Perfil
@@ -113,7 +126,11 @@ class CargoForm(forms.ModelForm):
                     'placeholder': 'Ingrese nombre del cargo',
                 }
             ),
-            'IdPerfil': forms.Select(),
+            'IdPerfil': forms.Select(
+                attrs = {
+                    'class':'form-select'
+                }
+            ),
         }
 
 class CompetenciaForm(forms.ModelForm):
@@ -138,7 +155,11 @@ class CompetenciaForm(forms.ModelForm):
                     'placeholder': 'Ingrese definición',
                 }
             ),
-            'IdPerfil': forms.Select(),
+            'IdPerfil': forms.Select(
+                attrs = {
+                    'class':'form-select'
+                }
+            ),
         }
 
 class AccionesForm(forms.ModelForm):
@@ -156,7 +177,11 @@ class AccionesForm(forms.ModelForm):
                     'placeholder': 'Ingrese descripción',
                 }
             ),
-            'IdCompetencia': forms.Select()
+            'IdCompetencia': forms.Select(
+                attrs = {
+                    'class':'form-select'
+                }
+            )
         }
 
 class GerenciaForm(forms.ModelForm):
@@ -206,7 +231,11 @@ class AreaFrom(forms.ModelForm):
                     'placeholder':'Ingrese nombre del area',
                 }
             ),
-            'IdArea': forms.Select()
+            'IdArea': forms.Select(
+                attrs = {
+                    'class':'form-select'
+                }
+            )
         }
 
 class SubgerenciaForm(forms.ModelForm):
@@ -224,7 +253,11 @@ class SubgerenciaForm(forms.ModelForm):
                     'placeholder': 'Ingrese nombre de la subgerencia',
                 }
             ),
-            'IdGerencia': forms.Select()
+            'IdGerencia': forms.Select(
+                attrs = {
+                    'class':'form-select'
+                }
+            )
         }
 
 
