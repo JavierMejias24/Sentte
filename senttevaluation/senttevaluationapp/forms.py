@@ -97,18 +97,8 @@ class PerfilRolForm(forms.ModelForm):
                     'placeholder': 'Ingrese la relación',
                 }
             ),
-            'NombreEvaluador': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder':'Ingrese nombre Evaluador'
-                }
-            ),
-            'NombreCalibrador': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder':'Ingrese nombre Calibrador'
-                }
-            ),
+            'NombreEvaluador': forms.Select(),
+            'NombreCalibrador': forms.Select(),
         }
 
 class CargoForm(forms.ModelForm):

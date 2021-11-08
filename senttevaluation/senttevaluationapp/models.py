@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.db.models.deletion import CASCADE
 from django.core.validators import RegexValidator, EmailValidator
 from django.contrib.auth.models import User
@@ -58,8 +59,8 @@ class PerfilRol(models.Model):
     ]
     Rol = models.IntegerField(choices=Roles, default=1)
     RelacionEvaluado = models.CharField(max_length=50, blank=True, default='',validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    NombreEvaluador = models.CharField(max_length=100, null=True, blank=True, default='')
-    NombreCalibrador = models.CharField(max_length=100, null=True, blank=True, default='')
+    NombreEvaluador = models.CharField(Empleado.objects.name, max_length=100, null=True, blank=True)
+    NombreCalibrador = models.CharField(Empleado, max_length=100, null=True, blank=True)
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE)
 
     def __str__(self):
@@ -76,7 +77,7 @@ class PlanAccion(models.Model):
     Medicion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
 
 class DetalleEv(models.Model):
-    FechaEvaluacion = models.DateField()
+    FechaEvaluacion = models.DateTimeField(default=timezone.now)
     ComentarioEvaluador = models.CharField(max_length=100, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Calificacion = models.IntegerField(validators=[RegexValidator(regex=r'^[0-9]')])
     AutoEvaluacion = models.IntegerField(validators=[RegexValidator(regex=r'^[0-9]')])
