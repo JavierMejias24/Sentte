@@ -65,14 +65,7 @@ class EmpleadoForm(forms.ModelForm):
                 }
             ),
         }
-class PerilForm(forms.ModelForm):
-    class Meta:
-        model = Perfil
-        fields = '__all__'
-        labels = {
-            'NombrePerfil': 'Nombre Perfil'
-        }
-      
+
 class PerfilRolForm(forms.ModelForm):
     class Meta:
         model = PerfilRol
@@ -97,8 +90,8 @@ class PerfilRolForm(forms.ModelForm):
                     'placeholder': 'Ingrese la relación',
                 }
             ),
-            'NombreEvaluador': forms.Select(),
-            'NombreCalibrador': forms.Select(),
+            'NombreEvaluador': forms.TextInput(),
+            'NombreCalibrador': forms.TextInput(),
         }
 
 class CargoForm(forms.ModelForm):
@@ -252,7 +245,6 @@ class SubgerenciaForm(forms.ModelForm):
 
 
 class PlanAccionForm(forms.ModelForm):
-
     class Meta:
         model = PlanAccion
         fields = ['Accion', 'Medicion']
@@ -274,7 +266,14 @@ class PlanAccionForm(forms.ModelForm):
                 }
             )
         }
-class EvaluacionForm(forms.ModelForm):
+class DetalleEvaluacionForm(forms.ModelForm):
     class Meta:
         model = DetalleEv
         fields = '__all__'
+
+
+class EvaluacionForm(forms.ModelForm):
+
+    class Meta:
+        model = Evaluacion
+        fields =['Estado', 'Fase', 'ComentarioCalibrador', 'IdEmpleado']

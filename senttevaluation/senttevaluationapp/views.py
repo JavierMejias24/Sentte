@@ -558,8 +558,10 @@ def agregar_usuario(request):
         form = UserForm(request.POST)
         formEmpleado = EmpleadoForm(request.POST, request.FILES)
         formPerfilrol = PerfilRolForm(request.POST)
+        formEvaluacion = EvaluacionForm()
 
         if form.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
+
             usuario = formEmpleado.save(commit=False)
             usuario.user = form.save()
             usuario.save()
@@ -567,6 +569,13 @@ def agregar_usuario(request):
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
             cuentausuario = form.save()
+
+            evaluaciones = formEvaluacion.save(commit=False)
+            evaluaciones.Estado = "Pendiente"
+            evaluaciones.Fase = "Planificacion"
+            evaluaciones.IdEmpleado = formEmpleado.save()
+            evaluaciones.save()
+
 
             #Permiso Cargos
             content_type = ContentType.objects.get_for_model(Cargo)
@@ -730,11 +739,11 @@ def evaluador_formulario(request, id):
         'accionclaves':accionclaves,
         'page': 'Formulario', 
         'form': PlanAccionForm(),
-        'form2': EvaluacionForm(),
+        'form2': DetalleEvaluacionForm(),
     }
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
-        formulario2 = EvaluacionForm(request.POST)
+        formulario2 = DetalleEvaluacionForm(request.POST)
         if formulario.is_valid() and formulario2.is_valid():
             formulario.save()
             formulario2.save()

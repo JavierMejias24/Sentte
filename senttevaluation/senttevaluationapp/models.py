@@ -59,7 +59,7 @@ class PerfilRol(models.Model):
     ]
     Rol = models.IntegerField(choices=Roles, default=1)
     RelacionEvaluado = models.CharField(max_length=50, blank=True, default='',validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    NombreEvaluador = models.CharField(Empleado.objects.name, max_length=100, null=True, blank=True)
+    NombreEvaluador = models.CharField(Empleado, max_length=100, null=True, blank=True)
     NombreCalibrador = models.CharField(Empleado, max_length=100, null=True, blank=True)
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE)
 
@@ -69,9 +69,11 @@ class PerfilRol(models.Model):
 class Evaluacion(models.Model):
     Estado = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Fase = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    ComentarioCalibrador = models.CharField(max_length=80, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    ComentarioCalibrador = models.CharField(max_length=80,  null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 
+    def __str__(self):
+        return self.Estado
 class PlanAccion(models.Model):
     Accion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Medicion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
