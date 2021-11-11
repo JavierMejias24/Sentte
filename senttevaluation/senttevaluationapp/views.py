@@ -706,9 +706,11 @@ def evaluador_inicio(request):
 @login_required
 def evaluador_evaluacion(request):
     empleados = Empleado.objects.all()
+    evaluacion = Evaluacion.objects.all()
 
     contexto = {
         'empleados':empleados,
+        'evaluacion':evaluacion,
         'page': 'Evaluación',
     }
     return render(request, "evaluador/evaluadorEvaluacion.html", contexto)

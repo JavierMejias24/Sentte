@@ -39,25 +39,32 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                {% for empleado in empleados %}
+                {% for evaluacion in evaluacion %}  
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
+                            <h4 class="card-tittle">Evaluacion de competencia</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body" style="font-size:13px">
                                 <form method="post" action="">
-                                    <p>Nombre: {{empleado.Nombre}}</p>
-                                    <p>Rut: {{empleado.Rut}}</p>
-                                    <p>Correo: {{empleado.Correo}}</p>
+                                    <p>Rut: {{evaluacion.IdEmpleado.Rut}}</p>
+                                    <p>Nombre: {{evaluacion.IdEmpleado}}</p>
+                                    <div>
+                                        Estado: 
+                                        <div class="badge badge-pill badge-danger" style="font-size:11px">
+                                            <b>{{evaluacion.Estado}}</b>
+                                        </div>
+                                    </div>
                                     <br>
-                                    <a href="{% url 'evaluadorFormulario' empleado.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                    <a href="{% url 'evaluadorFormulario' evaluacion.IdEmpleado.id %}" class="btn btn-info" role="button">Comenzar</a>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                   
+                
                 {% endfor %}
             </div>
         </div>
