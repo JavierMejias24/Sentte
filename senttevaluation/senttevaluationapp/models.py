@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import IntegerField
 from django.utils import timezone
 from django.db.models.deletion import CASCADE
 from django.core.validators import RegexValidator, EmailValidator
@@ -72,11 +73,14 @@ class Evaluacion(models.Model):
     ComentarioCalibrador = models.CharField(max_length=80,  null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 
-    def __str__(self):
-        return self.Estado
+    def __inti__(self):
+        return self.id == IntegerField
 class PlanAccion(models.Model):
     Accion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Medicion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+
+    def __inti__(self):
+        return self.id
 
 class DetalleEv(models.Model):
     FechaEvaluacion = models.DateTimeField(default=timezone.now)

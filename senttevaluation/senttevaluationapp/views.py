@@ -746,9 +746,9 @@ def evaluador_formulario(request, id):
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
         formulario2 = DetalleEvaluacionForm(request.POST)
-        if formulario.is_valid() and formulario2.is_valid():
+        if formulario.is_valid():
             formulario.save()
-            formulario2.save()
+            
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario.html",data)

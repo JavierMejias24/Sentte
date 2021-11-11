@@ -73,8 +73,6 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-                {% for competencia in competencias %}
-                {% if  "Accountability" in competencia.NombreCompetencia %}
                 <br><br><br>
                 <div class="card">
                     <div class="card-header">Plan de accion</div>
@@ -82,6 +80,14 @@
                         <div class="col-sm-12">  
                             <form action="" method="POST"> 
                                 {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        {{ form. | crispy }}
+                                    </div>
+                                    <div class="col-sm-8">
+                                        
+                                    </div>
+                                  </div>
                                 {{ form | crispy }} 
                                 <div class="d-flex justify-content-end">
                                     <input type="submit" value="Guardar" class="btn btn-primary">
@@ -92,16 +98,6 @@
                         </div>
                     </div>
                 </div>
-                {%else%}
-                <div class="card">
-                    <div class="card-body">
-                        {{form2.ComentarioEvaluador.label}}
-                        {{form2.ComentarioEvaluador}}
-                    </div>
-                </div>
-                {%endif%}
-                {%endfor%}
-                <br><br><br>
             </div>
         </div>
     </section>
