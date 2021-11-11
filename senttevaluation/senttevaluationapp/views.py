@@ -475,8 +475,8 @@ def admin_areas(request):
     contexto = {
         'entity': areas,
         'paginator': paginator,
-        'titulo': 'Areas',
-        'page': 'Areas',
+        'titulo': 'Área',
+        'page': 'Áreas',
     }
     return render(request, "admin/adminArea.html", contexto)
 
@@ -484,8 +484,8 @@ def admin_areas(request):
 def agregar_areas(request):
     contexto = {
         'form': AreaFrom(),
-        'titulo': 'Areas',
-        'page': 'Areas',
+        'titulo': 'Área',
+        'page': 'Áreas',
     }
 
     if request.method == 'POST':
@@ -504,7 +504,7 @@ def editar_area(request, id):
 
     data = {
         'form':  AreaFrom(instance=areas),
-        'page': 'Areas',
+        'page': 'Áreas',
     }
 
     if request.method == 'POST':
