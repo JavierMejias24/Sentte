@@ -1,5 +1,5 @@
 from django import forms
-from django.forms.widgets import HiddenInput
+from django.forms import widgets
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -66,14 +66,6 @@ class EmpleadoForm(forms.ModelForm):
             ),
         }
 
-class PerilForm(forms.ModelForm):
-    class Meta:
-        model = Perfil
-        fields = '__all__'
-        labels = {
-            'NombrePerfil': 'Nombre Perfil'
-        }
-      
 class PerfilRolForm(forms.ModelForm):
     class Meta:
         model = PerfilRol
@@ -90,9 +82,6 @@ class PerfilRolForm(forms.ModelForm):
                     (1, "Evaluador"),
                     (2, "Evaluado"),
                     (3, "Calibrador"),
-                },
-                attrs = {
-                    'class':'form-select'
                 }
             ),
             'RelacionEvaluado': forms.TextInput(
@@ -101,18 +90,8 @@ class PerfilRolForm(forms.ModelForm):
                     'placeholder': 'Ingrese la relación',
                 }
             ),
-            'NombreEvaluador': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder':'Ingrese nombre Evaluador'
-                }
-            ),
-            'NombreCalibrador': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder':'Ingrese nombre Calibrador'
-                }
-            ),
+            'NombreEvaluador': forms.TextInput(),
+            'NombreCalibrador': forms.TextInput(),
         }
 
 class CargoForm(forms.ModelForm):
@@ -237,7 +216,7 @@ class AreaFrom(forms.ModelForm):
             ),
             'IdArea': forms.Select(
                 attrs = {
-                    'class':'form-select'
+                    'class':'form-select' 
                 }
             )
         }
@@ -264,7 +243,37 @@ class SubgerenciaForm(forms.ModelForm):
             )
         }
 
-class EvaluacionForm(forms.ModelForm):
+
+class PlanAccionForm(forms.ModelForm):
+    class Meta:
+        model = PlanAccion
+        fields = ['Accion', 'Medicion']
+        labels = {
+            'Accion': 'Accion',
+            'Medicion': 'Medicion'
+        }
+        widgets = {
+            'Accion': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una accion',
+                }
+            ),
+            'Medicion': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una medicion',
+                }
+            )
+        }
+class DetalleEvaluacionForm(forms.ModelForm):
     class Meta:
         model = DetalleEv
         fields = '__all__'
+
+
+class EvaluacionForm(forms.ModelForm):
+
+    class Meta:
+        model = Evaluacion
+        fields =['Estado', 'Fase', 'ComentarioCalibrador', 'IdEmpleado']

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.db.models.deletion import CASCADE
 from django.core.validators import RegexValidator, EmailValidator
 from django.contrib.auth.models import User
@@ -6,7 +7,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Gerencia(models.Model):
-    NombreGerencia = models.CharField(max_length=50, unique=True ,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    NombreGerencia = models.CharField(max_length=50, unique=True ,validators=[RegexValidator(regex=r'^[a-zA-Z]')])
 
     def __str__(self):
         return self.NombreGerencia
@@ -58,8 +59,8 @@ class PerfilRol(models.Model):
     ]
     Rol = models.IntegerField(choices=Roles, default=1)
     RelacionEvaluado = models.CharField(max_length=50, blank=True, default='',validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    NombreEvaluador = models.CharField(max_length=100, null=True, blank=True, default='')
-    NombreCalibrador = models.CharField(max_length=100, null=True, blank=True, default='')
+    NombreEvaluador = models.CharField(Empleado, max_length=100, null=True, blank=True)
+    NombreCalibrador = models.CharField(Empleado, max_length=100, null=True, blank=True)
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE)
 
     def __str__(self):
@@ -68,15 +69,17 @@ class PerfilRol(models.Model):
 class Evaluacion(models.Model):
     Estado = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Fase = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    ComentarioCalibrador = models.CharField(max_length=80, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    ComentarioCalibrador = models.CharField(max_length=80,  null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 
+    def __str__(self):
+        return self.Estado
 class PlanAccion(models.Model):
     Accion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Medicion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
 
 class DetalleEv(models.Model):
-    FechaEvaluacion = models.DateField()
+    FechaEvaluacion = models.DateTimeField(default=timezone.now)
     ComentarioEvaluador = models.CharField(max_length=100, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Calificacion = models.IntegerField(validators=[RegexValidator(regex=r'^[0-9]')])
     AutoEvaluacion = models.IntegerField(validators=[RegexValidator(regex=r'^[0-9]')])

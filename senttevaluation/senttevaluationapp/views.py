@@ -459,7 +459,71 @@ def eliminar_subgerencia(request, id):
     messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminSubgerencias")
 # -----------------------------------------------------------------------------------------------.
+# -- ------------ Area ----------------.
 
+@login_required
+def admin_areas(request):
+    areas  = Area.objects.all().order_by('NombreArea')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(areas, 10)
+        areas = paginator.page(page)
+    except:
+        Http404
+
+    contexto = {
+        'entity': areas,
+        'paginator': paginator,
+        'titulo': 'Areas',
+        'page': 'Areas',
+    }
+    return render(request, "admin/adminArea.html", contexto)
+
+@login_required
+def agregar_areas(request):
+    contexto = {
+        'form': AreaFrom(),
+        'titulo': 'Areas',
+        'page': 'Areas',
+    }
+
+    if request.method == 'POST':
+        formulario = AreaFrom(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Guardada con éxito" )
+            return HttpResponseRedirect("adminArea")
+        else:
+            contexto["form"] = formulario
+    return render(request, "admin/adminAgregarArea.html", contexto)
+
+@login_required
+def editar_area(request, id):
+    areas = get_object_or_404(Area, id=id)
+
+    data = {
+        'form':  AreaFrom(instance=areas),
+        'page': 'Areas',
+    }
+
+    if request.method == 'POST':
+        formulario = AreaFrom(data=request.POST, instance=areas)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Editada con éxito" )
+            return redirect(to="adminArea")
+        else:
+            data["form"] = formulario
+    return render(request, "admin/adminAreaModificar.html", data)
+
+@login_required
+def eliminar_area(request, id):
+    areas = get_object_or_404(Area, id=id)
+    areas.delete()
+    messages.success(request, "Eliminada con éxito" )
+    return redirect(to="adminArea")
+# -----------------------------------------------------------------------------------------------.
 # -- ------------ Empleado ----------------.
 @login_required
 def admin_usuarios(request):
@@ -494,8 +558,10 @@ def agregar_usuario(request):
         form = UserForm(request.POST)
         formEmpleado = EmpleadoForm(request.POST, request.FILES)
         formPerfilrol = PerfilRolForm(request.POST)
+        formEvaluacion = EvaluacionForm()
 
         if form.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
+
             usuario = formEmpleado.save(commit=False)
             usuario.user = form.save()
             usuario.save()
@@ -503,6 +569,13 @@ def agregar_usuario(request):
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
             cuentausuario = form.save()
+
+            evaluaciones = formEvaluacion.save(commit=False)
+            evaluaciones.Estado = "Pendiente"
+            evaluaciones.Fase = "Planificacion"
+            evaluaciones.IdEmpleado = formEmpleado.save()
+            evaluaciones.save()
+
 
             #Permiso Cargos
             content_type = ContentType.objects.get_for_model(Cargo)
@@ -602,7 +675,17 @@ def eliminar_usuario(request, id):
     return redirect(to="adminUsuarios")
 
 # -----------------------------------------------------------------------------------------------.
+# ----------------------------------  Indicadores(graficos)  ---------------------------------.
 
+@login_required
+def admin_indicadores(request):
+    contexto = {
+        'page': 'Inidicadores',
+    }
+    return render(request, "admin/adminIndicadores.html", contexto)
+
+
+# -----------------------------------------------------------------------------------------------.
 @login_required
 def admin_ayuda(request):
     contexto = {
@@ -623,9 +706,11 @@ def evaluador_inicio(request):
 @login_required
 def evaluador_evaluacion(request):
     empleados = Empleado.objects.all()
+    evaluacion = Evaluacion.objects.all()
 
     contexto = {
         'empleados':empleados,
+        'evaluacion':evaluacion,
         'page': 'Evaluación',
     }
     return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
@@ -649,14 +734,24 @@ def evaluador_formulario(request, id):
     empleados = get_object_or_404(Empleado, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
-
+    
     data = {
         'empleados': Empleado.objects.get(Nombre = empleados),
         'competencias':competencias,
         'accionclaves':accionclaves,
-        'page': 'Formulario',
+        'page': 'Formulario', 
+        'form': PlanAccionForm(),
+        'form2': DetalleEvaluacionForm(),
     }
-    return render(request, "evaluador/evaluadorFormulario.html", data)
+    if request.method == 'POST':
+        formulario = PlanAccionForm(request.POST)
+        formulario2 = DetalleEvaluacionForm(request.POST)
+        if formulario.is_valid() and formulario2.is_valid():
+            formulario.save()
+            formulario2.save()
+            messages.success(request,'Guardado el plan de accion')   
+            return redirect(to="evaluadorEvaluacion")
+    return render(request, "evaluador/evaluadorFormulario.html",data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required
