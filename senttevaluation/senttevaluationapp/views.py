@@ -740,7 +740,7 @@ def evaluador_formulario(request, id):
         'accionclaves':accionclaves,
         'page': 'Formulario', 
         'form': PlanAccionForm(),
-        'form2': DetalleEvaluacionForm(),
+        'form2': DetalleEvaluacionForm()
     }
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
@@ -767,11 +767,14 @@ def evaluador_formulario2(request, id):
         'form2': DetalleEvaluacionForm(),
     }
     if request.method == 'POST':
-        formulario = PlanAccionForm(request.POST)
         formulario2 = DetalleEvaluacionForm(request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            
+
+        if formulario2.is_valid():
+            formulario2.IdEvaluacion = 11
+            formulario2.IdPlanAccion = 4
+            formulario2.AutoEvaluacion = 3
+            formulario2.save()
+
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario2.html",data)
