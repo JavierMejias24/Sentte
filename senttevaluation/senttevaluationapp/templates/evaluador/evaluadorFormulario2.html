@@ -15,6 +15,8 @@
         <br><br><br>
         <div class="container-fluid">
             <div id="accordion">
+                <form method="POST">
+                {%csrf_token%}
                 {% for competencia in competencias %}
                     {% if empleados.IdPerfil == competencia.IdPerfil%}
                         <div class="card">
@@ -31,16 +33,24 @@
                                             {{ competencia.Definicion}}
                                             <br><br>
                                         </div>
-                                        <p class="text-primary">Comportamientos esperados</p>  
+                                        <p class="text-primary">Acciones Clave</p>  
                                         <ul class="nav-links">
                                             {% for accionclave in accionclaves %}
                                             {% if competencia.NombreCompetencia == accionclave.IdCompetencia.NombreCompetencia %}
                                             <div class="row">
-                                             <p>
-                                                {{ accionclave.Descripcion }} 
-                                             </p>
+                                                <div class="col-sm-9">
+                                                    <p>
+                                                        {{ accionclave.Descripcion }} 
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p>
+                                                        {{form2.Calificacion}}
+                                                    </p>
+                                                </div>
+                                              </div>
                                             {% endif %}
-                                            {% endfor %}  
+                                            {% endfor %}   
                                         </ul>
                                     </div>
                                 </div>
@@ -50,32 +60,26 @@
                 {% endfor %}
                 <br><br><br>
                 <div class="card">
-                    <div class="card-header">Plan de accion</div>
+                    <div class="card-header">Observacion</div>
                     <div class="card-body">
                         <div class="col-sm-12">  
                             <form action="" method="POST"> 
                                 {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="{{form.Accion.name}}">{{form.Accion.label}}</label>
-                                        {{ form.Accion }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="{{form.Medicion.name}}">{{form.Medicion.label}}</label>
-                                        {{ form.Medicion }}
-                                    </div>
-                                  </div> 
-                                  <br><br>
-                                <div class="d-flex justify-content-end" style="margin-right: 30%;">
-                                    <input type="submit" value="Guardar" class="btn btn-primary" style="width: 250px;">
-                                    &nbsp;
-                                    <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 250px;">Cancelar</a>
-                                </div>
+                                {{ form2.ComentarioEvaluador  }} 
+                                
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="d-flex justify-content-end" style="margin-right: 30%;">
+                <input type="submit" value="Guardar" class="btn btn-primary" style="width: 250px;">
+                &nbsp;
+                <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 250px;">Cancelar</a>
+            </div>
+            </form>
+            <br><br><br>
         </div>
     </section>
     <br><br><br>

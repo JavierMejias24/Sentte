@@ -576,7 +576,6 @@ def agregar_usuario(request):
             evaluaciones.IdEmpleado = formEmpleado.save()
             evaluaciones.save()
 
-
             #Permiso Cargos
             content_type = ContentType.objects.get_for_model(Cargo)
             permission1 = Permission.objects.get( codename = 'view_cargo', content_type = content_type)
@@ -752,6 +751,30 @@ def evaluador_formulario(request, id):
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario.html",data)
+
+@login_required
+def evaluador_formulario2(request, id):
+    empleados = get_object_or_404(Empleado, id=id)
+    competencias = Competencia.objects.all()
+    accionclaves = AccionClave.objects.all()
+    
+    data = {
+        'empleados': Empleado.objects.get(Nombre = empleados),
+        'competencias':competencias,
+        'accionclaves':accionclaves,
+        'page': 'Formulario', 
+        'form': PlanAccionForm(),
+        'form2': DetalleEvaluacionForm(),
+    }
+    if request.method == 'POST':
+        formulario = PlanAccionForm(request.POST)
+        formulario2 = DetalleEvaluacionForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            
+            messages.success(request,'Guardado el plan de accion')   
+            return redirect(to="evaluadorEvaluacion")
+    return render(request, "evaluador/evaluadorFormulario2.html",data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required
