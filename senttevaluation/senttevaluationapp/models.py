@@ -40,7 +40,7 @@ class Cargo(models.Model):
         return self.NombreCargo
 
 class Empleado(models.Model):
-    Rut = models.CharField(max_length=12, null=False, unique=True, validators=[RegexValidator(regex=r'^(\d{1,3}(?:.\d{1,3}){2}-[\dkK])$' )])
+    Rut = models.CharField(max_length=12, null=False, unique=True, validators=[RegexValidator(regex=r'\b\d{1,2}.\d{3}.\d{3}-[K|k|0-9]' )])
     Nombre = models.CharField(max_length=100, null=False, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     FechaIngreso = models.DateField(null=False)
     Correo = models.CharField(max_length=100, null=False, unique=True, validators=[EmailValidator])

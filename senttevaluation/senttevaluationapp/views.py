@@ -43,7 +43,7 @@ def admin_inicio(request):
 def admin_acciones(request):
     accioneclaves = AccionClave.objects.all().order_by('id')
     page = request.GET.get('page', 1)
-    valor = request.GET.get('Select', 10)
+    valor = request.POST.get('Select', 10)
 
     try:
         paginator = Paginator(accioneclaves, valor)
