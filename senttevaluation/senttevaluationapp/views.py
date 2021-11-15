@@ -1,3 +1,4 @@
+from typing import ValuesView
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.db.models.query_utils import Q
@@ -42,18 +43,20 @@ def admin_inicio(request):
 def admin_acciones(request):
     accioneclaves = AccionClave.objects.all().order_by('id')
     page = request.GET.get('page', 1)
+    valor = request.GET.get('Select', 10)
 
     try:
-        paginator = Paginator(accioneclaves, 10)
+        paginator = Paginator(accioneclaves, valor)
         accioneclaves = paginator.page(page)
     except:
         Http404
 
     contexto = {
-        'entity':accioneclaves,
+        'entity': accioneclaves,
         'paginator': paginator,
         'titulo': 'Cargo',
         'page': 'Acciones',
+        'form': RegistrosForm(),
     }
     return render(request, "admin/adminAcciones.html", contexto)
 
