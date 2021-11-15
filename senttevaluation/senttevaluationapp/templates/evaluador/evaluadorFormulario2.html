@@ -12,46 +12,50 @@
                 </div>
             </div>
         </div>
-        <br><br><br>
+        <br><br><br><br>
         <div class="container-fluid">
             <div id="accordion">
-                <form method="POST">
-                {%csrf_token%}
                 {% for competencia in competencias %}
                     {% if empleados.IdPerfil == competencia.IdPerfil%}
                         <div class="card">
-                            <div class="card-header">
-                                <a class="card-link" data-toggle="collapse">
-                                    Competencia: {{ competencia.NombreCompetencia}}
+                            <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                                <a class="card-link" data-toggle="collapse" style="color:white">
+                                    <h4>Competencia: {{ competencia.NombreCompetencia}}</h4>
                                 </a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-11">
-                                            <p class="text-primary">Definicion:</p>  
+                                        <div class="col-sm-12">
+                                            <b>Definicion:</b>
                                             {{ competencia.Definicion}}
                                             <br><br>
                                         </div>
-                                        <p class="text-primary">Acciones Clave</p>  
-                                        <ul class="nav-links">
+                                        <div class="row" style="text-align:center">
+                                            <div class="col-sm-10">
+                                                <h5><b>Acciones clave</b><h5>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <h5><b>Calificación</b><h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
                                             {% for accionclave in accionclaves %}
-                                            {% if competencia.NombreCompetencia == accionclave.IdCompetencia.NombreCompetencia %}
-                                            <div class="row">
-                                                <div class="col-sm-9">
-                                                    <p>
-                                                        {{ accionclave.Descripcion }} 
-                                                    </p>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <p>
-                                                        {{form2.Calificacion}}
-                                                    </p>
-                                                </div>
-                                              </div>
-                                            {% endif %}
-                                            {% endfor %}   
-                                        </ul>
+                                                {% if competencia.NombreCompetencia == accionclave.IdCompetencia.NombreCompetencia %}
+                                                    <div class="row">
+                                                        <p>
+                                                            <div class="col-sm-10">
+                                                                {{ accionclave.Descripcion }}
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                {{ form2.Calificacion }}
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                    <hr>
+                                                {% endif %}
+                                            {% endfor %}  
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -60,22 +64,31 @@
                 {% endfor %}
                 <br><br><br>
                 <div class="card">
-                    <div class="card-header">Observacion</div>
+                    <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                        <a class="card-link" data-toggle="collapse" style="color:white">
+                            <h4>Observacion</h4>
+                        </a>
+                    </div>
                     <div class="card-body">
                         <div class="col-sm-12">  
-                            {{ form2.ComentarioEvaluador }}  
+                            <form action="" method="POST"> 
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form2.ComentarioEvaluador }}
+                                    </div>
+                                  </div> 
+                                  <br><br>
+                                <div class="d-flex justify-content-end" style="margin-right: 30%;">
+                                    <input type="submit" value="Guardar" class="btn btn-primary" style="width: 250px;">
+                                    &nbsp;
+                                    <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 250px;">Cancelar</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="d-flex justify-content-end" style="margin-right: 30%;">
-                <input type="submit" value="Guardar" class="btn btn-primary" style="width: 250px;">
-                &nbsp;
-                <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 250px;">Cancelar</a>
-            </div>
-            </form>
-            <br><br><br>
         </div>
     </section>
     <br><br><br>
