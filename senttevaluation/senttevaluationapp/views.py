@@ -559,6 +559,8 @@ def agregar_usuario(request):
         formEmpleado = EmpleadoForm(request.POST, request.FILES)
         formPerfilrol = PerfilRolForm(request.POST)
         formEvaluacion = EvaluacionForm()
+        formPlanAccion = PlanAccionForm(request.POST)
+        formDetalle = DetalleEvaluacionForm()
 
         if form.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
 
@@ -572,9 +574,10 @@ def agregar_usuario(request):
 
             evaluaciones = formEvaluacion.save(commit=False)
             evaluaciones.Estado = "Pendiente"
-            evaluaciones.Fase = "Planificacion"
+            evaluaciones.Fase = "Evaluacion"
             evaluaciones.IdEmpleado = formEmpleado.save()
             evaluaciones.save()
+
 
             #Permiso Cargos
             content_type = ContentType.objects.get_for_model(Cargo)
@@ -730,23 +733,26 @@ def evaluador_ayuda(request):
 
 @login_required
 def evaluador_formulario(request, id):
-    empleados = get_object_or_404(Empleado, id=id)
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
     
     data = {
-        'empleados': Empleado.objects.get(Nombre = empleados),
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario', 
         'form': PlanAccionForm(),
-        'form2': DetalleEvaluacionForm()
     }
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
-        formulario2 = DetalleEvaluacionForm(request.POST)
+
         if formulario.is_valid():
-            formulario.save()
+            evaluacionid = Evaluacion.objects.get(id = id)
+            plan = formulario.save(commit=False)
+            plan.IdEvaluacion = evaluacionid
+            plan.save()
+            
             
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")

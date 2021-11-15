@@ -59,9 +59,9 @@
                                     </div>
                                     <br>
                                     {% if  "Pendiente" in evaluacion.Estado %}
-                                    <a href="{% url 'evaluadorFormulario' evaluacion.IdEmpleado.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                    <a href="{% url 'evaluadorFormulario' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                     {% else %}
-                                    <a href="{% url 'evaluadorFormulario2' evaluacion.IdEmpleado.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                    <a href="{% url 'evaluadorFormulario2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                     {% endif %}
                                 </form>
                             </div>

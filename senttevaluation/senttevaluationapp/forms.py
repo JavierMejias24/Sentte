@@ -281,7 +281,20 @@ class DetalleEvaluacionForm(forms.ModelForm):
                     'placeholder':'Ingrese una observacion',
                 }
             ),
-            'Calificacion': forms.TextInput(),
+            'Calificacion': forms.Select(
+                attrs={
+                    'class':'form-select'
+                },
+                 choices = {
+                    (1, 1),
+                    (2, 2),
+                    (3, 3),
+                    (4, 4),
+                    (5, 5),
+                    (6, 6),
+                    (7, 7),
+                }
+            ),
             'AutoEvaluacion': forms.TextInput(),
         }
 
@@ -290,4 +303,4 @@ class EvaluacionForm(forms.ModelForm):
 
     class Meta:
         model = Evaluacion
-        fields =['Estado', 'Fase', 'ComentarioCalibrador', 'IdEmpleado']
+        fields = '__all__'
