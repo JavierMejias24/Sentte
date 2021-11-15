@@ -50,6 +50,7 @@
                                 <form method="post" action="">
                                     <p>Rut: {{evaluacion.IdEmpleado.Rut}}</p>
                                     <p>Nombre: {{evaluacion.IdEmpleado}}</p>
+                                    <p>Perfil: {{evaluacion.IdEmpleado.IdPerfil}}</p>
                                     <div>
                                         Estado: 
                                         <div class="badge badge-pill badge-danger" style="font-size:11px">
@@ -57,7 +58,11 @@
                                         </div>
                                     </div>
                                     <br>
+                                    {% if  "Pendiente" in evaluacion.Estado %}
                                     <a href="{% url 'evaluadorFormulario' evaluacion.IdEmpleado.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                    {% else %}
+                                    <a href="{% url 'evaluadorFormulario2' evaluacion.IdEmpleado.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                    {% endif %}
                                 </form>
                             </div>
                         </div>

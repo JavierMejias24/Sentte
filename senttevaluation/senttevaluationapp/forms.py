@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import widgets
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -269,7 +268,22 @@ class PlanAccionForm(forms.ModelForm):
 class DetalleEvaluacionForm(forms.ModelForm):
     class Meta:
         model = DetalleEv
-        fields = '__all__'
+        fields = ['ComentarioEvaluador', 'Calificacion', 'AutoEvaluacion']
+        labels = {
+            'ComentarioEvaluador': 'Observacion',
+            'Calificacion' : 'Calificacion',
+            'AutoEvaluacion' : 'AutoEvaluacion'
+        }
+        widgets = { 
+            'ComentarioEvaluador': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una observacion',
+                }
+            ),
+            'Calificacion': forms.TextInput(),
+            'AutoEvaluacion': forms.TextInput(),
+        }
 
 
 class EvaluacionForm(forms.ModelForm):
