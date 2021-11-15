@@ -78,10 +78,19 @@ class PlanAccion(models.Model):
     Medicion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
 
 class DetalleEv(models.Model):
+    Notas = [
+        (1,1),
+        (2,2),
+        (3,3),
+        (4,4),
+        (5,5),
+        (6,6),
+        (7,7),
+    ]
     FechaEvaluacion = models.DateTimeField(default=timezone.now)
     ComentarioEvaluador = models.CharField(max_length=100, null=True, blank=True,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    Calificacion = models.IntegerField( null=True, blank=True, validators=[RegexValidator(regex=r'^[0-9]')])
-    AutoEvaluacion = models.IntegerField( null=True, blank=True, validators=[RegexValidator(regex=r'^[0-9]')])
+    Calificacion = models.IntegerField(null=True, blank=True, choices=Notas)
+    AutoEvaluacion = models.IntegerField(null=True, blank=True, validators=[RegexValidator(regex=r'^[0-9]')])
     IdEvaluacion = models.ForeignKey(Evaluacion, on_delete=CASCADE, default=1)
     IdPlanAccion = models.ForeignKey(PlanAccion, on_delete=CASCADE, default=1)
 

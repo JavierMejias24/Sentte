@@ -71,7 +71,7 @@ class PerfilRolForm(forms.ModelForm):
         fields = ['Rol', 'RelacionEvaluado', 'NombreEvaluador', 'NombreCalibrador']
         labels = {
             'Rol': 'Rol',
-            'RelacionEvaluado': 'Relacion con el evaluado',
+            'RelacionEvaluado': 'Relación con el evaluado',
             'NombreEvaluador': 'Nombre del evaluador',
             'NombreCalibrador': 'Nombre del calibrador',
         }
@@ -121,7 +121,7 @@ class CompetenciaForm(forms.ModelForm):
         fields = ['NombreCompetencia', 'Definicion', 'IdPerfil']
         labels = {
             'NombreCompetencia': 'Nombre competencia',
-            'Definicion': 'Definicion',
+            'Definicion': 'Definición',
             'IdPerfil': 'Perfil',
         }
         widgets = {
@@ -248,43 +248,37 @@ class PlanAccionForm(forms.ModelForm):
         model = PlanAccion
         fields = ['Accion', 'Medicion']
         labels = {
-            'Accion': 'Accion',
-            'Medicion': 'Medicion'
+            'Accion': 'Acción',
+            'Medicion': 'Medición'
         }
         widgets = {
             'Accion': forms.Textarea(
                 attrs={
                     'class':'form-control',
-                    'placeholder':'Ingrese una accion',
+                    'placeholder':'Ingrese una acción',
                 }
             ),
             'Medicion': forms.Textarea(
                 attrs={
                     'class':'form-control',
-                    'placeholder':'Ingrese una medicion',
+                    'placeholder':'Ingrese una medición',
                 }
             )
         }
 class DetalleEvaluacionForm(forms.ModelForm):
     class Meta:
         model = DetalleEv
-        fields = ['ComentarioEvaluador', 'Calificacion', 'AutoEvaluacion']
+        fields = ['Calificacion']
         labels = {
-            'ComentarioEvaluador': 'Observacion',
-            'Calificacion' : 'Calificacion',
-            'AutoEvaluacion' : 'AutoEvaluacion'
+            'Calificacion' : '',
         }
-        widgets = { 
-            'ComentarioEvaluador': forms.Textarea(
-                attrs={
-                    'class':'form-control',
-                    'placeholder':'Ingrese una observacion',
+        widgets = {
+            'Calificacion': forms.Select(
+                attrs = {
+                    'class':'form-select',
                 }
             ),
-            'Calificacion': forms.TextInput(),
-            'AutoEvaluacion': forms.TextInput(),
         }
-
 
 class EvaluacionForm(forms.ModelForm):
 
