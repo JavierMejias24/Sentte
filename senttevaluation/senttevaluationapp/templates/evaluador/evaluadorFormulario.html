@@ -12,36 +12,42 @@
                 </div>
             </div>
         </div>
-        <br><br><br>
+        <br><br><br><br>
         <div class="container-fluid">
             <div id="accordion">
                 {% for competencia in competencias %}
                     {% if empleados.IdPerfil == competencia.IdPerfil%}
                         <div class="card">
-                            <div class="card-header">
-                                <a class="card-link" data-toggle="collapse">
-                                    Competencia: {{ competencia.NombreCompetencia}}
+                            <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                                <a class="card-link" data-toggle="collapse" style="color:white">
+                                    <h5>Competencia: {{ competencia.NombreCompetencia}}</h5>
                                 </a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-11">
-                                            <p class="text-primary">Definicion:</p>  
+                                        <div class="col-sm-12">
+                                            <b>Definicion:</b>
                                             {{ competencia.Definicion}}
                                             <br><br>
                                         </div>
-                                        <p class="text-primary">Comportamientos esperados</p>  
-                                        <ul class="nav-links">
+                                        <div class="row" style="text-align:center">
+                                            <h5><b>Acciones clave</b><h5>
+                                        </div>
+                                        <div class="col-sm-12">
                                             {% for accionclave in accionclaves %}
-                                            {% if competencia.NombreCompetencia == accionclave.IdCompetencia.NombreCompetencia %}
-                                            <div class="row">
-                                             <p>
-                                                {{ accionclave.Descripcion }} 
-                                             </p>
-                                            {% endif %}
+                                                {% if competencia.NombreCompetencia == accionclave.IdCompetencia.NombreCompetencia %}
+                                                    <div class="row">
+                                                        <p>
+                                                            <div class="col-sm-10">
+                                                                {{ accionclave.Descripcion }}
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                    <hr>
+                                                {% endif %}
                                             {% endfor %}  
-                                        </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -50,13 +56,16 @@
                 {% endfor %}
                 <br><br><br>
                 <div class="card">
-                    <div class="card-header">Plan de accion</div>
+                    <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                        <a class="card-link" data-toggle="collapse" style="color:white">
+                            <h5>Observacion</h5>
+                        </a>
+                    </div>
                     <div class="card-body">
-                        <div class="col-sm-12">  
+                        <div class="col-md-12 col-sm-12" style="text-align:center">  
                             <form action="" method="POST"> 
                                 {% csrf_token %}
                                 <div class="row">
-                                    {% if evaluacion.IdPlanAccion == planaccion.Id %}
                                     <div class="col-sm-6">
                                         <label for="{{form.Accion.name}}">{{form.Accion.label}}</label>
                                         {{ form.Accion }}
@@ -65,13 +74,16 @@
                                         <label for="{{form.Medicion.name}}">{{form.Medicion.label}}</label>
                                         {{ form.Medicion }}
                                     </div>
-                                  </div> 
-                                  <br><br>
-                                <div class="d-flex justify-content-end" style="margin-right: 30%;">
-                                    <input type="submit" value="Guardar" class="btn btn-primary" style="width: 250px;">
+                                </div> 
+                                <br><br>
+                                <div class="row" style="text-align:center">
+                                    <div class="col-sm-4 offset-md-2">
+                                        <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
+                                    </div>
                                     &nbsp;
-                                    <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 250px;">Cancelar</a>
-                                    {%endif%}
+                                    <div class="col-sm-4">
+                                        <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
