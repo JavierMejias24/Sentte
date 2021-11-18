@@ -15,6 +15,8 @@
         <br><br><br><br>
         <div class="container-fluid">
             <div id="accordion">
+                <form action="" method="POST">
+                {% csrf_token %}
                 {% for competencia in competencias %}
                     {% if empleados.IdPerfil == competencia.IdPerfil%}
                         <div class="card">
@@ -71,11 +73,19 @@
                     </div>
                     <div class="card-body">
                         <div class="col-sm-12">  
-                            <form action="" method="POST"> 
-                                {% csrf_token %}
+                            
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        {{ form }}
+                                        <div hidden>
+                                            {{ form.Estado }}
+                                            {{ form.Fase }}
+                                            {{ form.ComentarioCalibrador }}
+                                            {{ form.FechaEvaluacion }}
+                                            
+                                            {{ form.AutoEvaluacion }}
+                                            {{ form.IdEmpleado }}
+                                        </div>
+                                        {{ form.ComentarioEvaluador }}
                                     </div>
                                 </div> 
                                 <br><br>
@@ -88,10 +98,11 @@
                                         <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
                                     </div>
                                 </div>
-                            </form>
+                           
                         </div>
                     </div>
                 </div>
+             </form>
             </div>
         </div>
     </section>

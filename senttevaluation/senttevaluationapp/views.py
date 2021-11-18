@@ -792,9 +792,13 @@ def evaluador_formulario2(request, id):
         formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
 
         if formulario.is_valid():
+
+     
+            print(formulario.cleaned_data.get("ComentarioEvaluador"))
+            
             evaluacionid = Evaluacion.objects.get(id = id)
             
-            evaluacionid.ComentarioEvaluador = formulario
+            
     
             formulario.save()
 
