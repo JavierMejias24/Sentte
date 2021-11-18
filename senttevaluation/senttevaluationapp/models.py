@@ -74,7 +74,7 @@ class Evaluacion(models.Model):
     ComentarioCalibrador = models.CharField(max_length=80,  null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     FechaEvaluacion = models.DateTimeField(default=timezone.now)
     ComentarioEvaluador = models.CharField(max_length=100, null=True, blank=True,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    Calificacion = models.IntegerField( null=True, blank=True, validators=[RegexValidator(regex=r'^[0-9]')])
+    Calificacion = models.IntegerField( null=True, blank=True, default=1, validators=[RegexValidator(regex=r'^[0-9]')])
     AutoEvaluacion = models.IntegerField( null=True, blank=True, validators=[RegexValidator(regex=r'^[0-9]')])
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 

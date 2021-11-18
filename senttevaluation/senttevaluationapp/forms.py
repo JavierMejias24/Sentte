@@ -304,3 +304,25 @@ class EvaluacionForm(forms.ModelForm):
     class Meta:
         model = Evaluacion
         fields = '__all__'
+        widgets = {
+            'Calificacion': forms.Select(
+                attrs={
+                    'class':'form-select'
+                },
+                 choices = {
+                    (1, 1),
+                    (2, 2),
+                    (3, 3),
+                    (4, 4),
+                    (5, 5),
+                    (6, 6),
+                    (7, 7),
+                }
+            ),
+            'ComentarioEvaluador': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una observacion',
+                }
+            )
+        }

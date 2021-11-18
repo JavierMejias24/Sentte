@@ -718,11 +718,25 @@ def evaluador_evaluacion(request):
     return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
 
 @login_required
-def evaluador_autovaluacion(request):
-    contexto = {
-        'page': 'Autoevaluación',
+def evaluador_autovaluacion(request, id):
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
+    competencias = Competencia.objects.all()
+    accionclaves = AccionClave.objects.all()
+    
+    data = {
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
+        'competencias':competencias,
+        'accionclaves':accionclaves,
+        'page': 'AutoEvaluacion', 
+        'form': EvaluacionForm(),
     }
-    return render(request, "evaluador/evaluadorAutovaluacion.html", contexto)
+   
+    evaluacionid = Evaluacion.objects.get(id = id)
+    evaluacionid.Fase = "Planificacion"
+             
+    messages.success(request,'Guardado el plan de accion')   
+        
+    return render(request, "evaluador/evaluadorAutovaluacion.html",data)
 
 @login_required
 def evaluador_ayuda(request):
@@ -743,6 +757,7 @@ def evaluador_formulario(request, id):
         'accionclaves':accionclaves,
         'page': 'Formulario', 
         'form': PlanAccionForm(),
+        'form2': EvaluacionForm()
     }
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
@@ -753,33 +768,34 @@ def evaluador_formulario(request, id):
             plan.IdEvaluacion = evaluacionid
             plan.save()
             
-            
+            evaluacionid.Estado = "Finalizado"
+            evaluacionid.save()
+
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario.html",data)
 
 @login_required
 def evaluador_formulario2(request, id):
-    empleados = get_object_or_404(Empleado, id=id)
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
     
     data = {
-        'empleados': Empleado.objects.get(Nombre = empleados),
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario', 
-        'form': PlanAccionForm(),
-        'form2': DetalleEvaluacionForm(),
+        'form': EvaluacionForm(),
     }
     if request.method == 'POST':
-        formulario2 = DetalleEvaluacionForm(request.POST)
+        formulario = EvaluacionForm(request.POST)
 
-        if formulario2.is_valid():
-            formulario2.IdEvaluacion = 11
-            formulario2.IdPlanAccion = 4
-            formulario2.AutoEvaluacion = 3
-            formulario2.save()
+        if formulario.is_valid():
+
+            evaluacion = formulario.save(commit=False)
+            evaluacion.id = Evaluacion.objects.get(id = id)
+            evaluacion.save()
 
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")

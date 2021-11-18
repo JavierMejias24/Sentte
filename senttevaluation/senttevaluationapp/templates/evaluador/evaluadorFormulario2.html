@@ -48,7 +48,7 @@
                                                                 {{ accionclave.Descripcion }}
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                {{ form2.Calificacion }}
+                                                                {{ form.Calificacion }}
                                                             </div>
                                                         </p>
                                                     </div>
@@ -75,19 +75,19 @@
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        {{ form2.ComentarioEvaluador }}
+                                        {{ form.ComentarioEvaluador }}
                                     </div>
-                                  </div> 
-                                  <br><br>
-                                  <div class="row" style="text-align:center">
-                                      <div class="col-sm-4 offset-md-2">
-                                          <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
-                                      </div>
-                                      &nbsp;
-                                      <div class="col-sm-4">
-                                          <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
-                                      </div>
-                                  </div>
+                                </div> 
+                                <br><br>
+                                <div class="row" style="text-align:center">
+                                    <div class="col-sm-4 offset-md-2">
+                                        <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
+                                    </div>
+                                    &nbsp;
+                                    <div class="col-sm-4">
+                                        <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

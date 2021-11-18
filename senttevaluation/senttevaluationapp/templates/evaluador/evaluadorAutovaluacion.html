@@ -1,4 +1,5 @@
 {% include 'base.html' %}
+{% load crispy_forms_tags %}
 <body>
 {% include 'sidebars/adminSidebar.html' %}
     <section class="home-section">
@@ -11,32 +12,76 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
+        <br><br><br><br>
         <div class="container-fluid">
-            <h3>Aqui podra auto evaluarse segun sus competencias esperadas por la empresa</h3>
-            <br>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Fase Inicio</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <form method="post" action="">
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum excepturi consequatur 
-                                        voluptates debitis error consectetur, id inventore ducimus
-                                        incidunt suscipit cupiditate porro, eos officia repudiandae dolorum similique. Mollitia, nemo eaque!
-                                    </p>
-                                    <button type="button" >hola</button>
-                                </form>
+            <div id="accordion">
+                {% for competencia in competencias %}
+                    {% if empleados.IdPerfil == competencia.IdPerfil%}
+                        <div class="card">
+                            <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                                <a class="card-link" data-toggle="collapse" style="color:white">
+                                    <h5>Competencia: {{ competencia.NombreCompetencia}}</h5>
+                                </a>
                             </div>
+                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <b>Definicion:</b>
+                                            {{ competencia.Definicion}}
+                                            <br><br>
+                                        </div>
+                                        <div class="row" style="text-align:center">
+                                            <h5><b>Acciones clave</b><h5>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            {% for accionclave in accionclaves %}
+                                                {% if competencia.NombreCompetencia == accionclave.IdCompetencia.NombreCompetencia %}
+                                                    <div class="row">
+                                                        <p>
+                                                            <div class="col-sm-10">
+                                                                {{ accionclave.Descripcion }}
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                    <hr>
+                                                {% endif %}
+                                            {% endfor %}  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <br><br><br>
+                <div class="card">
+                    <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                        <a class="card-link" data-toggle="collapse" style="color:white">
+                            <h5>Confirmacion</h5>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12" style="text-align:center">  
+                            <form action="" method="POST"> 
+                                {% csrf_token %}
+                                {{form}}
+                                <br><br>
+                                <div class="row" style="text-align:center">
+                                    <div class="col-sm-4 offset-md-2">
+                                        <input type="submit" value="Confirmar" class="btn btn-primary" style="width: 200px;">
+                                    </div>
+                                    &nbsp;
+                                    <div class="col-sm-4">
+                                        <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <br><br><br>
 </body>
