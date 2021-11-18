@@ -110,9 +110,10 @@ def eliminar_acciones(request, id):
 def admin_cargos(request):
     cargos = Cargo.objects.all().order_by('NombreCargo')
     page = request.GET.get('page', 1)
+    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(cargos, 10)
+        paginator = Paginator(cargos, valor)
         cargos = paginator.page(page)
     except:
         Http404
@@ -122,6 +123,7 @@ def admin_cargos(request):
         'paginator': paginator,
         'titulo': 'Cargo',
         'page': 'Cargos',
+        'form': RegistrosForm(),
     }
     return render(request,"admin/adminCargos.html", contexto)
 
@@ -174,9 +176,10 @@ def eliminar_cargos(request, id):
 def admin_perfil(request):
     perfils = Perfil.objects.all()
     page = request.GET.get('page', 1)
+    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(perfils, 10)
+        paginator = Paginator(perfils, valor)
         perfils = paginator.page(page)
     except:
         Http404
@@ -187,6 +190,7 @@ def admin_perfil(request):
         'paginator': paginator,
         'titulo': 'Perfil',
         'page': 'Perfil',
+        'form': RegistrosForm()
     }
     return render(request,"admin/adminPerfil.html", contexto)
 
@@ -256,9 +260,10 @@ def admin_competencias(request):
     competencias = Competencia.objects.all().order_by('NombreCompetencia')
     perfil = Perfil.objects.all()
     page = request.GET.get('page', 1)
+    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(competencias, 10)
+        paginator = Paginator(competencias, valor)
         competencias = paginator.page(page)
     except:
         Http404
@@ -269,6 +274,7 @@ def admin_competencias(request):
         'paginator': paginator,
         'titulo': 'Competencia',
         'page': 'Competencias',
+        'form': RegistrosForm(),
     }
     return render(request, "admin/adminCompetencias.html", contexto1)
 
@@ -323,9 +329,10 @@ def eliminar_competencias(request, id):
 def admin_gerencias(request):
     gerencias = Gerencia.objects.all().order_by('NombreGerencia')
     page = request.GET.get('page', 1)
+    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(gerencias, 10)
+        paginator = Paginator(gerencias, valor)
         gerencias = paginator.page(page)
     except:
         Http404
@@ -336,6 +343,7 @@ def admin_gerencias(request):
         'paginator': paginator,
         'titulo': 'Gerencia',
         'page': 'Gerencias',
+        'form': RegistrosForm(),
     }
     return render(request, "admin/adminGerencias.html", contexto)
 
@@ -402,9 +410,10 @@ def eliminar_gerencias(request, id):
 def admin_subgerencias(request):
     subgerencias = SubGerencia.objects.all().order_by('NombreSubgerencia')
     page = request.GET.get('page', 1)
+    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(subgerencias, 10)
+        paginator = Paginator(subgerencias, valor)
         subgerencias = paginator.page(page)
     except:
         Http404
@@ -414,6 +423,7 @@ def admin_subgerencias(request):
         'paginator': paginator,
         'titulo': 'Subgerencia',
         'page': 'Subgerencias',
+        'form': RegistrosForm(),
     }
     return render(request, "admin/adminSubgerencias.html", contexto)
 
@@ -467,9 +477,10 @@ def eliminar_subgerencia(request, id):
 def admin_areas(request):
     areas  = Area.objects.all().order_by('NombreArea')
     page = request.GET.get('page', 1)
+    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(areas, 10)
+        paginator = Paginator(areas, valor)
         areas = paginator.page(page)
     except:
         Http404
@@ -477,8 +488,9 @@ def admin_areas(request):
     contexto = {
         'entity': areas,
         'paginator': paginator,
-        'titulo': 'Areas',
-        'page': 'Areas',
+        'titulo': 'Áreas',
+        'page': 'Áreas',
+        'form': RegistrosForm(),
     }
     return render(request, "admin/adminArea.html", contexto)
 
@@ -531,9 +543,10 @@ def eliminar_area(request, id):
 def admin_usuarios(request):
     empleados = Empleado.objects.all().order_by('Rut')
     page = request.GET.get('page', 1)
+    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(empleados, 10)
+        paginator = Paginator(empleados, valor)
         empleados = paginator.page(page)
     except:
         Http404
@@ -543,6 +556,7 @@ def admin_usuarios(request):
         'paginator': paginator,
         'titulo': 'Empleado',
         'page': 'Usuarios',
+        'form': RegistrosForm(),
     }
     return render(request, "admin/adminUsuarios.html",contexto)
 

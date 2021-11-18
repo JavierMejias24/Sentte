@@ -23,12 +23,22 @@
                         <div class="content-header-left col-md-6 col-12 mb-2">
                             <h3 class="content-header-title"> Mantenedor de {{ page }}</h3>
                             <br>
-                            <div class="col-sm-12 col-md-6">
-                                <div id="tablaUsuarios_filter" class="dataTables_filter">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-control">
+                                            {{ form }}
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-control">
                                     <label>
                                         Buscar:
-                                        <input class="form-control" id="buscar" type="text" placeholder="Search..">
                                     </label>
+                                        <input class="form-control" id="buscar" type="search">
+                                    </div>
                                 </div>
                             </div>
                         </div>
