@@ -786,16 +786,18 @@ def evaluador_formulario2(request, id):
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario', 
-        'form': EvaluacionForm(),
+        'form': EvaluacionForm(instance=evaluaciones),
     }
     if request.method == 'POST':
-        formulario = EvaluacionForm(request.POST)
+        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
 
         if formulario.is_valid():
+            evaluacionid = Evaluacion.objects.get(id = id)
+            
+            formulario.save()
 
-            evaluacion = formulario.save(commit=False)
-            evaluacion.id = Evaluacion.objects.get(id = id)
-            evaluacion.save()
+            evaluacionid.Estado = "Pendiente"
+            evaluacionid.save()
 
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
