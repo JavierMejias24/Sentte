@@ -242,7 +242,6 @@ class SubgerenciaForm(forms.ModelForm):
             )
         }
 
-
 class PlanAccionForm(forms.ModelForm):
     class Meta:
         model = PlanAccion
@@ -326,3 +325,12 @@ class EvaluacionForm(forms.ModelForm):
                 }
             )
         }
+
+class RegistrosForm(forms.Form):
+    select = {
+        (10, 10),
+        (25, 25),
+        (50, 50),
+        (100, 100),
+    }
+    Select = forms.ChoiceField(choices=select, label='Registros', widget=forms.Select(attrs={'class':'form-select'}))
