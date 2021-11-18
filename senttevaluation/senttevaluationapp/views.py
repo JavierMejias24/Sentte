@@ -795,14 +795,15 @@ def evaluador_formulario2(request, id):
 
         if formulario.is_valid():
 
-     
-            print(formulario.cleaned_data.get("ComentarioEvaluador"))
+            form = formulario.cleaned_data.get("ComentarioEvaluador")
+            form2 = formulario.cleaned_data.get("Calificacion")
             
             evaluacionid = Evaluacion.objects.get(id = id)
             
-            
-    
-            formulario.save()
+            evaluacionid.ComentarioEvaluador = form
+            evaluacionid.Calificacion = form2
+
+            evaluacionid.save()
 
             evaluacionid.Estado = "Pendiente"
             evaluacionid.save()
