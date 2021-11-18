@@ -794,6 +794,8 @@ def evaluador_formulario2(request, id):
         if formulario.is_valid():
             evaluacionid = Evaluacion.objects.get(id = id)
             
+            evaluacionid.ComentarioEvaluador = formulario
+    
             formulario.save()
 
             evaluacionid.Estado = "Pendiente"
