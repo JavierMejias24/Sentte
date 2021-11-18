@@ -1,8 +1,10 @@
+from typing import ValuesView
 from django import forms
-from django.forms import widgets
+from django import views
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.views import View
 
 class UserForm(UserCreationForm):
     class Meta:
@@ -348,9 +350,9 @@ class EvaluacionForm(forms.ModelForm):
 
 class RegistrosForm(forms.Form):
     select = [
-        (1, 10),
-        (2, 25),
-        (3, 50),
-        (4, 100),
+        (10, 10),
+        (25, 25),
+        (50, 50),
+        (100, 100),
     ]
-    Select = forms.ChoiceField(initial=1, choices=select, label="Mostrar")
+    Select = forms.ChoiceField(initial=10, choices=select, label="Mostrar")
