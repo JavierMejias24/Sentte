@@ -67,16 +67,26 @@ class PerfilRol(models.Model):
     def __str__(self):
         return str(self.Rol)
 
+
 class Evaluacion(models.Model):
     Estado = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Fase = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     ComentarioCalibrador = models.CharField(max_length=80,  null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    FechaEvaluacion = models.DateTimeField(default=timezone.now)
+    ComentarioEvaluador = models.CharField(max_length=100, null=True, blank=True,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    Calificacion = models.IntegerField( null=True, blank=True, default=1, validators=[RegexValidator(regex=r'^[0-9]')])
+    AutoEvaluacion = models.IntegerField( null=True, blank=True, validators=[RegexValidator(regex=r'^[0-9]')])
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 
+    def __str__(self):
+        return self.Fase
 class PlanAccion(models.Model):
-    Accion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
-    Medicion = models.CharField(max_length=50, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    Accion = models.CharField(max_length=50, null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    Medicion = models.CharField(max_length=50, null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
+    IdEvaluacion = models.ForeignKey(Evaluacion, on_delete=CASCADE, default=1)
 
+    def __str__(self):
+        return self.Accion
 class DetalleEv(models.Model):
     Notas = [
         (1,1),

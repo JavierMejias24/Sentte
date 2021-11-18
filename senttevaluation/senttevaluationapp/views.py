@@ -1,4 +1,3 @@
-from typing import ValuesView
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.db.models.query_utils import Q
@@ -43,20 +42,18 @@ def admin_inicio(request):
 def admin_acciones(request):
     accioneclaves = AccionClave.objects.all().order_by('id')
     page = request.GET.get('page', 1)
-    valor = request.POST.get('Select', 10)
 
     try:
-        paginator = Paginator(accioneclaves, valor)
+        paginator = Paginator(accioneclaves, 10)
         accioneclaves = paginator.page(page)
     except:
         Http404
 
     contexto = {
-        'entity': accioneclaves,
+        'entity':accioneclaves,
         'paginator': paginator,
         'titulo': 'Cargo',
         'page': 'Acciones',
-        'form': RegistrosForm(),
     }
     return render(request, "admin/adminAcciones.html", contexto)
 
@@ -478,8 +475,8 @@ def admin_areas(request):
     contexto = {
         'entity': areas,
         'paginator': paginator,
-        'titulo': 'Área',
-        'page': 'Áreas',
+        'titulo': 'Areas',
+        'page': 'Areas',
     }
     return render(request, "admin/adminArea.html", contexto)
 
@@ -487,8 +484,8 @@ def admin_areas(request):
 def agregar_areas(request):
     contexto = {
         'form': AreaFrom(),
-        'titulo': 'Área',
-        'page': 'Áreas',
+        'titulo': 'Areas',
+        'page': 'Areas',
     }
 
     if request.method == 'POST':
@@ -507,7 +504,7 @@ def editar_area(request, id):
 
     data = {
         'form':  AreaFrom(instance=areas),
-        'page': 'Áreas',
+        'page': 'Areas',
     }
 
     if request.method == 'POST':
@@ -562,6 +559,8 @@ def agregar_usuario(request):
         formEmpleado = EmpleadoForm(request.POST, request.FILES)
         formPerfilrol = PerfilRolForm(request.POST)
         formEvaluacion = EvaluacionForm()
+        formPlanAccion = PlanAccionForm(request.POST)
+        formDetalle = DetalleEvaluacionForm()
 
         if form.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
 
@@ -575,9 +574,10 @@ def agregar_usuario(request):
 
             evaluaciones = formEvaluacion.save(commit=False)
             evaluaciones.Estado = "Pendiente"
-            evaluaciones.Fase = "Planificacion"
+            evaluaciones.Fase = "Evaluacion"
             evaluaciones.IdEmpleado = formEmpleado.save()
             evaluaciones.save()
+
 
             #Permiso Cargos
             content_type = ContentType.objects.get_for_model(Cargo)
@@ -718,11 +718,25 @@ def evaluador_evaluacion(request):
     return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
 
 @login_required
-def evaluador_autovaluacion(request):
-    contexto = {
-        'page': 'Autoevaluación',
+def evaluador_autovaluacion(request, id):
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
+    competencias = Competencia.objects.all()
+    accionclaves = AccionClave.objects.all()
+    
+    data = {
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
+        'competencias':competencias,
+        'accionclaves':accionclaves,
+        'page': 'AutoEvaluacion', 
+        'form': EvaluacionForm(),
     }
-    return render(request, "evaluador/evaluadorAutovaluacion.html", contexto)
+   
+    evaluacionid = Evaluacion.objects.get(id = id)
+    evaluacionid.Fase = "Planificacion"
+             
+    messages.success(request,'Guardado el plan de accion')   
+        
+    return render(request, "evaluador/evaluadorAutovaluacion.html",data)
 
 @login_required
 def evaluador_ayuda(request):
@@ -733,53 +747,63 @@ def evaluador_ayuda(request):
 
 @login_required
 def evaluador_formulario(request, id):
-    empleados = get_object_or_404(Empleado, id=id)
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
     
     data = {
-        'empleados': Empleado.objects.get(Nombre = empleados),
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario', 
         'form': PlanAccionForm(),
-        'form2': DetalleEvaluacionForm()
+        'form2': EvaluacionForm()
     }
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
-        formulario2 = DetalleEvaluacionForm(request.POST)
-        if formulario.is_valid() and formulario2.is_valid():
-            formulario.save()
-            formulario2.save()
-            messages.success(request,'Evaluación terminada')
-        else:
-            messages.warning(request,'Evaluación incompleta o con errores')
+
+        if formulario.is_valid():
+            evaluacionid = Evaluacion.objects.get(id = id)
+            plan = formulario.save(commit=False)
+            plan.IdEvaluacion = evaluacionid
+            plan.save()
+            
+            evaluacionid.Estado = "Finalizado"
+            evaluacionid.save()
+
+            messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
-        return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario.html",data)
 
 @login_required
 def evaluador_formulario2(request, id):
-    empleados = get_object_or_404(Empleado, id=id)
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
     
     data = {
-        'empleados': Empleado.objects.get(Nombre = empleados),
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario', 
-        'form': PlanAccionForm(),
-        'form2': DetalleEvaluacionForm(),
+        'form': EvaluacionForm(instance=evaluaciones),
     }
     if request.method == 'POST':
-        formulario2 = DetalleEvaluacionForm(request.POST)
+        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
 
-        if formulario2.is_valid():
-            formulario2.IdEvaluacion = 11
-            formulario2.IdPlanAccion = 4
-            formulario2.AutoEvaluacion = 3
-            formulario2.save()
+        if formulario.is_valid():
+
+     
+            print(formulario.cleaned_data.get("ComentarioEvaluador"))
+            
+            evaluacionid = Evaluacion.objects.get(id = id)
+            
+            
+    
+            formulario.save()
+
+            evaluacionid.Estado = "Pendiente"
+            evaluacionid.save()
 
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")

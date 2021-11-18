@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <br><br><br>
+        <br><br><br><br>
         <div class="container-fluid">
             <div id="accordion">
                 {% for competencia in competencias %}
@@ -20,7 +20,7 @@
                         <div class="card">
                             <div class="card-header" style="background-color:#f3c53f;text-align:center;">
                                 <a class="card-link" data-toggle="collapse" style="color:white">
-                                    <h4>Competencia: {{ competencia.NombreCompetencia}}</h4>
+                                    <h5>Competencia: {{ competencia.NombreCompetencia}}</h5>
                                 </a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -32,12 +32,7 @@
                                             <br><br>
                                         </div>
                                         <div class="row" style="text-align:center">
-                                            <div class="col-sm-10">
-                                                <h5><b>Acciones clave</b><h5>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <h5><b>Calificación</b><h5>
-                                            </div>
+                                            <h5><b>Acciones clave</b><h5>
                                         </div>
                                         <div class="col-sm-12">
                                             {% for accionclave in accionclaves %}
@@ -46,9 +41,6 @@
                                                         <p>
                                                             <div class="col-sm-10">
                                                                 {{ accionclave.Descripcion }}
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                {{ form2 }}
                                                             </div>
                                                         </p>
                                                     </div>
@@ -66,28 +58,32 @@
                 <div class="card">
                     <div class="card-header" style="background-color:#f3c53f;text-align:center;">
                         <a class="card-link" data-toggle="collapse" style="color:white">
-                            <h4>Plan de acción</h4>
+                            <h5>Observacion</h5>
                         </a>
                     </div>
                     <div class="card-body">
-                        <div class="col-sm-12">  
+                        <div class="col-md-12 col-sm-12" style="text-align:center">  
                             <form action="" method="POST"> 
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="{{ form.Accion.name }}">{{ form.Accion.label }}</label>
+                                        <label for="{{form.Accion.name}}">{{form.Accion.label}}</label>
                                         {{ form.Accion }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="{{ form.Medicion.name }}">{{ form.Medicion.label }}</label>
+                                        <label for="{{form.Medicion.name}}">{{form.Medicion.label}}</label>
                                         {{ form.Medicion }}
                                     </div>
-                                  </div> 
-                                  <br><br>
-                                <div class="d-flex justify-content-end" style="margin-right: 30%;">
-                                    <input type="submit" value="Guardar" class="btn btn-primary" style="width: 250px;">
+                                </div> 
+                                <br><br>
+                                <div class="row" style="text-align:center">
+                                    <div class="col-sm-4 offset-md-2">
+                                        <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
+                                    </div>
                                     &nbsp;
-                                    <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 250px;">Cancelar</a>
+                                    <div class="col-sm-4">
+                                        <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>

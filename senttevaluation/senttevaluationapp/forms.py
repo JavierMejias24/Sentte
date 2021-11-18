@@ -1,45 +1,15 @@
-from typing import ValuesView
 from django import forms
-from django import views
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.views import View
 
 class UserForm(UserCreationForm):
+    username = forms.CharField(label='Usuario', widget=forms.TextInput)
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
-        labels = {
-            'username':'Usuario',
-            'password1':'Contraseña',
-            'password2':'Confirmar contraseña',
-        }
-        help_texts = { 
-            'username': ('Debe ser único, no puede estar en blanco'),
-            'password': ('No puede estar en blanco'),
-            'password2': ('Debe ser igual a la contraseña, no puede estar en blanco'),
-        }
-        widgets = {
-            'username': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Nombre de usuario',
-                }
-            ),
-            'password1': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Contraseña',
-                }
-            ),
-            'password2': forms.TextInput(
-                attrs = {
-                    'class':'form-control',
-                    'placeholder': 'Repita contraseña',
-                }
-            ),
-        }
 
 class EmpleadoForm(forms.ModelForm):
     class Meta:
@@ -53,13 +23,6 @@ class EmpleadoForm(forms.ModelForm):
             'Imagen': 'Foto para perfil',
             'IdSubGerencia': 'Subgerencia',
             'IdPerfil': 'Perfil',
-        }
-        help_texts = { 
-            'Rut': ('Entre 11 y 12 caracteres, no puede estar en blanco'),
-            'Nombre': ('No puede estar en blanco'),
-            'FechaIngreso': ('No puede estar en blanco'),
-            'Correo': ('No puede estar en blanco, debe incluir @'),
-            'Imagen': ('Puede estar en blanco'),
         }
         widgets = {
             'Rut': forms.TextInput(
@@ -108,14 +71,9 @@ class PerfilRolForm(forms.ModelForm):
         fields = ['Rol', 'RelacionEvaluado', 'NombreEvaluador', 'NombreCalibrador']
         labels = {
             'Rol': 'Rol',
-            'RelacionEvaluado': 'Relación con el evaluado',
+            'RelacionEvaluado': 'Relacion con el evaluado',
             'NombreEvaluador': 'Nombre del evaluador',
             'NombreCalibrador': 'Nombre del calibrador',
-        }
-        help_texts = {
-            'RelacionEvaluado': ('Puede estar en blanco'),
-            'NombreEvaluador': ('Puede estar en blanco'),
-            'NombreCalibrador': ('Puede estar en blanco'),
         }
         widgets = {
             'Rol': forms.Select(
@@ -128,7 +86,7 @@ class PerfilRolForm(forms.ModelForm):
             'RelacionEvaluado': forms.TextInput(
                 attrs = {
                     'class':'form-control',
-                    'placeholder': 'Jefe directo...',
+                    'placeholder': 'Ingrese la relación',
                 }
             ),
             'NombreEvaluador': forms.TextInput(),
@@ -140,11 +98,8 @@ class CargoForm(forms.ModelForm):
         model = Cargo
         fields = ['NombreCargo', 'IdPerfil']
         labels = {
-            'NombreCargo': 'Nombre cargo',
+            'NombreCargo': 'Nombre Cargo',
             'IdPerfil': 'Perfil',
-        }
-        help_texts = { 
-            'NombreCargo': ('No puede estar en blanco'),
         }
         widgets = {
             'NombreCargo': forms.TextInput(
@@ -166,12 +121,8 @@ class CompetenciaForm(forms.ModelForm):
         fields = ['NombreCompetencia', 'Definicion', 'IdPerfil']
         labels = {
             'NombreCompetencia': 'Nombre competencia',
-            'Definicion': 'Definición',
+            'Definicion': 'Definicion',
             'IdPerfil': 'Perfil',
-        }
-        help_texts = { 
-            'NombreCompetencia': ('No puede estar en blanco'),
-            'Definicion': ('No puede estar en blanco'),
         }
         widgets = {
             'NombreCompetencia': forms.TextInput(
@@ -201,9 +152,6 @@ class AccionesForm(forms.ModelForm):
             'Descripcion': 'Descripción',
             'IdCompetencia': 'Competencia',
         }
-        help_texts = { 
-            'Descripcion': ('No puede estar en blanco'),
-        }
         widgets = {
             'Descripcion': forms.Textarea(
                 attrs = {
@@ -225,9 +173,6 @@ class GerenciaForm(forms.ModelForm):
         labels = {
             'NombreGerencia': 'Nombre gerencia'            
         }
-        help_texts = { 
-            'NombreGerencia': ('No puede estar en blanco'),
-        }
         widgets = {
             'NombreGerencia': forms.TextInput(
                 attrs = {
@@ -244,9 +189,6 @@ class PerfilForm(forms.ModelForm):
         labels = {
             'NombrePerfil': 'Nombre Perfil'
         }
-        help_texts = { 
-            'NombrePerfil': ('No puede estar en blanco'),
-        }
         widgets = {
             'NombrePerfil': forms.TextInput(
                 attrs= {
@@ -261,11 +203,8 @@ class AreaFrom(forms.ModelForm):
         model=Area
         fields = ['NombreArea', 'IdGerencia']
         labels = {
-            'NombreArea':'Nombre área',
+            'NombreArea':'Nombre Area',
             'IdGerencia':'Gerencia'
-        }
-        help_texts = { 
-            'NombreArea': ('No puede estar en blanco'),
         }
         widgets = {
             'NombreArea': forms.TextInput(
@@ -274,7 +213,7 @@ class AreaFrom(forms.ModelForm):
                     'placeholder':'Ingrese nombre del area',
                 }
             ),
-            'IdGerencia': forms.Select(
+            'IdArea': forms.Select(
                 attrs = {
                     'class':'form-select' 
                 }
@@ -288,9 +227,6 @@ class SubgerenciaForm(forms.ModelForm):
         labels = {
             'NombreSubgerencia': 'Nombre subgerencia',
             'IdGerencia': 'Gerencia',
-        }
-        help_texts = { 
-            'NombreSubgerencia': ('No puede estar en blanco'),
         }
         widgets = {
             'NombreSubgerencia': forms.TextInput(
@@ -306,53 +242,87 @@ class SubgerenciaForm(forms.ModelForm):
             )
         }
 
+
 class PlanAccionForm(forms.ModelForm):
     class Meta:
         model = PlanAccion
         fields = ['Accion', 'Medicion']
         labels = {
-            'Accion': 'Acción',
-            'Medicion': 'Medición'
+            'Accion': 'Accion',
+            'Medicion': 'Medicion'
         }
         widgets = {
             'Accion': forms.Textarea(
                 attrs={
                     'class':'form-control',
-                    'placeholder':'Ingrese una acción',
+                    'placeholder':'Ingrese una accion',
                 }
             ),
             'Medicion': forms.Textarea(
                 attrs={
                     'class':'form-control',
-                    'placeholder':'Ingrese una medición',
+                    'placeholder':'Ingrese una medicion',
                 }
             )
         }
 class DetalleEvaluacionForm(forms.ModelForm):
     class Meta:
         model = DetalleEv
-        fields = ['Calificacion']
+        fields = ['ComentarioEvaluador', 'Calificacion', 'AutoEvaluacion']
         labels = {
-            'Calificacion' : '',
+            'ComentarioEvaluador': 'Observacion',
+            'Calificacion' : 'Calificacion',
+            'AutoEvaluacion' : 'AutoEvaluacion'
         }
-        widgets = {
-            'Calificacion': forms.Select(
-                attrs = {
-                    'class':'form-select',
+        widgets = { 
+            'ComentarioEvaluador': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una observacion',
                 }
             ),
+            'Calificacion': forms.Select(
+                attrs={
+                    'class':'form-select'
+                },
+                 choices = {
+                    (1, 1),
+                    (2, 2),
+                    (3, 3),
+                    (4, 4),
+                    (5, 5),
+                    (6, 6),
+                    (7, 7),
+                }
+            ),
+            'AutoEvaluacion': forms.TextInput(),
         }
 
+
 class EvaluacionForm(forms.ModelForm):
+
     class Meta:
         model = Evaluacion
-        fields = ['Estado', 'Fase', 'ComentarioCalibrador', 'IdEmpleado']
-
-class RegistrosForm(forms.Form):
-    select = [
-        (10, 10),
-        (25, 25),
-        (50, 50),
-        (100, 100),
-    ]
-    Select = forms.ChoiceField(initial=10, choices=select, label="Mostrar")
+        fields = '__all__'
+        widgets = {
+            'Calificacion': forms.Select(
+                attrs={
+                    'class':'form-select'
+                },
+                 choices = {
+                    (1, 1),
+                    (2, 2),
+                    (3, 3),
+                    (4, 4),
+                    (5, 5),
+                    (6, 6),
+                    (7, 7),
+                }
+            ),
+            'ComentarioEvaluador': forms.Textarea(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese una observacion',
+                }
+            )
+        }
