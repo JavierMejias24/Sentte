@@ -9,7 +9,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
 # ----------------------------------  Administrador ---------------------------------------------.
-    path('adminInicio', views.admin_inicio, name="adminInicio"),
+    path('home', views.admin_inicio, name="home"),
     path('adminAcciones', views.admin_acciones, name="adminAcciones"),
     path('adminAgregarAcciones', views.agregar_acciones, name="adminAgregarAcciones"),
     path('adminAccionesModificar/<id>/', views.editar_acciones, name="adminAccionesModificar"),

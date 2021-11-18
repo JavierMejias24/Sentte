@@ -17,7 +17,7 @@ def login(request):
     usuario = request.POST.get('name')
     contraseña = request.POST.get('contraseña')
     if usuario == "root" and contraseña == "proyectosentte":
-        return HttpResponseRedirect("adminInicio")
+        return HttpResponseRedirect("home")
     else:
         if usuario:
             cuentausuario = User.objects.filter(Q (username = usuario))
@@ -35,7 +35,7 @@ def admin_inicio(request):
     contexto = {
         'page': 'Inicio',
     }
-    return render(request, "admin/adminInicio.html", contexto)
+    return render(request, "admin/home.html", contexto)
 
 # -- ------------Acciones Claves----------------.
 @login_required
@@ -52,7 +52,7 @@ def admin_acciones(request):
     contexto = {
         'entity':accioneclaves,
         'paginator': paginator,
-        'titulo': 'Cargo',
+        'titulo': 'Acciones',
         'page': 'Acciones',
     }
     return render(request, "admin/adminAcciones.html", contexto)
@@ -722,11 +722,15 @@ def evaluador_autovaluacion(request, id):
     evaluaciones = get_object_or_404(Evaluacion, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
+    planaccion = PlanAccion.objects.all()
+    evaluacion = Evaluacion.objects.all()
     
     data = {
         'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
+        'planaccion':planaccion,
+        'evaluacion': Evaluacion.objects.get(id=evaluaciones.id),
         'page': 'AutoEvaluacion', 
         'form': EvaluacionForm(),
     }

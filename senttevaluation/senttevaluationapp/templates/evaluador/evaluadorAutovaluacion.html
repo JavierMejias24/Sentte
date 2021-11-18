@@ -58,26 +58,35 @@
                 <div class="card">
                     <div class="card-header" style="background-color:#f3c53f;text-align:center;">
                         <a class="card-link" data-toggle="collapse" style="color:white">
-                            <h5>Confirmacion</h5>
+                            <h5>Plan de accion: {{evaluacion.IdEmpleado.Nombre}}</h5>
                         </a>
                     </div>
+                    <center>
                     <div class="card-body">
-                        <div class="col-md-12 col-sm-12" style="text-align:center">  
-                            <form action="" method="POST"> 
-                                {% csrf_token %}
-                                {{form}}
-                                <br><br>
-                                <div class="row" style="text-align:center">
-                                    <div class="col-sm-4 offset-md-2">
-                                        <input type="submit" value="Confirmar" class="btn btn-primary" style="width: 200px;">
-                                    </div>
-                                    &nbsp;
-                                    <div class="col-sm-4">
-                                        <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
-                                    </div>
-                                </div>
-                            </form>
+                        {% for planaccion in planaccion %}
+                        {% if evaluacion.id == planaccion.IdEvaluacion.id %}
+                        <div class="col-sm-6">
+                            <p>Accion: {{planaccion.Accion}}</p>
+                            
                         </div>
+                        <div class="col-sm-6">
+                            <p>Medicion: {{planaccion.Medicion}}</p>
+                            
+                        </div>
+                        <hr>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    </center>
+                </div>
+                <br>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-4 offset-md-2">
+                        <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
+                    </div>
+                    &nbsp;
+                    <div class="col-sm-4">
+                        <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
                     </div>
                 </div>
             </div>
