@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db import connection
+from django.db.models import query_utils
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -10,6 +11,7 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from django.http import Http404
+import json
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -683,7 +685,7 @@ def eliminar_usuario(request, id):
 def admin_indicadores(request):
     contexto = {
         'page': 'Inidicadores',
-    }
+    }  
     return render(request, "admin/adminIndicadores.html", contexto)
 
 
@@ -733,6 +735,7 @@ def evaluador_autovaluacion(request, id):
         'evaluacion': Evaluacion.objects.get(id=evaluaciones.id),
         'page': 'AutoEvaluacion', 
         'form': EvaluacionForm(),
+        'contar': Evaluacion.objects.count()
     }
    
     evaluacionid = Evaluacion.objects.get(id = id)
