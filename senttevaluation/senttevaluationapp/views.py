@@ -1,8 +1,10 @@
+from functools import reduce
+from django import http
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.db.models import query_utils
 from django.db.models.query_utils import Q
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
 from .forms import *
@@ -683,10 +685,25 @@ def eliminar_usuario(request, id):
 
 @login_required
 def admin_indicadores(request):
-    contexto = {
+    evplanificacion = Evaluacion.objects.filter(Fase='Planificacion').count()
+    evevaluacion = Evaluacion.objects.filter(Fase='Evaluacion').count()
+    evevaluacionfinal = Evaluacion.objects.filter(Fase='Evaluacion final').count()
+    totalevaluacion = Evaluacion.objects.all().count()
+    data = {
         'page': 'Inidicadores',
+        "evplanificacion":evplanificacion,
+        'evevaluacion':evevaluacion,
+        'evevaluacionfinal':evevaluacionfinal,
+        'totalevaluacion':totalevaluacion,
     }  
-    return render(request, "admin/adminIndicadores.html", contexto)
+    return render(request, "admin/adminIndicadores.html", data)
+
+def get_data(request, *args, **kwargs):
+    data= {
+        "sales":100,
+        "customers": 10
+    }
+    return JsonResponse(data)
 
 
 # -----------------------------------------------------------------------------------------------.
@@ -735,15 +752,65 @@ def evaluador_autovaluacion(request, id):
         'evaluacion': Evaluacion.objects.get(id=evaluaciones.id),
         'page': 'AutoEvaluacion', 
         'form': EvaluacionForm(),
-        'contar': Evaluacion.objects.count()
     }
-   
-    evaluacionid = Evaluacion.objects.get(id = id)
-    evaluacionid.Fase = "Planificacion"
-             
-    messages.success(request,'Guardado el plan de accion')   
-        
+    if request.method == 'POST':
+        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
+
+        if formulario.is_valid():
+
+            form2 = formulario.cleaned_data.get("verificar")
+            
+            evaluacionid = Evaluacion.objects.get(id = id)
+            
+            evaluacionid.verificar = form2
+
+            if form2 == "Si":
+                evaluacionid.save()
+
+                evaluacionid.Estado = "Pendiente"
+                evaluacionid.Fase = "Evaluacion"
+                evaluacionid.save()
+
+                messages.success(request,'Guardado el plan de accion')   
+                return redirect(to="evaluadorEvaluacion")  
+            else:      
+                return HttpResponseRedirect(redirect_to="evaluadorAutovaluacion")       
     return render(request, "evaluador/evaluadorAutovaluacion.html",data)
+
+@login_required
+def evaluador_autovaluacion2(request, id):
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
+    competencias = Competencia.objects.all()
+    accionclaves = AccionClave.objects.all()
+    
+    data = {
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
+        'competencias':competencias,
+        'accionclaves':accionclaves,
+        'page': 'Formulario', 
+        'form': EvaluacionForm(instance=evaluaciones),
+    }
+    if request.method == 'POST':
+        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
+
+        if formulario.is_valid():
+
+            form2 = formulario.cleaned_data.get("AutoEvaluacion")
+            
+            evaluacionid = Evaluacion.objects.get(id = id)
+            
+            evaluacionid.AutoEvaluacion = form2
+
+            evaluacionid.save()
+
+            evaluacionid.Estado = "Pendiente"
+            evaluacionid.Fase = "Evaluacion final"
+            evaluacionid.save()
+
+            messages.success(request,'Guardado el plan de accion')   
+            return redirect(to="evaluadorEvaluacion")
+    return render(request, "evaluador/evaluadorAutovaluacion2.html",data)
+
 
 @login_required
 def evaluador_ayuda(request):
@@ -811,6 +878,7 @@ def evaluador_formulario2(request, id):
             evaluacionid.save()
 
             evaluacionid.Estado = "Pendiente"
+            evaluacionid.Fase = "FinalEv"
             evaluacionid.save()
 
             messages.success(request,'Guardado el plan de accion')   
