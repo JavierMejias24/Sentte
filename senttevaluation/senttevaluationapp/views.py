@@ -751,7 +751,7 @@ def evaluador_autovaluacion(request, id):
         'planaccion':planaccion,
         'evaluacion': Evaluacion.objects.get(id=evaluaciones.id),
         'page': 'AutoEvaluacion', 
-        'form': EvaluacionForm(),
+        'form': EvaluacionForm(instance=evaluaciones),
     }
     if request.method == 'POST':
         formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
@@ -764,7 +764,7 @@ def evaluador_autovaluacion(request, id):
             
             evaluacionid.verificar = form2
 
-            if form2 == "Si":
+            if  "Si" in evaluacionid.verificar:
                 evaluacionid.save()
 
                 evaluacionid.Estado = "Pendiente"

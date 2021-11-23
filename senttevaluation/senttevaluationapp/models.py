@@ -80,7 +80,7 @@ class Evaluacion(models.Model):
     ComentarioEvaluador = models.CharField(max_length=100, null=True, blank=True,validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     Calificacion = models.PositiveIntegerField( null=True, blank=True, default=1, validators=[RegexValidator(regex=r'^[0-9]')])
     AutoEvaluacion = models.PositiveIntegerField( null=True, blank=True, validators=[RegexValidator(regex=r'^[0-9]')])
-    verificar = models.IntegerField(choices=opciones, null=True, blank=True, default=1, validators=[RegexValidator(regex=r'^[a-zA-Z]')])
+    verificar = models.CharField(choices=opciones, max_length=50, null=True, blank=True, validators=[RegexValidator(regex=r'^[a-zA-Z]')])
     IdEmpleado = models.ForeignKey(Empleado, on_delete=CASCADE, default=1)
 
     def __str__(self):

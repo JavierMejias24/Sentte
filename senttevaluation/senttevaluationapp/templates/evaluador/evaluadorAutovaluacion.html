@@ -77,19 +77,20 @@
                         {% endif %}
                         {% endfor %}
                         <form method="POST">
-                        {% csrf_token %}
-                        <p>¿Esta de acuerdo con los planes de accion?</p>
-                        {{form.verificar}}
-                    </div>
-                    </center>
-                    <div hidden>
-                        {{ form.Estado }}
-                        {{ form.Fase }}
-                        {{ form.ComentarioCalibrador }}
-                        {{ form.FechaEvaluacion }}
-                        {{ form.ComentarioEvaluador }}
-                        {{ form.Calificacion }}
-                        {{ form.IdEmpleado }}
+                            {% csrf_token %}
+                            <p>¿Esta de acuerdo con los planes de accion?</p>
+                            {{form.verificar}}
+                            <div hidden>
+                                {{ form.Estado }}
+                                {{ form.Fase }}
+                                {{ form.ComentarioCalibrador }}
+                                {{ form.FechaEvaluacion }}
+                                {{ form.ComentarioEvaluador }}
+                                {{ form.AutoEvaluacion}}
+                                {{ form.Calificacion }}
+                                {{ form.IdEmpleado }}
+                            </div>
+                    </center>   
                     </div>
                 </div>
                 <br>
