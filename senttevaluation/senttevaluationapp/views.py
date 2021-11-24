@@ -271,19 +271,19 @@ def admin_competencias(request):
     contexto1 = {
         'entity': competencias,
         'perfil':perfil,
-        'paginator': paginator,
-        'titulo': 'Competencia',
-        'page': 'Competencias',
-        'form': RegistrosForm(),
+        'paginator':paginator,
+        'titulo':'Competencia',
+        'page':'Competencias',
+        'form':RegistrosForm(),
     }
     return render(request, "admin/adminCompetencias.html", contexto1)
 
 @login_required
 def agregar_competencias(request):
     contexto = {
-        'form': CompetenciaForm(),
-        'titulo': 'Competencia',
-        'page': 'Competencias',
+        'form':CompetenciaForm(),
+        'titulo':'Competencia',
+        'page':'Competencias',
     }
 
     if request.method == 'POST':
@@ -730,6 +730,7 @@ def evaluador_evaluacion(request):
         'empleados':empleados,
         'evaluacion':evaluacion,
         'page': 'Evaluación',
+        'titulo': 'Formulario',
     }
     return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
 
@@ -746,12 +747,10 @@ def evaluador_autovaluacion(request, id):
         'page': 'AutoEvaluacion', 
         'form': EvaluacionForm(),
     }
-   
+
     evaluacionid = Evaluacion.objects.get(id = id)
     evaluacionid.Fase = "Planificacion"
-             
     messages.success(request,'Guardado el plan de accion')   
-        
     return render(request, "evaluador/evaluadorAutovaluacion.html",data)
 
 @login_required
@@ -771,23 +770,22 @@ def evaluador_formulario(request, id):
         'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
+        'titulo': 'Formulario',
         'page': 'Formulario', 
         'form': PlanAccionForm(),
-        'form2': EvaluacionForm()
+        'form2': EvaluacionForm(),
     }
+
     if request.method == 'POST':
         formulario = PlanAccionForm(request.POST)
-
         if formulario.is_valid():
             evaluacionid = Evaluacion.objects.get(id = id)
             plan = formulario.save(commit=False)
             plan.IdEvaluacion = evaluacionid
             plan.save()
-            
             evaluacionid.Estado = "Finalizado"
             evaluacionid.save()
-
-            messages.success(request,'Guardado el plan de accion')   
+            messages.success(request,'Guardado el plan de acción')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario.html",data)
 
@@ -796,35 +794,32 @@ def evaluador_formulario2(request, id):
     evaluaciones = get_object_or_404(Evaluacion, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
-    
+
     data = {
         'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
-        'page': 'Formulario', 
-        'form': EvaluacionForm(instance=evaluaciones),
+        'page': 'Formulario',
+        'titulo': 'Formulario',
+        'form': EvaluacionForm(instance = evaluaciones),
+        'form2': AccionesForm(instance=evaluaciones),
     }
+
     if request.method == 'POST':
         formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
-
         if formulario.is_valid():
-
             form = formulario.cleaned_data.get("ComentarioEvaluador")
-            form2 = formulario.cleaned_data.get("Calificacion")
-            
             evaluacionid = Evaluacion.objects.get(id = id)
-            
+            accionid = AccionClave.objects.get(id = id)
             evaluacionid.ComentarioEvaluador = form
-            evaluacionid.Calificacion = form2
-
-            evaluacionid.save()
-
             evaluacionid.Estado = "Pendiente"
             evaluacionid.save()
-
-            messages.success(request,'Guardado el plan de accion')   
+            accionid.save()
+            messages.success(request,'Guardado el plan de acción')
             return redirect(to="evaluadorEvaluacion")
-    return render(request, "evaluador/evaluadorFormulario2.html",data)
+        else:
+            data["form"] = formulario
+    return render(request, "evaluador/evaluadorFormulario2.html", data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required
