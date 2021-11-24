@@ -333,7 +333,7 @@ class EvaluacionForm(forms.ModelForm):
                     (7, 7),
                 }
             ),
-            'verificar': forms.Select(
+            'Verificar': forms.Select(
                 choices = {
                     (1, "Si"),
                     (2, "No")

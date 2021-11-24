@@ -62,7 +62,11 @@
                                     <br>
                                     {% if evaluacion.IdEmpleado.user.username == user.username %}
                                         {%if "Planificacion" in evaluacion.Fase %}
-                                            <a href="{% url 'evaluadorAutovaluacion' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            {%if "Guardado" in evaluacion.Estado%}
+                                                <a href="{% url 'evaluadorAutovaluacion' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            {%else%}
+                                                <a href="evaluadorEvaluacion" class="btn btn-info" role="button">Comenzar</a>
+                                            {%endif%}
                                         {% else %}
                                             <a href="{% url 'evaluadorAutovaluacion2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                         {%endif%}
