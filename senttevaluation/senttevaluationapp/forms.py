@@ -342,6 +342,7 @@ class PlanAccionForm(forms.ModelForm):
                 }
             )
         }
+
 class DetalleEvaluacionForm(forms.ModelForm):
     class Meta:
         model = DetalleEv
