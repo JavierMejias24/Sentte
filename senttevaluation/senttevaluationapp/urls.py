@@ -9,7 +9,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
 # ----------------------------------  Administrador ---------------------------------------------.
-    path('adminInicio', views.admin_inicio, name="adminInicio"),
+    path('home', views.admin_inicio, name="home"),
     path('adminAcciones', views.admin_acciones, name="adminAcciones"),
     path('adminAgregarAcciones', views.agregar_acciones, name="adminAgregarAcciones"),
     path('adminAccionesModificar/<id>/', views.editar_acciones, name="adminAccionesModificar"),
@@ -48,8 +48,10 @@ urlpatterns = [
     path('evaluadorInicio', views.evaluador_inicio, name="evaluadorInicio"),
     path('evaluadorEvaluacion', views.evaluador_evaluacion, name="evaluadorEvaluacion"),
     path('evaluadorAutovaluacion/<id>', views.evaluador_autovaluacion, name="evaluadorAutovaluacion"),
+    path('evaluadorAutovaluacion2/<id>', views.evaluador_autovaluacion2, name="evaluadorAutovaluacion2"),
     path('evaluadorFormulario/<id>', views.evaluador_formulario, name="evaluadorFormulario"),
     path('evaluadorFormulario2/<id>', views.evaluador_formulario2, name="evaluadorFormulario2"),
+    path('evaluadorFormulario3/<id>', views.evaluador_formulario3, name="evaluadorFormulario3"),
     path('evaluadorAyuda', views.evaluador_ayuda, name="evaluadorAyuda"),
 # ----------------------------------  Colaborador ----------------------------------------------------.
     path('colaboradorInicio', views.colaborador_inicio, name="colaboradorInicio"),

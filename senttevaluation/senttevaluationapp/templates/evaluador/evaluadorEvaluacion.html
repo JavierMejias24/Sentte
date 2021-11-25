@@ -62,12 +62,28 @@
                                     </div>
                                     <br>
                                     {% if evaluacion.IdEmpleado.user.username == user.username %}
-                                    <a href="{% url 'evaluadorAutovaluacion' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                        {%if "Planificacion" in evaluacion.Fase %}
+                                            {%if "Guardado" in evaluacion.Estado%}
+                                                <a href="{% url 'evaluadorAutovaluacion' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            {%else%}
+                                                <a href="evaluadorEvaluacion" class="btn btn-info" role="button">Comenzar</a>
+                                            {%endif%}
+                                        {% else %}
+                                            <a href="{% url 'evaluadorAutovaluacion2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                        {%endif%}
                                     {% else %}
                                         {% if  "Planificacion" in evaluacion.Fase %}
-                                        <a href="{% url 'evaluadorFormulario' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            <a href="{% url 'evaluadorFormulario' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                         {% else %}
-                                        <a href="{% url 'evaluadorFormulario2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            {%if "Evaluacion" in evaluacion.Fase %}
+                                                {%if "Guardado" in evaluacion.Estado%}
+                                                    <a href="{% url 'evaluadorFormulario2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                                {%else%}
+                                                    <a href="{% url 'evaluadorEvaluacion' %}" class="btn btn-info" role="button">Comenzar</a>
+                                                {%endif%}
+                                            {%else%}
+                                                <a href="{% url 'evaluadorFormulario3' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            {%endif%}
                                         {% endif %}
                                     {% endif %}
                                 </form>

@@ -1,0 +1,80 @@
+{% include 'base.html' %}
+{% load crispy_forms_tags %}
+<body>
+{% include 'sidebars/adminSidebar.html' %}
+    <section class="home-section">
+        <div class="container-fluid" id="title">
+            <div class="card shadow">
+                <div class="card body">
+                    <div class="home-content">
+                        <span class="text">{{ page }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="container-fluid">
+            <div id="accordion">
+                <form action="" method="POST">
+                {% csrf_token %}
+                {% for competencia in competencias %}
+                    {% if empleados.IdPerfil == competencia.IdPerfil%}
+                        <div class="card">
+                            <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                                <a class="card-link" data-toggle="collapse" style="color:white">
+                                    <h5>Calificacion</h5>
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                        <div class="col-sm-12">
+                                            
+                                            <div class="row">
+                                                <p>
+                                                    <div class="col-sm-10">
+                                                        <p>
+                                                           Nota Calificacion Final: {{evaluacion.Calificacion}}
+                                                        </p>
+                                                        <p>
+                                                           Nota AutoCalificacion Final: {{evaluacion.AutoEvaluacion}}
+                                                        </p>
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        {{ form.Calificacion }}
+                                                        {{ form.AutoEvaluacion }}
+                                                    </div>
+                                                    <div hidden>
+                                                        {{ form.Estado }}
+                                                        {{ form.Fase }}
+                                                        {{ form.ComentarioCalibrador }}
+                                                        {{ form.FechaEvaluacion }}
+                                                        {{ form.ComentarioEvaluador }}
+                                                        {{ form.IdEmpleado }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                        <div class="row" style="text-align:center">
+                                            <div class="col-sm-4 offset-md-2">
+                                                <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
+                                            </div>
+                                            &nbsp;
+                                            <div class="col-sm-4">
+                                                <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+             </form>
+            </div>
+        </div>
+    </section>
+    <br><br><br>
+</body>

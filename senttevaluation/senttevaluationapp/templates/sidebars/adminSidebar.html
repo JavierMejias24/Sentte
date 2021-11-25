@@ -3,7 +3,7 @@
 <div class="sidebar close">
   <!-- Se configura el logo con el nombre -->
   <div class="logo-details">
-    <a class="logo-details" href="/adminInicio">
+    <a class="logo-details" href="/home">
       <i><img src="{% static 'img/logo.png' %}" width="50" height="50"></i>
       <span class="logo_name">Sentte</span>
     </a>
@@ -13,7 +13,7 @@
   <ul class="nav-links">
     <!-- Administrador -->
     <li>
-        <a href="/adminInicio">
+        <a href="/home">
           <i class='bx bx-home'></i>
           <span class="link_name">Inicio</span>
         </a>
@@ -80,12 +80,6 @@
       <a href="/evaluadorEvaluacion">
         <i class='bx bx-file'></i>
         <span class="link_name">Evaluar</span>
-      </a>
-    </li>
-    <li>
-      <a href="/evaluadorAutovaluacion">
-        <i class='bx bx-calendar-check'></i>
-        <span class="link_name">AutoEvaluacion</span>
       </a>
     </li>
   {% endif %}

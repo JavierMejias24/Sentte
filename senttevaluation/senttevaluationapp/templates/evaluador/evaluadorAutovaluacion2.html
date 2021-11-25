@@ -15,6 +15,8 @@
         <br><br><br><br>
         <div class="container-fluid">
             <div id="accordion">
+                <form action="" method="POST">
+                {% csrf_token %}
                 {% for competencia in competencias %}
                     {% if empleados.IdPerfil == competencia.IdPerfil%}
                         <div class="card">
@@ -32,7 +34,12 @@
                                             <br><br>
                                         </div>
                                         <div class="row" style="text-align:center">
-                                            <h5><b>Acciones clave</b><h5>
+                                            <div class="col-sm-10">
+                                                <h5><b>Acciones clave</b><h5>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <h5><b>Calificación</b><h5>
+                                            </div>
                                         </div>
                                         <div class="col-sm-12">
                                             {% for accionclave in accionclaves %}
@@ -41,6 +48,18 @@
                                                         <p>
                                                             <div class="col-sm-10">
                                                                 {{ accionclave.Descripcion }}
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                {{ form.AutoEvaluacion }}
+                                                                <div hidden>
+                                                                    {{ form.Estado }}
+                                                                    {{ form.Fase }}
+                                                                    {{ form.ComentarioCalibrador }}
+                                                                    {{ form.FechaEvaluacion }}
+                                                                    {{ form.ComentarioEvaluador }}
+                                                                    {{ form.Calificacion }}
+                                                                    {{ form.IdEmpleado }}
+                                                                </div>
                                                             </div>
                                                         </p>
                                                     </div>
@@ -54,55 +73,18 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-                <br><br><br>
-                <div class="card">
-                    <div class="card-header" style="background-color:#f3c53f;text-align:center;">
-                        <a class="card-link" data-toggle="collapse" style="color:white">
-                            <h5>Plan de accion: {{evaluacion.IdEmpleado.Nombre}}</h5>
-                        </a>
-                    </div>
-                    <center>
-                    <div class="card-body">
-                        {% for planaccion in planaccion %}
-                        {% if evaluacion.id == planaccion.IdEvaluacion.id %}
-                        <div class="col-sm-6">
-                            <p>Accion: {{planaccion.Accion}}</p>
+                <br><br>
+                    <div class="row" style="text-align:center">
+                        <div class="col-sm-4 offset-md-2">
+                            <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
                         </div>
-                        <div class="col-sm-6">
-                            <p>Medicion: {{planaccion.Medicion}}</p>
-                            
+                        &nbsp;
+                        <div class="col-sm-4">
+                            <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
                         </div>
-                        <hr>
-                        {% endif %}
-                        {% endfor %}
-                        <form action="" method="POST">
-                            {% csrf_token %}
-                            <p>¿Esta de acuerdo con los planes de accion?</p>
-                            {{form.Verificar}}
-                            <div hidden>
-                                {{ form.Estado }}
-                                {{ form.Fase }}
-                                {{ form.ComentarioCalibrador }}
-                                {{ form.FechaEvaluacion }}
-                                {{ form.ComentarioEvaluador }}
-                                {{ form.AutoEvaluacion}}
-                                {{ form.Calificacion }}
-                                {{ form.IdEmpleado }}
-                            </div>
-                    </center>   
                     </div>
-                </div>
-                <br>
-                <div class="row" style="text-align:center">
-                    <div class="col-sm-4 offset-md-2">
-                        <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
-                    </div>
-                    &nbsp;
-                    <div class="col-sm-4">
-                        <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
-                    </div>
-                </div></form>        
-            <br><br>
+               <br><br>
+             </form>
             </div>
         </div>
     </section>
