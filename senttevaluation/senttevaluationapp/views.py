@@ -687,7 +687,7 @@ def eliminar_usuario(request, id):
 def admin_indicadores(request):
     evplanificacion = Evaluacion.objects.filter(Fase='Planificacion').count()
     evevaluacion = Evaluacion.objects.filter(Fase='Evaluacion').count()
-    evevaluacionfinal = Evaluacion.objects.filter(Fase='Evaluacion final').count()
+    evevaluacionfinal = Evaluacion.objects.filter(Fase='FinalEv').count()
     totalevaluacion = Evaluacion.objects.all().count()
     data = {
         'page': 'Inidicadores',
