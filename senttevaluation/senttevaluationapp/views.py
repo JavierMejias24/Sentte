@@ -801,8 +801,8 @@ def evaluador_autovaluacion2(request, id):
 
             evaluacionid.save()
 
-            evaluacionid.Estado = "Pendiente"
-            evaluacionid.Fase = "FinalEv"
+            evaluacionid.Estado = "Guardado"
+            evaluacionid.Fase = "Evaluacion"
             evaluacionid.save()
 
             messages.success(request,'Guardado el plan de accion')   
@@ -882,6 +882,42 @@ def evaluador_formulario2(request, id):
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario2.html",data)
+
+@login_required
+def evaluador_formulario3(request, id):
+    evaluaciones = get_object_or_404(Evaluacion, id=id)
+    competencias = Competencia.objects.all()
+    accionclaves = AccionClave.objects.all()
+    
+    data = {
+        'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
+        'competencias':competencias,
+        'accionclaves':accionclaves,
+        'page': 'Formulario', 
+        'form': EvaluacionForm(instance=evaluaciones),
+        'evaluacion': Evaluacion.objects.get(id = evaluaciones.id),
+    }
+    if request.method == 'POST':
+        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
+
+        if formulario.is_valid():
+
+            form = formulario.cleaned_data.get("AutoEvaluacion")
+            form2 = formulario.cleaned_data.get("Calificacion")
+            
+            evaluacionid = Evaluacion.objects.get(id = id)
+            
+            evaluacionid.AutoEvaluacion = form
+            evaluacionid.Calificacion = form2
+
+            evaluacionid.save()
+
+            evaluacionid.Estado = "Finalizado"
+            evaluacionid.save()
+
+            messages.success(request,'Guardado el plan de accion')   
+            return redirect(to="evaluadorEvaluacion")
+    return render(request, "evaluador/evaluadorFormulario3.html",data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required

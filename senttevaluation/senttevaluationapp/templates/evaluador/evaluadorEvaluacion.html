@@ -75,9 +75,13 @@
                                             <a href="{% url 'evaluadorFormulario' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                         {% else %}
                                             {%if "Evaluacion" in evaluacion.Fase %}
-                                                <a href="{% url 'evaluadorFormulario2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                                {%if "Guardado" in evaluacion.Estado%}
+                                                    <a href="{% url 'evaluadorFormulario2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                                {%else%}
+                                                    <a href="{% url 'evaluadorEvaluacion' %}" class="btn btn-info" role="button">Comenzar</a>
+                                                {%endif%}
                                             {%else%}
-                                                <a href="{% url 'home' %}" class="btn btn-info" role="button">Comenzar</a>
+                                                <a href="{% url 'evaluadorFormulario3' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                             {%endif%}
                                         {% endif %}
                                     {% endif %}
