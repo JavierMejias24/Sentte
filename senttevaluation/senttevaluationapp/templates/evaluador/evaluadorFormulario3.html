@@ -17,60 +17,56 @@
             <div id="accordion">
                 <form action="" method="POST">
                     {% csrf_token %}
-                    {% for competencia in competencias %}
-                        {% if empleados.IdPerfil == competencia.IdPerfil%}
-                            <div class="card">
-                                <div class="card-header" style="background-color:#f3c53f;text-align:center;">
-                                    <a class="card-link" data-toggle="collapse" style="color:white">
-                                        <h5>Calificación</h5>
-                                    </a>
-                                </div>
-                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                    <div class="card-body">
-                                            <div class="col-sm-12">
-                                                <div class="row">
+                    <div class="card">
+                        <div class="card-header" style="background-color:#f3c53f;text-align:center;">
+                            <a class="card-link" data-toggle="collapse" style="color:white">
+                                <h5>Calificación</h5>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <p>
+                                                <div class="col-sm-10">
                                                     <p>
-                                                        <div class="col-sm-10">
-                                                            <p>
-                                                            Nota Calificación Final: {{ evaluacion.Calificacion }}
-                                                            </p>
-                                                            <p>
-                                                            Nota AutoCalificación Final: {{ evaluacion.AutoEvaluacion }}
-                                                            </p>
-                                                            
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            {{ form.Calificacion }}
-                                                            {{ form.AutoEvaluacion }}
-                                                        </div>
-                                                        <div hidden>
-                                                            {{ form.Estado }}
-                                                            {{ form.Fase }}
-                                                            {{ form.ComentarioCalibrador }}
-                                                            {{ form.FechaEvaluacion }}
-                                                            {{ form.ComentarioEvaluador }}
-                                                            {{ form.IdEmpleado }}
-                                                        </div>
+                                                        Nota Calificación Final: {{ evaluacion.Calificacion }}
+                                                    </p>
+                                                    <p>
+                                                        Nota AutoCalificación Final: {{ evaluacion.AutoEvaluacion }}
                                                     </p>
                                                 </div>
-                                            </div>
-                                            <br><br>
-                                            <div class="row" style="text-align:center">
-                                                <div class="col-sm-4 offset-md-2">
-                                                    <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
+                                                <div class="col-sm-2">
+                                                    {{ form.Calificacion }}
+                                                    {{ form.AutoEvaluacion }}
                                                 </div>
-                                                &nbsp;
-                                                <div class="col-sm-4">
-                                                    <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
+                                                <div hidden>
+                                                    {{ form.Estado }}
+                                                    {{ form.Fase }}
+                                                    {{ form.ComentarioCalibrador }}
+                                                    {{ form.FechaEvaluacion }}
+                                                    {{ form.ComentarioEvaluador }}
+                                                    {{ form.IdEmpleado }}
                                                 </div>
-                                            </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="row" style="text-align:center">
+                                        <div class="col-sm-4 offset-md-2">
+                                            <input type="submit" value="Guardar" class="btn btn-primary" style="width: 200px;">
+                                        </div>
+                                        &nbsp;
+                                        <div class="col-sm-4">
+                                            <a href="/evaluadorEvaluacion" value="Cancelar" class="btn btn-danger" role="button" style="width: 200px;">Cancelar</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                </form>
+                        </div>
+                    </div>
+                </div>
+             </form>
             </div>
         </div>
     </section>
