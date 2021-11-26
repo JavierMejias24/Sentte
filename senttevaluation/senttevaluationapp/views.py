@@ -693,7 +693,7 @@ def admin_indicadores(request):
     totalevaluacion = Evaluacion.objects.all().count()
 
     data = {
-        'page': 'Inidicadores',
+        'page':'Indicadores',
         "evplanificacion":evplanificacion,
         'evevaluacion':evevaluacion,
         'evevaluacionfinal':evevaluacionfinal,
