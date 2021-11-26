@@ -13,7 +13,6 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from django.http import Http404
-import json
 
 # Create your views here.
 # ----------------------------------  Login ---------------------------------.
@@ -36,10 +35,10 @@ def login(request):
 # ----------------------------------  Administrador ---------------------------------.
 @login_required
 def admin_inicio(request):
-    contexto = {
+    data = {
         'page': 'Inicio',
     }
-    return render(request, "admin/home.html", contexto)
+    return render(request, "admin/home.html", data)
 
 # -- ------------Acciones Claves----------------.
 @login_required
@@ -54,18 +53,18 @@ def admin_acciones(request):
     except:
         Http404
 
-    contexto = {
+    data = {
         'entity':accioneclaves,
         'paginator': paginator,
         'titulo': 'Acciones',
         'page': 'Acciones',
         'form': RegistrosForm(),
     }
-    return render(request, "admin/adminAcciones.html", contexto)
+    return render(request, "admin/adminAcciones.html", data)
 
 @login_required
 def agregar_acciones(request):
-    contexto = {
+    data = {
         'form': AccionesForm(),
         'titulo': 'Acción',
         'page': 'Acciones',
@@ -78,8 +77,8 @@ def agregar_acciones(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminAcciones")
         else:
-            contexto["form"] = formulario
-    return render(request, "admin/adminAgregarAcciones.html", contexto)
+            data["form"] = formulario
+    return render(request, "admin/adminAgregarAcciones.html", data)
 
 @login_required
 def editar_acciones(request, id):
@@ -122,18 +121,18 @@ def admin_cargos(request):
     except:
         Http404
 
-    contexto = {
+    data = {
         'entity':cargos,
         'paginator': paginator,
         'titulo': 'Cargo',
         'page': 'Cargos',
         'form': RegistrosForm(),
     }
-    return render(request,"admin/adminCargos.html", contexto)
+    return render(request,"admin/adminCargos.html", data)
 
 @login_required
 def agregar_cargos(request):
-    contexto = {
+    data = {
         'form': CargoForm(),
         'titulo': 'Cargo',
         'page': 'Cargos',
@@ -146,16 +145,18 @@ def agregar_cargos(request):
             messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminCargos")
         else:
-            contexto["form"] = formulario
-    return render(request,"admin/adminAgregarCargos.html", contexto)
+            data["form"] = formulario
+    return render(request,"admin/adminAgregarCargos.html", data)
 
 @login_required
 def editar_cargos(request, id):
     cargos = get_object_or_404(Cargo, id=id)
+
     data = {
         'form':  CargoForm(instance=cargos),
         'page': 'Cargos',
     }
+
     if request.method == 'POST':
         formulario = CargoForm(data=request.POST, instance=cargos)
         if formulario.is_valid():
@@ -188,7 +189,7 @@ def admin_perfil(request):
     except:
         Http404
 
-    contexto = {
+    data = {
         'perfils':listarperfil(),
         'entity':perfils,
         'paginator': paginator,
@@ -196,7 +197,7 @@ def admin_perfil(request):
         'page': 'Perfil',
         'form': RegistrosForm()
     }
-    return render(request,"admin/adminPerfil.html", contexto)
+    return render(request,"admin/adminPerfil.html", data)
 
 def listarperfil():
     django_cursor = connection.cursor()
@@ -210,10 +211,9 @@ def listarperfil():
         lista.append(fila)
     return lista
 
-
 @login_required
 def agregar_perfil(request):
-    contexto = {
+    data = {
         'form': PerfilForm(),
         'titulo': 'Perfil',
         'page': 'Perfil',
@@ -226,8 +226,8 @@ def agregar_perfil(request):
             messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminPerfil")
         else:
-            contexto["form"] = formulario
-    return render(request,"admin/adminAgregarPerfil.html", contexto)
+            data["form"] = formulario
+    return render(request,"admin/adminAgregarPerfil.html", data)
 
 
 @login_required
@@ -272,7 +272,7 @@ def admin_competencias(request):
     except:
         Http404
 
-    contexto1 = {
+    data = {
         'entity': competencias,
         'perfil':perfil,
         'paginator':paginator,
@@ -280,11 +280,11 @@ def admin_competencias(request):
         'page':'Competencias',
         'form':RegistrosForm(),
     }
-    return render(request, "admin/adminCompetencias.html", contexto1)
+    return render(request, "admin/adminCompetencias.html", data)
 
 @login_required
 def agregar_competencias(request):
-    contexto = {
+    data = {
         'form':CompetenciaForm(),
         'titulo':'Competencia',
         'page':'Competencias',
@@ -297,8 +297,8 @@ def agregar_competencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminCompetencias")
         else:
-            contexto["form"] = formulario
-    return render(request, "admin/adminAgregarCompetencias.html", contexto)
+            data["form"] = formulario
+    return render(request, "admin/adminAgregarCompetencias.html", data)
 
 @login_required
 def editar_competencias(request, id):
@@ -341,7 +341,7 @@ def admin_gerencias(request):
     except:
         Http404
 
-    contexto = {
+    data = {
         'gerencias':listargerencia(),
         'entity': gerencias,
         'paginator': paginator,
@@ -349,7 +349,7 @@ def admin_gerencias(request):
         'page': 'Gerencias',
         'form': RegistrosForm(),
     }
-    return render(request, "admin/adminGerencias.html", contexto)
+    return render(request, "admin/adminGerencias.html", data)
 
 def listargerencia():
     django_cursor = connection.cursor()
@@ -363,10 +363,9 @@ def listargerencia():
         lista.append(fila)
     return lista
 
-
 @login_required
 def agregar_gerencias(request):
-    contexto = {
+    data = {
         'form': GerenciaForm(),
         'titulo': 'Gerencia',
         'page': 'Gerencias',
@@ -379,8 +378,8 @@ def agregar_gerencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminGerencias")
         else:
-            contexto["form"] = formulario
-    return render(request, "admin/adminAgregarGerencias.html", contexto)
+            data["form"] = formulario
+    return render(request, "admin/adminAgregarGerencias.html", data)
 
 @login_required
 def editar_gerencias(request, id):
@@ -407,6 +406,7 @@ def eliminar_gerencias(request, id):
     gerencias.delete()
     messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminGerencias")
+
 # -----------------------------------------------------------------------------------------------.
 
 # -- ------------ Sub-gerencias ----------------.
@@ -422,18 +422,18 @@ def admin_subgerencias(request):
     except:
         Http404
 
-    contexto = {
+    data = {
         'entity': subgerencias,
         'paginator': paginator,
         'titulo': 'Subgerencia',
         'page': 'Subgerencias',
         'form': RegistrosForm(),
     }
-    return render(request, "admin/adminSubgerencias.html", contexto)
+    return render(request, "admin/adminSubgerencias.html", data)
 
 @login_required
 def agregar_subgerencias(request):
-    contexto = {
+    data = {
         'form': SubgerenciaForm(),
         'titulo': 'Subgerencia',
         'page': 'Subgerencias',
@@ -446,8 +446,8 @@ def agregar_subgerencias(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminSubgerencias")
         else:
-            contexto["form"] = formulario
-    return render(request, "admin/adminAgregarSubgerencias.html", contexto)
+            data["form"] = formulario
+    return render(request, "admin/adminAgregarSubgerencias.html", data)
 
 @login_required
 def editar_subgerencia(request, id):
@@ -474,6 +474,7 @@ def eliminar_subgerencia(request, id):
     subgerencias.delete()
     messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminSubgerencias")
+
 # -----------------------------------------------------------------------------------------------.
 # -- ------------ Area ----------------.
 
@@ -489,18 +490,18 @@ def admin_areas(request):
     except:
         Http404
 
-    contexto = {
+    data = {
         'entity': areas,
         'paginator': paginator,
         'titulo': 'Áreas',
         'page': 'Áreas',
         'form': RegistrosForm(),
     }
-    return render(request, "admin/adminArea.html", contexto)
+    return render(request, "admin/adminArea.html", data)
 
 @login_required
 def agregar_areas(request):
-    contexto = {
+    data = {
         'form': AreaFrom(),
         'titulo': 'Areas',
         'page': 'Areas',
@@ -513,8 +514,8 @@ def agregar_areas(request):
             messages.success(request, "Guardada con éxito" )
             return HttpResponseRedirect("adminArea")
         else:
-            contexto["form"] = formulario
-    return render(request, "admin/adminAgregarArea.html", contexto)
+            data["form"] = formulario
+    return render(request, "admin/adminAgregarArea.html", data)
 
 @login_required
 def editar_area(request, id):
@@ -541,6 +542,7 @@ def eliminar_area(request, id):
     areas.delete()
     messages.success(request, "Eliminada con éxito" )
     return redirect(to="adminArea")
+
 # -----------------------------------------------------------------------------------------------.
 # -- ------------ Empleado ----------------.
 @login_required
@@ -555,18 +557,19 @@ def admin_usuarios(request):
     except:
         Http404
 
-    contexto = {
+    data = {
         'entity': empleados,
         'paginator': paginator,
         'titulo': 'Empleado',
         'page': 'Usuarios',
         'form': RegistrosForm(),
     }
-    return render(request, "admin/adminUsuarios.html",contexto)
+
+    return render(request, "admin/adminUsuarios.html", data)
 
 @login_required
 def agregar_usuario(request):
-    contexto = {
+    data = {
         'form': EmpleadoForm(),
         'form1': PerfilRolForm(),
         'form3': UserForm(),
@@ -579,11 +582,7 @@ def agregar_usuario(request):
         formEmpleado = EmpleadoForm(request.POST, request.FILES)
         formPerfilrol = PerfilRolForm(request.POST)
         formEvaluacion = EvaluacionForm()
-        formPlanAccion = PlanAccionForm(request.POST)
-        formDetalle = DetalleEvaluacionForm()
-
         if form.is_valid() and formPerfilrol.is_valid() and formEmpleado.is_valid():
-
             usuario = formEmpleado.save(commit=False)
             usuario.user = form.save()
             usuario.save()
@@ -591,69 +590,56 @@ def agregar_usuario(request):
             rolempleado.IdEmpleado = formEmpleado.save()
             rolempleado.save()
             cuentausuario = form.save()
-
             evaluaciones = formEvaluacion.save(commit=False)
             evaluaciones.Estado = "Pendiente"
             evaluaciones.Fase = "Evaluacion"
             evaluaciones.IdEmpleado = formEmpleado.save()
             evaluaciones.save()
 
-
             #Permiso Cargos
             content_type = ContentType.objects.get_for_model(Cargo)
             permission1 = Permission.objects.get( codename = 'view_cargo', content_type = content_type)
             cuentausuario.user_permissions.add(permission1)
-
             #Permiso Sub Gerencia
             content_type1 = ContentType.objects.get_for_model(SubGerencia)
             permission2 = Permission.objects.get( codename = 'view_subgerencia', content_type = content_type1)
             cuentausuario.user_permissions.add(permission2)
-
             #Permiso Accion Clave
             content_type2 = ContentType.objects.get_for_model(AccionClave)
             permission3 = Permission.objects.get( codename = 'view_accionclave', content_type = content_type2)
             cuentausuario.user_permissions.add(permission3)
-
             #Permiso Area
             content_type3 = ContentType.objects.get_for_model(Area)
             permission4 = Permission.objects.get( codename = 'view_area', content_type = content_type3)
             cuentausuario.user_permissions.add(permission4)
-
             #Permiso Competencia
             content_type4 = ContentType.objects.get_for_model(Competencia)
             permission5 = Permission.objects.get( codename = 'view_competencia', content_type = content_type4)
             cuentausuario.user_permissions.add(permission5)
-
             #Permiso Detalle Evaluacion
             content_type5 = ContentType.objects.get_for_model(DetalleEv)
             permission6 = Permission.objects.get( codename = 'view_detalleev', content_type = content_type5)
             cuentausuario.user_permissions.add(permission6)
-
             #Permiso Empleado
             content_type6 = ContentType.objects.get_for_model(Empleado)
             permission7 = Permission.objects.get( codename = 'view_empleado', content_type = content_type6)
             cuentausuario.user_permissions.add(permission7)
-
             #Permiso Evaluacion
             content_type7 = ContentType.objects.get_for_model(Evaluacion)
             permission8 = Permission.objects.get( codename = 'view_evaluacion', content_type = content_type7)
             cuentausuario.user_permissions.add(permission8)
-
             #Permiso Gerencia
             content_type8 = ContentType.objects.get_for_model(Gerencia)
             permission9 = Permission.objects.get( codename = 'view_gerencia', content_type = content_type8)
             cuentausuario.user_permissions.add(permission9)
-
             #Permiso Perfil
             content_type9 = ContentType.objects.get_for_model(Perfil)
             permission10 = Permission.objects.get( codename = 'view_perfil', content_type = content_type9)
             cuentausuario.user_permissions.add(permission10)
-
             #Permiso Perfil Rol
             content_type10 = ContentType.objects.get_for_model(PerfilRol)
             permission11 = Permission.objects.get( codename = 'view_perfilrol', content_type = content_type10)
             cuentausuario.user_permissions.add(permission11)
-
             #Permiso Plan accion
             content_type11 = ContentType.objects.get_for_model(PlanAccion)
             permission12 = Permission.objects.get( codename = 'view_planaccion', content_type = content_type11)
@@ -662,10 +648,10 @@ def agregar_usuario(request):
             messages.success(request, "Guardado con éxito" )
             return HttpResponseRedirect("adminUsuarios")
         else:
-            contexto["form"] = formEmpleado,
-            contexto["form1"] = formPerfilrol,
-            contexto["form3"] = form
-    return render(request, "admin/adminAgregarUsuarios.html",contexto)
+            data["form"] = formEmpleado,
+            data["form1"] = formPerfilrol,
+            data["form3"] = form
+    return render(request, "admin/adminAgregarUsuarios.html", data)
 
 
 @login_required
@@ -705,6 +691,7 @@ def admin_indicadores(request):
     evevaluacion = Evaluacion.objects.filter(Fase='Evaluacion').count()
     evevaluacionfinal = Evaluacion.objects.filter(Fase='FinalEv').count()
     totalevaluacion = Evaluacion.objects.all().count()
+
     data = {
         'page': 'Inidicadores',
         "evplanificacion":evplanificacion,
@@ -712,6 +699,7 @@ def admin_indicadores(request):
         'evevaluacionfinal':evevaluacionfinal,
         'totalevaluacion':totalevaluacion,
     }  
+
     return render(request, "admin/adminIndicadores.html", data)
 
 def get_data(request, *args, **kwargs):
@@ -719,39 +707,41 @@ def get_data(request, *args, **kwargs):
         "sales":100,
         "customers": 10
     }
-    return JsonResponse(data)
 
+    return JsonResponse(data)
 
 # -----------------------------------------------------------------------------------------------.
 @login_required
 def admin_ayuda(request):
-    contexto = {
+    data = {
         'page': 'Ayuda',
     }
-    return render(request, "admin/adminAyuda.html", contexto)
+
+    return render(request, "admin/adminAyuda.html", data)
 
 # -----------------------------------------------------------------------------------------------.
 
 # ----------------------------------  Evaluador ---------------------------------.
 @login_required
 def evaluador_inicio(request):
-    contexto = {
+    data = {
         'page': 'Inicio',
     }
-    return render(request, "evaluador/evaluadorInicio.html", contexto)
+
+    return render(request, "evaluador/evaluadorInicio.html", data)
 
 @login_required
 def evaluador_evaluacion(request):
     empleados = Empleado.objects.all()
     evaluacion = Evaluacion.objects.all()
 
-    contexto = {
+    data = {
         'empleados':empleados,
         'evaluacion':evaluacion,
         'page': 'Evaluación',
         'titulo': 'Formulario',
     }
-    return render(request, "evaluador/evaluadorEvaluacion.html", contexto)
+    return render(request, "evaluador/evaluadorEvaluacion.html", data)
 
 @login_required
 def evaluador_autovaluacion(request, id):
@@ -767,30 +757,25 @@ def evaluador_autovaluacion(request, id):
         'planaccion': planaccion,
         'evaluacion': Evaluacion.objects.get(id = evaluaciones.id),
         'page': 'AutoEvaluacion', 
-        'form': EvaluacionForm(instance=evaluaciones),
+        'form': EvaluacionForm(instance = evaluaciones),
     }
+
     if request.method == 'POST':
-        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
-
+        formulario = EvaluacionForm(data = request.POST, instance = evaluaciones)
         if formulario.is_valid():
-
             form = formulario.cleaned_data.get("Verificar")
-
             evaluacionid = Evaluacion.objects.get(id = id)
-
             evaluacionid.Verificar = form
             if evaluacionid.Verificar == 1:
                 evaluacionid.save()
-
                 evaluacionid.Estado = "Pendiente"
                 evaluacionid.Fase = "Evaluacion"
                 evaluacionid.save()
-
                 messages.success(request,'Guardado el plan de accion')
                 return redirect(to="evaluadorEvaluacion")
             else:
                   return redirect(to="evaluadorEvaluacion")
-    return render(request, "evaluador/evaluadorAutovaluacion.html",data)
+    return render(request, "evaluador/evaluadorAutovaluacion.html", data)
 
 @login_required
 def evaluador_autovaluacion2(request, id):
@@ -803,51 +788,44 @@ def evaluador_autovaluacion2(request, id):
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario', 
-        'form': EvaluacionForm(instance=evaluaciones),
+        'form': EvaluacionForm(instance = evaluaciones),
     }
+
     if request.method == 'POST':
-        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
-
+        formulario = EvaluacionForm(data = request.POST, instance = evaluaciones)
         if formulario.is_valid():
-
             form2 = formulario.cleaned_data.get("AutoEvaluacion")
-            
             evaluacionid = Evaluacion.objects.get(id = id)
-            
             evaluacionid.AutoEvaluacion = form2
-
             evaluacionid.save()
-
             evaluacionid.Estado = "Guardado"
             evaluacionid.Fase = "Evaluacion"
             evaluacionid.save()
-
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
-    return render(request, "evaluador/evaluadorAutovaluacion2.html",data)
+    return render(request, "evaluador/evaluadorAutovaluacion2.html", data)
 
 
 @login_required
 def evaluador_ayuda(request):
-    contexto = {
+    data = {
         'page': 'Ayuda',
     }
-    return render(request, "evaluador/evaluadorAyuda.html", contexto)
+    return render(request, "evaluador/evaluadorAyuda.html", data)
 
 @login_required
 def evaluador_formulario(request, id):
     evaluaciones = get_object_or_404(Evaluacion, id=id)
     competencias = Competencia.objects.all()
     accionclaves = AccionClave.objects.all()
-    
+
     data = {
         'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
-        'titulo': 'Formulario',
         'page': 'Formulario', 
         'form': PlanAccionForm(),
-        'form2': EvaluacionForm(),
+        'form2': EvaluacionForm()
     }
 
     if request.method == 'POST':
@@ -857,10 +835,9 @@ def evaluador_formulario(request, id):
             plan = formulario.save(commit=False)
             plan.IdEvaluacion = evaluacionid
             plan.save()
-            evaluacionid.Estado = "Finalizado"
             evaluacionid.Estado = "Guardado"
             evaluacionid.save()
-            messages.success(request,'Guardado el plan de acción')   
+            messages.success(request,'Guardado el plan de accion')
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario.html",data)
 
@@ -877,11 +854,11 @@ def evaluador_formulario2(request, id):
         'page': 'Formulario',
         'titulo': 'Formulario',
         'form': EvaluacionForm(instance = evaluaciones),
-        'form2': AccionesForm(instance=evaluaciones),
+        'form2': AccionesForm(instance = evaluaciones),
     }
 
     if request.method == 'POST':
-        formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
+        formulario = EvaluacionForm(data=request.POST, instance = evaluaciones)
         if formulario.is_valid():
             form = formulario.cleaned_data.get("ComentarioEvaluador")
             evaluacionid = Evaluacion.objects.get(id = id)
@@ -911,68 +888,68 @@ def evaluador_formulario3(request, id):
         'form': EvaluacionForm(instance=evaluaciones),
         'evaluacion': Evaluacion.objects.get(id = evaluaciones.id),
     }
+
     if request.method == 'POST':
         formulario = EvaluacionForm(data=request.POST, instance=evaluaciones)
-
         if formulario.is_valid():
-
             form = formulario.cleaned_data.get("AutoEvaluacion")
             form2 = formulario.cleaned_data.get("Calificacion")
-            
             evaluacionid = Evaluacion.objects.get(id = id)
-            
             evaluacionid.AutoEvaluacion = form
             evaluacionid.Calificacion = form2
-
             evaluacionid.save()
-
             evaluacionid.Estado = "Finalizado"
             evaluacionid.save()
-
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
-    return render(request, "evaluador/evaluadorFormulario3.html",data)
+    return render(request, "evaluador/evaluadorFormulario3.html", data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required
 def colaborador_inicio(request):
-    contexto = {
+    data = {
         'page': 'Inicio',
     }
-    return render(request, "colaborador/colaboradorInicio.html", contexto)
+
+    return render(request, "colaborador/colaboradorInicio.html", data)
 
 @login_required
 def colaborador_ayuda(request):
-    contexto = {
+    data = {
         'page': 'Ayuda',
     }
-    return render(request, "colaborador/colaboradorAyuda.html", contexto)
+
+    return render(request, "colaborador/colaboradorAyuda.html", data)
 
 @login_required
 def colaborador_autovaluacion(request):
-    contexto = {
+    data = {
         'page': 'Autoevaluación',
     }
-    return render(request, "colaborador/colaboradorAutovaluacion.html", contexto)
+
+    return render(request, "colaborador/colaboradorAutovaluacion.html", data)
 
 # ----------------------------------  Calibrador ---------------------------------.
 @login_required
 def calibrador_inicio(request):
-    contexto = {
+    data = {
         'page': 'Inicio',
     }
-    return render(request, "calibrador/calibradorInicio.html", contexto)
+
+    return render(request, "calibrador/calibradorInicio.html", data)
 
 @login_required
 def calibrador_ayuda(request):
-    contexto = {
+    data = {
         'page': 'Ayuda',
     }
-    return render(request, "calibrador/calibradorAyuda.html", contexto)
+
+    return render(request, "calibrador/calibradorAyuda.html", data)
 
 @login_required
 def calibrador_evaluaciones(request):
-    contexto = {
+    data = {
         'page': 'Evaluaciones',
     }
-    return render(request, "calibrador/calibradorEvaluaciones.html", contexto)
+
+    return render(request, "calibrador/calibradorEvaluaciones.html", data)

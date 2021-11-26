@@ -18,81 +18,78 @@
         <div class="container-fluid">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold">Sistema de Gestión y Retroalimentación del Desempeño</h6>
+                    <h6 class="m-0 font-weight-bold">Sistema de gestión y retroalimentación del desempeño</h6>
                 </div>
                 <div class="card-body">
                     {% for empleado in empleados %}
                         {% if empleado.user.username == user.username %}
-                    
-                            <p>{{ empleado.Nombre }}, bienvenido/a al “Sistema de Gestión y Retroalimentación del Desempeño”, 
-                                importante herramienta que ha sido desarrollada por estudiantes del Duoc con el fin de que 
+                            <p>{{ empleado.Nombre }}, Bienvenido/a al “Sistema de gestión y retroalimentación del desempeño”, 
+                                importante herramienta que ha sido desarrollada por estudiantes de Duoc UC con el fin de que 
                                 pueda gestionar el desarrollo de las personas de su equipo de trabajo, alineando y planificando 
-                                su desempeño, por medio de la evaluación de competencias.</p>
-                            <p>El Sistema de Gestión y Retroalimentación del Desempeño se compone de tres fases: planificación, 
+                                su desempeño por medio de la evaluación de competencias.</p>
+                            <p>El sistema se compone de tres fases: planificación,
                                 seguimiento y evaluación, durante las cuales deberá realizar distintos pasos que iremos informando 
                                 oportunamente.</p>
-                            <p>Lo invitamos a participar de manera activa y comprometida en este proceso, para que podamos contar 
+                            <p>Lo invitamos a participar de manera activa y comprometida en este proceso para que podamos contar 
                                 con un sistema que apoye un modelo de gestión de personas eficiente y de calidad.</p>
                             <p> Gerencia de Recursos Humanos </p>
                         {% endif %}
                     {% endfor %}
+                </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row">
                 {% for evaluacion in evaluacion %}  
-                <div class="col-md-4" style="margin-top: 20px;">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-tittle">Evaluacion de competencia</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body" style="font-size:13px">
-                                <form method="post" action="">
-                                    
-                                    <h6>Fase {{evaluacion.Fase}}</h6>
-                                    <p>Rut: {{evaluacion.IdEmpleado.Rut}}</p>
-                                    <p>Nombre: {{evaluacion.IdEmpleado}}</p>
-                                    <p>Perfil: {{evaluacion.IdEmpleado.IdPerfil}}</p>
-                                    <div>
-                                        Estado: 
-                                        <div class="badge badge-pill badge-danger" style="font-size:11px">
-                                            <b>{{evaluacion.Estado}}</b>
+                    <div class="col-md-4" style="margin-top: 20px;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-tittle">Evaluación de competencia</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body" style="font-size:13px">
+                                    <form method="post" action="">
+                                        <h6>Fase {{ evaluacion.Fase }}</h6>
+                                        <p>Rut: {{ evaluacion.IdEmpleado.Rut }}</p>
+                                        <p>Nombre: {{ evaluacion.IdEmpleado }}</p>
+                                        <p>Perfil: {{ evaluacion.IdEmpleado.IdPerfil }}</p>
+                                        <div>
+                                            Estado: 
+                                            <div class="badge badge-pill badge-danger" style="font-size:11px">
+                                                <b>{{ evaluacion.Estado }}</b>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br>
-                                    {% if evaluacion.IdEmpleado.user.username == user.username %}
-                                        {%if "Planificacion" in evaluacion.Fase %}
-                                            {%if "Guardado" in evaluacion.Estado%}
-                                                <a href="{% url 'evaluadorAutovaluacion' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
-                                            {%else%}
-                                                <a href="evaluadorEvaluacion" class="btn btn-info" role="button">Comenzar</a>
-                                            {%endif%}
+                                        <br>
+                                        {% if evaluacion.IdEmpleado.user.username == user.username %}
+                                            {% if "Planificacion" in evaluacion.Fase %}
+                                                {% if "Guardado" in evaluacion.Estado %}
+                                                    <a href="{% url 'evaluadorAutovaluacion' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                                {% else %}
+                                                    <a href="evaluadorEvaluacion" class="btn btn-info" role="button">Comenzar</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a href="{% url 'evaluadorAutovaluacion2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            {% endif %}
                                         {% else %}
-                                            <a href="{% url 'evaluadorAutovaluacion2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
-                                        {%endif%}
-                                    {% else %}
-                                        {% if  "Planificacion" in evaluacion.Fase %}
-                                            <a href="{% url 'evaluadorFormulario' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
-                                        {% else %}
-                                            {%if "Evaluacion" in evaluacion.Fase %}
-                                                {%if "Guardado" in evaluacion.Estado%}
-                                                    <a href="{% url 'evaluadorFormulario2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
-                                                {%else%}
-                                                    <a href="{% url 'evaluadorEvaluacion' %}" class="btn btn-info" role="button">Comenzar</a>
-                                                {%endif%}
-                                            {%else%}
-                                                <a href="{% url 'evaluadorFormulario3' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
-                                            {%endif%}
+                                            {% if  "Planificacion" in evaluacion.Fase %}
+                                                <a href="{% url 'evaluadorFormulario' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                            {% else %}
+                                                {% if "Evaluacion" in evaluacion.Fase %}
+                                                    {% if "Guardado" in evaluacion.Estado%}
+                                                        <a href="{% url 'evaluadorFormulario2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                                    {% else %}
+                                                        <a href="{% url 'evaluadorEvaluacion' %}" class="btn btn-info" role="button">Comenzar</a>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <a href="{% url 'evaluadorFormulario3' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
+                                                {% endif %}
+                                            {% endif %}
                                         {% endif %}
-                                    {% endif %}
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                   
-                
                 {% endfor %}
             </div>
         </div>
