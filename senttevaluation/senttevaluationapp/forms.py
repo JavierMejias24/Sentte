@@ -422,20 +422,3 @@ class EvaluacionForm(forms.ModelForm):
                 }
             )
         }
-
-class RegistrosForm(forms.Form):
-    Cantidad = {
-        (10, 10),
-        (25, 25),
-        (50, 50),
-        (100, 100),
-    }
-    Registros = forms.ChoiceField(
-        choices=Cantidad, 
-        label='Registros', 
-        widget = forms.Select(
-            attrs = {
-                'class':'form-select'
-            }
-        )
-    )
