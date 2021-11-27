@@ -730,6 +730,7 @@ def evaluador_evaluacion(request):
         'empleados':empleados,
         'evaluacion':evaluacion,
         'page': 'Evaluación',
+        'titulo': 'Acciones',
     }
 
     return render(request, "evaluador/evaluadorEvaluacion.html", data)
@@ -842,7 +843,6 @@ def evaluador_formulario2(request, id):
         'competencias':competencias,
         'accionclaves':accionclaves,
         'page': 'Formulario',
-        'titulo': 'Formulario',
         'form': EvaluacionForm(instance=evaluaciones),
     }
 
