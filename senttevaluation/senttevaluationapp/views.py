@@ -858,7 +858,7 @@ def evaluador_formulario2(request, id):
             evaluacionid.save()
             messages.success(request,'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
-    return render(request, "evaluador/evaluadorFormulario2.html",data)
+    return render(request, "evaluador/evaluadorFormulario2.html", data)
 
 @login_required
 def evaluador_formulario3(request, id):
@@ -885,9 +885,9 @@ def evaluador_formulario3(request, id):
             evaluacionid.Calificacion = form2
             evaluacionid.Estado = "Finalizado"
             evaluacionid.save()
-            messages.success(request,'Guardado el plan de accion')   
+            messages.success(request,'Guardado el plan de accion')
             return redirect(to="evaluadorEvaluacion")
-    return render(request, "evaluador/evaluadorFormulario3.html",data)
+    return render(request, "evaluador/evaluadorFormulario3.html", data)
 
 # ----------------------------------  Colaborador ---------------------------------.
 @login_required

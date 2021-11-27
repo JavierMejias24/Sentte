@@ -382,8 +382,8 @@ class EvaluacionForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'Calificacion': forms.Select(
-                attrs={
-                    'class':'form-select'
+                attrs = {
+                    'class': 'form-select'
                 },
                  choices = {
                     (1, 1),
@@ -396,8 +396,8 @@ class EvaluacionForm(forms.ModelForm):
                 }
             ),
             'AutoEvaluacion': forms.Select(
-                attrs={
-                    'class':'form-select'
+                attrs = {
+                    'class': 'form-select'
                 },
                  choices = {
                     (1, 1),
@@ -417,7 +417,7 @@ class EvaluacionForm(forms.ModelForm):
             ),
             'ComentarioEvaluador': forms.Textarea(
                 attrs = {
-                    'class':'form-control',
+                    'class': 'form-control',
                     'placeholder':'Ingrese una observacion',
                 }
             )

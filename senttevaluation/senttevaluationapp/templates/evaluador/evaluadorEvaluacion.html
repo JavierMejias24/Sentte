@@ -70,7 +70,7 @@
                                                 <a href="{% url 'evaluadorAutovaluacion2' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                             {% endif %}
                                         {% else %}
-                                            {% if  "Planificacion" in evaluacion.Fase %}
+                                            {% if "Planificacion" in evaluacion.Fase %}
                                                 <a href="{% url 'evaluadorFormulario' evaluacion.id %}" class="btn btn-info" role="button">Comenzar</a>
                                             {% else %}
                                                 {% if "Evaluacion" in evaluacion.Fase %}
