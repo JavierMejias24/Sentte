@@ -741,6 +741,7 @@ def evaluador_evaluacion(request):
         'page': 'Evaluación',
         'titulo': 'Formulario',
     }
+
     return render(request, "evaluador/evaluadorEvaluacion.html", data)
 
 @login_required
@@ -900,7 +901,7 @@ def evaluador_formulario3(request, id):
             evaluacionid.save()
             evaluacionid.Estado = "Finalizado"
             evaluacionid.save()
-            messages.success(request,'Guardado el plan de accion')   
+            messages.success(request, 'Guardado el plan de accion')   
             return redirect(to="evaluadorEvaluacion")
     return render(request, "evaluador/evaluadorFormulario3.html", data)
 
