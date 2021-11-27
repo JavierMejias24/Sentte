@@ -25,27 +25,17 @@
                     <br>
                     {% block content %}
                         <div class="row">
-                            <div class="card shadow">
-                                <div class="col-sm-6" url-endpoint='{% url "adminIndicadores" %}'>
-                                    <canvas id="myChart" width="400" height="400"></canvas>
-                                </div>
+                            <div class="col-sm-3" url-endpoint='{% url "adminIndicadores" %}'>
+                                <canvas id="myChart" width="400" height="400"></canvas>
                             </div>
-                            <div class="card shadow">
-                                <div class="col-sm-6" url-endpoint='{% url "adminIndicadores" %}'>
-                                    <canvas id="myChart2" width="400" height="400"></canvas>
-                                </div>
+                            <div class="col-sm-3" url-endpoint='{% url "adminIndicadores" %}'>
+                                <canvas id="myChart2" width="400" height="400"></canvas>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="card shadow">
-                                <div class="col-sm-6" url-endpoint='{% url "adminIndicadores" %}'>
-                                    <canvas id="myChart3" width="400" height="400"></canvas>
-                                </div>
-                            </div>
-                            <div class="card shadow">  
-                                <div class="col-sm-6" url-endpoint='{% url "adminIndicadores" %}'>
-                                    <canvas id="myChart4" width="400" height="400"></canvas>
-                                </div>
+                            <div class="col-sm-3" url-endpoint='{% url "adminIndicadores" %}'>
+                                <canvas id="myChart3" width="400" height="400"></canvas>
+                            </div>   
+                            <div class="col-sm-3" url-endpoint='{% url "adminIndicadores" %}'>
+                                <canvas id="myChart4" width="400" height="400"></canvas>
                             </div>
                         </div>
                     {% endblock content %}
