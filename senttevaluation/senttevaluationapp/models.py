@@ -118,7 +118,6 @@ class Competencia(models.Model):
 class AccionClave(models.Model):
     Descripcion = models.CharField(max_length=1000, validators=[RegexValidator(regex=r'^[a-zA-Z]' )])
     IdCompetencia = models.ForeignKey(Competencia, on_delete=CASCADE, default=1)
-    Calificacion = models.IntegerField(null=True, blank=True, default=1, validators=[RegexValidator(regex=r'^[0-7]')])
 
     def __str__(self):
         return self.Descripcion

@@ -583,7 +583,7 @@ def agregar_usuario(request):
             cuentausuario = form.save()
             evaluaciones = formEvaluacion.save(commit=False)
             evaluaciones.Estado = "Pendiente"
-            evaluaciones.Fase = "Evaluacion"
+            evaluaciones.Fase = "Planificacion"
             evaluaciones.IdEmpleado = formEmpleado.save()
             evaluaciones.save()
 
