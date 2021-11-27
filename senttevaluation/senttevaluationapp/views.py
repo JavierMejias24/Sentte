@@ -841,7 +841,8 @@ def evaluador_formulario2(request, id):
         'empleados': Empleado.objects.get(Nombre = evaluaciones.IdEmpleado.Nombre),
         'competencias':competencias,
         'accionclaves':accionclaves,
-        'page': 'Formulario', 
+        'page': 'Formulario',
+        'titulo': 'Formulario',
         'form': EvaluacionForm(instance=evaluaciones),
     }
 
