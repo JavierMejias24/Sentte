@@ -310,8 +310,8 @@ class PlanAccionForm(forms.ModelForm):
         model = PlanAccion
         fields = ['Accion', 'Medicion']
         labels = {
-            'Accion':'Accion',
-            'Medicion':'Medicion'
+            'Accion':'Acción',
+            'Medicion':'Medición'
         }
         widgets = {
             'Accion': forms.Textarea(

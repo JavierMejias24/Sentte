@@ -16,11 +16,11 @@
         <div class="container-fluid">
             <div id="accordion">
                 {% for competencia in competencias %}
-                    {% if empleados.IdPerfil == competencia.IdPerfil%}
+                    {% if empleados.IdPerfil == competencia.IdPerfil %}
                         <div class="card">
                             <div class="card-header" style="background-color:#f3c53f;text-align:center;">
                                 <a class="card-link" data-toggle="collapse" style="color:white">
-                                    <h5>Competencia: {{ competencia.NombreCompetencia}}</h5>
+                                    <h5>Competencia: {{ competencia.NombreCompetencia }}</h5>
                                 </a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -28,7 +28,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <b>Definicion:</b>
-                                            {{ competencia.Definicion}}
+                                            {{ competencia.Definicion }}
                                             <br><br>
                                         </div>
                                         <div class="row" style="text-align:center">
@@ -58,7 +58,7 @@
                 <div class="card">
                     <div class="card-header" style="background-color:#f3c53f;text-align:center;">
                         <a class="card-link" data-toggle="collapse" style="color:white">
-                            <h5>Observacion</h5>
+                            <h5>Observación</h5>
                         </a>
                     </div>
                     <div class="card-body">
@@ -67,11 +67,11 @@
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="{{form.Accion.name}}">{{form.Accion.label}}</label>
+                                        <label for="{{form.Accion.name}}">{{ form.Accion.label }}</label>
                                         {{ form.Accion }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="{{form.Medicion.name}}">{{form.Medicion.label}}</label>
+                                        <label for="{{form.Medicion.name}}">{{ form.Medicion.label }}</label>
                                         {{ form.Medicion }}
                                     </div>
                                 </div> 

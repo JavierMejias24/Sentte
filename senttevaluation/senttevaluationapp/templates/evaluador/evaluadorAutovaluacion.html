@@ -16,19 +16,19 @@
         <div class="container-fluid">
             <div id="accordion">
                 {% for competencia in competencias %}
-                    {% if empleados.IdPerfil == competencia.IdPerfil%}
+                    {% if empleados.IdPerfil == competencia.IdPerfil %}
                         <div class="card">
                             <div class="card-header" style="background-color:#f3c53f;text-align:center;">
                                 <a class="card-link" data-toggle="collapse" style="color:white">
-                                    <h5>Competencia: {{ competencia.NombreCompetencia}}</h5>
+                                    <h5>Competencia: {{ competencia.NombreCompetencia }}</h5>
                                 </a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <b>Definicion:</b>
-                                            {{ competencia.Definicion}}
+                                            <b>Definición:</b>
+                                            {{ competencia.Definicion }}
                                             <br><br>
                                         </div>
                                         <div class="row" style="text-align:center">
@@ -58,27 +58,26 @@
                 <div class="card">
                     <div class="card-header" style="background-color:#f3c53f;text-align:center;">
                         <a class="card-link" data-toggle="collapse" style="color:white">
-                            <h5>Plan de accion: {{evaluacion.IdEmpleado.Nombre}}</h5>
+                            <h5>Plan de acción: {{ evaluacion.IdEmpleado.Nombre }}</h5>
                         </a>
                     </div>
                     <center>
                     <div class="card-body">
                         {% for planaccion in planaccion %}
-                        {% if evaluacion.id == planaccion.IdEvaluacion.id %}
-                        <div class="col-sm-6">
-                            <p>Accion: {{planaccion.Accion}}</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p>Medicion: {{planaccion.Medicion}}</p>
-                            
-                        </div>
-                        <hr>
-                        {% endif %}
+                            {% if evaluacion.id == planaccion.IdEvaluacion.id %}
+                                <div class="col-sm-6">
+                                    <p>Acción: {{ planaccion.Accion }}</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Medición: {{ planaccion.Medicion }}</p>                            
+                                </div>
+                                <hr>
+                            {% endif %}
                         {% endfor %}
                         <form action="" method="POST">
                             {% csrf_token %}
-                            <p>¿Esta de acuerdo con los planes de accion?</p>
-                            {{form.Verificar}}
+                            <p>¿Está de acuerdo con los planes de acción?</p>
+                            {{ form.Verificar }}
                             <div hidden>
                                 {{ form.Estado }}
                                 {{ form.Fase }}

@@ -725,10 +725,12 @@ def evaluador_inicio(request):
 def evaluador_evaluacion(request):
     empleados = Empleado.objects.all()
     evaluacion = Evaluacion.objects.all()
+    perfilrol = PerfilRol.objects.all()
 
     data = {
         'empleados':empleados,
         'evaluacion':evaluacion,
+        'perfilrol':perfilrol,
         'page': 'Evaluación',
         'titulo': 'Formulario',
     }
